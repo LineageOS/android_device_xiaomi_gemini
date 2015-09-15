@@ -1,5 +1,7 @@
 # Audio
 PRODUCT_PROPERTY_OVERRIDES += \
+    af.fast_track_multiplier=1 \
+    audio_hal.period_size=192 \
     audio.offload.disable=0 \
     audio.offload.buffer.size.kb=32 \
     audio.offload.video=true \
