@@ -120,6 +120,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Perf
 PRODUCT_PROPERTY_OVERRIDES += \
+    ro.am.reschedule_service=true \
     ro.min_freq_0=307200 \
     ro.min_freq_4=307200 \
     ro.sys.fw.bg_apps_limit=60 \
