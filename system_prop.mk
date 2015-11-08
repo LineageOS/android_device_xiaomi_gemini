@@ -128,6 +128,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.use_data_netmgrd=true \
     persist.data.netmgrd.qos.enable=true \
     persist.data.mode=concurrent \
+    persist.data.qmi.adb_logmask=0 \
     persist.dbg.volte_avail_ovr=1 \
     persist.dbg.vt_avail_ovr=1 \
     persist.logd.size.radio=4M \
