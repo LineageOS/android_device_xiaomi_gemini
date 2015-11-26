@@ -85,7 +85,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     media.stagefright.enable-scan=true \
     mm.enable.smoothstreaming=true \
     mmp.enable.3g2=true \
-    mm.enable.qcom_parser=1048575 \
     persist.mm.enable.prefetch=true
 
 # NFC
