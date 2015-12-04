@@ -47,7 +47,6 @@ lib/soundfx/libdirac.so
 vendor/lib64/soundfx/libqcbassboost.so
 vendor/lib64/soundfx/libqcreverb.so
 vendor/lib64/soundfx/libqcvirt.so
-vendor/lib64/libFlacSwDec.so
 vendor/lib64/libaudioalsa.so
 vendor/lib64/libaudiodevarb.so
 vendor/lib64/libacdb-fts.so
@@ -60,7 +59,6 @@ vendor/lib64/libhwdaphal.so
 vendor/lib/soundfx/libqcbassboost.so
 vendor/lib/soundfx/libqcreverb.so
 vendor/lib/soundfx/libqcvirt.so
-vendor/lib/libFlacSwDec.so
 vendor/lib/libadm.so
 vendor/lib/libaudioalsa.so
 vendor/lib/libaudiodevarb.so
