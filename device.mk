@@ -87,6 +87,13 @@ PRODUCT_PACKAGES += \
     memtrack.msm8996 \
     liboverlay
 
+# GPS
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/gps/gps.conf:system/etc/gps.conf \
+    $(LOCAL_PATH)/gps/flp.conf:system/etc/flp.conf \
+    $(LOCAL_PATH)/gps/izat.conf:system/etc/izat.conf \
+    $(LOCAL_PATH)/gps/sap.conf:system/etc/sap.conf
+
 # Input
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/atmel-maxtouch.kl:system/usr/keylayout/atmel-maxtouch.kl \
