@@ -1,0 +1,15 @@
+# Android fstab file.
+# The filesystem that contains the filesystem checker binary (typically /system) cannot
+# specify MF_CHECK, and must come before any filesystems that do specify MF_CHECK
+
+#TODO: Add 'check' as fs_mgr_flags with data partition.
+# Currently we dont have e2fsck compiled. So fs check would failed.
+
+#<src>                                       <mnt_point>        <type>  <mnt_flags and options>                                     <fs_mgr_flags>
+/dev/block/bootdevice/by-name/boot           /boot              emmc    defaults                                                    recoveryonly
+/dev/block/bootdevice/by-name/recovery       /recovery          emmc    defaults                                                    recoveryonly
+/dev/block/bootdevice/by-name/cust           /cust              ext4    nosuid,nodev,barrier=1                                      wait,check
+/dev/block/bootdevice/by-name/system         /system            ext4    ro,barrier=1                                                wait
+/dev/block/bootdevice/by-name/userdata       /data              ext4    nosuid,nodev,barrier=1,noauto_da_alloc,discard              wait,check,forceencrypt=footer
+
+/devices/soc/6a00000.ssusb/6a00000.dwc3/xhci-hcd.0.auto/usb1*       auto               auto    defaults                                                    voldmanaged=usb:auto
