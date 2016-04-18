@@ -87,6 +87,12 @@ PRODUCT_PACKAGES += \
     memtrack.msm8996 \
     liboverlay
 
+# Input
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/keylayout/atmel-maxtouch.kl:system/usr/keylayout/atmel-maxtouch.kl \
+    $(LOCAL_PATH)/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+    $(LOCAL_PATH)/keylayout/synaptics_dsx.kl:system/usr/keylayout/synaptics_dsx.kl
+
 # Keystore
 PRODUCT_PACKAGES += \
     keystore.msm8996
