@@ -357,12 +357,6 @@ on property:persist.sys.pd_enable=1
 on property:persist.sys.pd_enable=0
      write /sys/class/service_locator/service_locator_status 0
 
-#
-## QCA1530 SoC late_start group trigger
-#service gnss-init /system/vendor/bin/gnss.qca1530.sh init
-#   class late_start
-#   oneshot
-#
 on property:sys.ims.QMI_DAEMON_STATUS=1
     start imsdatadaemon
 
