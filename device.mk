@@ -98,7 +98,6 @@ PRODUCT_PACKAGES += \
     init.qcom.audio.sh \
     init.qcom.bt.sh \
     init.qcom.efs.sync.sh \
-    init.qcom.fm.sh \
     init.qcom.post_boot.sh \
     init.qcom.uicc.sh \
     init.qcom.wifi.sh \
