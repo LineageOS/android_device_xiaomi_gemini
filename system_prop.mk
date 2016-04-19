@@ -33,6 +33,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.btconfig.dev=/dev/ttyHS0 \
     qcom.bluetooth.soc=rome
 
+# Camera
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.camera.stats.test=5
+
 # Graphics
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.egl.hw=1 \
@@ -115,6 +119,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.env.fastdorm.enabled=false \
     persist.fd.scroff.timer=3000 \
     persist.fd.scron.timer=10000 \
+    persist.logd.size.radio=4M \
     persist.radio.apm_sim_not_pwdn=1 \
     persist.radio.calls.on.ims=0 \
     persist.radio.jbims=0 \
@@ -136,6 +141,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.gt_library=libqti-gt.so \
     ro.vendor.at_library=libqti-at.so \
     sys.games.gt.prof=1
+
+# Wifi
+PRODUCT_PROPERTY_OVERRIDES += \
+    wifi.interface=wlan0
 
 # WiFi display
 PRODUCT_PROPERTY_OVERRIDES += \

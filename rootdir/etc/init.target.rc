@@ -40,8 +40,6 @@ on post-fs
 
 on init
     mkdir /cust 0771 system system
-    # set logd.radio buffer size
-    setprop persist.logd.size.radio "4M"
     # write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
 
 on fs
@@ -114,7 +112,6 @@ on boot
     start rmt_storage
     start rfs_access
     # nfc init config
-    setprop ro.nfc.port "I2C"
     chmod 0660 /dev/pn548
     chown nfc nfc /dev/pn548
 # access permission for secure touch
