@@ -131,6 +131,9 @@ PRODUCT_PACKAGES += \
     memtrack.msm8996 \
     liboverlay
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/calib.cfg:system/etc/calib.cfg
+
 # GPS
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/gps.conf:system/etc/gps.conf \

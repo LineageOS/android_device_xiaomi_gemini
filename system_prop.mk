@@ -89,6 +89,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
     com.qc.hardware=true \
     ro.qc.sdk.sensors.gestures=true
 
+# Qualcomm Assertive Display
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.qualcomm.cabl=0 \
+    ro.qcom.ad=1 \
+    ro.qcom.ad.calib.data=/system/etc/calib.cfg \
+    ro.qcom.ad.sensortype=2
+
 # Radio
 PRODUCT_PROPERTY_OVERRIDES += \
     DEVICE_PROVISIONED=1 \
