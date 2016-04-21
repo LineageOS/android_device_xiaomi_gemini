@@ -44,6 +44,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.dpm.nsrm.bkg.evt=3955 \
     persist.env.fastdorm.enabled=false
 
+# Fingerprint
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hardware.fingerprint=fpc \
+    persist.qfp=false
+
 # Graphics
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.egl.hw=1 \
