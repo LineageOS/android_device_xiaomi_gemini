@@ -136,7 +136,8 @@ PRODUCT_PACKAGES += \
     gralloc.msm8996 \
     hwcomposer.msm8996 \
     memtrack.msm8996 \
-    liboverlay
+    liboverlay \
+    libtinyxml
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/calib.cfg:system/etc/calib.cfg
