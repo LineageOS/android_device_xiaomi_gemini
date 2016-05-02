@@ -110,6 +110,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Snap
 
+# Charger
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/sbin/chargeonlymode:root/sbin/chargeonlymode
+
 # Device config scripts
 PRODUCT_PACKAGES += \
     hsic.control.bt.sh \
