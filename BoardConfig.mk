@@ -92,6 +92,11 @@ QCOM_BT_USE_BTNV := true
 # Camera
 USE_DEVICE_SPECIFIC_CAMERA := true
 
+# CM Hardware
+BOARD_USES_CYANOGEN_HARDWARE := true
+BOARD_HARDWARE_CLASS := \
+    hardware/cyanogen/cmhw
+
 # CNE and DPM
 TARGET_LDPRELOAD := libNimsWrap.so
 BOARD_USES_QCNE := true
