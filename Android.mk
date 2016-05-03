@@ -28,6 +28,13 @@ LOCAL_PATH := $(call my-dir)
 ifneq ($(filter gemini,$(TARGET_DEVICE)),)
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
+include $(CLEAR_VARS)
+
+WLAN_MODULES:		
+	ln -sf /system/lib/modules/qca_cld/qca_cld_wlan.ko $(TARGET_OUT)/lib/modules/wlan.ko		
+
+TARGET_KERNEL_MODULES += WLAN_MODULES
+
 # Create a link for the WCNSS config file
 $(shell mkdir -p $(TARGET_OUT)/etc/firmware/wlan/qca_cld; \
     ln -sf /system/etc/wifi/WCNSS_qcom_cfg.ini \
