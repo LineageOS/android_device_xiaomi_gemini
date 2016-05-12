@@ -120,8 +120,9 @@ on boot
 
     chown system system /sys/class/leds/button-backlight1/brightness
 
-    # DT2W
+    # DT2W and KeyDisabler permissions
     chown system system /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input1/wake_gesture
+    chown system system /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input1/0dbutton
 
     #Remove SUID bit for iproute2 ip tool
     chmod 0755 /system/bin/ip

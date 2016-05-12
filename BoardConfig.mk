@@ -94,8 +94,9 @@ USE_DEVICE_SPECIFIC_CAMERA := true
 
 # CM Hardware
 BOARD_USES_CYANOGEN_HARDWARE := true
-BOARD_HARDWARE_CLASS := \
-    hardware/cyanogen/cmhw
+BOARD_HARDWARE_CLASS += \
+    hardware/cyanogen/cmhw \
+    $(DEVICE_PATH)/cmhw
 TARGET_TAP_TO_WAKE_NODE := "/sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input1/wake_gesture"
 
 # CNE and DPM
