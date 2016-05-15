@@ -88,8 +88,8 @@ on post-fs-data
     mkdir /data/fpc 0770 system system
     mkdir /data/fpc/s 0770 system system
 
-on property:init.svc.bootanim=running
-    write /sys/class/leds/wled/brightness 4095
+# on property:init.svc.bootanim=running
+#    write /sys/class/leds/wled/brightness 4095
 
 on boot
     start rmt_storage
@@ -141,6 +141,7 @@ service qfp-daemon /system/bin/qfp-daemon
     class late_start
     user system
     group system drmrpc diag input
+    disabled
 
 service qvop-daemon /system/bin/qvop-daemon
     class late_start
@@ -427,11 +428,6 @@ service hvdcp_opti /system/bin/hvdcp_opti
 
 on property:persist.sys.ltm_enable=*
     start service_ad
-
-service mdtp_service /system/vendor/bin/mdtp_service
-   class late_start
-   user system
-   group system
 
 service displayfeature /system/bin/displayfeature
     class late_start
