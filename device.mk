@@ -220,6 +220,12 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     power.msm8996
 
+# QMI
+PRODUCT_PACKAGES += \
+    dsi_config.xml \
+    netmgr_config.xml \
+    qmi_config.xml
+
 # Sensors
 PRODUCT_PACKAGES += \
     sensors.msm8996
