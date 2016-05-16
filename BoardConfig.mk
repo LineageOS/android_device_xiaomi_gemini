@@ -41,10 +41,18 @@ TARGET_BOOTLOADER_BOARD_NAME := MSM8996
 TARGET_NO_BOOTLOADER := true
 
 # Kernel
+BOARD_CUSTOM_BOOTIMG_MK := $(DEVICE_PATH)/mkbootimg.mk
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.console=ttyHSL0 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x37 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 cma=16M@0-0xffffffff androidboot.selinux=permissive
 BOARD_KERNEL_PAGESIZE := 4096
-BOARD_MKBOOTIMG_ARGS := --kernel_offset 0x00008000 --ramdisk_offset 0x01000000 --tags_offset 0x00000100
+BOARD_KERNEL_TAGS_OFFSET := 0x02000000
+BOARD_RAMDISK_OFFSET := 0x02200000
+
+TARGET_KERNEL_ARCH := arm64
+TARGET_KERNEL_HEADER_ARCH := arm64
+TARGET_KERNEL_CONFIG := msm_defconfig
+TARGET_KERNEL_SOURCE := kernel/msm
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/zImage
  
 # Platform
