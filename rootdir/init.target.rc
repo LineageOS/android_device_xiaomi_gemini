@@ -243,17 +243,11 @@ service qpaydaemon /system/vendor/bin/qpaydaemon
     user system
     group system
 
-service nv_fem /system/bin/nv_fem
-   class main
-   user root
-   group net_raw
-   oneshot
-
-service nv_mac /system/bin/nv_mac
-   class main
-   user root
-   group net_raw
-   oneshot
+service readmac /system/bin/readmac
+    class main
+    user root
+    group root
+    oneshot
 
 service mmbn-daemon /system/bin/mmbn-daemon
     class main

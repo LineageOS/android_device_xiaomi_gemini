@@ -1,0 +1,12 @@
+type readmac, domain;
+type readmac_exec, exec_type, file_type;
+
+# Allow for transition from init domain to readmac
+init_daemon_domain(readmac)
+
+qmux_socket(readmac)
+
+allow readmac persist_file:dir rw_dir_perms;
+allow readmac persist_file:file { create rw_file_perms };
+allow readmac self:socket create_socket_perms;
+allow readmac self:capability { dac_override };

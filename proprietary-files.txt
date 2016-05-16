@@ -675,8 +675,8 @@ vendor/lib64/libmm-qdcm.so
 # QMI
 bin/irsc_util
 etc/permissions/qti_permissions.xml
-lib64/libqminvapi.so
-lib/libqminvapi.so
+-lib64/libqminvapi.so
+-lib/libqminvapi.so
 vendor/bin/pd-mapper
 vendor/lib64/libdiag.so
 vendor/lib64/libdsi_netctrl.so
@@ -779,6 +779,4 @@ vendor/lib/libTimeService.so
 # WiFi
 bin/cnss-daemon
 bin/cnss_diag
-bin/nv_fem
-bin/nv_mac
 lib/modules/qca_cld/qca_cld_wlan.ko

@@ -6,15 +6,9 @@
 # Data files
 /data/fpc(/.*)?                       u:object_r:fpc_data_file:s0
 
-# Persist files
-/persist/wlan_bt/bt.mac               u:object_r:wlan_bt_persist_file:s0
-/persist/wlan_bt/ff_flag              u:object_r:wlan_bt_persist_file:s0
-/persist/wlan_bt/wlan.mac             u:object_r:wlan_bt_persist_file:s0
-
 # Binaries
 /system/bin/displayfeature            u:object_r:displayfeature_exec:s0
 /system/bin/ftmdaemon                 u:object_r:ftmdaemon_exec:s0
 /system/bin/mmbn-daemon               u:object_r:mmbn-daemon_exec:s0
-/system/bin/nv_fem                    u:object_r:nv_fem_exec:s0
-/system/bin/nv_mac                    u:object_r:nv_mac_exec:s0
+/system/bin/readmac                   u:object_r:readmac_exec:s0
 /system/vendor/bin/qpaydaemon         u:object_r:qpaydaemon_exec:s0

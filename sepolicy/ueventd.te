@@ -1,1 +1,0 @@
-allow ueventd wlan_bt_persist_file:file { open read };
