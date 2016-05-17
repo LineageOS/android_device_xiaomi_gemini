@@ -55,6 +55,7 @@ bool IPACM_Wan::wan_up = false;
 bool IPACM_Wan::wan_up_v6 = false;
 uint8_t IPACM_Wan::xlat_mux_id = 0;
 
+uint32_t IPACM_Wan::curr_wan_ip = 0;
 int IPACM_Wan::num_v4_flt_rule = 0;
 int IPACM_Wan::num_v6_flt_rule = 0;
 
@@ -124,6 +125,8 @@ IPACM_Wan::IPACM_Wan(int iface_index,
 	memset(invalid_mac, 0, sizeof(invalid_mac));
 
 	is_xlat = false;
+	hdr_hdl_dummy_v6 = 0;
+	hdr_proc_hdl_dummy_v6 = 0;
 
 	if(iface_query != NULL)
 	{
@@ -147,12 +150,6 @@ IPACM_Wan::IPACM_Wan(int iface_index,
 	else
 	{
 		IPACMDBG_H("The new WAN interface is WLAN STA.\n");
-	}
-
-	if(m_is_sta_mode == WLAN_WAN)
-	{
-		memcpy(ext_router_mac_addr, mac_addr,
-			sizeof(ext_router_mac_addr));
 	}
 
 	m_fd_ipa = open(IPA_DEVICE_NAME, O_RDWR);
@@ -235,7 +232,7 @@ int IPACM_Wan::handle_addr_evt(ipacm_event_data_addr *data)
 	    rt_rule->commit = 1;
 	    rt_rule->num_rules = NUM_RULES;
 	    rt_rule->ip = data->iptype;
-	    	strcpy(rt_rule->rt_tbl_name, IPACM_Iface::ipacmcfg->rt_tbl_v6.name);
+		strlcpy(rt_rule->rt_tbl_name, IPACM_Iface::ipacmcfg->rt_tbl_v6.name, sizeof(rt_rule->rt_tbl_name));
 
 	    rt_rule_entry = &rt_rule->rules[0];
 		if(m_is_sta_mode == Q6_WAN)
@@ -272,7 +269,7 @@ int IPACM_Wan::handle_addr_evt(ipacm_event_data_addr *data)
 	    	ipv6_addr[num_dft_rt_v6][2] = data->ipv6_addr[2];
 	    	ipv6_addr[num_dft_rt_v6][3] = data->ipv6_addr[3];
 #ifdef FEATURE_IPA_V3
-		rt_rule_entry->rule.hashable = IPA_RULE_NON_HASHABLE;
+		rt_rule_entry->rule.hashable = false;
 #endif
 	        if (false == m_routing.AddRoutingRule(rt_rule))
 	        {
@@ -289,7 +286,7 @@ int IPACM_Wan::handle_addr_evt(ipacm_event_data_addr *data)
 	    	dft_rt_rule_hdl[MAX_DEFAULT_v4_ROUTE_RULES + 2*num_dft_rt_v6] = rt_rule_entry->rt_rule_hdl;
 
             /* setup same rule for v6_wan table*/
-	    	strcpy(rt_rule->rt_tbl_name, IPACM_Iface::ipacmcfg->rt_tbl_wan_v6.name);
+			strlcpy(rt_rule->rt_tbl_name, IPACM_Iface::ipacmcfg->rt_tbl_wan_v6.name, sizeof(rt_rule->rt_tbl_name));
 	    if (false == m_routing.AddRoutingRule(rt_rule))
 	    {
 	    	IPACMERR("Routing rule addition failed!\n");
@@ -357,6 +354,9 @@ int IPACM_Wan::handle_addr_evt(ipacm_event_data_addr *data)
 				flt_rule_entry.flt_rule_hdl = -1;
 				flt_rule_entry.status = -1;
 				flt_rule_entry.rule.action = IPA_PASS_TO_EXCEPTION;
+#ifdef FEATURE_IPA_V3
+				flt_rule_entry.rule.hashable = true;
+#endif
 				memcpy(&flt_rule_entry.rule.attrib, &rx_prop->rx[0].attrib, sizeof(flt_rule_entry.rule.attrib));
 
 				flt_rule_entry.rule.attrib.attrib_mask |= IPA_FLT_DST_ADDR;
@@ -448,11 +448,11 @@ int IPACM_Wan::handle_addr_evt(ipacm_event_data_addr *data)
 		rt_rule_entry->at_rear = false;
 		rt_rule_entry->rule.attrib.attrib_mask = IPA_FLT_DST_ADDR;
 		/* still need setup v4 default routing rule to A5*/
-		strcpy(rt_rule->rt_tbl_name, IPACM_Iface::ipacmcfg->rt_tbl_lan_v4.name);
+		strlcpy(rt_rule->rt_tbl_name, IPACM_Iface::ipacmcfg->rt_tbl_lan_v4.name, sizeof(rt_rule->rt_tbl_name));
 		rt_rule_entry->rule.attrib.u.v4.dst_addr      = data->ipv4_addr;
 		rt_rule_entry->rule.attrib.u.v4.dst_addr_mask = 0xFFFFFFFF;
 #ifdef FEATURE_IPA_V3
-		rt_rule_entry->rule.hashable = IPA_RULE_NON_HASHABLE;
+		rt_rule_entry->rule.hashable = false;
 #endif
 		if (false == m_routing.AddRoutingRule(rt_rule))
 		{
@@ -492,6 +492,10 @@ int IPACM_Wan::handle_addr_evt(ipacm_event_data_addr *data)
 
 		wan_v4_addr = data->ipv4_addr;
 		wan_v4_addr_set = true;
+
+		if (m_is_sta_mode == Q6_WAN)
+			curr_wan_ip = data->ipv4_addr;
+
 		IPACMDBG_H("Receved wan ipv4-addr:0x%x\n",wan_v4_addr);
 	}
 
@@ -1218,7 +1222,6 @@ int IPACM_Wan::handle_route_add_evt(ipa_ip_type iptype)
 	if (m_is_sta_mode !=Q6_WAN)
 	{
 		IPACM_Wan::backhaul_is_sta_mode	= true;
-
 		if((iptype==IPA_IP_v4) && (header_set_v4 != true))
 		{
 			header_partial_default_wan_v4 = true;
@@ -1338,12 +1341,12 @@ int IPACM_Wan::handle_route_add_evt(ipa_ip_type iptype)
 			/* use the STA-header handler */
 			if (iptype == IPA_IP_v4)
 			{
-	    		strcpy(rt_rule->rt_tbl_name, IPACM_Iface::ipacmcfg->rt_tbl_wan_v4.name);
+				strlcpy(rt_rule->rt_tbl_name, IPACM_Iface::ipacmcfg->rt_tbl_wan_v4.name, sizeof(rt_rule->rt_tbl_name));
 				rt_rule_entry->rule.hdr_hdl = hdr_hdl_sta_v4;
 			}
 			else
 			{
-	    		strcpy(rt_rule->rt_tbl_name, IPACM_Iface::ipacmcfg->rt_tbl_v6.name);
+				strlcpy(rt_rule->rt_tbl_name, IPACM_Iface::ipacmcfg->rt_tbl_v6.name, sizeof(rt_rule->rt_tbl_name));
 				rt_rule_entry->rule.hdr_hdl = hdr_hdl_sta_v6;
 			}
 
@@ -1366,6 +1369,10 @@ int IPACM_Wan::handle_route_add_evt(ipa_ip_type iptype)
 			{
 				rt_rule_entry->rule.attrib.u.v4.dst_addr      = 0;
 				rt_rule_entry->rule.attrib.u.v4.dst_addr_mask = 0;
+#ifdef FEATURE_IPA_V3
+
+				rt_rule_entry->rule.hashable = true;
+#endif
 				if (false == m_routing.AddRoutingRule(rt_rule))
 				{
 		    		IPACMERR("Routing rule addition failed!\n");
@@ -1388,6 +1395,9 @@ int IPACM_Wan::handle_route_add_evt(ipa_ip_type iptype)
 				rt_rule_entry->rule.attrib.u.v6.dst_addr_mask[1] = 0;
 				rt_rule_entry->rule.attrib.u.v6.dst_addr_mask[2] = 0;
 				rt_rule_entry->rule.attrib.u.v6.dst_addr_mask[3] = 0;
+#ifdef FEATURE_IPA_V3
+				rt_rule_entry->rule.hashable = true;
+#endif
 				if (false == m_routing.AddRoutingRule(rt_rule))
 				{
 		    		IPACMERR("Routing rule addition failed!\n");
@@ -1407,7 +1417,7 @@ int IPACM_Wan::handle_route_add_evt(ipa_ip_type iptype)
 
 	if (iptype == IPA_IP_v6)
 	{
-		strcpy(rt_rule->rt_tbl_name, IPACM_Iface::ipacmcfg->rt_tbl_wan_v6.name);
+		strlcpy(rt_rule->rt_tbl_name, IPACM_Iface::ipacmcfg->rt_tbl_wan_v6.name, sizeof(rt_rule->rt_tbl_name));
 		memset(rt_rule_entry, 0, sizeof(struct ipa_rt_rule_add));
 		rt_rule_entry->at_rear = true;
 		if(m_is_sta_mode == Q6_WAN)
@@ -1425,6 +1435,15 @@ int IPACM_Wan::handle_route_add_evt(ipa_ip_type iptype)
 		}
 		else
 		{
+			/* create dummy ethernet header for v6 RX path */
+			IPACMDBG_H("Construct dummy ethernet_header\n");
+			if (add_dummy_rx_hdr())
+			{
+				IPACMERR("Construct dummy ethernet_header failed!\n");
+				free(rt_rule);
+				return IPACM_FAILURE;
+			}
+			rt_rule_entry->rule.hdr_proc_ctx_hdl = hdr_proc_hdl_dummy_v6;
 			rt_rule_entry->rule.dst = IPA_CLIENT_APPS_LAN_CONS;
 		}
 		rt_rule_entry->rule.attrib.attrib_mask = IPA_FLT_DST_ADDR;
@@ -1436,6 +1455,9 @@ int IPACM_Wan::handle_route_add_evt(ipa_ip_type iptype)
 		rt_rule_entry->rule.attrib.u.v6.dst_addr_mask[1] = 0;
 		rt_rule_entry->rule.attrib.u.v6.dst_addr_mask[2] = 0;
 		rt_rule_entry->rule.attrib.u.v6.dst_addr_mask[3] = 0;
+#ifdef FEATURE_IPA_V3
+		rt_rule_entry->rule.hashable = true;
+#endif
 		if (false == m_routing.AddRoutingRule(rt_rule))
 		{
 			IPACMERR("Routing rule addition failed!\n");
@@ -1731,11 +1753,14 @@ int IPACM_Wan::handle_sta_header_add_evt()
 					 get_client_memptr(wan_client, index)->mac[3],
 					 get_client_memptr(wan_client, index)->mac[4],
 					 get_client_memptr(wan_client, index)->mac[5]);
+
 			if(get_client_memptr(wan_client, index)->ipv4_header_set)
 			{
 				hdr_hdl_sta_v4 = get_client_memptr(wan_client, index)->hdr_hdl_v4;
 				header_set_v4 = true;
 				IPACMDBG_H("add full ipv4 header hdl: (%x)\n", get_client_memptr(wan_client, index)->hdr_hdl_v4);
+				/* store external_ap's MAC */
+				memcpy(ext_router_mac_addr, get_client_memptr(wan_client, index)->mac, sizeof(ext_router_mac_addr));
 			}
 			else
 			{
@@ -1776,11 +1801,14 @@ int IPACM_Wan::handle_sta_header_add_evt()
 					 get_client_memptr(wan_client, index)->mac[3],
 					 get_client_memptr(wan_client, index)->mac[4],
 					 get_client_memptr(wan_client, index)->mac[5]);
+
 			if(get_client_memptr(wan_client, index)->ipv6_header_set)
 			{
 				hdr_hdl_sta_v6 = get_client_memptr(wan_client, index)->hdr_hdl_v6;
 				header_set_v6 = true;
 				IPACMDBG_H("add full ipv6 header hdl: (%x)\n", get_client_memptr(wan_client, index)->hdr_hdl_v6);
+				/* store external_ap's MAC */
+				memcpy(ext_router_mac_addr, get_client_memptr(wan_client, index)->mac, sizeof(ext_router_mac_addr));
 			}
 			else
 			{
@@ -1920,14 +1948,13 @@ int IPACM_Wan::config_dft_firewall_rules(ipa_ip_type iptype)
 		flt_rule_entry.at_rear = true;
 #ifdef FEATURE_IPA_V3
 		flt_rule_entry.at_rear = false;
-		flt_rule_entry.rule.hashable = IPA_RULE_NON_HASHABLE;
+		flt_rule_entry.rule.hashable = false;
 #endif
 		flt_rule_entry.flt_rule_hdl = -1;
 		flt_rule_entry.status = -1;
 		flt_rule_entry.rule.action = IPA_PASS_TO_EXCEPTION;
 		memcpy(&flt_rule_entry.rule.attrib, &rx_prop->rx[0].attrib, sizeof(struct ipa_rule_attrib));
 		flt_rule_entry.rule.attrib.attrib_mask |= IPA_FLT_FRAGMENT;
-
 		memcpy(&(m_pFilteringTable->rules[0]), &flt_rule_entry, sizeof(struct ipa_flt_rule_add));
 		if (false == m_filtering.AddFilteringRule(m_pFilteringTable))
 		{
@@ -2003,6 +2030,7 @@ int IPACM_Wan::config_dft_firewall_rules(ipa_ip_type iptype)
             }
 #ifdef FEATURE_IPA_V3
 			flt_rule_entry.at_rear = true;
+			flt_rule_entry.rule.hashable = true;
 #endif
 			flt_rule_entry.rule.rt_tbl_hdl = IPACM_Iface::ipacmcfg->rt_tbl_lan_v4.hdl;
 			memcpy(&flt_rule_entry.rule.attrib,
@@ -2079,6 +2107,9 @@ int IPACM_Wan::config_dft_firewall_rules(ipa_ip_type iptype)
 			        {
 			            flt_rule_entry.rule.action = IPA_PASS_TO_EXCEPTION;
                     }
+#ifdef FEATURE_IPA_V3
+					flt_rule_entry.rule.hashable = true;
+#endif
 					memcpy(&flt_rule_entry.rule.attrib,
 								 &firewall_config.extd_firewall_entries[i].attrib,
 								 sizeof(struct ipa_rule_attrib));
@@ -2207,6 +2238,9 @@ int IPACM_Wan::config_dft_firewall_rules(ipa_ip_type iptype)
 					flt_rule_entry.rule.action = IPA_PASS_TO_ROUTING;
 				}
             }
+#ifdef FEATURE_IPA_V3
+			flt_rule_entry.rule.hashable = true;
+#endif
 			flt_rule_entry.rule.rt_tbl_hdl = IPACM_Iface::ipacmcfg->rt_tbl_lan_v4.hdl;
 			memcpy(&flt_rule_entry.rule.attrib,
 						 &rx_prop->rx[0].attrib,
@@ -2256,6 +2290,9 @@ int IPACM_Wan::config_dft_firewall_rules(ipa_ip_type iptype)
 			flt_rule_entry.rule.retain_hdr = 1;
 			flt_rule_entry.rule.eq_attrib_type = 0;
 			flt_rule_entry.rule.action = IPA_PASS_TO_EXCEPTION;
+#ifdef FEATURE_IPA_V3
+			flt_rule_entry.rule.hashable = true;
+#endif
 			memcpy(&flt_rule_entry.rule.attrib,
 					 &rx_prop->rx[0].attrib,
 					 sizeof(struct ipa_rule_attrib));
@@ -2312,6 +2349,9 @@ int IPACM_Wan::config_dft_firewall_rules(ipa_ip_type iptype)
 			  flt_rule_entry.at_rear = true;
 			  flt_rule_entry.rule.action = IPA_PASS_TO_ROUTING;
                         }
+#ifdef FEATURE_IPA_V3
+			flt_rule_entry.rule.hashable = true;
+#endif
 			memcpy(&flt_rule_entry.rule.attrib,
 						 &rx_prop->rx[0].attrib,
 						 sizeof(struct ipa_rule_attrib));
@@ -2381,6 +2421,9 @@ int IPACM_Wan::config_dft_firewall_rules(ipa_ip_type iptype)
 			            {
 					flt_rule_entry.rule.action = IPA_PASS_TO_EXCEPTION;
                                     }
+#ifdef FEATURE_IPA_V3
+					flt_rule_entry.rule.hashable = true;
+#endif
 		    			flt_rule_entry.rule.rt_tbl_hdl = IPACM_Iface::ipacmcfg->rt_tbl_wan_v6.hdl;
 					memcpy(&flt_rule_entry.rule.attrib,
 								 &firewall_config.extd_firewall_entries[i].attrib,
@@ -2461,6 +2504,9 @@ int IPACM_Wan::config_dft_firewall_rules(ipa_ip_type iptype)
 			flt_rule_entry.rule.retain_hdr = 1;
 			flt_rule_entry.rule.eq_attrib_type = 0;
 			flt_rule_entry.rule.action = IPA_PASS_TO_EXCEPTION;
+#ifdef FEATURE_IPA_V3
+			flt_rule_entry.rule.hashable = true;
+#endif
 			memcpy(&flt_rule_entry.rule.attrib,
 					 &rx_prop->rx[0].attrib,
 					 sizeof(struct ipa_rule_attrib));
@@ -2510,6 +2556,9 @@ int IPACM_Wan::config_dft_firewall_rules(ipa_ip_type iptype)
 			  flt_rule_entry.at_rear = true;
 			  flt_rule_entry.rule.action = IPA_PASS_TO_ROUTING;
                         }
+#ifdef FEATURE_IPA_V3
+			flt_rule_entry.rule.hashable = true;
+#endif
 			memcpy(&flt_rule_entry.rule.attrib,
 						 &rx_prop->rx[0].attrib,
 						 sizeof(struct ipa_rule_attrib));
@@ -2613,7 +2662,7 @@ int IPACM_Wan::config_dft_firewall_rules_ex(struct ipa_flt_rule_add *rules, int 
 		flt_rule_entry.rule.action = IPA_PASS_TO_ROUTING;
 #ifdef FEATURE_IPA_V3
 		flt_rule_entry.at_rear = false;
-		flt_rule_entry.rule.hashable = IPA_RULE_NON_HASHABLE;
+		flt_rule_entry.rule.hashable = false;
 #endif
 		memset(&rt_tbl_idx, 0, sizeof(rt_tbl_idx));
 		rt_tbl_idx.ip = IPA_IP_v6;
@@ -2680,6 +2729,9 @@ int IPACM_Wan::config_dft_firewall_rules_ex(struct ipa_flt_rule_add *rules, int 
 					{
 						flt_rule_entry.rule.action = IPA_PASS_TO_ROUTING;
 					}
+#ifdef FEATURE_IPA_V3
+					flt_rule_entry.rule.hashable = true;
+#endif
 					memset(&rt_tbl_idx, 0, sizeof(rt_tbl_idx));
 					rt_tbl_idx.ip = iptype;
 					if(flt_rule_entry.rule.action == IPA_PASS_TO_ROUTING)
@@ -2814,6 +2866,9 @@ int IPACM_Wan::config_dft_firewall_rules_ex(struct ipa_flt_rule_add *rules, int 
 				flt_rule_entry.rule.action = IPA_PASS_TO_DST_NAT;
 			}
 		}
+#ifdef FEATURE_IPA_V3
+		flt_rule_entry.rule.hashable = true;
+#endif
 		memset(&rt_tbl_idx, 0, sizeof(rt_tbl_idx));
 		rt_tbl_idx.ip = iptype;
 
@@ -2886,6 +2941,9 @@ int IPACM_Wan::config_dft_firewall_rules_ex(struct ipa_flt_rule_add *rules, int 
 					flt_rule_entry.rule.to_uc = 0;
 					flt_rule_entry.rule.eq_attrib_type = 1;
 					flt_rule_entry.rule.action = IPA_PASS_TO_ROUTING;
+#ifdef FEATURE_IPA_V3
+					flt_rule_entry.rule.hashable = true;
+#endif
 					memset(&rt_tbl_idx, 0, sizeof(rt_tbl_idx));
 					rt_tbl_idx.ip = iptype;
 
@@ -2996,6 +3054,9 @@ int IPACM_Wan::config_dft_firewall_rules_ex(struct ipa_flt_rule_add *rules, int 
 		flt_rule_entry.rule.to_uc = 0;
 		flt_rule_entry.rule.eq_attrib_type = 1;
 		flt_rule_entry.rule.action = IPA_PASS_TO_ROUTING;
+#ifdef FEATURE_IPA_V3
+		flt_rule_entry.rule.hashable = true;
+#endif
 		memset(&rt_tbl_idx, 0, sizeof(rt_tbl_idx));
 		rt_tbl_idx.ip = iptype;
 		/* firewall disable, all traffic are allowed */
@@ -3190,6 +3251,9 @@ int IPACM_Wan::add_icmp_alg_rules(struct ipa_flt_rule_add *rules, int rule_offse
 		flt_rule_entry.rule.to_uc = 0;
 		flt_rule_entry.rule.eq_attrib_type = 1;
 		flt_rule_entry.rule.action = IPA_PASS_TO_ROUTING;
+#ifdef FEATURE_IPA_V3
+		flt_rule_entry.rule.hashable = true;
+#endif
 		flt_rule_entry.rule.rt_tbl_idx = rt_tbl_idx.idx;
 
 		/* Configuring ICMP filtering rule */
@@ -3307,6 +3371,9 @@ int IPACM_Wan::add_icmp_alg_rules(struct ipa_flt_rule_add *rules, int rule_offse
 		flt_rule_entry.rule.to_uc = 0;
 		flt_rule_entry.rule.eq_attrib_type = 1;
 		flt_rule_entry.rule.action = IPA_PASS_TO_ROUTING;
+#ifdef FEATURE_IPA_V3
+		flt_rule_entry.rule.hashable = true;
+#endif
 		flt_rule_entry.rule.rt_tbl_idx = rt_tbl_idx.idx;
 
 		/* Configuring ICMP filtering rule */
@@ -3503,6 +3570,9 @@ int IPACM_Wan::add_dft_filtering_rule(struct ipa_flt_rule_add *rules, int rule_o
 		flt_rule_entry.rule.to_uc = 0;
 		flt_rule_entry.rule.eq_attrib_type = 1;
 		flt_rule_entry.rule.action = IPA_PASS_TO_ROUTING;
+#ifdef FEATURE_IPA_V3
+		flt_rule_entry.rule.hashable = true;
+#endif
 		flt_rule_entry.rule.rt_tbl_idx = rt_tbl_idx.idx;
 
 		IPACMDBG_H("rx property attrib mask:0x%x\n", rx_prop->rx[0].attrib.attrib_mask);
@@ -3583,6 +3653,9 @@ int IPACM_Wan::add_dft_filtering_rule(struct ipa_flt_rule_add *rules, int rule_o
 		flt_rule_entry.rule.to_uc = 0;
 		flt_rule_entry.rule.eq_attrib_type = 1;
 		flt_rule_entry.rule.action = IPA_PASS_TO_ROUTING;
+#ifdef FEATURE_IPA_V3
+		flt_rule_entry.rule.hashable = true;
+#endif
 		flt_rule_entry.rule.rt_tbl_idx = rt_tbl_idx.idx;
 
 		/* Configuring Multicast Filtering Rule */
@@ -4141,6 +4214,9 @@ int IPACM_Wan::config_dft_embms_rules(ipa_ioc_add_flt_rule *pFilteringTable_v4, 
 	flt_rule_entry.rule.to_uc = 0;
 	flt_rule_entry.rule.eq_attrib_type = 1;
 	flt_rule_entry.rule.action = IPA_PASS_TO_ROUTING;
+#ifdef FEATURE_IPA_V3
+	flt_rule_entry.rule.hashable = true;
+#endif
 	flt_rule_entry.rule.rt_tbl_idx = rt_tbl_idx.idx;
 
 	memcpy(&flt_rule_entry.rule.attrib,
@@ -4187,6 +4263,9 @@ int IPACM_Wan::config_dft_embms_rules(ipa_ioc_add_flt_rule *pFilteringTable_v4, 
 	flt_rule_entry.rule.to_uc = 0;
 	flt_rule_entry.rule.eq_attrib_type = 1;
 	flt_rule_entry.rule.action = IPA_PASS_TO_ROUTING;
+#ifdef FEATURE_IPA_V3
+	flt_rule_entry.rule.hashable = true;
+#endif
 	flt_rule_entry.rule.rt_tbl_idx = rt_tbl_idx.idx;
 
 	memcpy(&flt_rule_entry.rule.attrib,
@@ -4393,7 +4472,24 @@ int IPACM_Wan::handle_down_evt()
 		}
 		IPACMDBG_H("finished delete default v6 filtering rules\n ");
 	}
-
+	if(hdr_proc_hdl_dummy_v6)
+	{
+		if(m_header.DeleteHeaderProcCtx(hdr_proc_hdl_dummy_v6) == false)
+		{
+			IPACMERR("Failed to delete hdr_proc_hdl_dummy_v6\n");
+			res = IPACM_FAILURE;
+			goto fail;
+		}
+	}
+	if(hdr_hdl_dummy_v6)
+	{
+		if (m_header.DeleteHeaderHdl(hdr_hdl_dummy_v6) == false)
+		{
+			IPACMERR("Failed to delete hdr_hdl_dummy_v6\n");
+			res = IPACM_FAILURE;
+			goto fail;
+		}
+	}
 fail:
 	if (tx_prop != NULL)
 	{
@@ -4757,6 +4853,10 @@ int IPACM_Wan::install_wan_filtering_rule(bool is_sw_routing)
 		flt_rule_entry.flt_rule_hdl = -1;
 		flt_rule_entry.status = -1;
 		flt_rule_entry.rule.action = IPA_PASS_TO_ROUTING;
+#ifdef FEATURE_IPA_V3
+		flt_rule_entry.rule.hashable = true;
+#endif
+
 		flt_rule_entry.rule.rt_tbl_idx = rt_tbl_idx.idx;
 
 		memcpy(&flt_rule_entry.rule.attrib,
@@ -4815,6 +4915,9 @@ int IPACM_Wan::install_wan_filtering_rule(bool is_sw_routing)
 		flt_rule_entry.flt_rule_hdl = -1;
 		flt_rule_entry.status = -1;
 		flt_rule_entry.rule.action = IPA_PASS_TO_ROUTING;
+#ifdef FEATURE_IPA_V3
+		flt_rule_entry.rule.hashable = true;
+#endif
 		flt_rule_entry.rule.rt_tbl_idx = rt_tbl_idx.idx;
 		memcpy(&flt_rule_entry.rule.attrib,
 					&rx_prop->rx[0].attrib,
@@ -5040,7 +5143,6 @@ int IPACM_Wan::handle_wan_hdr_init(uint8_t *mac_addr)
 	memcpy(get_client_memptr(wan_client, num_wan_client)->mac,
 				 mac_addr,
 				 sizeof(get_client_memptr(wan_client, num_wan_client)->mac));
-
 
 	IPACMDBG_H("Received Client MAC %02x:%02x:%02x:%02x:%02x:%02x\n",
 					 mac_addr[0], mac_addr[1], mac_addr[2],
@@ -5488,6 +5590,9 @@ int IPACM_Wan::handle_wan_client_route_rule(uint8_t *mac_addr, ipa_ip_type iptyp
 				rt_rule_entry->rule.hdr_hdl = get_client_memptr(wan_client, wan_index)->hdr_hdl_v4;
 				rt_rule_entry->rule.attrib.u.v4.dst_addr = get_client_memptr(wan_client, wan_index)->v4_addr;
 				rt_rule_entry->rule.attrib.u.v4.dst_addr_mask = 0xFFFFFFFF;
+#ifdef FEATURE_IPA_V3
+				rt_rule_entry->rule.hashable = true;
+#endif
 				if (false == m_routing.AddRoutingRule(rt_rule))
 				{
 					IPACMERR("Routing rule addition failed!\n");
@@ -5535,6 +5640,9 @@ int IPACM_Wan::handle_wan_client_route_rule(uint8_t *mac_addr, ipa_ip_type iptyp
 					rt_rule_entry->rule.attrib.u.v6.dst_addr_mask[1] = 0xFFFFFFFF;
 					rt_rule_entry->rule.attrib.u.v6.dst_addr_mask[2] = 0xFFFFFFFF;
 					rt_rule_entry->rule.attrib.u.v6.dst_addr_mask[3] = 0xFFFFFFFF;
+#ifdef FEATURE_IPA_V3
+					rt_rule_entry->rule.hashable = true;
+#endif
 					if (false == m_routing.AddRoutingRule(rt_rule))
 					{
 						IPACMERR("Routing rule addition failed!\n");
@@ -5920,6 +6028,141 @@ int IPACM_Wan::handle_network_stats_update(ipa_get_apn_data_stats_resp_msg_v01 *
 			fclose(fp);
 			break;
 		};
+	}
+	return IPACM_SUCCESS;
+}
+
+int IPACM_Wan::add_dummy_rx_hdr()
+{
+
+#define IFACE_INDEX_LEN 2
+	char index[IFACE_INDEX_LEN];
+	struct ipa_ioc_add_hdr *pHeaderDescriptor = NULL;
+	int len = 0;
+	struct ipa_ioc_copy_hdr sCopyHeader;
+	struct ipa_hdr_add *ipv6_hdr;
+	struct ethhdr *eth_ipv6;
+	struct ipa_ioc_add_hdr_proc_ctx* pHeaderProcTable = NULL;
+	uint32_t cnt;
+
+	/* get netdev-mac */
+	if(tx_prop != NULL)
+	{
+		/* copy partial header for v6 */
+		for (cnt=0; cnt<tx_prop->num_tx_props; cnt++)
+		{
+				 if(tx_prop->tx[cnt].ip==IPA_IP_v6)
+				 {
+								IPACMDBG_H("Got partial v6-header name from %d tx props\n", cnt);
+								memset(&sCopyHeader, 0, sizeof(sCopyHeader));
+								memcpy(sCopyHeader.name,
+											 tx_prop->tx[cnt].hdr_name,
+											 sizeof(sCopyHeader.name));
+
+								IPACMDBG_H("header name: %s in tx:%d\n", sCopyHeader.name,cnt);
+								if (m_header.CopyHeader(&sCopyHeader) == false)
+								{
+									PERROR("ioctl copy header failed");
+									return IPACM_FAILURE;
+								}
+
+								IPACMDBG_H("header length: %d, paritial: %d\n", sCopyHeader.hdr_len, sCopyHeader.is_partial);
+								IPACMDBG_H("header eth2_ofst_valid: %d, eth2_ofst: %d\n", sCopyHeader.is_eth2_ofst_valid, sCopyHeader.eth2_ofst);
+								if (sCopyHeader.hdr_len > IPA_HDR_MAX_SIZE)
+								{
+									IPACMERR("header oversize\n");
+									return IPACM_FAILURE;
+								}
+								else
+								{
+									/* copy client mac_addr to partial header */
+									IPACMDBG_H("header eth2_ofst_valid: %d, eth2_ofst: %d\n",
+											sCopyHeader.is_eth2_ofst_valid, sCopyHeader.eth2_ofst);
+									/* only copy 6 bytes mac-address */
+									if(sCopyHeader.is_eth2_ofst_valid == false)
+									{
+										memcpy(netdev_mac, &sCopyHeader.hdr[0+IPA_MAC_ADDR_SIZE],
+												sizeof(netdev_mac));
+									}
+									else
+									{
+										memcpy(netdev_mac, &sCopyHeader.hdr[sCopyHeader.eth2_ofst+IPA_MAC_ADDR_SIZE],
+												sizeof(netdev_mac));
+									}
+								}
+					break;
+				}
+		}
+	}
+
+	len = sizeof(struct ipa_ioc_add_hdr) + (1 * sizeof(struct ipa_hdr_add));
+	pHeaderDescriptor = (struct ipa_ioc_add_hdr *)calloc(1, len);
+	if (pHeaderDescriptor == NULL)
+	{
+		IPACMERR("calloc failed to allocate pHeaderDescriptor\n");
+		return IPACM_FAILURE;
+	}
+	ipv6_hdr = &pHeaderDescriptor->hdr[0];
+	/* copy ethernet type to header */
+	eth_ipv6 = (struct ethhdr *) (ipv6_hdr->hdr +2);
+	memcpy(eth_ipv6->h_dest, netdev_mac, ETH_ALEN);
+	memcpy(eth_ipv6->h_source, ext_router_mac_addr, ETH_ALEN);
+	eth_ipv6->h_proto = htons(ETH_P_IPV6);
+	pHeaderDescriptor->commit = true;
+	pHeaderDescriptor->num_hdrs = 1;
+
+	memset(ipv6_hdr->name, 0,
+			 sizeof(pHeaderDescriptor->hdr[0].name));
+
+	snprintf(index,sizeof(index), "%d", ipa_if_num);
+	strlcpy(ipv6_hdr->name, index, sizeof(ipv6_hdr->name));
+	ipv6_hdr->name[IPA_RESOURCE_NAME_MAX-1] = '\0';
+
+	if (strlcat(ipv6_hdr->name, IPA_DUMMY_ETH_HDR_NAME_v6, sizeof(ipv6_hdr->name)) > IPA_RESOURCE_NAME_MAX)
+	{
+		IPACMERR(" header name construction failed exceed length (%d)\n", strlen(ipv6_hdr->name));
+		return IPACM_FAILURE;
+	}
+
+	ipv6_hdr->hdr_len = ETH_HLEN + 2;
+	ipv6_hdr->hdr_hdl = -1;
+	ipv6_hdr->is_partial = 0;
+	ipv6_hdr->status = -1;
+	ipv6_hdr->type = IPA_HDR_L2_ETHERNET_II;
+
+	if (m_header.AddHeader(pHeaderDescriptor) == false ||
+			ipv6_hdr->status != 0)
+	{
+		IPACMERR("ioctl IPA_IOC_ADD_HDR failed: %d\n", ipv6_hdr->status);
+		return IPACM_FAILURE;
+	}
+
+	hdr_hdl_dummy_v6 = ipv6_hdr->hdr_hdl;
+	IPACMDBG_H("dummy v6 full header name:%s header handle:(0x%x)\n",
+								 ipv6_hdr->name,
+								 hdr_hdl_dummy_v6);
+	/* add dummy hdr_proc_hdl */
+	len = sizeof(struct ipa_ioc_add_hdr_proc_ctx) + sizeof(struct ipa_hdr_proc_ctx_add);
+	pHeaderProcTable = (ipa_ioc_add_hdr_proc_ctx*)malloc(len);
+	if(pHeaderProcTable == NULL)
+	{
+		IPACMERR("Cannot allocate header processing table.\n");
+		return IPACM_FAILURE;
+	}
+
+	memset(pHeaderProcTable, 0, len);
+	pHeaderProcTable->commit = 1;
+	pHeaderProcTable->num_proc_ctxs = 1;
+	pHeaderProcTable->proc_ctx[0].hdr_hdl = hdr_hdl_dummy_v6;
+	if (m_header.AddHeaderProcCtx(pHeaderProcTable) == false)
+	{
+		IPACMERR("Adding dummy hhdr_proc_hdl failed with status: %d\n", pHeaderProcTable->proc_ctx[0].status);
+		return IPACM_FAILURE;
+	}
+	else
+	{
+		hdr_proc_hdl_dummy_v6 = pHeaderProcTable->proc_ctx[0].proc_ctx_hdl;
+		IPACMDBG_H("dummy hhdr_proc_hdl is added successfully. (0x%x)\n", hdr_proc_hdl_dummy_v6);
 	}
 	return IPACM_SUCCESS;
 }
