@@ -37,6 +37,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.stats.test=5
 
+# CNE and DPM
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.cne.feature=1 \
+    persist.dpm.feature=5 \
+    persist.dpm.nsrm.bkg.evt=3955 \
+    persist.env.fastdorm.enabled=false
+
 # Graphics
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.egl.hw=1 \
@@ -116,7 +123,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.mode=concurrent \
     persist.dbg.volte_avail_ovr=1 \
     persist.dbg.vt_avail_ovr=1 \
-    persist.env.fastdorm.enabled=false \
     persist.fd.scroff.timer=3000 \
     persist.fd.scron.timer=10000 \
     persist.logd.size.radio=4M \

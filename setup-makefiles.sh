@@ -67,6 +67,7 @@ done
 # Pick up overlay for features that depend on non-open-source files
 
 PRODUCT_PACKAGES += \\
+    CNEService \\
     TimeService \\
     fastdormancy \\
     ims \\
@@ -123,6 +124,17 @@ EOF
 LOCAL_PATH := \$(call my-dir)
 
 ifeq (\$(TARGET_DEVICE),gemini)
+
+include \$(CLEAR_VARS)
+LOCAL_MODULE := CNEService
+LOCAL_MODULE_CLASS := APPS
+LOCAL_MODULE_OWNER := $VENDOR
+LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
+LOCAL_MODULE_TAGS := optional
+LOCAL_PRIVILEGED_MODULE := true
+LOCAL_SRC_FILES := proprietary/priv-app/CNEService/CNEService.apk
+LOCAL_CERTIFICATE := platform
+include \$(BUILD_PREBUILT)
 
 include \$(CLEAR_VARS)
 LOCAL_MODULE := TimeService

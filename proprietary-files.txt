@@ -810,6 +810,51 @@ vendor/lib/libmmcamera_sony_imx378_eeprom.so
 vendor/lib/libmmcamera_sonyimx135_eeprom.so
 vendor/lib/libmmcamera_sunny_q5v41b_eeprom.so
 
+# CNE
+bin/cnd
+etc/cne/SwimConfig.xml
+etc/cne/andsfCne.xml
+etc/permissions/ConnectivityExt.xml
+etc/permissions/cneapiclient.xml
+etc/permissions/com.quicinc.cne.xml
+framework/cneapiclient.jar
+framework/com.quicinc.cne.jar
+framework/ConnectivityExt.jar
+-priv-app/CNEService/CNEService.apk
+vendor/lib64/libNimsWrap.so
+vendor/lib64/libcneapiclient.so
+vendor/lib64/libcneconn.so
+vendor/lib64/libcneqmiutils.so
+vendor/lib64/libcne.so
+vendor/lib64/libvendorconn.so
+vendor/lib64/libwqe.so
+vendor/lib/libNimsWrap.so
+vendor/lib/libcneapiclient.so
+vendor/lib/libcneconn.so
+vendor/lib/libcneqmiutils.so
+vendor/lib/libcne.so
+vendor/lib/libvendorconn.so
+vendor/lib/libwqe.so
+
+# DPM
+bin/dpmd
+etc/dpm/dpm.conf
+etc/dpm/nsrm/NsrmConfiguration.xml
+etc/permissions/dpmapi.xml
+framework/com.qti.dpmframework.jar
+framework/dpmapi.jar
+framework/tcmclient.jar
+vendor/lib64/libdpmctmgr.so
+vendor/lib64/libdpmfdmgr.so
+vendor/lib64/libdpmframework.so
+vendor/lib64/libdpmnsrm.so
+vendor/lib64/libdpmtcm.so
+vendor/lib/libdpmctmgr.so
+vendor/lib/libdpmfdmgr.so
+vendor/lib/libdpmframework.so
+vendor/lib/libdpmnsrm.so
+vendor/lib/libdpmtcm.so
+
 # DRM
 bin/qseecomd
 vendor/bin/qseeproxydaemon

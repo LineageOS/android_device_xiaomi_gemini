@@ -126,6 +126,10 @@ PRODUCT_PACKAGES += \
     init.qcom.sh \
     init.qcom.usb.sh
 
+# CNE
+PRODUCT_PACKAGES += \
+    libcnefeatureconfig
+
 # Display
 PRODUCT_PACKAGES += \
     copybit.msm8996 \
