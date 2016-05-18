@@ -230,6 +230,12 @@ PRODUCT_PACKAGES += \
     netmgr_config.xml \
     qmi_config.xml
 
+# RIL
+PRODUCT_PACKAGES += \
+    librmnetctl \
+    libtinyxml2 \
+    libxml2
+
 # Sensors
 PRODUCT_PACKAGES += \
     sensors.msm8996
