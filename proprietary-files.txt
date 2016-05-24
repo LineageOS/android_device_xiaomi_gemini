@@ -15,7 +15,6 @@ etc/acdbdata/Forte/Forte_Headset_cal.acdb
 etc/acdbdata/Forte/Forte_Speaker_cal.acdb
 
 # Audio amplifier
-bin/climax_hostSW
 bin/nxp_do_cal.sh
 bin/nxp_do_f0.sh
 bin/tfa_coldboot.sh
@@ -814,13 +813,6 @@ vendor/lib/libmmcamera_sunny_q5v41b_eeprom.so
 bin/cnd
 etc/cne/SwimConfig.xml
 etc/cne/andsfCne.xml
-etc/permissions/ConnectivityExt.xml
-etc/permissions/cneapiclient.xml
-etc/permissions/com.quicinc.cne.xml
-framework/cneapiclient.jar
-framework/com.quicinc.cne.jar
-framework/ConnectivityExt.jar
--priv-app/CNEService/CNEService.apk
 vendor/lib64/libNimsWrap.so
 vendor/lib64/libcneapiclient.so
 vendor/lib64/libcneconn.so
@@ -841,9 +833,6 @@ bin/dpmd
 etc/dpm/dpm.conf
 etc/dpm/nsrm/NsrmConfiguration.xml
 etc/permissions/dpmapi.xml
-framework/com.qti.dpmframework.jar
-framework/dpmapi.jar
-framework/tcmclient.jar
 vendor/lib64/libdpmctmgr.so
 vendor/lib64/libdpmfdmgr.so
 vendor/lib64/libdpmframework.so
@@ -1015,8 +1004,6 @@ bin/imscmservice
 bin/imsdatadaemon
 bin/imsqmidaemon
 bin/ims_rtp_daemon
--vendor/app/ims/ims.apk
--vendor/app/imssettings/imssettings.apk
 vendor/lib64/libimscamera_jni.so
 vendor/lib64/libimsmedia_jni.so
 vendor/lib64/lib-dplmedia.so
@@ -1291,7 +1278,6 @@ vendor/lib/libmm-qdcm.so
 
 # QMI
 bin/irsc_util
-etc/permissions/qti_permissions.xml
 vendor/lib64/libconnctrl.so
 vendor/lib64/libdiag.so
 vendor/lib64/libdsi_netctrl.so
@@ -1328,7 +1314,6 @@ vendor/lib/libqmi.so
 vendor/lib/libsmemlog.so
 
 # RIL
--app/fastdormancy/fastdormancy.apk
 -app/shutdownlistener/shutdownlistener.apk
 bin/netmgrd
 bin/port-bridge
@@ -1338,7 +1323,6 @@ bin/rmt_storage
 etc/modem/Diag.cfg
 etc/permissions/qcnvitems.xml
 etc/permissions/qcrilhook.xml
-etc/permissions/telephonyservice.xml
 -framework/qcnvitems.jar
 -framework/qcrilhook.jar
 framework/qti-telephony-common.jar
