@@ -1084,7 +1084,9 @@ lib/hw/lights.msm8996.so
 
 # Media
 lib64/libOmxVpp.so
+lib64/libmm-omxcore.so
 lib/libOmxVpp.so
+lib/libmm-omxcore.so
 vendor/lib64/libI420colorconvert.so
 vendor/lib64/libmm-color-convertor.so
 vendor/lib64/libmmosal.so
@@ -1149,9 +1151,12 @@ vendor/bin/qpaydaemon
 vendor/lib64/lib-sec-disp.so
 vendor/lib64/libalarmservice_jni.so
 vendor/lib64/libExtendedExtractor.so
+vendor/lib64/libFileMux.so
 vendor/lib64/libhdcp1prov.so
 vendor/lib64/libmm-hdcpmgr.so
 vendor/lib64/libmmQSM.so
+vendor/lib64/libmmrtpdecoder.so
+vendor/lib64/libmmrtpencoder.so
 vendor/lib64/libproxadapter.so
 vendor/lib64/libproxsockadapter.so
 vendor/lib64/libpvr.so
@@ -1171,6 +1176,7 @@ vendor/lib64/libsdm-disp-apis.so
 vendor/lib64/libsdmextension.so
 vendor/lib64/libsecureui.so
 vendor/lib64/libsecureui_svcsock.so
+vendor/lib64/libSecureUILib.so
 vendor/lib64/libsecureuisvc_jni.so
 vendor/lib64/libseemp_binder.so
 vendor/lib64/libseempnative.so
@@ -1178,7 +1184,9 @@ vendor/lib64/libsi.so
 vendor/lib64/libsta_lib_third_party_libsta_lib_libsta_gyp.so
 vendor/lib64/libsta_lib_third_party_staproxy_sta_proxy_loader_gyp.so
 vendor/lib64/libstaapi.so
+vendor/lib64/libStDrvInt.so
 vendor/lib64/libstlport_sta.so
+vendor/lib64/libsubsystem_control.so
 vendor/lib64/libual.so
 vendor/lib64/libualutil.so
 vendor/lib64/libusndroute.so
@@ -1193,11 +1201,10 @@ vendor/lib/libarcsoft_beauty_shot.so
 vendor/lib/libcppf.so
 vendor/lib/libdrc.so
 vendor/lib/libExtendedExtractor.so
+vendor/lib/libFileMux.so
 vendor/lib/libhdcp1prov.so
 vendor/lib/libmm-hdcpmgr.so
 vendor/lib/libmmQSM.so
-vendor/lib64/libmmrtpdecoder.so
-vendor/lib64/libmmrtpencoder.so
 vendor/lib/libmmrtpdecoder.so
 vendor/lib/libmmrtpencoder.so
 vendor/lib/libproxadapter.so
@@ -1217,6 +1224,7 @@ vendor/lib/libscveTextRecoPostProcessing.so
 vendor/lib/libsd_sdk_display.so
 vendor/lib/libsecureui.so
 vendor/lib/libsecureui_svcsock.so
+vendor/lib/libSecureUILib.so
 vendor/lib/libsecureuisvc_jni.so
 vendor/lib/libseemp_binder.so
 vendor/lib/libseempnative.so
@@ -1225,7 +1233,9 @@ vendor/lib/libsmwrapper.so
 vendor/lib/libsta_lib_third_party_libsta_lib_libsta_gyp.so
 vendor/lib/libsta_lib_third_party_staproxy_sta_proxy_loader_gyp.so
 vendor/lib/libstaapi.so
+vendor/lib/libStDrvInt.so
 vendor/lib/libstlport_sta.so
+vendor/lib/libsubsystem_control.so
 vendor/lib/libsurround_3mic_proc.so
 vendor/lib/libtm_interface.so
 vendor/lib/libual.so
