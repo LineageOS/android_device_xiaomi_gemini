@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<device name="Android">
+    <item name="none">0</item>
+    <item name="screen.on">60</item>
+    <item name="screen.full">320</item>
+    <item name="bluetooth.active">21</item>
+    <item name="bluetooth.on">0.6</item>
+    <item name="wifi.on">1</item>
+    <item name="wifi.active">120</item>
+    <item name="wifi.scan">88</item>
+    <item name="dsp.audio">60</item>
+    <item name="dsp.video">160</item>
+    <item name="camera.flashlight">200</item>
+    <item name="camera.avg">600</item>
+    <item name="radio.active">200</item>
+    <item name="gps.on">27</item>
+    <item name="battery.capacity">2910</item>
+    <item name="radio.scanning">3</item>
+    <array name="radio.on">
+        <value>3</value>
+        <value>3</value>
+    </array>
+    <array name="cpu.speeds">
+        <value>307200</value>
+        <value>403200</value>
+        <value>422400</value>
+        <value>480000</value>
+        <value>556800</value>
+        <value>652800</value>
+        <value>729600</value>
+        <value>806400</value>
+        <value>844800</value>
+        <value>883200</value>
+        <value>940800</value>
+        <value>960000</value>
+        <value>1036800</value>
+        <value>1113600</value>
+        <value>1190400</value>
+        <value>1228800</value>
+        <value>1248000</value>
+        <value>1324800</value>
+        <value>1401600</value>
+        <value>1478400</value>
+        <value>1555200</value>
+        <value>1593600</value>
+        <value>1632000</value>
+        <value>1708800</value>
+        <value>1785600</value>
+        <value>1824000</value>
+        <value>1920000</value>
+        <value>1996800</value>
+        <value>2073600</value>
+        <value>2150400</value>
+    </array>
+    <item name="cpu.idle">8</item>
+    <item name="cpu.awake">25</item>
+    <array name="cpu.active">
+        <value>78</value>
+        <value>90</value>
+        <value>85</value>
+        <value>95</value>
+        <value>103</value>
+        <value>110</value>
+        <value>118</value>
+        <value>130</value>
+        <value>131</value>
+        <value>140</value>
+        <value>145</value>
+        <value>148</value>
+        <value>163</value>
+        <value>178</value>
+        <value>194</value>
+        <value>208</value>
+        <value>209</value>
+        <value>230</value>
+        <value>250</value>
+        <value>270</value>
+        <value>290</value>
+        <value>330</value>
+        <value>315</value>
+        <value>345</value>
+        <value>378</value>
+        <value>398</value>
+        <value>442</value>
+        <value>492</value>
+        <value>530</value>
+        <value>610</value>
+    </array>
+</device>
