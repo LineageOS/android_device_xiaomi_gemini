@@ -120,7 +120,6 @@ PRODUCT_COPY_FILES += \
 
 # Device config scripts
 PRODUCT_PACKAGES += \
-    hsic.control.bt.sh \
     init.leds.sh \
     init.qcom.bt.sh \
     init.qcom.post_boot.sh \
