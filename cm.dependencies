@@ -2,5 +2,17 @@
  {
    "repository": "android_device_qcom_common",
    "target_path": "device/qcom/common"
+ },
+ {
+   "repository": "android_vendor_nxp-nfc_opensource_frameworks",
+   "target_path": "vendor/nxp-nfc/opensource/frameworks"
+ },
+ {
+   "repository": "android_vendor_nxp-nfc_opensource_libnfc-nci",
+   "target_path": "vendor/nxp-nfc/opensource/libnfc-nci"
+ },
+ {
+   "repository": "android_vendor_nxp-nfc_opensource_Nfc",
+   "target_path": "vendor/nxp-nfc/opensource/Nfc"
  }
 ]
