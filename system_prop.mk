@@ -165,6 +165,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.df.iwlan_mux=9 \
     persist.data.df.dev_name=rmnet_usb0
 
+# Subsystem
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.ssr.restart_level=ALL_ENABLE \
+    persist.sys.ssr.enable_ramdumps=0
+
 # Vendor specific
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.gt_library=libqti-gt.so \
