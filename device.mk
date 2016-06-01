@@ -135,7 +135,6 @@ PRODUCT_PACKAGES += \
     init.target.rc \
     ueventd.qcom.rc \
     init.qcom.early_boot.sh \
-    init.qcom.sensors.sh \
     init.qcom.sh \
     init.qcom.usb.sh
 

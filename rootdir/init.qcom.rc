@@ -118,6 +118,15 @@ on boot
     chown system system /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input1/wake_gesture
     chown system system /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input1/0dbutton
 
+    # SSC/SLPI sensors
+    chmod 0775 /persist/sensors
+    chmod 0664 /persist/sensors/sensors_settings
+    chown system root /persist/sensors/sensors_settings
+    chmod 0600 /persist/PRSensorData.txt
+    chown system system /persist/PRSensorData.txt
+    chmod 0600 /persist/PSensor3cm_ct.txt
+    chown system system /persist/PSensor3cm_ct.txt
+
     # Remove SUID bit for iproute2 ip tool
     chmod 0755 /system/bin/ip
 
@@ -261,6 +270,9 @@ on post-fs-data
     # Create directory for FOTA
     mkdir /data/fota 0771
     chown system system /data/fota
+
+    # Create directory for SSC/SLPI sensors
+    mkdir /data/misc/sensors 0775 system system
 
     # Create directory for hostapd
     mkdir /data/hostapd 0770 system wifi
@@ -513,7 +525,6 @@ service sensors /system/bin/sensors.qcom
     class core
     user root
     group root
-    disabled
 
 on property:ro.use_data_netmgrd=false
     # netmgr not supported on specific target
@@ -694,11 +705,6 @@ on property:drmdiag.load=0
 
 service qcom-sh /system/bin/sh /init.qcom.sh
     class late_start
-    user root
-    oneshot
-
-service sensor-sh /system/bin/sh /init.qcom.sensors.sh
-    class core
     user root
     oneshot
 
