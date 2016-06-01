@@ -1,8 +1,7 @@
 # Copyright (c) 2013-2015, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are
-# met:
+# modification, are permitted provided that the following conditions are met:
 #     * Redistributions of source code must retain the above copyright
 #       notice, this list of conditions and the following disclaimer.
 #     * Redistributions in binary form must reproduce the above
@@ -61,7 +60,7 @@ on post-fs
     # We restorecon /cust in case the cust partition has been reset.
     restorecon_recursive /cust
 
-    # create the lost+found directories, so as to enforce our permissions
+    # Create the lost+found directories, so as to enforce our permissions
     mkdir /cust/lost+found 0770 root root
 
     # We chown/chmod sram update period so app can change it
@@ -94,10 +93,7 @@ on post-fs-data
 on boot
     start rmt_storage
     start rfs_access
-    # nfc init config
-    chmod 0660 /dev/pn548
-    chown nfc nfc /dev/pn548
-# access permission for secure touch
+    # Access permission for secure touch
     chmod 0660 /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/secure_touch_enable
     chmod 0440 /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/secure_touch
     chown system drmrpc /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/secure_touch_enable
@@ -105,15 +101,15 @@ on boot
     write /proc/sys/kernel/sched_boost 1
     write /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input0/update_fw 1
 
-# access permission for led torch
+    # Access permission for led torch
     chmod 0666 /sys/class/leds/led:torch_0/brightness
     chmod 0666 /sys/class/leds/led:torch_1/brightness
     chmod 0666 /sys/class/leds/led:switch/brightness
 
-# access permission for smartPA
+    # Access permission for smartPA
     chmod 0666 /dev/i2c-9
 
-# audio smart pa cold boot
+# Audio smartPA cold boot
 service tfa_cold_boot /system/bin/sh /system/bin/tfa_coldboot.sh /etc/silence_short.wav 15 1
     class main
     user system
@@ -124,13 +120,13 @@ service tfa_cold_boot /system/bin/sh /system/bin/tfa_coldboot.sh /etc/silence_sh
 on property:service.soundcard.detected=1
     start tfa_cold_boot
 
-#start camera server as daemon
+# Start camera server as daemon
 service qcamerasvr /system/bin/mm-qcamera-daemon
     class late_start
     user camera
     group camera system inet input graphics
 
-#fingerprint service
+# Fingerprint service
 service fingerprintd /system/bin/fingerprintd
     class late_start
     user system
@@ -148,7 +144,7 @@ service qvop-daemon /system/bin/qvop-daemon
     user system
     group system drmrpc
 
-#Start up peripheral manager
+# Start up peripheral manager
 service per_mgr system/bin/pm-service
     class core
     user system
@@ -167,92 +163,52 @@ on property:init.svc.per_mgr=running
 on property:sys.shutdown.requested=*
     stop per_proxy
 
-## Allow usb charging to be disabled peristently
-#on property:persist.usb.chgdisabled=1
-#    write /sys/class/power_supply/battery/charging_enabled 0
-#
-#on property:persist.usb.chgdisabled=0
-#    write /sys/class/power_supply/battery/charging_enabled 1
-#
-#service qrngd /system/bin/qrngd -f
-#   class main
-#   user root
-#   group root
-#
-#service qrngp /system/bin/qrngp
-#    class main
-#    user root
-#    group root
-#    oneshot
-#    disabled
-#
-#on property:sys.boot_completed=1
-#    start qrngp
-
 service qseecomd /system/bin/qseecomd
-   class core
-   user root
-   group root
+    class core
+    user root
+    group root
 
 service perfd /system/vendor/bin/perfd
-   class main
-   user root
-   disabled
+    class main
+    user root
+    disabled
 
 service seempd /system/bin/seempd
-   class late_start
-   user system
-   group system
-   socket seempdw dgram 0666 system system
+    class late_start
+    user system
+    group system
+    socket seempdw dgram 0666 system system
 
 service secotad /system/bin/secotad
-   class late_start
-   user system
-   group system
+    class late_start
+    user system
+    group system
 
-#service mpdecision /system/bin/mpdecision --avg_comp
-#   user root
-#   disabled
-#
-#service qosmgrd /system/bin/qosmgr /system/etc/qosmgr_rules.xml
-#   user system
-#   group system
-#   disabled
-#
 service thermal-engine /system/vendor/bin/thermal-engine
-   class main
-   user root
-   socket thermal-send-client stream 0666 system system
-   socket thermal-recv-client stream 0660 system system
-   socket thermal-recv-passive-client stream 0666 system system
-   group root
-   socket thermal-send-client stream 0666 system system
-   socket thermal-recv-client stream 0660 system system
-   socket thermal-recv-passive-client stream 0666 system system
+    class main
+    user root
+    socket thermal-send-client stream 0666 system system
+    socket thermal-recv-client stream 0660 system system
+    socket thermal-recv-passive-client stream 0666 system system
+    group root
+    socket thermal-send-client stream 0666 system system
+    socket thermal-recv-client stream 0660 system system
+    socket thermal-recv-passive-client stream 0666 system system
 
-#service security-check1 /sbin/security_boot_check system
-#    class core
-#    oneshot
-#
-#service security-check2 /sbin/security_boot_check recovery
-#    class core
-#    oneshot
-#
 service time_daemon /system/bin/time_daemon
-   class late_start
-   user root
-   group root
+    class late_start
+    user root
+    group root
 
 service adsprpcd /system/bin/adsprpcd
-   class main
-   user media
-   group media
+    class main
+    user media
+    group media
 
 service audiod /system/bin/audiod
-   class late_start
-   user system
-   group system
-
+    class late_start
+    user system
+    group system
 
 service usf_tester /system/bin/usf_tester
     user system
@@ -331,35 +287,35 @@ service imsdatadaemon /system/bin/imsdatadaemon
     disabled
 
 service pd_mapper /system/vendor/bin/pd-mapper
-     class core
-     disabled
+    class core
+    disabled
 
 on property:persist.sys.pd_enable=1
-     start pd_mapper
-     write /sys/class/service_locator/service_locator_status 1
+    start pd_mapper
+    write /sys/class/service_locator/service_locator_status 1
 
 on property:persist.sys.pd_enable=0
-     write /sys/class/service_locator/service_locator_status 0
+    write /sys/class/service_locator/service_locator_status 0
 
 on property:sys.ims.QMI_DAEMON_STATUS=1
     start imsdatadaemon
 
 service ims_rtp_daemon /system/bin/ims_rtp_daemon
-   class main
-   user system
-   socket ims_rtpd stream 0660 system radio
-   group radio net_raw diag inet log
-   disabled
+    class main
+    user system
+    socket ims_rtpd stream 0660 system radio
+    group radio net_raw diag inet log
+    disabled
 
 service imscmservice /system/bin/imscmservice
-   class main
-   user system
-   group radio net_raw diag diag log
-   disabled
+    class main
+    user system
+    group radio net_raw diag diag log
+    disabled
 
 on property:sys.ims.DATA_DAEMON_STATUS=1
-   start ims_rtp_daemon
-   start imscmservice
+    start ims_rtp_daemon
+    start imscmservice
 
 service dts_configurator /system/bin/dts_configurator
     class late_start
@@ -459,11 +415,6 @@ service smeloop /system/bin/smeloop
     user root
     group root
     oneshot
-
-on charger
-    write /sys/devices/system/cpu/cpu2/online 0
-    write /sys/devices/system/cpu/cpu3/online 0
-    write /sys/module/lpm_levels/parameters/sleep_disabled 0
 
 on property:slpi.restart=1
     write /sys/kernel/debug/msm_subsys/slpi restart
