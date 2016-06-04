@@ -22,6 +22,8 @@ etc/firmware/tfa98xx.cnt
 etc/firmware/tfa9891.cnt
 
 # Audio libraries
+lib64/hw/audio.primary.msm8996.so
+lib/hw/audio.primary.msm8996.so
 lib/soundfx/libdirac.so
 lib/libDiracAPI_SHARED.so
 vendor/lib64/soundfx/libqcbassboost.so
