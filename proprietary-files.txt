@@ -981,7 +981,6 @@ bin/xtwifi-inet-agent
 -lib/libloc_api_v02.so
 -lib/libloc_ds_api.so
 vendor/lib64/hw/flp.default.so
-vendor/lib64/libQtiTether.so
 vendor/lib64/libalarmservice_jni.so
 vendor/lib64/libasn1cper.so
 vendor/lib64/libasn1crt.so
@@ -1004,7 +1003,6 @@ vendor/lib64/libxt_native.so
 vendor/lib64/libxtadapter.so
 vendor/lib64/libxtwifi_ulp_adaptor.so
 vendor/lib/hw/flp.default.so
-vendor/lib/libQtiTether.so
 vendor/lib/libalarmservice_jni.so
 vendor/lib/libasn1cper.so
 vendor/lib/libasn1crt.so
@@ -1275,6 +1273,13 @@ vendor/lib/libstlport_sta.so
 vendor/lib/libsurround_3mic_proc.so
 vendor/lib/libvpphvx.so
 
+# Network
+-priv-app/QtiTetherService/QtiTetherService.apk
+vendor/lib64/libQtiTether.so
+vendor/lib64/libconnctrl.so
+vendor/lib/libQtiTether.so
+vendor/lib/libconnctrl.so
+
 # NFC
 bin/pnx
 
@@ -1324,7 +1329,6 @@ lib/hw/wbc_hal.default.so
 bin/irsc_util
 lib64/libqminvapi.so
 lib/libqminvapi.so
-vendor/lib64/libconnctrl.so
 vendor/lib64/libdiag.so
 vendor/lib64/libdsi_netctrl.so
 vendor/lib64/libdsutils.so
@@ -1341,7 +1345,6 @@ vendor/lib64/libqmi_encdec.so
 vendor/lib64/libqmiservices.so
 vendor/lib64/libqmi.so
 vendor/lib64/libsmemlog.so
-vendor/lib/libconnctrl.so
 vendor/lib/libdiag.so
 vendor/lib/libdsi_netctrl.so
 vendor/lib/libdsutils.so
