@@ -1176,10 +1176,6 @@ vendor/lib/hw/sound_trigger.primary.msm8996.so
 vendor/lib/libadpcmdec.so
 vendor/lib/libsmwrapper.so
 
-# Lights
-lib64/hw/lights.msm8996.so
-lib/hw/lights.msm8996.so
-
 # Media
 lib64/libOmxVenc.so
 lib64/libOmxVpp.so
