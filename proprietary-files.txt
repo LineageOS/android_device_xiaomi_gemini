@@ -22,6 +22,8 @@ etc/firmware/tfa98xx.cnt
 etc/firmware/tfa9891.cnt
 
 # Audio libraries
+etc/drc/drc_cfg_AZ.txt
+etc/surround_sound_3mic/surround_sound_rec_AZ.cfg
 lib64/hw/audio.primary.msm8996.so
 lib/hw/audio.primary.msm8996.so
 lib/soundfx/libdirac.so
@@ -31,6 +33,7 @@ vendor/lib64/soundfx/libqcreverb.so
 vendor/lib64/soundfx/libqcvirt.so
 vendor/lib64/libFlacSwDec.so
 vendor/lib64/libaudioalsa.so
+vendor/lib64/libaudiodevarb.so
 vendor/lib64/libacdb-fts.so
 vendor/lib64/libacdbloader.so
 vendor/lib64/libacdbrtac.so
@@ -44,6 +47,7 @@ vendor/lib/soundfx/libqcreverb.so
 vendor/lib/soundfx/libqcvirt.so
 vendor/lib/libFlacSwDec.so
 vendor/lib/libaudioalsa.so
+vendor/lib/libaudiodevarb.so
 vendor/lib/libacdb-fts.so
 vendor/lib/libacdbloader.so
 vendor/lib/libacdbrtac.so
@@ -51,6 +55,7 @@ vendor/lib/libacdbmapper.so
 vendor/lib/libadiertac.so
 vendor/lib/libaudcal.so
 vendor/lib/libqct_resampler.so
+vendor/lib/libsurround_3mic_proc.so
 
 # Audio libraries (USF)
 bin/usf_proximity
@@ -73,6 +78,7 @@ bin/btnvtool
 bin/dun-server
 bin/ftmdaemon
 bin/hci_qcomm_init
+bin/mm-audio-ftm
 bin/wcnss_filter
 vendor/lib64/libbtnv.so
 vendor/lib/libbtnv.so
@@ -92,8 +98,17 @@ etc/firmware/rampatch_tlv_3.2.tlv
 # Camera
 bin/mm-qcamera-app
 bin/mm-qcamera-daemon
+etc/age_gender_bg
 etc/android_model_facea.dat
 etc/android_model_faceg.dat
+etc/crown_156_128.bin
+etc/face_goodly_208_180
+etc/face_ravishing_238_224
+etc/face_splendid_274_200
+etc/lf_facerank_model.bin
+etc/people_gender.dat
+etc/sdm_ys_32p_120_21_5_perturb50.bin
+etc/watermark_font_2300_3199.dat
 lib64/libmorpho_memory_allocator.so
 lib64/libmorpho_panorama.so
 lib/hw/camera.msm8996.so
@@ -803,8 +818,6 @@ etc/firmware/cpp_firmware_v1_4_0.fw
 etc/firmware/cpp_firmware_v1_6_0.fw
 etc/firmware/cpp_firmware_v1_8_0.fw
 etc/firmware/cpp_firmware_v1_10_0.fw
-etc/crown_156_128.bin
-etc/sdm_ys_32p_120_21_5_perturb50.bin
 
 # Camera sensors
 vendor/lib64/libSonyIMX298PdafLibrary.so
@@ -844,6 +857,9 @@ vendor/lib/libmmcamera_sony_imx298_eeprom.so
 vendor/lib/libmmcamera_sony_imx378_eeprom.so
 vendor/lib/libmmcamera_sonyimx135_eeprom.so
 vendor/lib/libmmcamera_sunny_q5v41b_eeprom.so
+
+# Charger
+bin/hvdcp_opti
 
 # CNE
 bin/cnd
@@ -900,12 +916,14 @@ vendor/bin/chamomile_provision
 vendor/bin/qseeproxydaemon
 vendor/bin/qseeproxysampledaemon
 vendor/lib64/mediadrm/libdrmclearkeyplugin.so
+vendor/lib64/lib-sec-disp.so
 vendor/lib64/libChamomilePA.so
 vendor/lib64/libGPreqcancel.so
 vendor/lib64/libGPreqcancel_svc.so
 vendor/lib64/libGPTEE.so
 vendor/lib64/libQSEEComAPI.so
 vendor/lib64/libSecureUILib.so
+vendor/lib64/libStDrvInt.so
 vendor/lib64/libdrmfs.so
 vendor/lib64/libdrmtime.so
 vendor/lib64/libqisl.so
@@ -925,12 +943,14 @@ vendor/lib/qcdrm/playready/lib/mediadrm/libprmediadrmdecrypt_customer.so
 vendor/lib/qcdrm/playready/lib/mediadrm/libprmediadrmplugin_customer.so
 vendor/lib/qcdrm/playready/lib/libprdrmdecrypt_customer.so
 vendor/lib/qcdrm/playready/lib/libtzplayready_customer.so
+vendor/lib/lib-sec-disp.so
 vendor/lib/libChamomilePA.so
 vendor/lib/libGPreqcancel.so
 vendor/lib/libGPreqcancel_svc.so
 vendor/lib/libGPTEE.so
 vendor/lib/libQSEEComAPI.so
 vendor/lib/libSecureUILib.so
+vendor/lib/libStDrvInt.so
 vendor/lib/libdrmfs.so
 vendor/lib/libdrmtime.so
 vendor/lib/libqisl.so
@@ -1034,7 +1054,6 @@ vendor/lib64/egl/libGLESv2_adreno.so
 vendor/lib64/egl/libq3dtools_adreno.so
 vendor/lib64/egl/libq3dtools_esx.so
 vendor/lib64/egl/libQTapGLES.so
-vendor/lib64/lib-sec-disp.so
 vendor/lib64/libadreno_utils.so
 vendor/lib64/libC2D2.so
 vendor/lib64/libCB.so
@@ -1062,7 +1081,6 @@ vendor/lib/egl/libGLESv2_adreno.so
 vendor/lib/egl/libq3dtools_adreno.so
 vendor/lib/egl/libq3dtools_esx.so
 vendor/lib/egl/libQTapGLES.so
-vendor/lib/lib-sec-disp.so
 vendor/lib/libadreno_utils.so
 vendor/lib/libbccQTI.so
 vendor/lib/libC2D2.so
@@ -1191,6 +1209,9 @@ lib64/libmm-omxcore.so
 lib/libOmxVenc.so
 lib/libOmxVpp.so
 lib/libmm-omxcore.so
+vendor/lib64/libavenhancements.so
+vendor/lib64/libExtendedExtractor.so
+vendor/lib64/libFileMux.so
 vendor/lib64/libI420colorconvert.so
 vendor/lib64/libmm-color-convertor.so
 vendor/lib64/libmmosal.so
@@ -1204,6 +1225,9 @@ vendor/lib64/libOmxEvrcDec.so
 vendor/lib64/libOmxMux.so
 vendor/lib64/libOmxQcelp13Dec.so
 vendor/lib64/libOmxWmaDec.so
+vendor/lib/libavenhancements.so
+vendor/lib/libExtendedExtractor.so
+vendor/lib/libFileMux.so
 vendor/lib/libI420colorconvert.so
 vendor/lib/libmm-color-convertor.so
 vendor/lib/libmmosal.so
@@ -1225,23 +1249,12 @@ bin/diag_mdlog
 bin/displayfeature
 bin/fdpp
 bin/gptest
-bin/hvdcp_opti
-bin/mm-audio-ftm
-bin/mm-pp-dpps
-bin/mmbn-daemon
 bin/mtd
-bin/qcom-system-daemon
 bin/smeloop
 bin/smonsir
 bin/smprosrv
-etc/drc/drc_cfg_AZ.txt
 vendor/bin/hdcp1prov
-vendor/bin/pd-mapper
-vendor/bin/qpaydaemon
-vendor/lib64/libExtendedExtractor.so
-vendor/lib64/libFileMux.so
 vendor/lib64/libhdcp1prov.so
-vendor/lib64/libmmQSM.so
 vendor/lib64/libpvr.so
 vendor/lib64/libqti-at.so
 vendor/lib64/libqti-gt.so
@@ -1250,31 +1263,22 @@ vendor/lib64/libsi.so
 vendor/lib64/libsta_lib_third_party_libsta_lib_libsta_gyp.so
 vendor/lib64/libsta_lib_third_party_staproxy_sta_proxy_loader_gyp.so
 vendor/lib64/libstaapi.so
-vendor/lib64/libStDrvInt.so
 vendor/lib64/libstlport_sta.so
 vendor/lib64/libusutils.so
 vendor/lib64/libvpphvx.so
 vendor/lib/libadm.so
 vendor/lib/libcppf.so
 vendor/lib/libdrc.so
-vendor/lib/libExtendedExtractor.so
-vendor/lib/libFileMux.so
 vendor/lib/libhdcp1prov.so
-vendor/lib/libmmQSM.so
 vendor/lib/libpvr.so
 vendor/lib/libqti-at.so
 vendor/lib/libqti-gt.so
 vendor/lib/librmp.so
-vendor/lib/libscve.so
-vendor/lib/libscve_stub.so
-vendor/lib/libscveTextRecoPostProcessing.so
 vendor/lib/libsi.so
 vendor/lib/libsta_lib_third_party_libsta_lib_libsta_gyp.so
 vendor/lib/libsta_lib_third_party_staproxy_sta_proxy_loader_gyp.so
 vendor/lib/libstaapi.so
-vendor/lib/libStDrvInt.so
 vendor/lib/libstlport_sta.so
-vendor/lib/libsurround_3mic_proc.so
 vendor/lib/libvpphvx.so
 
 # Network
@@ -1286,6 +1290,9 @@ vendor/lib/libconnctrl.so
 
 # NFC
 bin/pnx
+vendor/bin/qpaydaemon
+vendor/lib64/libQPayJNI.so
+vendor/lib/libQPayJNI.so
 
 # NFC firmware
 vendor/firmware/libpn548ad_fw.so
@@ -1314,6 +1321,29 @@ vendor/lib/libperipheral_client.so
 
 # Postprocessing
 bin/mm-pp-daemon
+bin/mm-pp-dpps
+vendor/etc/scve/facereco/gModel.dat
+vendor/etc/scve/textreco/chardecoder/character.cost
+vendor/etc/scve/textreco/chardecoder/CharType.dat
+vendor/etc/scve/textreco/chardecoder/ChinesePunctuation.rst
+vendor/etc/scve/textreco/chardecoder/_conf_eng_num_sym_font40_4transd_zscore_morph_.trn2876.trn
+vendor/etc/scve/textreco/chardecoder/_conf_eng_num_sym_font40_conc2_meshrn__de__1_1__zscore_morph.trn10158.trn
+vendor/etc/scve/textreco/chardecoder/_conf_eng_num_sym_font40_rbp_data5100_patch500_5x5_24x24_dim727.trn31585.trn
+vendor/etc/scve/textreco/chardecoder/_eng_font40_4transmeshrnorm6x6_leaflda85_ligature_ext14_c70_sp1lI_newxml3.trn31299.trn
+vendor/etc/scve/textreco/chardecoder/GLVQDecoder_fixed.ohie
+vendor/etc/scve/textreco/chardecoder/glvq_kor_consonant_19classes_64_16dim_i0_linearNorm.dat
+vendor/etc/scve/textreco/chardecoder/hGLVQ_kor_RLF80_float.hie
+vendor/etc/scve/textreco/chardecoder/LDA_kor_consonant_19classes_64dim_linearNorm.dat
+vendor/etc/scve/textreco/chardecoder/_numpunc_font40_4transmeshrnorm_leafnum1.trn9614.trn
+vendor/etc/scve/textreco/chardecoder/_numpunc_font40_conc2_DEFn__BGTouchy6x6n__1_1__morph.trn32025.trn
+vendor/etc/scve/textreco/chardecoder/_numpunc_parteng_font40_4transmeshr_morph.trn400.trn
+vendor/etc/scve/textreco/chardecoder/punRangeData.rst
+vendor/etc/scve/textreco/textdetector/cnn_multiLang1020.bin
+vendor/etc/scve/textreco/worddecoder/chinese_address_20150304.bin
+vendor/etc/scve/textreco/worddecoder/english_address_20150213.bin
+vendor/etc/scve/textreco/worddecoder/english_dictionary_20150213.bin
+vendor/etc/scve/textreco/worddecoder/korean_address_20150129.bin
+vendor/etc/scve/textreco/worddecoder/korean.pos.20141226.bin
 vendor/lib64/libdisp-aba.so
 vendor/lib64/libmm-abl.so
 vendor/lib64/libmm-abl-oem.so
@@ -1324,6 +1354,10 @@ vendor/lib/libmm-abl.so
 vendor/lib/libmm-abl-oem.so
 vendor/lib/libmm-als.so
 vendor/lib/libmm-qdcm.so
+vendor/lib/libscve_mv.so
+vendor/lib/libscve_stub.so
+vendor/lib/libscveTextRecoPostProcessing.so
+vendor/lib/libscve.so
 
 # Power
 lib64/hw/wbc_hal.default.so
@@ -1333,6 +1367,7 @@ lib/hw/wbc_hal.default.so
 bin/irsc_util
 lib64/libqminvapi.so
 lib/libqminvapi.so
+vendor/bin/pd-mapper
 vendor/lib64/libdiag.so
 vendor/lib64/libdsi_netctrl.so
 vendor/lib64/libdsutils.so
@@ -1373,6 +1408,7 @@ bin/port-bridge
 bin/qmuxd
 bin/radish
 bin/rmt_storage
+bin/mmbn-daemon
 bin/tftp_server
 etc/modem/Diag.cfg
 etc/permissions/qcnvitems.xml
@@ -1425,6 +1461,7 @@ vendor/lib/sensors.oem.so
 vendor/lib/sensors.ssc.so
 
 # Subsystem
+bin/qcom-system-daemon
 bin/ssr_diag
 bin/ssr_setup
 bin/subsystem_ramdump
