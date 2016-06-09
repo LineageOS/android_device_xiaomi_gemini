@@ -1102,6 +1102,8 @@ bin/imscmservice
 bin/imsdatadaemon
 bin/imsqmidaemon
 bin/ims_rtp_daemon
+-vendor/app/ims/ims.apk
+-vendor/app/imssettings/imssettings.apk
 vendor/lib64/libimscamera_jni.so
 vendor/lib64/libimsmedia_jni.so
 vendor/lib64/lib-dplmedia.so
@@ -1123,6 +1125,8 @@ vendor/lib64/lib-rtpcommon.so
 vendor/lib64/lib-rtpcore.so
 vendor/lib64/lib-rtpdaemoninterface.so
 vendor/lib64/lib-rtpsl.so
+vendor/lib64/librcc.so
+vendor/lib64/libvoice-svc.so
 vendor/lib/libimscamera_jni.so
 vendor/lib/libimsmedia_jni.so
 vendor/lib/lib-dplmedia.so
@@ -1144,6 +1148,8 @@ vendor/lib/lib-rtpcommon.so
 vendor/lib/lib-rtpcore.so
 vendor/lib/lib-rtpdaemoninterface.so
 vendor/lib/lib-rtpsl.so
+vendor/lib/librcc.so
+vendor/lib/libvoice-svc.so
 
 # IPA
 bin/ipacm-diag
@@ -1239,7 +1245,6 @@ vendor/lib64/libmmQSM.so
 vendor/lib64/libpvr.so
 vendor/lib64/libqti-at.so
 vendor/lib64/libqti-gt.so
-vendor/lib64/librcc.so
 vendor/lib64/librmp.so
 vendor/lib64/libsi.so
 vendor/lib64/libsta_lib_third_party_libsta_lib_libsta_gyp.so
@@ -1259,7 +1264,6 @@ vendor/lib/libmmQSM.so
 vendor/lib/libpvr.so
 vendor/lib/libqti-at.so
 vendor/lib/libqti-gt.so
-vendor/lib/librcc.so
 vendor/lib/librmp.so
 vendor/lib/libscve.so
 vendor/lib/libscve_stub.so
