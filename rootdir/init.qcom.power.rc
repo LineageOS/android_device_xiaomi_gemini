@@ -198,11 +198,13 @@ service iop /system/bin/iop
     user root
     group root
     disabled
+    socket iop seqpacket 0666 root system
 
 service perfd /system/vendor/bin/perfd
     class main
     user root
     disabled
+    socket perfd seqpacket 0666 root system
 
 service qbcharger /charger -m 1
     disabled

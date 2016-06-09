@@ -300,8 +300,6 @@ on post-fs-data
     mkdir /data/misc/SelfHost/socket/ 2770 system system
 
     # Create PERFD deamon related dirs
-    mkdir /dev/socket/perfd 0755 root system
-    chmod 2755 /dev/socket/perfd
     mkdir /data/system/perfd 0770 root system
     chmod 2770 /data/system/perfd
 
