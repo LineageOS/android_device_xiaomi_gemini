@@ -16,6 +16,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     audio.parser.ip.buffer.size=262144 \
     audio.dolby.ds2.enabled=false \
     audio.dolby.ds2.hardbypass=false \
+    ro.audio.flinger_standbytime_ms=300 \
     tunnel.audio.encode=true \
     use.voice.path.for.pcm.voip=true
 
