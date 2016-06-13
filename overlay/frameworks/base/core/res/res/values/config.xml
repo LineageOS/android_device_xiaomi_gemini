@@ -439,10 +439,7 @@
     <integer name="config_bluetooth_operating_voltage_mv">3300</integer>
 
     <!-- Enable overlay for all location components. -->
-    <bool name="config_enableNetworkLocationOverlay" translatable="false">false</bool>
-    <bool name="config_enableFusedLocationOverlay" translatable="false">false</bool>
     <string name="config_networkLocationProviderPackageName" translatable="false">com.qualcomm.location</string>
     <string name="config_fusedLocationProviderPackageName" translatable="false">com.qualcomm.location</string>
-    <string name="config_comboNetworkLocationProvider" translatable="false">com.qualcomm.location</string>
 
 </resources>
