@@ -1441,10 +1441,8 @@ vendor/qcril.db
 # Sensors
 bin/sensors.qcom
 etc/sensor_diag.cfg
-lib64/hw/sensors.msm8996.so
 lib64/libsensor_cal.so
 lib64/libsensor_calJNI.so
-lib/hw/sensors.msm8996.so
 vendor/lib64/hw/activity_recognition.msm8996.so
 vendor/lib64/libsensor_reg.so
 vendor/lib64/libsensor_test.so
