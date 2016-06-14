@@ -119,7 +119,9 @@ on boot
     chown system system /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input1/0dbutton
 
     # SSC/SLPI sensors
+    mkdir /persist/sensors
     chmod 0775 /persist/sensors
+    chown sensors sensors /persist/sensors
     chmod 0664 /persist/sensors/sensors_settings
     chown system root /persist/sensors/sensors_settings
     chmod 0600 /persist/PRSensorData.txt

@@ -30,17 +30,22 @@ include $(call all-makefiles-under,$(LOCAL_PATH))
 
 include $(CLEAR_VARS)
 
+$(shell mkdir -p $(TARGET_OUT_ETC)/firmware; \
+    ln -sf /dev/block/bootdevice/by-name/msadp \
+	    $(TARGET_OUT_ETC)/firmware/msadp)
+
+# WiFi symlinks
 WLAN_MODULES:		
 	ln -sf /system/lib/modules/qca_cld/qca_cld_wlan.ko $(TARGET_OUT)/lib/modules/wlan.ko		
 
 TARGET_KERNEL_MODULES += WLAN_MODULES
 
-# Create a link for the WCNSS config file
-$(shell mkdir -p $(TARGET_OUT)/etc/firmware/wlan/qca_cld; \
+$(shell mkdir -p $(TARGET_OUT_ETC)/firmware/wlan/qca_cld; \
     ln -sf /system/etc/wifi/WCNSS_qcom_cfg.ini \
-	    $(TARGET_OUT)/etc/firmware/wlan/qca_cld/WCNSS_qcom_cfg.ini; \
+	    $(TARGET_OUT_ETC)/firmware/wlan/qca_cld/WCNSS_qcom_cfg.ini; \
     ln -sf /persist/wlan_mac.bin \
 	    $(TARGET_OUT_ETC)/firmware/wlan/qca_cld/wlan_mac.bin)
+# END WiFi symlinks
 
 # IMS lib symlink
 IMS_LIBS := libimscamera_jni.so libimsmedia_jni.so

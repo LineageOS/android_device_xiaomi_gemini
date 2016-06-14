@@ -14,7 +14,7 @@
     <item name="camera.avg">600</item>
     <item name="radio.active">200</item>
     <item name="gps.on">27</item>
-    <item name="battery.capacity">2910</item>
+    <item name="battery.capacity">3000</item>
     <item name="radio.scanning">3</item>
     <array name="radio.on">
         <value>3</value>

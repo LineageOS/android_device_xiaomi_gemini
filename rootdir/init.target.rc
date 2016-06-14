@@ -339,9 +339,11 @@ service tlocd /system/bin/tloc_daemon
     group drmrpc gps net_raw
 
 on property:init.svc.surfaceflinger=stopped
+    stop displayfeature
     stop ppd
 
 on property:init.svc.surfaceflinger=running
+    start displayfeature
     start ppd
 
 on property:persist.sys.ltm_enable=*
@@ -356,6 +358,18 @@ service qpaydaemon /system/vendor/bin/qpaydaemon
     class late_start
     user system
     group system
+
+service nv_mac /system/bin/nv_mac
+   class main
+   user root
+   group net_raw
+   oneshot
+
+service nv_fem /system/bin/nv_fem
+   class main
+   user root
+   group net_raw
+   oneshot
 
 service smonsir /system/bin/smonsir
     user root
