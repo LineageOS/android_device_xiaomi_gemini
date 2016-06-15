@@ -1,0 +1,4 @@
+type mmbn-daemon, domain;
+type mmbn-daemon_exec, exec_type, file_type;
+
+init_daemon_domain(mmbn-daemon)

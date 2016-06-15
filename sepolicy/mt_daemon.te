@@ -1,0 +1,4 @@
+type mt_daemon, domain;
+type mt_daemon_exec, exec_type, file_type;
+
+init_daemon_domain(mt_daemon)
