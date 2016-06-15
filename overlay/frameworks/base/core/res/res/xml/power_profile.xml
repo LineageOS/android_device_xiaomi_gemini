@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+**
+** Copyright 2009, The Android Open Source Project
+**
+** Licensed under the Apache License, Version 2.0 (the "License")
+** you may not use this file except in compliance with the License.
+** You may obtain a copy of the License at
+**
+**     http://www.apache.org/licenses/LICENSE-2.0
+**
+** Unless required by applicable law or agreed to in writing, software
+** distributed under the License is distributed on an "AS IS" BASIS,
+** WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+** See the License for the specific language governing permissions and
+** limitations under the License.
+*/
+-->
+
 <device name="Android">
+
+    <!-- All values are in mAh except as noted -->
     <item name="none">0</item>
     <item name="screen.on">60</item>
     <item name="screen.full">320</item>
@@ -12,78 +32,88 @@
     <item name="dsp.video">160</item>
     <item name="camera.flashlight">200</item>
     <item name="camera.avg">600</item>
-    <item name="radio.active">200</item>
     <item name="gps.on">27</item>
-    <item name="battery.capacity">3000</item>
+    <!-- The current consumed by the radio when it is scanning for a signal -->
+    <item name="radio.active">200</item>
     <item name="radio.scanning">3</item>
-    <array name="radio.on">
+    <!-- Current consumed by the radio at different signal strengths, when paging -->
+    <array name="radio.on"> <!-- Strength 0 to BINS-1 -->
         <value>3</value>
         <value>3</value>
     </array>
+
+    <!-- Different CPU speeds as reported in
+         /sys/devices/system/cpu/cpu0/cpufreq/stats/time_in_state -->
     <array name="cpu.speeds">
-        <value>307200</value>
-        <value>403200</value>
-        <value>422400</value>
-        <value>480000</value>
-        <value>556800</value>
-        <value>652800</value>
-        <value>729600</value>
-        <value>806400</value>
-        <value>844800</value>
-        <value>883200</value>
-        <value>940800</value>
-        <value>960000</value>
-        <value>1036800</value>
-        <value>1113600</value>
-        <value>1190400</value>
-        <value>1228800</value>
-        <value>1248000</value>
-        <value>1324800</value>
-        <value>1401600</value>
-        <value>1478400</value>
-        <value>1555200</value>
-        <value>1593600</value>
-        <value>1632000</value>
-        <value>1708800</value>
-        <value>1785600</value>
-        <value>1824000</value>
-        <value>1920000</value>
-        <value>1996800</value>
-        <value>2073600</value>
-        <value>2150400</value>
+        <value>307200</value> <!-- 307.2 MHz CPU speed -->
+        <value>403200</value> <!-- 403.2 MHz CPU speed -->
+        <value>422400</value> <!-- 422.4 MHz CPU speed -->
+        <value>480000</value> <!-- 480 MHz CPU speed -->
+        <value>556800</value> <!-- 556.8 MHz CPU speed -->
+        <value>652800</value> <!-- 652.8 MHz CPU speed -->
+        <value>729600</value> <!-- 729.6 MHz CPU speed -->
+        <value>806400</value> <!-- 806.4 MHz CPU speed -->
+        <value>844800</value> <!-- 844.8 MHz CPU speed -->
+        <value>883200</value> <!-- 883.2 MHz CPU speed -->
+        <value>940800</value> <!-- 940.8 MHz CPU speed -->
+        <value>960000</value> <!-- 960 MHz CPU speed -->
+        <value>1036800</value> <!-- 1036.8 MHz CPU speed -->
+        <value>1113600</value> <!-- 1113.6 MHz CPU speed -->
+        <value>1190400</value> <!-- 1190.4 MHz CPU speed -->
+        <value>1228800</value> <!-- 1228.8 MHz CPU speed -->
+        <value>1248000</value> <!-- 1248 MHz CPU speed -->
+        <value>1324800</value> <!-- 1324.8 MHz CPU speed -->
+        <value>1401600</value> <!-- 1401.6 MHz CPU speed -->
+        <value>1478400</value> <!-- 1478.4 MHz CPU speed -->
+        <value>1555200</value> <!-- 1555.2 MHz CPU speed -->
+        <value>1593600</value> <!-- 1593.6 MHz CPU speed -->
+        <value>1632000</value> <!-- 1632 MHz CPU speed -->
+        <value>1708800</value> <!-- 1708.8 MHz CPU speed -->
+        <value>1785600</value> <!-- 1785.6 MHz CPU speed -->
+        <value>1824000</value> <!-- 1824 MHz CPU speed -->
+        <value>1920000</value> <!-- 1920 MHz CPU speed -->
+        <value>1996800</value> <!-- 1996.8 MHz CPU speed -->
+        <value>2073600</value> <!-- 2073.6 MHz CPU speed -->
+        <value>2150400</value> <!-- 2150.4 MHz CPU speed -->
     </array>
+    <!-- Power consumption when CPU is idle -->
     <item name="cpu.idle">8</item>
     <item name="cpu.awake">25</item>
+    <!-- Power consumption at different speeds -->
     <array name="cpu.active">
-        <value>78</value>
-        <value>90</value>
-        <value>85</value>
-        <value>95</value>
-        <value>103</value>
-        <value>110</value>
-        <value>118</value>
-        <value>130</value>
-        <value>131</value>
-        <value>140</value>
-        <value>145</value>
-        <value>148</value>
-        <value>163</value>
-        <value>178</value>
-        <value>194</value>
-        <value>208</value>
-        <value>209</value>
-        <value>230</value>
-        <value>250</value>
-        <value>270</value>
-        <value>290</value>
-        <value>330</value>
-        <value>315</value>
-        <value>345</value>
-        <value>378</value>
-        <value>398</value>
-        <value>442</value>
-        <value>492</value>
-        <value>530</value>
-        <value>610</value>
+        <value>78</value> <!-- 307.2 MHz CPU speed -->
+        <value>90</value> <!-- 403.2 MHz CPU speed -->
+        <value>85</value> <!-- 422.4 MHz CPU speed -->
+        <value>95</value> <!-- 480 MHz CPU speed -->
+        <value>103</value> <!-- 556.8 MHz CPU speed -->
+        <value>110</value> <!-- 652.8 MHz CPU speed -->
+        <value>118</value> <!-- 729.6 MHz CPU speed -->
+        <value>130</value> <!-- 806.4 MHz CPU speed -->
+        <value>131</value> <!-- 844.8 MHz CPU speed -->
+        <value>140</value> <!-- 883.2 MHz CPU speed -->
+        <value>145</value> <!-- 940.8 MHz CPU speed -->
+        <value>148</value> <!-- 960 MHz CPU speed -->
+        <value>163</value> <!-- 1036.8 MHz CPU speed -->
+        <value>178</value> <!-- 1113.6 MHz CPU speed -->
+        <value>194</value> <!-- 1190.4 MHz CPU speed -->
+        <value>208</value> <!-- 1228.8 MHz CPU speed -->
+        <value>209</value> <!-- 1248 MHz CPU speed -->
+        <value>230</value> <!-- 1324.8 MHz CPU speed -->
+        <value>250</value> <!-- 1401.6 MHz CPU speed -->
+        <value>270</value> <!-- 1478.4 MHz CPU speed -->
+        <value>290</value> <!-- 1555.2 MHz CPU speed -->
+        <value>330</value> <!-- 1593.6 MHz CPU speed -->
+        <value>315</value> <!-- 1632 MHz CPU speed -->
+        <value>345</value> <!-- 1708.8 MHz CPU speed -->
+        <value>378</value> <!-- 1785.6 MHz CPU speed -->
+        <value>398</value> <!-- 1824 MHz CPU speed -->
+        <value>442</value> <!-- 1920 MHz CPU speed -->
+        <value>492</value> <!-- 1996.8 MHz CPU speed -->
+        <value>530</value> <!-- 2073.6 MHz CPU speed -->
+        <value>610</value> <!-- 2150.4 MHz CPU speed -->
     </array>
+
+    <!-- This is the battery capacity in mAh -->
+    <item name="battery.capacity">3000</item>
+
 </device>
