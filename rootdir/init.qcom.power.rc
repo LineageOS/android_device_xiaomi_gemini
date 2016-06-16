@@ -145,9 +145,8 @@ on enable-low-power
     # Set idle GPU to 133 MHz
     write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 6
 
-    # Set perfd properties and start service
-    rm /data/system/perfd/default_values
-    start perfd
+    # Set perfd properties
+    setprop sys.post_boot.parsed 1
 
     # Start IO prefetcher service
     start iop
