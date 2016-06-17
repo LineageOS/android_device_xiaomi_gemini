@@ -1,4 +1,9 @@
 allow fingerprintd firmware_file:file { read getattr open };
+allow fingerprintd fpc_data_file:dir { write remove_name add_name };
+allow fingerprintd fpc_data_file:file { append create getattr open };
+allow fingerprintd fpc_data_file:sock_file { create unlink };
+allow fingerprintd sysfs:file write;
+allow fingerprintd sysmatdrv_device:chr_file { write open };
 allow fingerprintd system_data_file:dir { write remove_name add_name };
 allow fingerprintd system_data_file:sock_file { create unlink };
 allow fingerprintd tee_device:chr_file { read write ioctl open };

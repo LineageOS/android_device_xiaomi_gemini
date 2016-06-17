@@ -1,9 +1,13 @@
 # Devices
 /dev/lirc[0-9]*                       u:object_r:lirc_device:s0
 /dev/pn548                            u:object_r:nfc_device:s0
+/dev/sysmatdrv                        u:object_r:sysmatdrv_device:s0
 
 # Partitions
 /dev/block/bootdevice/by-name/cust    u:object_r:cust_block_device:s0
+
+# Data files
+/data/fpc(/.*)?                       u:object_r:fpc_data_file:s0
 
 # System files
 /system/bin/mmbn-daemon               u:object_r:mmbn-daemon_exec:s0
