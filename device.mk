@@ -139,7 +139,6 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.rc \
     init.target.rc \
     ueventd.qcom.rc \
-    init.qcom.early_boot.sh \
     init.qcom.sh
 
 # CNE
