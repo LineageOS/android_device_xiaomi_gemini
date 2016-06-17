@@ -127,9 +127,7 @@ PRODUCT_COPY_FILES += \
 # Device config scripts
 PRODUCT_PACKAGES += \
     init.leds.sh \
-    init.qcom.bt.sh \
-    usf_post_boot.sh \
-    usf_settings.sh
+    init.qcom.bt.sh
 
 # Device init scripts
 PRODUCT_PACKAGES += \

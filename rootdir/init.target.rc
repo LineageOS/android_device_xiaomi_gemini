@@ -77,7 +77,6 @@ on post-fs-data
     mkdir /persist/data/tz 0700 system system
     mkdir /persist/qc_senseid 0700 system system
     mkdir /data/misc/dts 0770 media audio
-    mkdir /data/usf 0700 system system
     mkdir /data/nfc 0770 nfc nfc
     mkdir /data/misc/tloc/ 0700 system drmrpc
     mkdir /data/misc/qvop 0660 system system
@@ -204,69 +203,6 @@ service audiod /system/bin/audiod
     class late_start
     user system
     group system
-
-service usf_tester /system/bin/usf_tester
-    user system
-    group system inet
-    disabled
-    oneshot
-
-service usf_epos /system/bin/usf_epos
-    class main
-    user system
-    group system inet
-    disabled
-    oneshot
-
-service usf_gesture /system/bin/usf_gesture
-    user system
-    group system inet
-    disabled
-    oneshot
-
-service usf_sync_gesture /system/bin/usf_sync_gesture
-    user system
-    group system inet audio
-    disabled
-    oneshot
-
-service usf_p2p /system/bin/usf_p2p
-    user system
-    group system inet
-    disabled
-    oneshot
-
-service usf_hovering /system/bin/usf_hovering
-    user system
-    group system inet
-    disabled
-    oneshot
-
-service usf_proximity /system/bin/usf_proximity
-    class late_start
-    user system
-    group system inet audio
-
-service usf_pairing /system/bin/usf_pairing
-    user system
-    group system inet
-    disabled
-    oneshot
-
-service usf_sw_calib /system/bin/usf_sw_calib
-    user system
-    group system inet
-    disabled
-    oneshot
-
-service usf-post-boot /system/bin/sh /system/etc/usf_post_boot.sh
-    class late_start
-    user root
-    disabled
-    oneshot
-
-on property:init.svc.bootanim=stopped
-    start usf-post-boot
 
 service imsqmidaemon /system/bin/imsqmidaemon
     class main

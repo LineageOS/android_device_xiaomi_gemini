@@ -57,22 +57,6 @@ vendor/lib/libaudcal.so
 vendor/lib/libqct_resampler.so
 vendor/lib/libsurround_3mic_proc.so
 
-# Audio libraries (USF)
-bin/usf_proximity
-bin/usf_tester
-vendor/lib64/libual.so
-vendor/lib64/libualutil.so
-vendor/lib64/libusndroute.so
-vendor/lib64/libproxadapter.so
-vendor/lib64/libproxsockadapter.so
-vendor/lib64/libqcproximity.so
-vendor/lib/libual.so
-vendor/lib/libualutil.so
-vendor/lib/libusndroute.so
-vendor/lib/libproxadapter.so
-vendor/lib/libproxsockadapter.so
-vendor/lib/libqcproximity.so
-
 # Bluetooth
 bin/btnvtool
 bin/dun-server
