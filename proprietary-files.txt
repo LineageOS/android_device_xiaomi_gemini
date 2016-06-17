@@ -775,25 +775,6 @@ vendor/lib/libchromatix_s5k3m2xx_video_4k.so
 vendor/lib/libchromatix_s5k3m2xx_zsl_preview_ad5816g.so
 vendor/lib/libchromatix_s5k3m2xx_zsl_video_ad5816g.so
 
-# Camera configs
-etc/camera/imx214_chromatix.xml
-etc/camera/imx230_chromatix.xml
-etc/camera/imx258_chromatix.xml
-etc/camera/imx298_chromatix.xml
-etc/camera/imx298_liteon_chromatix.xml
-etc/camera/imx298_semco_chromatix.xml
-etc/camera/msm8952_camera.xml
-etc/camera/msm8996_camera.xml
-etc/camera/ov4688_chromatix.xml
-etc/camera/ov4688_primax_chromatix.xml
-etc/camera/ov5670_chromatix.xml
-etc/camera/ov8858_chromatix.xml
-etc/camera/ov8865_chromatix.xml
-etc/camera/ov13850_chromatix.xml
-etc/camera/ov13850_q13v06k_chromatix.xml
-etc/camera/s5k3m2xm_chromatix.xml
-etc/camera/s5k3m2xx_chromatix.xml
-
 # Camera firmware
 etc/firmware/cpp_firmware_v1_1_1.fw
 etc/firmware/cpp_firmware_v1_1_6.fw

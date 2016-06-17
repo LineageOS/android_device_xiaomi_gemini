@@ -120,6 +120,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Snap
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/camera/imx298_chromatix.xml:system/etc/camera/imx298_chromatix.xml \
+    $(LOCAL_PATH)/configs/camera/imx298_liteon_chromatix.xml:system/etc/camera/imx298_liteon_chromatix.xml \
+    $(LOCAL_PATH)/configs/camera/imx298_semco_chromatix.xml:system/etc/camera/imx298_semco_chromatix.xml \
+    $(LOCAL_PATH)/configs/camera/msm8996_camera.xml:system/etc/camera/msm8996_camera.xml \
+    $(LOCAL_PATH)/configs/camera/ov4688_chromatix.xml:system/etc/camera/ov4688_chromatix.xml \
+    $(LOCAL_PATH)/configs/camera/ov4688_primax_chromatix.xml:system/etc/camera/ov4688_primax_chromatix.xml
+
 # Charger
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/sbin/chargeonlymode:root/sbin/chargeonlymode
