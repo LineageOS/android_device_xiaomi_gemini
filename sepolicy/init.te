@@ -1,6 +1,5 @@
 allow init graphics_device:chr_file { write ioctl };
 allow init mm-pp-daemon:unix_stream_socket connectto;
-allow init mmbn-daemon:file execute_no_trans;
 allow init pps_socket:sock_file write;
 allow init qmuxd:unix_stream_socket connectto;
 allow init qmuxd_socket:sock_file write;

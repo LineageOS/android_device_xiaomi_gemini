@@ -1,0 +1,15 @@
+type displayfeature, domain;
+type displayfeature_exec, exec_type, file_type;
+
+# Allow for transition from init domain to displayfeature
+init_daemon_domain(displayfeature)
+
+# Allow IPC binding with service manager
+binder_use(displayfeature)
+binder_call(displayfeature, servicemanager)
+
+allow displayfeature graphics_device:chr_file { ioctl open read write };
+allow displayfeature mm-pp-daemon:unix_stream_socket connectto;
+allow displayfeature pps_socket:sock_file write;
+allow displayfeature self:capability dac_override;
+allow displayfeature sysfs:file write;

@@ -1,0 +1,12 @@
+type qpaydaemon, domain;
+type qpaydaemon_exec, exec_type, file_type;
+
+# Allow for transition from init domain to qpaydaemon
+init_daemon_domain(qpaydaemon)
+
+# Allow IPC binding with service manager
+binder_use(qpaydaemon)
+binder_call(qpaydaemon, servicemanager)
+
+# Allow qpaydaemon to be registered with service manager
+allow qpaydaemon qpay_service:service_manager add;
