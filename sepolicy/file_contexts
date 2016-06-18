@@ -9,6 +9,5 @@
 # Data files
 /data/fpc(/.*)?                       u:object_r:fpc_data_file:s0
 
-# System files
+# Binaries
 /system/bin/mmbn-daemon               u:object_r:mmbn-daemon_exec:s0
-/system/bin/mtd                       u:object_r:mt_daemon_exec:s0

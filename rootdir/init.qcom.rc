@@ -369,12 +369,6 @@ on property:sys.boot_completed=1
     # CPE fw_name used by sound trigger HAL
     chown media audio /sys/kernel/wcd_cpe0/fw_name
 
-on property:persist.radio.atfwd.start=false
-    stop atfwd
-
-on property:radio.atfwd.start=false
-    stop atfwd
-
 # Corefile limit
 on property:persist.debug.trace=1
     mkdir /data/core 0777 root root
@@ -423,11 +417,6 @@ service irsc_util /system/bin/irsc_util "/etc/sec_config"
 service rmt_storage /system/bin/rmt_storage
     class core
     user root
-
-service rfs_access /system/bin/rfs_access
-    class core
-    user root
-    group system net_raw
 
 service tftp_server /system/bin/tftp_server
     class main
@@ -642,18 +631,6 @@ service iprenew_p2p /system/bin/dhcpcd -n
     disabled
     oneshot
 
-service ptt_socket_app /system/bin/ptt_socket_app -d
-    class main
-    user root
-    group root
-    oneshot
-
-service ptt_ffbm /system/bin/ptt_socket_app -f -d
-    user root
-    group root
-    disabled
-    oneshot
-
 service cnss_diag /system/bin/cnss_diag -q -f
     class main
     user root
@@ -724,11 +701,6 @@ service leds-sh /system/bin/sh /system/etc/init.leds.sh
     class late_start
     user root
     oneshot
-
-service atfwd /system/bin/ATFWD-daemon
-    class late_start
-    user system
-    group system radio
 
 service hostapd /system/bin/hostapd /data/hostapd/hostapd.conf
     class late_start
@@ -810,12 +782,6 @@ service wfdservice /system/bin/wfdservice
     #graphics net_bt net_bt_admin bluetooth
 
 service qseeproxydaemon /system/vendor/bin/qseeproxydaemon
-    class late_start
-    user system
-    group system
-
-# Seemp health service
-service seemp_healthd /system/vendor/bin/seemp_healthd
     class late_start
     user system
     group system

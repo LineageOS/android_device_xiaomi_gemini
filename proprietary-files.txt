@@ -820,10 +820,6 @@ bin/diag_mdlog
 bin/displayfeature
 bin/fdpp
 bin/gptest
-bin/mtd
-bin/smeloop
-bin/smonsir
-bin/smprosrv
 vendor/bin/hdcp1prov
 vendor/lib64/libhdcp1prov.so
 vendor/lib64/libpvr.so

@@ -86,12 +86,8 @@ on post-fs-data
     mkdir /data/fpc 0770 system system
     mkdir /data/fpc/s 0770 system system
 
-# on property:init.svc.bootanim=running
-#    write /sys/class/leds/wled/brightness 4095
-
 on boot
     start rmt_storage
-    start rfs_access
     # Access permission for secure touch
     chmod 0660 /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/secure_touch_enable
     chmod 0440 /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/secure_touch
@@ -167,17 +163,6 @@ service qseecomd /system/bin/qseecomd
     user root
     group root
 
-service seempd /system/bin/seempd
-    class late_start
-    user system
-    group system
-    socket seempdw dgram 0666 system system
-
-service secotad /system/bin/secotad
-    class late_start
-    user system
-    group system
-
 service thermal-engine /system/vendor/bin/thermal-engine
     class main
     user root
@@ -248,31 +233,11 @@ on property:sys.ims.DATA_DAEMON_STATUS=1
     start ims_rtp_daemon
     start imscmservice
 
-service dts_configurator /system/bin/dts_configurator
-    class late_start
-    user system
-    group system media audio
-    oneshot
-
-service dtseagleservice /system/bin/dts_eagle_service
-    class late_start
-    user system
-    group audio media
-    disabled
-
-on property:init.svc.dts_configurator=stopped
-    start dtseagleservice
-
 service ppd /system/bin/mm-pp-dpps
     class late_start
     user system
     group system graphics
     socket pps stream 0660 system system
-
-service tlocd /system/bin/tloc_daemon
-    class late_start
-    user system
-    group drmrpc gps net_raw
 
 on property:init.svc.surfaceflinger=stopped
     stop displayfeature
@@ -301,37 +266,5 @@ service nv_mac /system/bin/nv_mac
    group net_raw
    oneshot
 
-service nv_fem /system/bin/nv_fem
-   class main
-   user root
-   group net_raw
-   oneshot
-
-service smonsir /system/bin/smonsir
-    user root
-    group root
-    oneshot
-    disabled
-
-service smprosrv /system/bin/smprosrv
-    user root
-    group root
-    oneshot
-    disabled
-
-on property:persist.sys.matsir.enable=1
-    setprop sys.sysmat.service.control start
-    start smonsir
-    start smprosrv
-
-service smeloop /system/bin/smeloop
-    class late_start
-    user root
-    group root
-    oneshot
-
 on property:slpi.restart=1
     write /sys/kernel/debug/msm_subsys/slpi restart
-
-service mtservice /system/bin/mtd
-    class late_start
