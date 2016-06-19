@@ -31,6 +31,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
     bt.max.hfpclient.connections=1 \
+    ro.bluetooth.ftm_enabled=true \
     ro.btconfig.if=uart \
     ro.btconfig.vendor=qcom \
     ro.btconfig.chip=QCA6164 \

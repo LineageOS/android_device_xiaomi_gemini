@@ -485,11 +485,11 @@ service btsnoop /system/bin/btsnoop
     disabled
     oneshot
 
-service ftmd /system/bin/logwrapper /system/bin/ftmdaemon
+service ftmd /system/bin/ftmdaemon
     class late_start
     user root
     group bluetooth net_bt_admin misc net_bt_stack qcom_diag net_bt
-#    disabled
+    disabled
     oneshot
 
 service port-bridge /system/bin/port-bridge
