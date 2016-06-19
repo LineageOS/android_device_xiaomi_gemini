@@ -4,5 +4,4 @@ allow init pps_socket:sock_file write;
 allow init qmuxd:unix_stream_socket connectto;
 allow init qmuxd_socket:sock_file write;
 allow init self:socket { read getopt create write ioctl };
-allow init servicemanager:binder { transfer call };
 allow init socket_device:sock_file { create setattr };

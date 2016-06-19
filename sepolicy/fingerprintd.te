@@ -1,5 +1,6 @@
+allow fingerprintd firmware_file:dir search;
 allow fingerprintd firmware_file:file { read getattr open };
-allow fingerprintd fpc_data_file:dir { write remove_name add_name };
+allow fingerprintd fpc_data_file:dir { add_name remove_name search write };
 allow fingerprintd fpc_data_file:file { append create getattr open };
 allow fingerprintd fpc_data_file:sock_file { create unlink };
 allow fingerprintd sysfs:file write;

@@ -8,7 +8,11 @@ init_daemon_domain(displayfeature)
 binder_use(displayfeature)
 binder_call(displayfeature, servicemanager)
 
+# Allow displayfeature to be registered with service manager
+allow displayfeature DisplayFeatureControl_service:service_manager add;
+
 allow displayfeature graphics_device:chr_file { ioctl open read write };
+allow displayfeature graphics_device:dir search;
 allow displayfeature mm-pp-daemon:unix_stream_socket connectto;
 allow displayfeature pps_socket:sock_file write;
 allow displayfeature self:capability dac_override;

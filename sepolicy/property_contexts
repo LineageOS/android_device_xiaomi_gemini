@@ -1,0 +1,2 @@
+service.soundcard.         u:object_r:audio_prop:s0
+audio.                     u:object_r:audio_prop:s0

@@ -1,1 +1,2 @@
 com.qualcomm.qti.qpaydaemon                    u:object_r:qpay_service:s0
+DisplayFeatureControl                          u:object_r:DisplayFeatureControl_service:s0

@@ -4,9 +4,11 @@ type mmbn-daemon_exec, exec_type, file_type;
 # Allow for transition from init domain to mmbn-daemon
 init_daemon_domain(mmbn-daemon)
 
-allow mmbn-daemon firmware_file:file { open read };
+allow mmbn-daemon firmware_file:dir search;
+allow mmbn-daemon firmware_file:file { open getattr read };
+allow mmbn-daemon property_socket:sock_file write;
 allow mmbn-daemon self:capability { dac_override fsetid };
 allow mmbn-daemon self:socket { create getopt ioctl read write };
-allow mmbn-daemon qmuxd:unix_stream_socket connectto;
-allow mmbn-daemon qmuxd_socket:dir { add_name write };
+allow mmbn-daemon { init qmuxd }:unix_stream_socket connectto;
+allow mmbn-daemon qmuxd_socket:dir { add_name search write };
 allow mmbn-daemon qmuxd_socket:sock_file { create setattr write };
