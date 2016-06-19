@@ -3,9 +3,6 @@
 /dev/pn548                            u:object_r:nfc_device:s0
 /dev/sysmatdrv                        u:object_r:sysmatdrv_device:s0
 
-# Partitions
-/dev/block/bootdevice/by-name/cust    u:object_r:cust_block_device:s0
-
 # Data files
 /data/fpc(/.*)?                       u:object_r:fpc_data_file:s0
 
