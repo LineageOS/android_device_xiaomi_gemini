@@ -63,6 +63,7 @@ bin/hci_qcomm_init
 bin/mm-audio-ftm
 bin/wcnss_filter
 vendor/lib64/libbtnv.so
+vendor/lib64/libCommandSvc.so
 vendor/lib/libbtnv.so
 
 # Bluetooth firmware
@@ -485,7 +486,6 @@ vendor/lib/libdpmtcm.so
 bin/qseecomd
 vendor/bin/chamomile_provision
 vendor/bin/qseeproxydaemon
-vendor/bin/qseeproxysampledaemon
 vendor/lib64/mediadrm/libdrmclearkeyplugin.so
 vendor/lib64/lib-sec-disp.so
 vendor/lib64/libChamomilePA.so
@@ -993,6 +993,8 @@ bin/sensors.qcom
 etc/sensor_diag.cfg
 lib64/libsensor_cal.so
 lib64/libsensor_calJNI.so
+lib/libsensor_cal.so
+lib/libsensor_calJNI.so
 vendor/lib64/hw/activity_recognition.msm8996.so
 vendor/lib64/libsensor_reg.so
 vendor/lib64/libsensor_test.so
