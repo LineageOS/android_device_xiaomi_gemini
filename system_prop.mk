@@ -56,6 +56,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     sys.fpc.navigation.enableflags=0 \
     sys.fpc.tu.disabled=0
 
+# FRP
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.frp.pst=/dev/block/bootdevice/by-name/frp
+
 # Graphics
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.egl.hw=1 \
