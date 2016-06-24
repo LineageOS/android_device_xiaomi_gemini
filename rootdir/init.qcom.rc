@@ -42,6 +42,8 @@ on early-boot
 
     # Set aggressive read ahead during boot up
     write /sys/block/dm-0/queue/read_ahead_kb 2048
+    write /sys/block/sda/queue/read_ahead_kb 2048
+    write /sys/block/sde/queue/read_ahead_kb 2048
 
     write /sys/kernel/boot_adsp/boot 1
     write /sys/kernel/boot_slpi/boot 1
@@ -342,6 +344,8 @@ on property:sys.boot_completed=1
     write /dev/kmsg "Boot completed "
     # Reset the read_ahead_kb to 512
     write /sys/block/dm-0/queue/read_ahead_kb 512
+    write /sys/block/sda/queue/read_ahead_kb 512
+    write /sys/block/sde/queue/read_ahead_kb 512
 
 # Corefile limit
 on property:persist.debug.trace=1
