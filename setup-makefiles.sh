@@ -81,6 +81,7 @@ PRODUCT_PACKAGES += \\
 
 PRODUCT_PACKAGES += \\
     CNEService \\
+    com.qualcomm.location \\
     dpmserviceapp \\
     qcrilmsgtunnel \\
     QtiTetherService
@@ -219,6 +220,17 @@ LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
 LOCAL_MODULE_TAGS := optional
 LOCAL_PRIVILEGED_MODULE := true
 LOCAL_SRC_FILES := proprietary/priv-app/CNEService/CNEService.apk
+LOCAL_CERTIFICATE := platform
+include \$(BUILD_PREBUILT)
+
+include \$(CLEAR_VARS)
+LOCAL_MODULE := com.qualcomm.location
+LOCAL_MODULE_CLASS := APPS
+LOCAL_MODULE_OWNER := $VENDOR
+LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
+LOCAL_MODULE_TAGS := optional
+LOCAL_PRIVILEGED_MODULE := true
+LOCAL_SRC_FILES := proprietary/priv-app/com.qualcomm.location/com.qualcomm.location.apk
 LOCAL_CERTIFICATE := platform
 include \$(BUILD_PREBUILT)
 
