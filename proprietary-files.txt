@@ -758,14 +758,6 @@ vendor/lib/libadpcmdec.so
 vendor/lib/libsmwrapper.so
 
 # Media
-lib64/libOmxVenc.so
-lib64/libOmxVpp.so
-lib64/libmm-omxcore.so
-lib/libOmxVenc.so
-lib/libOmxVpp.so
-lib/libmm-omxcore.so
-vendor/lib64/libavenhancements.so
-vendor/lib64/libExtendedExtractor.so
 vendor/lib64/libFileMux.so
 vendor/lib64/libI420colorconvert.so
 vendor/lib64/libmm-color-convertor.so
@@ -773,15 +765,8 @@ vendor/lib64/libmmosal.so
 vendor/lib64/libmmparser.so
 vendor/lib64/libmmparser_lite.so
 vendor/lib64/libOmxAacDec.so
-vendor/lib64/libOmxAlacDec.so
-vendor/lib64/libOmxAmrwbplusDec.so
-vendor/lib64/libOmxApeDec.so
 vendor/lib64/libOmxEvrcDec.so
-vendor/lib64/libOmxMux.so
 vendor/lib64/libOmxQcelp13Dec.so
-vendor/lib64/libOmxWmaDec.so
-vendor/lib/libavenhancements.so
-vendor/lib/libExtendedExtractor.so
 vendor/lib/libFileMux.so
 vendor/lib/libI420colorconvert.so
 vendor/lib/libmm-color-convertor.so
@@ -789,14 +774,8 @@ vendor/lib/libmmosal.so
 vendor/lib/libmmparser.so
 vendor/lib/libmmparser_lite.so
 vendor/lib/libOmxAacDec.so
-vendor/lib/libOmxAlacDec.so
-vendor/lib/libOmxAmrwbplusDec.so
-vendor/lib/libOmxApeDec.so
 vendor/lib/libOmxEvrcDec.so
-vendor/lib/libOmxMux.so
 vendor/lib/libOmxQcelp13Dec.so
-vendor/lib/libOmxVideoDSMode.so
-vendor/lib/libOmxWmaDec.so
 vendor/lib/libvqzip.so
 
 # Misc
