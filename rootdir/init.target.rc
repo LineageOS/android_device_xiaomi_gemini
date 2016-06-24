@@ -37,6 +37,9 @@ on early-init
 on post-fs
     export LD_PRELOAD libNimsWrap.so
 
+on init
+   write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
+
 on fs
     wait /dev/block/bootdevice
     mount_all fstab.qcom
@@ -46,13 +49,6 @@ on fs
     mkdir /persist/data 0700 system system
     mkdir /persist/wlan_bt 0700 system system
     mkdir /persist/audio 0777 media audio
-
-    restorecon_recursive /dsp
-
-on post-fs
-    # We chown/chmod sram update period so app can change it
-    chown root system /sys/module/qpnp_fg/parameters/sram_update_period_ms
-    chmod 0660 /sys/module/qpnp_fg/parameters/sram_update_period_ms
 
 on post-fs-data
     mkdir /data/tombstones 0771 system system
@@ -67,6 +63,7 @@ on post-fs-data
     mkdir /data/nfc 0770 nfc nfc
     mkdir /data/misc/tloc/ 0700 system drmrpc
     mkdir /data/misc/qvop 0660 system system
+    mkdir /data/misc/qvr 0770 system system
     mkdir /data/misc/audio_pp 0771 media audio
     chown system system /dev/sysmatdrv
     chmod 0660 /dev/sysmatdrv
@@ -81,7 +78,6 @@ on boot
     chmod 0440 /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/secure_touch
     chown system drmrpc /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/secure_touch_enable
     chown system drmrpc /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/secure_touch
-    write /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input0/update_fw 1
 
     write /proc/sys/kernel/sched_boost 1
 
@@ -91,6 +87,7 @@ on boot
     chmod 0666 /sys/class/leds/led:switch/brightness
 
     # Access permission for smartPA
+    chmod 0666 /dev/i2c-3
     chmod 0666 /dev/i2c-9
 
 # Audio smartPA cold boot
@@ -114,14 +111,7 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
 service fingerprintd /system/bin/fingerprintd
     class late_start
     user system
-    group drmrpc input system
-    socket fpce stream 0660 system system
-
-service qfp-daemon /system/bin/qfp-daemon
-    class late_start
-    user system
-    group system drmrpc diag input
-    disabled
+    group system sdcard_rw
 
 service qvop-daemon /system/bin/qvop-daemon
     class late_start
@@ -219,11 +209,12 @@ on property:sys.ims.DATA_DAEMON_STATUS=1
     start ims_rtp_daemon
     start imscmservice
 
-service ppd /system/bin/mm-pp-dpps
+service ppd /system/vendor/bin/mm-pp-dpps
     class late_start
     user system
     group system graphics
     socket pps stream 0660 system system
+    disabled
 
 on property:init.svc.surfaceflinger=stopped
     stop displayfeature
@@ -233,8 +224,26 @@ on property:init.svc.surfaceflinger=running
     start displayfeature
     start ppd
 
-on property:persist.sys.ltm_enable=*
-    start service_ad
+on property:init.svc.surfaceflinger=restarting
+    stop displayfeature
+    stop ppd
+
+on property:init.svc.zygote=stopped
+    stop displayfeature
+    stop ppd
+
+on property:init.svc.zygote=running
+    start displayfeature
+    start ppd
+
+on property:init.svc.zygote=restarting
+    stop displayfeature
+    stop ppd
+
+service tlocd /system/bin/tloc_daemon
+    class late_start
+    user system
+    group drmrpc gps net_raw
 
 service displayfeature /system/bin/displayfeature
     class late_start
@@ -246,11 +255,27 @@ service qpaydaemon /system/vendor/bin/qpaydaemon
     user system
     group system
 
+service nv_fem /system/bin/nv_fem
+   class main
+   user root
+   group net_raw
+   oneshot
+
 service nv_mac /system/bin/nv_mac
    class main
    user root
    group net_raw
    oneshot
 
+service mmbn-daemon /system/bin/mmbn-daemon
+    class main
+    oneshot
+
 on property:slpi.restart=1
     write /sys/kernel/debug/msm_subsys/slpi restart
+
+on property:persist.sys.display_oled_hbm=0
+   write /sys/devices/virtual/graphics/fb0/msm_fb_dispparam 0xE00
+
+on property:persist.sys.display_oled_hbm=1
+   write /sys/devices/virtual/graphics/fb0/msm_fb_dispparam 0xD00

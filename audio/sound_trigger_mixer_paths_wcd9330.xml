@@ -39,6 +39,7 @@
     <ctl name="SLIMBUS_5_TX LSM Function" value="None" />
     <ctl name="MADONOFF Switch" value="0" />
     <ctl name="MAD Input" value="DMIC1" />
+    <ctl name="CPE AFE MAD Enable" value="0"/>
 
     <path name="listen-voice-wakeup-1">
         <ctl name="LSM1 MUX" value="SLIMBUS_5_TX" />
@@ -74,7 +75,13 @@
         <ctl name="SLIMBUS_5_TX LSM Function" value="AUDIO" />
     </path>
 
-    <path name="listen-handset-mic">
+    <path name="listen-cpe-handset-mic">
+        <ctl name="MADONOFF Switch" value="1" />
+        <ctl name="MAD Input" value="DMIC1" />
+        <ctl name="CPE AFE MAD Enable" value="1"/>
+    </path>
+
+    <path name="listen-ape-handset-mic">
         <ctl name="MADONOFF Switch" value="1" />
         <ctl name="MAD Input" value="DMIC1" />
     </path>

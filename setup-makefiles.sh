@@ -67,9 +67,9 @@ done
 # Pick up overlay for features that depend on non-open-source files
 
 PRODUCT_PACKAGES += \\
-    TimeService \\
-    qcrilmsgtunnel \\
-    shutdownlistener
+    fastdormancy \\
+    shutdownlistener \\
+    TimeService
 
 PRODUCT_PACKAGES += \\
     qcnvitems \\
@@ -82,6 +82,7 @@ PRODUCT_PACKAGES += \\
 PRODUCT_PACKAGES += \\
     CNEService \\
     dpmserviceapp \\
+    qcrilmsgtunnel \\
     QtiTetherService
 
 PRODUCT_PACKAGES += \\
@@ -135,23 +136,12 @@ LOCAL_PATH := \$(call my-dir)
 ifeq (\$(TARGET_DEVICE),gemini)
 
 include \$(CLEAR_VARS)
-LOCAL_MODULE := TimeService
+LOCAL_MODULE := fastdormancy
 LOCAL_MODULE_CLASS := APPS
 LOCAL_MODULE_OWNER := $VENDOR
 LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
 LOCAL_MODULE_TAGS := optional
-LOCAL_SRC_FILES := proprietary/app/TimeService/TimeService.apk
-LOCAL_CERTIFICATE := platform
-include \$(BUILD_PREBUILT)
-
-include \$(CLEAR_VARS)
-LOCAL_MODULE := qcrilmsgtunnel
-LOCAL_MODULE_CLASS := APPS
-LOCAL_MODULE_OWNER := $VENDOR
-LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
-LOCAL_MODULE_TAGS := optional
-LOCAL_PRIVILEGED_MODULE := true
-LOCAL_SRC_FILES := proprietary/priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
+LOCAL_SRC_FILES := proprietary/app/fastdormancy/fastdormancy.apk
 LOCAL_CERTIFICATE := platform
 include \$(BUILD_PREBUILT)
 
@@ -162,6 +152,16 @@ LOCAL_MODULE_OWNER := $VENDOR
 LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
 LOCAL_MODULE_TAGS := optional
 LOCAL_SRC_FILES := proprietary/app/shutdownlistener/shutdownlistener.apk
+LOCAL_CERTIFICATE := platform
+include \$(BUILD_PREBUILT)
+
+include \$(CLEAR_VARS)
+LOCAL_MODULE := TimeService
+LOCAL_MODULE_CLASS := APPS
+LOCAL_MODULE_OWNER := $VENDOR
+LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
+LOCAL_MODULE_TAGS := optional
+LOCAL_SRC_FILES := proprietary/app/TimeService/TimeService.apk
 LOCAL_CERTIFICATE := platform
 include \$(BUILD_PREBUILT)
 
@@ -230,6 +230,17 @@ LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
 LOCAL_MODULE_TAGS := optional
 LOCAL_PRIVILEGED_MODULE := true
 LOCAL_SRC_FILES := proprietary/priv-app/dpmserviceapp/dpmserviceapp.apk
+LOCAL_CERTIFICATE := platform
+include \$(BUILD_PREBUILT)
+
+include \$(CLEAR_VARS)
+LOCAL_MODULE := qcrilmsgtunnel
+LOCAL_MODULE_CLASS := APPS
+LOCAL_MODULE_OWNER := $VENDOR
+LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
+LOCAL_MODULE_TAGS := optional
+LOCAL_PRIVILEGED_MODULE := true
+LOCAL_SRC_FILES := proprietary/priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
 LOCAL_CERTIFICATE := platform
 include \$(BUILD_PREBUILT)
 

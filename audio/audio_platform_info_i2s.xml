@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- Copyright (c) 2014, The Linux Foundation. All rights reserved.         -->
+<!-- Copyright (c) 2016, The Linux Foundation. All rights reserved.         -->
 <!--                                                                        -->
 <!-- Redistribution and use in source and binary forms, with or without     -->
 <!-- modification, are permitted provided that the following conditions are -->
@@ -25,11 +25,13 @@
 <!-- OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN -->
 <!-- IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                          -->
 <audio_platform_info_i2s>
-    <device name="SND_DEVICE_IN_HANDSET_MIC" acdb_id="8" />
-    <device name="SND_DEVICE_IN_SPEAKER_MIC" acdb_id="8" />
-    <device name="SND_DEVICE_IN_VOICE_SPEAKER_MIC" acdb_id="8" />
-    <device name="SND_DEVICE_OUT_HANDSET" acdb_id="10" />
-    <device name="SND_DEVICE_OUT_VOICE_HANDSET" acdb_id="10" />
-    <device name="SND_DEVICE_OUT_SPEAKER" acdb_id="10" />
-    <device name="SND_DEVICE_OUT_VOICE_SPEAKER" acdb_id="10" />
+    <acdb_ids>
+        <device name="SND_DEVICE_IN_HANDSET_MIC" acdb_id="8" />
+        <device name="SND_DEVICE_IN_SPEAKER_MIC" acdb_id="8" />
+        <device name="SND_DEVICE_IN_VOICE_SPEAKER_MIC" acdb_id="8" />
+        <device name="SND_DEVICE_OUT_HANDSET" acdb_id="10" />
+        <device name="SND_DEVICE_OUT_VOICE_HANDSET" acdb_id="10" />
+        <device name="SND_DEVICE_OUT_SPEAKER" acdb_id="10" />
+        <device name="SND_DEVICE_OUT_VOICE_SPEAKER" acdb_id="10" />
+    </acdb_ids>
 </audio_platform_info_i2s>

@@ -1634,6 +1634,10 @@
         <ctl name="COMP1 Switch" value="1" />
     </path>
 
+    <path name="line">
+        <path name="headphones" />
+    </path>
+
     <path name="headset-mic">
         <path name="adc2" />
         <ctl name="ADC2 Volume" value="13" />
@@ -1685,6 +1689,10 @@
         <path name="headphones" />
     </path>
 
+    <path name="voice-line">
+        <path name="voice-headphones" />
+    </path>
+
     <path name="voice-headset-mic">
         <path name="headset-mic" />
         <ctl name="ADC2 Volume" value="13" />
@@ -1697,10 +1705,18 @@
         <ctl name="COMP0 Switch" value="1" />
     </path>
 
+    <path name="speaker-and-line">
+        <path name="speaker-and-headphones" />
+    </path>
+
     <path name="speaker-and-headphones-fluid">
         <path name="headphones" />
         <ctl name="RX8 MIX1 INP1" value="RX1" />
         <ctl name="COMP0 Switch" value="1" />
+    </path>
+
+   <path name="speaker-and-line-fluid">
+        <path name="speaker-and-headphones-fluid" />
     </path>
 
     <path name="speaker-and-headphones-liquid">
@@ -1710,6 +1726,10 @@
         <ctl name="RX7 Digital Volume" value="84" />
         <ctl name="RX8 Digital Volume" value="84" />
         <ctl name="COMP0 Switch" value="1" />
+    </path>
+
+   <path name="speaker-and-line-liquid">
+        <path name="speaker-and-headphones-liquid" />
     </path>
 
     <path name="speaker-and-headphones-ext-1-liquid">

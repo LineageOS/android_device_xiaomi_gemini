@@ -39,6 +39,10 @@ on init
 on early-boot
     # Set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
+
+    # Set aggressive read ahead during boot up
+    write /sys/block/dm-0/queue/read_ahead_kb 2048
+
     write /sys/kernel/boot_adsp/boot 1
     write /sys/kernel/boot_slpi/boot 1
 
@@ -46,37 +50,8 @@ on boot
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/type
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/state
-    chown system system /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/setup/adc_gain
-    chown system system /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/setup/adc_shift
-    chown system system /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/setup/capture_col_groups
-    chown system system /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/setup/capture_col_start
-    chown system system /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/setup/capture_count
-    chown system system /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/setup/capture_mode
-    chown system system /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/setup/capture_row_count
-    chown system system /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/setup/capture_row_start
-    chown system system /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/setup/capture_settings_mux
-    chown system system /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/setup/pxl_ctrl
     chown system system /sys/devices/soc/soc:fpc_fpc1020/irq
     chown system system /sys/devices/soc/soc:fpc_fpc1020/enable_wakeup
-
-    chmod 666 /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/setup/adc_gain
-    chmod 666 /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/setup/adc_shift
-    chmod 666 /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/setup/capture_col_groups
-    chmod 666 /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/setup/capture_col_start
-    chmod 666 /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/setup/capture_count
-    chmod 666 /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/setup/capture_mode
-    chmod 666 /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/setup/capture_row_count
-    chmod 666 /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/setup/capture_row_start
-    chmod 666 /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/setup/capture_settings_mux
-    chmod 666 /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/setup/pxl_ctrl
-
-    chmod 666 /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/diag/chip_id
-    chmod 666 /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/diag/finger_present_status
-    chmod 666 /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/diag/last_capture_time
-    chmod 666 /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/diag/selftest
-    chmod 666 /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/diag/spi_data
-    chmod 666 /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/diag/spi_register
-    chmod 666 /sys/devices/soc/7579000.spi/spi_master/spi5/spi5.0/diag/spi_regsize
 
     chmod 0660 /sys/module/bluetooth_power/parameters/power
 
@@ -314,8 +289,6 @@ on post-fs-data
     mkdir /data/misc/SelfHost/socket/ 2770 system system
 
     # Create PERFD deamon related dirs
-    mkdir /dev/socket/perfd 0755 root system
-    chmod 2755 /dev/socket/perfd
     mkdir /data/system/perfd 0770 root system
     chmod 2770 /data/system/perfd
 
@@ -367,9 +340,8 @@ on property:persist.sys.ssr.enable_ramdumps=0
 
 on property:sys.boot_completed=1
     write /dev/kmsg "Boot completed "
-
-    # CPE fw_name used by sound trigger HAL
-    chown media audio /sys/kernel/wcd_cpe0/fw_name
+    # Reset the read_ahead_kb to 512
+    write /sys/block/dm-0/queue/read_ahead_kb 512
 
 # Corefile limit
 on property:persist.debug.trace=1
@@ -571,8 +543,22 @@ service wpa_supplicant /system/bin/wpa_supplicant \
     disabled
     oneshot
 
+service wigig_supplicant /system/bin/wpa_supplicant \
+    -iwigig0 -Dnl80211 -c/data/misc/wifi/wigig_supplicant.conf \
+    -m/data/misc/wifi/wigig_p2p_supplicant.conf \
+    -O/data/misc/wifi/wigig_sockets \
+    -e/data/misc/wifi/wigig_entropy.bin -g@android:wpa_wigig0
+    #   we will start as root and wpa_supplicant will switch to user wifi
+    #   after setting up the capabilities required for WEXT
+    #   user wifi
+    #   group wifi inet keystore
+    class main
+    socket wpa_wigig0 dgram 660 wifi wifi
+    disabled
+    oneshot
+
 # FST Manager can be started by property_set("ctl.start", "fstman:<hostap ctrl iface>");
-service fstman /system/bin/fstman -B -ddd -n -c /data/misc/wifi/fstman.ini
+service fstman /system/bin/fstman -B -ddd -c /data/misc/wifi/fstman.ini
     user wifi
     group wifi net_admin net_raw
     class main
@@ -600,6 +586,11 @@ service dhcpcd_p2p /system/bin/dhcpcd -ABKLG
     disabled
     oneshot
 
+service dhcpcd_wigig0 /system/bin/dhcpcd -ABKLG
+    class late_start
+    disabled
+    oneshot
+
 service iprenew_wlan0 /system/bin/dhcpcd -n
     class late_start
     disabled
@@ -614,6 +605,21 @@ service iprenew_p2p /system/bin/dhcpcd -n
     class late_start
     disabled
     oneshot
+
+service iprenew_wigig0 /system/bin/dhcpcd -n
+    class late_start
+    disabled
+    oneshot
+
+service wifi_fccutild /system/bin/wifi_fccutild
+    user system
+    group system inet net_admin
+    socket wififccutild_server dgram 0660 system system
+    disabled
+    oneshot
+
+on property:wifi.fccutild.load.qcacld=true
+    insmod /system/lib/modules/qca_cld/qca_cld_wlan.ko con_mode=5
 
 service cnss_diag /system/bin/cnss_diag -q -f
     class main
@@ -715,7 +721,7 @@ service ril-daemon2 /system/bin/rild -c 2
     socket rild2 stream 660 root radio
     socket rild-debug2 stream 660 radio system
     user root
-    group radio cache inet misc audio sdcard_r sdcard_rw qcom_diag diag log
+    group radio cache inet misc audio sdcard_r sdcard_rw qcom_diag diag log net_raw
 
 service ssr_diag /system/bin/ssr_diag
     class late_start
@@ -765,11 +771,3 @@ service qseeproxydaemon /system/vendor/bin/qseeproxydaemon
     class late_start
     user system
     group system
-
-service mmbn-daemon /system/bin/mmbn-daemon
-    class main
-    oneshot
-
-on property:persist.radio.modem=A1-LTE-ALL
-    setprop ro.sys.oosenhance.enable true
-    setprop ro.sys.oosenhance.timer 20000

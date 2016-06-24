@@ -1,9 +1,27 @@
 # ADSP
 bin/adsprpcd
 vendor/lib64/libadsprpc.so
+vendor/lib64/libadsp_default_listener.so
+vendor/lib/rfsa/adsp/libadsp_hvx_add_constant.so
+vendor/lib/rfsa/adsp/libadsp_hvx_zzhdr_BGGR.so
+vendor/lib/rfsa/adsp/libdspCV_skel.so
+vendor/lib/rfsa/adsp/libobjectMattingApp_skel.so
+vendor/lib/rfsa/adsp/libscveObjectSegmentation_skel.so
+vendor/lib/rfsa/adsp/libvpp_frc.so
+vendor/lib/rfsa/adsp/libadsp_hvx_skel.so
+vendor/lib/rfsa/adsp/libadsp_hvx_zzhdr_RGGB.so
+vendor/lib/rfsa/adsp/libfastcvadsp_skel.so
+vendor/lib/rfsa/adsp/libscveBlobDescriptor_skel.so
+vendor/lib/rfsa/adsp/libscveT2T_skel.so
 vendor/lib/rfsa/adsp/libvpp_svc_skel.so
+vendor/lib/rfsa/adsp/libadsp_hvx_stats.so
+vendor/lib/rfsa/adsp/libapps_mem_heap.so
+vendor/lib/rfsa/adsp/libfastcvadsp.so
+vendor/lib/rfsa/adsp/libscveCleverCapture_skel.so
+vendor/lib/rfsa/adsp/libscveTextReco_skel.so
 vendor/lib/rfsa/adsp/us-syncproximity.so
 vendor/lib/libadsprpc.so
+vendor/lib/libadsp_default_listener.so
 
 # Audio ACDB
 etc/acdbdata/Forte/Forte_Bluetooth_cal.acdb
@@ -23,11 +41,9 @@ etc/firmware/tfa9891.cnt
 
 # Audio libraries
 etc/drc/drc_cfg_AZ.txt
-etc/surround_sound_3mic/surround_sound_rec_AZ.cfg
 lib64/hw/audio.primary.msm8996.so
 lib/hw/audio.primary.msm8996.so
 lib/soundfx/libdirac.so
-lib/libDiracAPI_SHARED.so
 vendor/lib64/soundfx/libqcbassboost.so
 vendor/lib64/soundfx/libqcreverb.so
 vendor/lib64/soundfx/libqcvirt.so
@@ -40,10 +56,12 @@ vendor/lib64/libacdbrtac.so
 vendor/lib64/libacdbmapper.so
 vendor/lib64/libadiertac.so
 vendor/lib64/libaudcal.so
+vendor/lib64/libhwdaphal.so
 vendor/lib/soundfx/libqcbassboost.so
 vendor/lib/soundfx/libqcreverb.so
 vendor/lib/soundfx/libqcvirt.so
 vendor/lib/libFlacSwDec.so
+vendor/lib/libadm.so
 vendor/lib/libaudioalsa.so
 vendor/lib/libaudiodevarb.so
 vendor/lib/libacdb-fts.so
@@ -52,8 +70,8 @@ vendor/lib/libacdbrtac.so
 vendor/lib/libacdbmapper.so
 vendor/lib/libadiertac.so
 vendor/lib/libaudcal.so
+vendor/lib/libhwdaphal.so
 vendor/lib/libqct_resampler.so
-vendor/lib/libsurround_3mic_proc.so
 
 # Bluetooth
 bin/btnvtool
@@ -79,7 +97,6 @@ etc/firmware/rampatch_tlv_3.0.tlv
 etc/firmware/rampatch_tlv_3.2.tlv
 
 # Camera
-bin/mm-qcamera-app
 bin/mm-qcamera-daemon
 etc/age_gender_bg
 etc/android_model_facea.dat
@@ -129,14 +146,13 @@ vendor/lib/libmmcamera2_imglib_modules.so
 vendor/lib/libmmcamera2_is.so
 vendor/lib/libmmcamera2_isp_modules.so
 vendor/lib/libmmcamera2_mct.so
+vendor/lib/libmmcamera2_memleak.so
 vendor/lib/libmmcamera2_pp_buf_mgr.so
 vendor/lib/libmmcamera2_pproc_modules.so
 vendor/lib/libmmcamera2_q3a_core.so
 vendor/lib/libmmcamera2_sensor_modules.so
 vendor/lib/libmmcamera2_stats_algorithm.so
 vendor/lib/libmmcamera2_stats_modules.so
-vendor/lib/libmmcamera2_vpe_module.so
-vendor/lib/libmmcamera2_wnr_module.so
 vendor/lib/libmmcamera_dbg.so
 vendor/lib/libmmcamera_eeprom_util.so
 vendor/lib/libmmcamera_eztune_module.so
@@ -153,7 +169,6 @@ vendor/lib/libmmcamera_tintless_algo.so
 vendor/lib/libmmcamera_tintless_bg_pca_algo.so
 vendor/lib/libmmcamera_tuning.so
 vendor/lib/libmmcamera_tuning_lookup.so
-vendor/lib/libmmcamera_vpu_module.so
 vendor/lib/libmmjpeg.so
 vendor/lib/libmmqjpeg_codec.so
 vendor/lib/libmmqjpegdma.so
@@ -166,10 +181,6 @@ vendor/lib/libqomx_jpegdec.so
 vendor/lib/libqomx_jpegenc_pipe.so
 vendor/lib/libqomx_jpegenc.so
 vendor/lib/libtm_interface.so
-vendor/lib/test_suite_all_modules.so
-vendor/lib/test_suite_no_sensor.so
-vendor/lib/test_suite_pproc.so
-vendor/lib/test_suite_vfe.so
 
 # Camera actuators
 vendor/lib/libactuator_ad5816g.so
@@ -242,7 +253,6 @@ vendor/lib/libchromatix_imx298_liteon_snapshot_hdr.so
 vendor/lib/libchromatix_imx298_liteon_video_hdr.so
 vendor/lib/libchromatix_imx298_liteon_zsl_preview.so
 vendor/lib/libchromatix_imx298_liteon_zsl_video.so
-vendor/lib/libchromatix_imx298_liveshot.so
 vendor/lib/libchromatix_imx298_postproc.so
 vendor/lib/libchromatix_imx298_preview.so
 vendor/lib/libchromatix_imx298_semco_4K_preview.so
@@ -484,11 +494,9 @@ vendor/lib/libdpmtcm.so
 
 # DRM and SEE
 bin/qseecomd
-vendor/bin/chamomile_provision
 vendor/bin/qseeproxydaemon
 vendor/lib64/mediadrm/libdrmclearkeyplugin.so
 vendor/lib64/lib-sec-disp.so
-vendor/lib64/libChamomilePA.so
 vendor/lib64/libGPreqcancel.so
 vendor/lib64/libGPreqcancel_svc.so
 vendor/lib64/libGPTEE.so
@@ -498,7 +506,6 @@ vendor/lib64/libStDrvInt.so
 vendor/lib64/libdrmfs.so
 vendor/lib64/libdrmtime.so
 vendor/lib64/libqisl.so
-#vendor/lib64/libmdtp.so
 vendor/lib64/librpmb.so
 vendor/lib64/libsecureui.so
 vendor/lib64/libsecureui_svcsock.so
@@ -515,7 +522,6 @@ vendor/lib/qcdrm/playready/lib/mediadrm/libprmediadrmplugin_customer.so
 vendor/lib/qcdrm/playready/lib/libprdrmdecrypt_customer.so
 vendor/lib/qcdrm/playready/lib/libtzplayready_customer.so
 vendor/lib/lib-sec-disp.so
-vendor/lib/libChamomilePA.so
 vendor/lib/libGPreqcancel.so
 vendor/lib/libGPreqcancel_svc.so
 vendor/lib/libGPTEE.so
@@ -525,7 +531,6 @@ vendor/lib/libStDrvInt.so
 vendor/lib/libdrmfs.so
 vendor/lib/libdrmtime.so
 vendor/lib/libqisl.so
-#vendor/lib/libmdtp.so
 vendor/lib/librpmb.so
 vendor/lib/libsecureui.so
 vendor/lib/libsecureui_svcsock.so
@@ -537,21 +542,14 @@ vendor/lib/libssd.so
 vendor/lib/libtzdrmgenprov.so
 
 # Fingerprint and Sense ID
-bin/qfp-client
-bin/qfp-daemon
 bin/qvop-daemon
 lib64/hw/fingerprint.fpc.so
-lib64/libcom_fingerprints_service.so
 lib/hw/fingerprint.fpc.so
-lib/libcom_fingerprints_service.so
-vendor/lib64/hw/fingerprint.qcom.so
 vendor/lib64/libFIDOKeyProvisioning.so
 vendor/lib64/libFidoCryptoJNI.so
 vendor/lib64/libFidoCrypto.so
 vendor/lib64/libFidoSuiJNI.so
-vendor/lib64/libqfp-service.so
 vendor/lib64/libqvop-service.so
-vendor/lib64/qfp.wakeup.so
 vendor/lib/libFIDOKeyProvisioning.so
 vendor/lib/libFidoCryptoJNI.so
 vendor/lib/libFidoCrypto.so
@@ -565,6 +563,7 @@ vendor/lib/hw/gatekeeper.msm8996.so
 # GPS
 bin/gpsone_daemon
 bin/loc_launcher
+bin/tloc_daemon
 bin/xtwifi-client
 bin/xtwifi-inet-agent
 -lib64/libloc_api_v02.so
@@ -616,6 +615,7 @@ vendor/lib/libxtadapter.so
 vendor/lib/libxtwifi_ulp_adaptor.so
 
 # Graphics
+bin/displayfeature
 lib64/egl/libGLES_android.so
 lib/egl/libGLES_android.so
 vendor/lib64/egl/eglSubDriverAndroid.so
@@ -633,8 +633,6 @@ vendor/lib64/libc2d30_bltlib.so
 vendor/lib64/libgsl.so
 vendor/lib64/libllvm-glnext.so
 vendor/lib64/libllvm-qcom.so
-vendor/lib64/libmm-disp-apis.so
-vendor/lib64/libmm-hdcpmgr.so
 vendor/lib64/libOpenCL.so
 vendor/lib64/libRSDriver_adreno.so
 vendor/lib64/librs_adreno.so
@@ -661,8 +659,6 @@ vendor/lib/libc2d30_bltlib.so
 vendor/lib/libgsl.so
 vendor/lib/libllvm-glnext.so
 vendor/lib/libllvm-qcom.so
-vendor/lib/libmm-disp-apis.so
-vendor/lib/libmm-hdcpmgr.so
 vendor/lib/libOpenCL.so
 vendor/lib/libRSDriver_adreno.so
 vendor/lib/librs_adreno.so
@@ -800,35 +796,22 @@ vendor/lib/libvqzip.so
 
 # Misc
 bin/diag_mdlog
-bin/displayfeature
 bin/fdpp
 bin/gptest
-vendor/bin/hdcp1prov
-vendor/lib64/libhdcp1prov.so
 vendor/lib64/libpvr.so
 vendor/lib64/libqti-at.so
 vendor/lib64/libqti-gt.so
 vendor/lib64/librmp.so
 vendor/lib64/libsi.so
-vendor/lib64/libsta_lib_third_party_libsta_lib_libsta_gyp.so
-vendor/lib64/libsta_lib_third_party_staproxy_sta_proxy_loader_gyp.so
-vendor/lib64/libstaapi.so
-vendor/lib64/libstlport_sta.so
 vendor/lib64/libusutils.so
 vendor/lib64/libvpphvx.so
-vendor/lib/libadm.so
 vendor/lib/libcppf.so
 vendor/lib/libdrc.so
-vendor/lib/libhdcp1prov.so
 vendor/lib/libpvr.so
 vendor/lib/libqti-at.so
 vendor/lib/libqti-gt.so
 vendor/lib/librmp.so
 vendor/lib/libsi.so
-vendor/lib/libsta_lib_third_party_libsta_lib_libsta_gyp.so
-vendor/lib/libsta_lib_third_party_staproxy_sta_proxy_loader_gyp.so
-vendor/lib/libstaapi.so
-vendor/lib/libstlport_sta.so
 vendor/lib/libvpphvx.so
 
 # Network
@@ -842,7 +825,6 @@ vendor/lib/libconnctrl.so
 bin/pnx
 vendor/bin/qpaydaemon
 vendor/lib64/libQPayJNI.so
-vendor/lib/libQPayJNI.so
 
 # NFC firmware
 vendor/firmware/libpn548ad_fw.so
@@ -854,6 +836,7 @@ bin/msm_irqbalance
 framework/QPerformance.jar
 lib64/libqti_performance.so
 lib64/libqti-iop.so
+lib/modules/core_ctl.ko
 lib/libqti_performance.so
 vendor/bin/perfd
 vendor/lib64/libqc-opt.so
@@ -870,8 +853,8 @@ vendor/lib64/libperipheral_client.so
 vendor/lib/libperipheral_client.so
 
 # Postprocessing
-bin/mm-pp-daemon
-bin/mm-pp-dpps
+vendor/bin/mm-pp-daemon
+vendor/bin/mm-pp-dpps
 vendor/etc/scve/facereco/gModel.dat
 vendor/etc/scve/textreco/chardecoder/character.cost
 vendor/etc/scve/textreco/chardecoder/CharType.dat
@@ -895,23 +878,19 @@ vendor/etc/scve/textreco/worddecoder/english_dictionary_20150213.bin
 vendor/etc/scve/textreco/worddecoder/korean_address_20150129.bin
 vendor/etc/scve/textreco/worddecoder/korean.pos.20141226.bin
 vendor/lib64/libdisp-aba.so
-vendor/lib64/libmm-abl.so
-vendor/lib64/libmm-abl-oem.so
 vendor/lib64/libmm-als.so
+vendor/lib64/libmm-disp-apis.so
+vendor/lib64/libmm-hdcpmgr.so
 vendor/lib64/libmm-qdcm.so
 vendor/lib/libdisp-aba.so
-vendor/lib/libmm-abl.so
-vendor/lib/libmm-abl-oem.so
 vendor/lib/libmm-als.so
+vendor/lib/libmm-disp-apis.so
+vendor/lib/libmm-hdcpmgr.so
 vendor/lib/libmm-qdcm.so
 vendor/lib/libscve_mv.so
 vendor/lib/libscve_stub.so
 vendor/lib/libscveTextRecoPostProcessing.so
 vendor/lib/libscve.so
-
-# Power
-lib64/hw/wbc_hal.default.so
-lib/hw/wbc_hal.default.so
 
 # QMI
 bin/irsc_util
@@ -952,6 +931,7 @@ vendor/lib/libqmi.so
 vendor/lib/libsmemlog.so
 
 # RIL
+-app/fastdormancy/fastdormancy.apk
 -app/shutdownlistener/shutdownlistener.apk
 bin/netmgrd
 bin/port-bridge
@@ -974,6 +954,7 @@ vendor/lib64/libmdmdetect.so
 vendor/lib64/libnetmgr.so
 vendor/lib64/libqcmaputils.so
 vendor/lib64/libril-qc-qmi-1.so
+vendor/lib64/libril-qc-radioconfig.so
 vendor/lib64/libril-qcril-hook-oem.so
 vendor/lib64/libsystem_health_mon.so
 vendor/lib64/libxml.so
@@ -983,6 +964,7 @@ vendor/lib/libmdmdetect.so
 vendor/lib/libnetmgr.so
 vendor/lib/libqcmaputils.so
 vendor/lib/libril-qc-qmi-1.so
+vendor/lib/libril-qc-radioconfig.so
 vendor/lib/libril-qcril-hook-oem.so
 vendor/lib/libsystem_health_mon.so
 vendor/lib/libxml.so
@@ -1038,15 +1020,20 @@ bin/time_daemon
 bin/cnss-daemon
 bin/cnss_diag
 bin/fstman
+bin/nv_fem
 bin/nv_mac
+bin/wifi_fccutild
 lib/modules/qca_cld/qca_cld_wlan.ko
 
 # WiFi Display
 bin/wfdservice
 etc/wfdconfigsink.xml
 etc/wfdconfig.xml
+vendor/bin/hdcp1prov
+vendor/lib64/libhdcp1prov.so
 vendor/lib64/libmmrtpdecoder.so
 vendor/lib64/libmmrtpencoder.so
+vendor/lib64/libwfdavenhancements.so
 vendor/lib64/libmmwfdinterface.so
 vendor/lib64/libmmwfdsinkinterface.so
 vendor/lib64/libmmwfdsrcinterface.so
@@ -1066,8 +1053,10 @@ vendor/lib64/libwfduibcsinkinterface.so
 vendor/lib64/libwfduibcsink.so
 vendor/lib64/libwfduibcsrcinterface.so
 vendor/lib64/libwfduibcsrc.so
+vendor/lib/libhdcp1prov.so
 vendor/lib/libmmrtpdecoder.so
 vendor/lib/libmmrtpencoder.so
+vendor/lib/libwfdavenhancements.so
 vendor/lib/libmmwfdinterface.so
 vendor/lib/libmmwfdsinkinterface.so
 vendor/lib/libmmwfdsrcinterface.so

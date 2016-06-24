@@ -36,9 +36,11 @@ on charger
     write /sys/class/input/input5/enabled 0
     write /sys/module/lpm_levels/parameters/sleep_disabled 0
     write /sys/module/lpm_levels/system/system-cci-pc/idle_enabled 0
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "userspace"
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_setspeed 300000
     write /sys/devices/system/cpu/cpu1/online 1
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "interactive"
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "userspace"
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_setspeed 300000
     write /sys/devices/system/cpu/cpu2/online 0
     write /sys/devices/system/cpu/cpu3/online 0
     write /sys/module/msm_thermal/parameters/enabled "N"
@@ -145,10 +147,13 @@ on enable-low-power
     write /sys/module/lowmemorykiller/parameters/enable_adaptive_lmk 1
     write /sys/module/lowmemorykiller/parameters/vmpressure_file_min 81250
 
+    # Set perfd properties and start service
     rm /data/system/perfd/default_values
     setprop ro.min_freq_0 384000
     setprop ro.min_freq_4 384000
     start perfd
+
+    # Start IO prefetcher service
     start iop
 
 on class_start:late_start
@@ -160,18 +165,6 @@ on property:dev.bootcomplete=1
 on property:init.svc.recovery=running
     trigger enable-low-power
 
-on property:persist.usb.hvdcp.detect=true
-    start hvdcp
-
-on property:persist.usb.hvdcp.detect=false
-    stop hvdcp
-
-on property:sys.qbcharger.enable=true
-    start qbcharger
-
-on property:sys.qbcharger.enable=false
-    stop qbcharger
-
 service charger /sbin/chargeonlymode
     class charger
     group system
@@ -182,11 +175,6 @@ service energy-awareness /system/bin/energy-awareness
     user root
     group system
     oneshot
-
-service hvdcp /system/bin/hvdcp
-    class core
-    user root
-    disabled
 
 service hvdcp_opti /system/bin/hvdcp_opti
     class main
@@ -205,7 +193,3 @@ service perfd /system/vendor/bin/perfd
     user root
     disabled
     socket perfd seqpacket 0666 root system
-
-service qbcharger /charger -m 1
-    disabled
-    oneshot
