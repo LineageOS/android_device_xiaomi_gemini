@@ -1,0 +1,2 @@
+allow kernel persist_file:dir search;
+allow kernel wlan_bt_persist_file:file read;

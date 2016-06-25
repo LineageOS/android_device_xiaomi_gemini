@@ -11,6 +11,12 @@ binder_call(displayfeature, servicemanager)
 # Allow displayfeature to be registered with service manager
 allow displayfeature DisplayFeatureControl_service:service_manager add;
 
+# Allow binder calls to surfaceflinger
+binder_call(displayfeature, surfaceflinger)
+
+# Allow surfaceflinger service to be found
+allow displayfeature surfaceflinger_service:service_manager find;
+
 allow displayfeature graphics_device:chr_file { ioctl open read write };
 allow displayfeature graphics_device:dir search;
 allow displayfeature mm-pp-daemon:unix_stream_socket connectto;

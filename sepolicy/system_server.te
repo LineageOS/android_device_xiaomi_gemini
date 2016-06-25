@@ -1,2 +1,3 @@
 allow system_server lirc_device:chr_file rw_file_perms;
 allow system_server persist_file:file { read getattr open };
+allow system_server wlan_bt_persist_file:file { open read };

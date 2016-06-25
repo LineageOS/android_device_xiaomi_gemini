@@ -1,0 +1,15 @@
+type nv_fem, domain;
+type nv_fem_exec, exec_type, file_type;
+
+# Allow for transition from init domain to nv_fem
+init_daemon_domain(nv_fem)
+
+allow nv_fem persist_file:dir { add_name search setattr write };
+allow nv_fem wlan_bt_persist_file:file { create open read setattr write };
+allow nv_fem self:capability { chown dac_override fowner fsetid };
+allow nv_fem self:socket { create getopt ioctl read write };
+allow nv_fem system_prop:property_service set;
+allow nv_fem property_socket:sock_file write;
+allow nv_fem { init qmuxd }:unix_stream_socket connectto;
+allow nv_fem qmuxd_socket:dir { add_name remove_name search write };
+allow nv_fem qmuxd_socket:sock_file { create setattr write };

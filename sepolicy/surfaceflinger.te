@@ -1,0 +1,2 @@
+allow surfaceflinger displayfeature:dir search;
+allow surfaceflinger displayfeature:file { open read };
