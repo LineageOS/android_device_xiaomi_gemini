@@ -68,6 +68,7 @@ done
 
 PRODUCT_PACKAGES += \\
     fastdormancy \\
+    QtiTelephonyService \\
     shutdownlistener \\
     TimeService
 
@@ -143,6 +144,16 @@ LOCAL_MODULE_OWNER := $VENDOR
 LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
 LOCAL_MODULE_TAGS := optional
 LOCAL_SRC_FILES := proprietary/app/fastdormancy/fastdormancy.apk
+LOCAL_CERTIFICATE := platform
+include \$(BUILD_PREBUILT)
+
+include \$(CLEAR_VARS)
+LOCAL_MODULE := QtiTelephonyService
+LOCAL_MODULE_CLASS := APPS
+LOCAL_MODULE_OWNER := $VENDOR
+LOCAL_MODULE_SUFFIX := \$(COMMON_ANDROID_PACKAGE_SUFFIX)
+LOCAL_MODULE_TAGS := optional
+LOCAL_SRC_FILES := proprietary/app/QtiTelephonyService/QtiTelephonyService.apk
 LOCAL_CERTIFICATE := platform
 include \$(BUILD_PREBUILT)
 
