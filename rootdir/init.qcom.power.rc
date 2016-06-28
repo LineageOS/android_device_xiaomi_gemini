@@ -161,9 +161,9 @@ on property:dev.bootcomplete=1
 on property:init.svc.recovery=running
     trigger enable-low-power
 
-service charger /sbin/chargeonlymode
+service charger /charger
     class charger
-    group system
+    group system graphics
     seclabel u:r:healthd:s0
 
 service energy-awareness /system/bin/energy-awareness

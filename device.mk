@@ -131,8 +131,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/camera/ov4688_primax_chromatix.xml:system/etc/camera/ov4688_primax_chromatix.xml
 
 # Charger
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/sbin/chargeonlymode:root/sbin/chargeonlymode
+PRODUCT_PACKAGES += \
+    charger_res_images
 
 # Device config scripts
 PRODUCT_PACKAGES += \
