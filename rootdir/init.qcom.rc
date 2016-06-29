@@ -765,13 +765,6 @@ service msm_irqbalance /system/bin/msm_irqbalance -f /system/vendor/etc/msm_irqb
     disabled
     writepid /dev/cpuset/system-background/tasks
 
-service wfdservice /system/bin/wfdservice
-    class main
-    user system
-    group audio camera inet net_bt_stack drmrpc media_rw media input net_admin
-    #removed these because of limit of 12 groups
-    #graphics net_bt net_bt_admin bluetooth
-
 service qseeproxydaemon /system/vendor/bin/qseeproxydaemon
     class late_start
     user system
