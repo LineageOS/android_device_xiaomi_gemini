@@ -463,6 +463,12 @@ vendor/lib/libvendorconn.so
 vendor/lib/libwms.so
 vendor/lib/libwqe.so
 
+# Display calibration data
+-etc/qdcm_calib_data_jdi_fhd_cmd_incell_dsi_panel.xml
+-etc/qdcm_calib_data_jdi_j1_fhd_cmd_incell_dsi_panel.xml
+-etc/qdcm_calib_data_lgd_fhd_cmd_incell_dsi_panel.xml
+-etc/qdcm_calib_data_sharp_fhd_cmd_incell_dsi_panel.xml
+
 # DPM
 bin/dpmd
 etc/dpm/dpm.conf
@@ -770,6 +776,9 @@ vendor/lib64/libperipheral_client.so
 vendor/lib/libperipheral_client.so
 
 # Postprocessing
+etc/permissions/com.qti.snapdragon.sdk.display.xml
+framework/com.qti.snapdragon.sdk.display.jar
+-vendor/app/colorservice/colorservice.apk
 vendor/bin/mm-pp-daemon
 vendor/bin/mm-pp-dpps
 vendor/lib64/libdisp-aba.so
