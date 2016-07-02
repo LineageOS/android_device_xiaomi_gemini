@@ -822,6 +822,8 @@ vendor/lib/libqmi.so
 vendor/lib/libsmemlog.so
 
 # RIL
+-app/datastatusnotification/datastatusnotification.apk
+-app/embms/embms.apk
 -app/fastdormancy/fastdormancy.apk
 -app/QtiTelephonyService/QtiTelephonyService.apk
 -app/shutdownlistener/shutdownlistener.apk
@@ -833,9 +835,11 @@ bin/rmt_storage
 bin/mmbn-daemon
 bin/tftp_server
 etc/modem/Diag.cfg
+etc/permissions/embms.xml
 etc/permissions/qcnvitems.xml
 etc/permissions/qcrilhook.xml
 etc/permissions/telephonyservice.xml
+framework/embmslibrary.jar
 -framework/qcnvitems.jar
 -framework/qcrilhook.jar
 framework/qti-telephony-common.jar
