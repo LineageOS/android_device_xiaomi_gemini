@@ -3,22 +3,17 @@ bin/adsprpcd
 vendor/lib64/libadsprpc.so
 vendor/lib64/libadsp_default_listener.so
 vendor/lib/rfsa/adsp/libadsp_hvx_add_constant.so
-vendor/lib/rfsa/adsp/libadsp_hvx_zzhdr_BGGR.so
-vendor/lib/rfsa/adsp/libdspCV_skel.so
-vendor/lib/rfsa/adsp/libobjectMattingApp_skel.so
-vendor/lib/rfsa/adsp/libscveObjectSegmentation_skel.so
-vendor/lib/rfsa/adsp/libvpp_frc.so
 vendor/lib/rfsa/adsp/libadsp_hvx_skel.so
-vendor/lib/rfsa/adsp/libadsp_hvx_zzhdr_RGGB.so
-vendor/lib/rfsa/adsp/libfastcvadsp_skel.so
-vendor/lib/rfsa/adsp/libscveBlobDescriptor_skel.so
-vendor/lib/rfsa/adsp/libscveT2T_skel.so
-vendor/lib/rfsa/adsp/libvpp_svc_skel.so
 vendor/lib/rfsa/adsp/libadsp_hvx_stats.so
+vendor/lib/rfsa/adsp/libadsp_hvx_zzhdr_BGGR.so
+vendor/lib/rfsa/adsp/libadsp_hvx_zzhdr_RGGB.so
 vendor/lib/rfsa/adsp/libapps_mem_heap.so
+vendor/lib/rfsa/adsp/libdspCV_skel.so
 vendor/lib/rfsa/adsp/libfastcvadsp.so
-vendor/lib/rfsa/adsp/libscveCleverCapture_skel.so
-vendor/lib/rfsa/adsp/libscveTextReco_skel.so
+vendor/lib/rfsa/adsp/libfastcvadsp_skel.so
+vendor/lib/rfsa/adsp/libobjectMattingApp_skel.so
+vendor/lib/rfsa/adsp/libvpp_frc.so
+vendor/lib/rfsa/adsp/libvpp_svc_skel.so
 vendor/lib/rfsa/adsp/us-syncproximity.so
 vendor/lib/libadsprpc.so
 vendor/lib/libadsp_default_listener.so
@@ -76,7 +71,6 @@ bin/btnvtool
 bin/dun-server
 bin/ftmdaemon
 bin/hci_qcomm_init
-bin/mm-audio-ftm
 bin/wcnss_filter
 vendor/lib64/libbtnv.so
 vendor/lib64/libCommandSvc.so
@@ -493,11 +487,9 @@ vendor/lib/libdpmtcm.so
 # DRM and SEE
 bin/qseecomd
 vendor/bin/qseeproxydaemon
-vendor/lib64/mediadrm/libdrmclearkeyplugin.so
 vendor/lib64/lib-sec-disp.so
 vendor/lib64/libGPreqcancel.so
 vendor/lib64/libGPreqcancel_svc.so
-vendor/lib64/libGPTEE.so
 vendor/lib64/libQSEEComAPI.so
 vendor/lib64/libSecureUILib.so
 vendor/lib64/libStDrvInt.so
@@ -507,37 +499,8 @@ vendor/lib64/libqisl.so
 vendor/lib64/librpmb.so
 vendor/lib64/libsecureui.so
 vendor/lib64/libsecureui_svcsock.so
-vendor/lib64/libsecureuisvc_jni.so
-vendor/lib64/libseemp_binder.so
-vendor/lib64/libSeempMsgService.so
-vendor/lib64/libseempnative.so
 vendor/lib64/libssd.so
-vendor/lib64/libtzdrmgenprov.so
-vendor/lib/mediadrm/libdrmclearkeyplugin.so
-vendor/lib/qcdrm/playready/lib/drm/libdrmprplugin_customer.so
-vendor/lib/qcdrm/playready/lib/mediadrm/libprmediadrmdecrypt_customer.so
-vendor/lib/qcdrm/playready/lib/mediadrm/libprmediadrmplugin_customer.so
-vendor/lib/qcdrm/playready/lib/libprdrmdecrypt_customer.so
-vendor/lib/qcdrm/playready/lib/libtzplayready_customer.so
-vendor/lib/lib-sec-disp.so
-vendor/lib/libGPreqcancel.so
-vendor/lib/libGPreqcancel_svc.so
-vendor/lib/libGPTEE.so
 vendor/lib/libQSEEComAPI.so
-vendor/lib/libSecureUILib.so
-vendor/lib/libStDrvInt.so
-vendor/lib/libdrmfs.so
-vendor/lib/libdrmtime.so
-vendor/lib/libqisl.so
-vendor/lib/librpmb.so
-vendor/lib/libsecureui.so
-vendor/lib/libsecureui_svcsock.so
-vendor/lib/libsecureuisvc_jni.so
-vendor/lib/libseemp_binder.so
-vendor/lib/libSeempMsgService.so
-vendor/lib/libseempnative.so
-vendor/lib/libssd.so
-vendor/lib/libtzdrmgenprov.so
 
 # Fingerprint and Sense ID
 bin/qvop-daemon
@@ -619,8 +582,6 @@ vendor/lib/libxtwifi_ulp_adaptor.so
 
 # Graphics
 bin/displayfeature
-lib64/egl/libGLES_android.so
-lib/egl/libGLES_android.so
 vendor/lib64/egl/eglSubDriverAndroid.so
 vendor/lib64/egl/libEGL_adreno.so
 vendor/lib64/egl/libGLESv1_CM_adreno.so
@@ -667,6 +628,7 @@ vendor/lib/libRSDriver_adreno.so
 vendor/lib/librs_adreno.so
 vendor/lib/librs_adreno_sha1.so
 vendor/lib/libsd_sdk_display.so
+vendor/lib/libsdm-disp-apis.so
 
 # Graphics firmware
 etc/firmware/a530_gpmu.fw2
@@ -756,41 +718,18 @@ vendor/lib/libadpcmdec.so
 vendor/lib/libsmwrapper.so
 
 # Media
-vendor/lib64/libFileMux.so
 vendor/lib64/libI420colorconvert.so
 vendor/lib64/libmm-color-convertor.so
 vendor/lib64/libmmosal.so
 vendor/lib64/libOmxAacDec.so
 vendor/lib64/libOmxEvrcDec.so
 vendor/lib64/libOmxQcelp13Dec.so
-vendor/lib/libFileMux.so
 vendor/lib/libI420colorconvert.so
 vendor/lib/libmm-color-convertor.so
 vendor/lib/libmmosal.so
 vendor/lib/libOmxAacDec.so
 vendor/lib/libOmxEvrcDec.so
 vendor/lib/libOmxQcelp13Dec.so
-vendor/lib/libvqzip.so
-
-# Misc
-bin/diag_mdlog
-bin/fdpp
-bin/gptest
-vendor/lib64/libpvr.so
-vendor/lib64/libqti-at.so
-vendor/lib64/libqti-gt.so
-vendor/lib64/librmp.so
-vendor/lib64/libsi.so
-vendor/lib64/libusutils.so
-vendor/lib64/libvpphvx.so
-vendor/lib/libcppf.so
-vendor/lib/libdrc.so
-vendor/lib/libpvr.so
-vendor/lib/libqti-at.so
-vendor/lib/libqti-gt.so
-vendor/lib/librmp.so
-vendor/lib/libsi.so
-vendor/lib/libvpphvx.so
 
 # Network
 -priv-app/QtiTetherService/QtiTetherService.apk
@@ -833,45 +772,19 @@ vendor/lib/libperipheral_client.so
 # Postprocessing
 vendor/bin/mm-pp-daemon
 vendor/bin/mm-pp-dpps
-vendor/etc/scve/facereco/gModel.dat
-vendor/etc/scve/textreco/chardecoder/character.cost
-vendor/etc/scve/textreco/chardecoder/CharType.dat
-vendor/etc/scve/textreco/chardecoder/ChinesePunctuation.rst
-vendor/etc/scve/textreco/chardecoder/_conf_eng_num_sym_font40_4transd_zscore_morph_.trn2876.trn
-vendor/etc/scve/textreco/chardecoder/_conf_eng_num_sym_font40_conc2_meshrn__de__1_1__zscore_morph.trn10158.trn
-vendor/etc/scve/textreco/chardecoder/_conf_eng_num_sym_font40_rbp_data5100_patch500_5x5_24x24_dim727.trn31585.trn
-vendor/etc/scve/textreco/chardecoder/_eng_font40_4transmeshrnorm6x6_leaflda85_ligature_ext14_c70_sp1lI_newxml3.trn31299.trn
-vendor/etc/scve/textreco/chardecoder/GLVQDecoder_fixed.ohie
-vendor/etc/scve/textreco/chardecoder/glvq_kor_consonant_19classes_64_16dim_i0_linearNorm.dat
-vendor/etc/scve/textreco/chardecoder/hGLVQ_kor_RLF80_float.hie
-vendor/etc/scve/textreco/chardecoder/LDA_kor_consonant_19classes_64dim_linearNorm.dat
-vendor/etc/scve/textreco/chardecoder/_numpunc_font40_4transmeshrnorm_leafnum1.trn9614.trn
-vendor/etc/scve/textreco/chardecoder/_numpunc_font40_conc2_DEFn__BGTouchy6x6n__1_1__morph.trn32025.trn
-vendor/etc/scve/textreco/chardecoder/_numpunc_parteng_font40_4transmeshr_morph.trn400.trn
-vendor/etc/scve/textreco/chardecoder/punRangeData.rst
-vendor/etc/scve/textreco/textdetector/cnn_multiLang1020.bin
-vendor/etc/scve/textreco/worddecoder/chinese_address_20150304.bin
-vendor/etc/scve/textreco/worddecoder/english_address_20150213.bin
-vendor/etc/scve/textreco/worddecoder/english_dictionary_20150213.bin
-vendor/etc/scve/textreco/worddecoder/korean_address_20150129.bin
-vendor/etc/scve/textreco/worddecoder/korean.pos.20141226.bin
 vendor/lib64/libdisp-aba.so
 vendor/lib64/libmm-als.so
 vendor/lib64/libmm-disp-apis.so
-vendor/lib64/libmm-hdcpmgr.so
 vendor/lib64/libmm-qdcm.so
+vendor/lib64/libmm-qdcm-diag.so
 vendor/lib/libdisp-aba.so
 vendor/lib/libmm-als.so
 vendor/lib/libmm-disp-apis.so
-vendor/lib/libmm-hdcpmgr.so
 vendor/lib/libmm-qdcm.so
-vendor/lib/libscve_mv.so
-vendor/lib/libscve_stub.so
-vendor/lib/libscveTextRecoPostProcessing.so
-vendor/lib/libscve.so
 
 # QMI
 bin/irsc_util
+etc/permissions/qti_permissions.xml
 lib64/libqminvapi.so
 lib/libqminvapi.so
 vendor/bin/pd-mapper
@@ -950,35 +863,18 @@ vendor/qcril.db
 
 # Sensors
 bin/sensors.qcom
-etc/sensor_diag.cfg
-lib64/libsensor_cal.so
-lib64/libsensor_calJNI.so
-lib/libsensor_cal.so
-lib/libsensor_calJNI.so
 vendor/lib64/hw/activity_recognition.msm8996.so
 vendor/lib64/libsensor_reg.so
-vendor/lib64/libsensor_test.so
 vendor/lib64/libsensor_user_cal.so
 vendor/lib64/libsensor1.so
 vendor/lib64/sensors.oem.so
 vendor/lib64/sensors.ssc.so
 vendor/lib/hw/activity_recognition.msm8996.so
 vendor/lib/libsensor_reg.so
-vendor/lib/libsensor_test.so
 vendor/lib/libsensor_user_cal.so
 vendor/lib/libsensor1.so
 vendor/lib/sensors.oem.so
 vendor/lib/sensors.ssc.so
-
-# Subsystem
-bin/qcom-system-daemon
-bin/ssr_diag
-bin/ssr_setup
-bin/subsystem_ramdump
-vendor/lib64/libSubSystemShutdown.so
-vendor/lib64/libsubsystem_control.so
-vendor/lib/libSubSystemShutdown.so
-vendor/lib/libsubsystem_control.so
 
 # Thermal
 vendor/bin/thermal-engine

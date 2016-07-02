@@ -314,11 +314,6 @@ on post-fs-data
     chown radio radio /data/misc/radio/db_check_done
     chmod 0660 /data/misc/radio/db_check_done
 
-service qcomsysd /system/bin/qcom-system-daemon
-    class main
-    user root
-    group root qcom_diag
-
 service ssr_setup /system/bin/ssr_setup
     oneshot
     disabled
@@ -732,31 +727,6 @@ service ssr_diag /system/bin/ssr_diag
     user system
     group system
     disabled
-
-service diag_mdlog_start /system/bin/diag_mdlog -n 20
-    class late_start
-    user shell
-    group system qcom_diag sdcard_rw sdcard_r media_rw
-    disabled
-    oneshot
-
-service diag_mdlog_stop /system/bin/diag_mdlog -k
-    class late_start
-    user shell
-    group system qcom_diag sdcard_rw sdcard_r media_rw
-    disabled
-    oneshot
-
-service qlogd /system/xbin/qlogd
-    socket qlogd stream 0662 system system
-    class main
-    disabled
-
-on property:persist.sys.qlogd=1
-    start qlogd
-
-on property:persist.sys.qlogd=0
-    stop qlogd
 
 service msm_irqbalance /system/bin/msm_irqbalance -f /system/vendor/etc/msm_irqbalance.conf
     class core

@@ -300,12 +300,10 @@ PRODUCT_PACKAGES += \
     dhcpcd.conf \
     libqsap_sdk \
     libQWiFiSoftApCfg \
-    libwcnss_qmi \
     libwpa_client \
     hostapd \
     wpa_supplicant \
-    wpa_supplicant.conf \
-    wcnss_service
+    wpa_supplicant.conf
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/hostapd.accept:system/etc/hostapd/hostapd.accept \

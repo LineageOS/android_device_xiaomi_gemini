@@ -76,17 +76,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Media
 PRODUCT_PROPERTY_OVERRIDES += \
-    av.debug.disable.pers.cache=true \
     media.aac_51_output_enabled=true \
-    media.stagefright.enable-player=true \
-    media.stagefright.enable-http=true \
-    media.stagefright.enable-aac=true \
-    media.stagefright.enable-qcp=true \
-    media.stagefright.enable-fma2dp=true \
-    media.stagefright.enable-scan=true \
-    mm.enable.smoothstreaming=true \
-    mmp.enable.3g2=true \
-    persist.mm.enable.prefetch=true
+    mm.enable.smoothstreaming=true
 
 # NFC
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -151,6 +142,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     sys.ims.DATA_DAEMON_STATUS=1 \
     telephony.lteOnCdmaDevice=1
 
+# RmNet Data
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.rmnet.data.enable=true \
     persist.data.wda.enable=true \
@@ -162,16 +154,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.df.iwlan_mux=9 \
     persist.data.df.dev_name=rmnet_usb0
 
-# Subsystem
+# TimeService
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.ssr.restart_level=ALL_ENABLE \
-    persist.sys.ssr.enable_ramdumps=0
-
-# Vendor specific
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.gt_library=libqti-gt.so \
-    ro.vendor.at_library=libqti-at.so \
-    sys.games.gt.prof=1
+    persist.timed.enable=true
 
 # Wifi
 PRODUCT_PROPERTY_OVERRIDES += \
