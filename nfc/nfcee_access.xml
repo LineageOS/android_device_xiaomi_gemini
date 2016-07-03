@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-<!-- app with platform signature can access eSE by declare using permission com.miui.permission.ACCESS_ESE -->
-<!-- leave empty here until you really known what you are to do -->
-</resources>
