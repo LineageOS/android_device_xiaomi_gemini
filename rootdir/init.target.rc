@@ -79,8 +79,6 @@ on boot
     chown system drmrpc /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/secure_touch_enable
     chown system drmrpc /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/secure_touch
 
-    write /proc/sys/kernel/sched_boost 1
-
     # Access permission for led torch
     chmod 0666 /sys/class/leds/led:torch_0/brightness
     chmod 0666 /sys/class/leds/led:torch_1/brightness
