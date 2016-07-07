@@ -101,7 +101,7 @@
         <param key="spkr_1_tz_name" value="wsatz.13"/>
         <!-- In the below value string, first parameter indicates size -->
         <!-- followed by perf lock options                             -->
-        <param key="perf_lock_opts" value="4, 0x101, 0x704, 0x20F, 0x1E01"/>
+        <param key="perf_lock_opts" value="2, 0x101, 0x20F"/>
     </config_params>
 </audio_platform_info>
 

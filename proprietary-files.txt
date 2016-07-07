@@ -39,6 +39,7 @@ etc/drc/drc_cfg_AZ.txt
 lib64/hw/audio.primary.msm8996.so
 lib/hw/audio.primary.msm8996.so
 lib/soundfx/libdirac.so
+vendor/etc/diracmobile.config
 vendor/lib64/soundfx/libqcbassboost.so
 vendor/lib64/soundfx/libqcreverb.so
 vendor/lib64/soundfx/libqcvirt.so
