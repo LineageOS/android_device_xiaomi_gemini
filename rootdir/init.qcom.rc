@@ -683,7 +683,7 @@ service qcom-sh /system/bin/sh /init.qcom.sh
     oneshot
 
 service leds-sh /system/bin/sh /system/etc/init.leds.sh
-    class late_start
+    class core
     user root
     oneshot
 

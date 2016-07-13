@@ -9,6 +9,7 @@ vendor/lib/rfsa/adsp/libadsp_hvx_zzhdr_BGGR.so
 vendor/lib/rfsa/adsp/libadsp_hvx_zzhdr_RGGB.so
 vendor/lib/rfsa/adsp/libapps_mem_heap.so
 vendor/lib/rfsa/adsp/libdspCV_skel.so
+vendor/lib/rfsa/adsp/libdirac-appi.so
 vendor/lib/rfsa/adsp/libfastcvadsp.so
 vendor/lib/rfsa/adsp/libfastcvadsp_skel.so
 vendor/lib/rfsa/adsp/libobjectMattingApp_skel.so
@@ -26,6 +27,7 @@ etc/acdbdata/Forte/Forte_Handset_cal.acdb
 etc/acdbdata/Forte/Forte_Hdmi_cal.acdb
 etc/acdbdata/Forte/Forte_Headset_cal.acdb
 etc/acdbdata/Forte/Forte_Speaker_cal.acdb
+etc/acdbdata/adsp_avs_config.acdb
 
 # Audio amplifier
 bin/nxp_do_cal.sh
@@ -39,7 +41,6 @@ etc/drc/drc_cfg_AZ.txt
 lib64/hw/audio.primary.msm8996.so
 lib/hw/audio.primary.msm8996.so
 lib/soundfx/libdirac.so
-vendor/etc/diracmobile.config
 vendor/lib64/soundfx/libqcbassboost.so
 vendor/lib64/soundfx/libqcreverb.so
 vendor/lib64/soundfx/libqcvirt.so
@@ -149,14 +150,18 @@ vendor/lib/libmmcamera2_stats_modules.so
 vendor/lib/libmmcamera_dbg.so
 vendor/lib/libmmcamera_eeprom_util.so
 vendor/lib/libmmcamera_eztune_module.so
+vendor/lib/libmmcamera_facedetection_lib.so
 vendor/lib/libmmcamera_faceproc.so
+vendor/lib/libmmcamera_faceproc2.so
 vendor/lib/libmmcamera_hdr_gb_lib.so
 vendor/lib/libmmcamera_hvx_add_constant.so
 vendor/lib/libmmcamera_hvx_grid_sum.so
 vendor/lib/libmmcamera_imglib.so
+vendor/lib/libmmcamera_paaf_lib.so
 vendor/lib/libmmcamera_pdaf.so
 vendor/lib/libmmcamera_pdafcamif.so
 vendor/lib/libmmcamera_ppbase_module.so
+vendor/lib/libmmcamera_ppeiscore.so
 vendor/lib/libmmcamera_thread_services.so
 vendor/lib/libmmcamera_tintless_algo.so
 vendor/lib/libmmcamera_tintless_bg_pca_algo.so
@@ -374,6 +379,8 @@ etc/firmware/cpp_firmware_v1_1_1.fw
 etc/firmware/cpp_firmware_v1_1_6.fw
 etc/firmware/cpp_firmware_v1_2_0.fw
 etc/firmware/cpp_firmware_v1_4_0.fw
+etc/firmware/cpp_firmware_v1_5_0.fw
+etc/firmware/cpp_firmware_v1_5_2.fw
 etc/firmware/cpp_firmware_v1_6_0.fw
 etc/firmware/cpp_firmware_v1_8_0.fw
 etc/firmware/cpp_firmware_v1_10_0.fw

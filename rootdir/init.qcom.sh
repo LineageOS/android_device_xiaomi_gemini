@@ -77,4 +77,20 @@ if [ ! -f /firmware/verinfo/ver_info.txt -o "$prev_version_info" != "$cur_versio
     cp /firmware/verinfo/ver_info.txt /data/misc/radio/ver_info.txt
     chown radio.radio /data/misc/radio/ver_info.txt
 fi
+cp /firmware/image/modem_pr/mbn_ota.txt /data/misc/radio/modem_config
+chown radio.radio /data/misc/radio/modem_config/mbn_ota.txt
 echo 1 > /data/misc/radio/copy_complete
+
+# Check build variant for printk logging
+# Current default minimum boot-time-default
+buildvariant=`getprop ro.build.type`
+case "$buildvariant" in
+    "userdebug" | "eng")
+        #set default loglevel to KERN_INFO
+        echo "6 6 1 7" > /proc/sys/kernel/printk
+        ;;
+    *)
+        #set default loglevel to KERN_WARNING
+        echo "4 4 1 4" > /proc/sys/kernel/printk
+        ;;
+esac

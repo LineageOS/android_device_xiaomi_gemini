@@ -31,9 +31,9 @@
         <device name="SND_DEVICE_OUT_HEADPHONES" acdb_id="52"/>
         <device name="SND_DEVICE_OUT_HEADPHONES_44_1" acdb_id="52"/>
         <device name="SND_DEVICE_OUT_HEADPHONES_NATIVE_44_1" acdb_id="52"/>
-        <device name="SND_DEVICE_OUT_HIFI_HEADPHONES" acdb_id="52"/>
-        <device name="SND_DEVICE_OUT_HIFI_HEADPHONES_44_1" acdb_id="52"/>
-        <device name="SND_DEVICE_OUT_HIFI_HEADPHONES_NATIVE_44_1" acdb_id="52"/>
+        <device name="SND_DEVICE_OUT_HIFI_HEADPHONES" acdb_id="564"/>
+        <device name="SND_DEVICE_OUT_HIFI_HEADPHONES_44_1" acdb_id="564"/>
+        <device name="SND_DEVICE_OUT_HIFI_HEADPHONES_NATIVE_44_1" acdb_id="564"/>
         <device name="SND_DEVICE_OUT_SPEAKER_AND_HEADPHONES" acdb_id="34"/>
         <device name="SND_DEVICE_OUT_VOICE_HANDSET" acdb_id="18"/>
         <device name="SND_DEVICE_OUT_VOICE_SPEAKER" acdb_id="34"/>

@@ -215,6 +215,7 @@ kill_hciattach ()
 logi "init.qcom.bt.sh config = $config"
 case "$config" in
     "onboot")
+        program_bdaddr
         config_bt
         exit 0
         ;;
