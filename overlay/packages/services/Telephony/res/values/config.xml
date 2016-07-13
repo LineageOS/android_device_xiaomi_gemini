@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2015 The Android Open Source Project
+<!-- Copyright (C) 2009 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,10 +14,14 @@
      limitations under the License.
 -->
 
+<!-- NOTE: Many variables that used to be in this file have been migrated to
+     CarrierConfigManager.java. Please consider whether new variables belong
+     there before adding to this file. Variables here should be more closely
+     related to devices than to networks. -->
+
 <!-- Phone app resources that may need to be customized
      for different hardware or product builds. -->
 <resources>
-
     <!-- Determine whether calls to mute the microphone in PhoneUtils
          are routed through the android.media.AudioManager class (true) or through
          the com.android.internal.telephony.Phone interface (false). -->
@@ -29,4 +33,6 @@
     <!-- Show enabled lte option for lte device -->
     <bool name="config_enabled_lte" translatable="false">true</bool>
 
+    <!-- Show Preferred Network Type options in No SIM case -->
+    <bool name="config_no_sim_display_network_modes">true</bool>
 </resources>
