@@ -169,6 +169,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.df.iwlan_mux=9 \
     persist.data.df.dev_name=rmnet_usb0
 
+# Storage
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.sdcardfs.enable=true
+
 # TimeService
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.timed.enable=true
