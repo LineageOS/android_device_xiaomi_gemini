@@ -1,2 +1,0 @@
-# Allow batterymanager and batteryproperties services to be found
-allow platform_app { battery_service healthd_service }:service_manager find;
