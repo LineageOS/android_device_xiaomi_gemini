@@ -66,7 +66,6 @@ TARGET_BOARD_PLATFORM_GPU := qcom-adreno530
 USE_CLANG_PLATFORM_BUILD := true
 
 # Releasetools
-ADD_RADIO_FILES ?= true
 TARGET_RELEASETOOLS_EXTENSIONS := device/qcom/common
 
 # ANT+
