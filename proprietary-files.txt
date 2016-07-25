@@ -2,6 +2,16 @@
 bin/adsprpcd
 vendor/lib64/libadsprpc.so
 vendor/lib64/libadsp_default_listener.so
+vendor/lib64/libfastcvadsp_stub.so
+vendor/lib64/libfastcvopt.so
+vendor/lib/libadsprpc.so
+vendor/lib/libadsp_default_listener.so
+vendor/lib/libadsp_hvx_callback_skel.so
+vendor/lib/libadsp_hvx_stub.so
+vendor/lib/libfastcvadsp_stub.so
+vendor/lib/libfastcvopt.so
+
+# ADSP modules
 vendor/lib/rfsa/adsp/libadsp_hvx_add_constant.so
 vendor/lib/rfsa/adsp/libadsp_hvx_skel.so
 vendor/lib/rfsa/adsp/libadsp_hvx_stats.so
@@ -16,8 +26,6 @@ vendor/lib/rfsa/adsp/libobjectMattingApp_skel.so
 vendor/lib/rfsa/adsp/libvpp_frc.so
 vendor/lib/rfsa/adsp/libvpp_svc_skel.so
 vendor/lib/rfsa/adsp/us-syncproximity.so
-vendor/lib/libadsprpc.so
-vendor/lib/libadsp_default_listener.so
 
 # Audio ACDB
 etc/acdbdata/Forte/Forte_Bluetooth_cal.acdb
@@ -113,8 +121,6 @@ lib/libmmjpeg_interface.so
 lib/libmorpho_memory_allocator.so
 lib/libmorpho_panorama.so
 lib/libqomx_core.so
-vendor/lib64/libfastcvadsp_stub.so
-vendor/lib64/libfastcvopt.so
 vendor/lib64/libmmcamera2_frame_algorithm.so
 vendor/lib64/libmmcamera2_is.so
 vendor/lib64/libmmcamera2_q3a_core.so
@@ -126,8 +132,6 @@ vendor/lib64/libmorpho_panorama_gp.so
 vendor/lib/libFaceGrade.so
 vendor/lib/libFaceProc.so
 vendor/lib/libarcsoft_beauty_shot.so
-vendor/lib/libfastcvadsp_stub.so
-vendor/lib/libfastcvopt.so
 vendor/lib/libflash_pmic.so
 vendor/lib/libjpegdhw.so
 vendor/lib/libjpegdmahw.so
@@ -196,6 +200,7 @@ vendor/lib/libactuator_lc898122.so
 vendor/lib/libactuator_lc898212xd.so
 vendor/lib/libactuator_lc898214xc.so
 vendor/lib/libactuator_lc898217xc.so
+vendor/lib/libactuator_lc898217xc_a4_semco.so
 vendor/lib/libactuator_rohm_bu64243gwz.so
 
 # Camera chromatix
@@ -518,6 +523,7 @@ vendor/lib/libQSEEComAPI.so
 
 # Fingerprint and Sense ID
 bin/qvop-daemon
+etc/stargate/qfp_config.txt
 lib64/hw/fingerprint.fpc.so
 lib/hw/fingerprint.fpc.so
 vendor/lib64/libFIDOKeyProvisioning.so
