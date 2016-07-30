@@ -39,7 +39,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Camera
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.camera.stats.test=5
+    persist.camera.imglib.fddsp=1
 
 # CNE
 PRODUCT_PROPERTY_OVERRIDES += \

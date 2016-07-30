@@ -100,38 +100,17 @@ etc/firmware/rampatch_tlv_3.2.tlv
 
 # Camera
 bin/mm-qcamera-daemon
-etc/age_gender_bg
-etc/android_model_facea.dat
-etc/android_model_faceg.dat
-etc/crown_156_128.bin
-etc/face_goodly_208_180
-etc/face_ravishing_238_224
-etc/face_splendid_274_200
-etc/lf_facerank_model.bin
-etc/people_gender.dat
-etc/sdm_ys_32p_120_21_5_perturb50.bin
-etc/watermark_font_2300_3199.dat
-lib64/libmorpho_memory_allocator.so
-lib64/libmorpho_panorama.so
 lib/hw/camera.msm8996.so
-lib/libRecoFace.so
-lib/libmm-qcamera.so
 lib/libmmcamera_interface.so
 lib/libmmjpeg_interface.so
+lib/libmm-qcamera.so
 lib/libmorpho_memory_allocator.so
 lib/libmorpho_panorama.so
 lib/libqomx_core.so
-vendor/lib64/libmmcamera2_frame_algorithm.so
-vendor/lib64/libmmcamera2_is.so
-vendor/lib64/libmmcamera2_q3a_core.so
-vendor/lib64/libmmcamera2_stats_algorithm.so
-vendor/lib64/libmmcamera_dbg.so
-vendor/lib64/libmmcamera_tintless_algo.so
-vendor/lib64/libmmcamera_tintless_bg_pca_algo.so
-vendor/lib64/libmorpho_panorama_gp.so
+lib/libRecoFace.so
+vendor/lib/libarcsoft_beauty_shot.so
 vendor/lib/libFaceGrade.so
 vendor/lib/libFaceProc.so
-vendor/lib/libarcsoft_beauty_shot.so
 vendor/lib/libflash_pmic.so
 vendor/lib/libjpegdhw.so
 vendor/lib/libjpegdmahw.so
@@ -161,11 +140,17 @@ vendor/lib/libmmcamera_hdr_gb_lib.so
 vendor/lib/libmmcamera_hvx_add_constant.so
 vendor/lib/libmmcamera_hvx_grid_sum.so
 vendor/lib/libmmcamera_imglib.so
+vendor/lib/libmmcamera_imx298_liteon.so
+vendor/lib/libmmcamera_imx298_semco.so
+vendor/lib/libmmcamera_ov4688.so
+vendor/lib/libmmcamera_ov4688_eeprom.so
+vendor/lib/libmmcamera_ov4688_primax.so
 vendor/lib/libmmcamera_paaf_lib.so
 vendor/lib/libmmcamera_pdaf.so
 vendor/lib/libmmcamera_pdafcamif.so
 vendor/lib/libmmcamera_ppbase_module.so
 vendor/lib/libmmcamera_ppeiscore.so
+vendor/lib/libmmcamera_sony_imx298_eeprom.so
 vendor/lib/libmmcamera_thread_services.so
 vendor/lib/libmmcamera_tintless_algo.so
 vendor/lib/libmmcamera_tintless_bg_pca_algo.so
@@ -182,50 +167,14 @@ vendor/lib/libmorpho_panorama_gp.so
 vendor/lib/libqomx_jpegdec.so
 vendor/lib/libqomx_jpegenc_pipe.so
 vendor/lib/libqomx_jpegenc.so
+vendor/lib/libSonyIMX298PdafLibrary.so
 vendor/lib/libtm_interface.so
 
 # Camera actuators
-vendor/lib/libactuator_ad5816g.so
-vendor/lib/libactuator_ad5823.so
 vendor/lib/libactuator_ak7348.so
 vendor/lib/libactuator_ak7371.so
-vendor/lib/libactuator_ak7371_a4_primax.so
-vendor/lib/libactuator_ak7371_a7_liteon.so
-vendor/lib/libactuator_bu64244gwz.so
-vendor/lib/libactuator_bu64245.so
-vendor/lib/libactuator_bu64297.so
-vendor/lib/libactuator_dw9714.so
-vendor/lib/libactuator_dw9716.so
-vendor/lib/libactuator_lc898122.so
-vendor/lib/libactuator_lc898212xd.so
-vendor/lib/libactuator_lc898214xc.so
-vendor/lib/libactuator_lc898217xc.so
-vendor/lib/libactuator_lc898217xc_a4_semco.so
-vendor/lib/libactuator_rohm_bu64243gwz.so
 
 # Camera chromatix
-vendor/lib/libchromatix_imx298_4K_preview.so
-vendor/lib/libchromatix_imx298_4K_video.so
-vendor/lib/libchromatix_imx298_common.so
-vendor/lib/libchromatix_imx298_cpp_hfr_60.so
-vendor/lib/libchromatix_imx298_cpp_hfr_90.so
-vendor/lib/libchromatix_imx298_cpp_hfr_120.so
-vendor/lib/libchromatix_imx298_cpp_liveshot.so
-vendor/lib/libchromatix_imx298_cpp_preview.so
-vendor/lib/libchromatix_imx298_cpp_snapshot.so
-vendor/lib/libchromatix_imx298_cpp_snapshot_hdr.so
-vendor/lib/libchromatix_imx298_cpp_video.so
-vendor/lib/libchromatix_imx298_cpp_video_hdr.so
-vendor/lib/libchromatix_imx298_default_preview.so
-vendor/lib/libchromatix_imx298_default_video.so
-vendor/lib/libchromatix_imx298_hdr_snapshot_3a.so
-vendor/lib/libchromatix_imx298_hdr_video_3a.so
-vendor/lib/libchromatix_imx298_hfr_60.so
-vendor/lib/libchromatix_imx298_hfr_60_3a.so
-vendor/lib/libchromatix_imx298_hfr_90.so
-vendor/lib/libchromatix_imx298_hfr_90_3a.so
-vendor/lib/libchromatix_imx298_hfr_120.so
-vendor/lib/libchromatix_imx298_hfr_120_3a.so
 vendor/lib/libchromatix_imx298_liteon_4K_preview.so
 vendor/lib/libchromatix_imx298_liteon_4K_video.so
 vendor/lib/libchromatix_imx298_liteon_common.so
@@ -256,8 +205,6 @@ vendor/lib/libchromatix_imx298_liteon_snapshot_hdr.so
 vendor/lib/libchromatix_imx298_liteon_video_hdr.so
 vendor/lib/libchromatix_imx298_liteon_zsl_preview.so
 vendor/lib/libchromatix_imx298_liteon_zsl_video.so
-vendor/lib/libchromatix_imx298_postproc.so
-vendor/lib/libchromatix_imx298_preview.so
 vendor/lib/libchromatix_imx298_semco_4K_preview.so
 vendor/lib/libchromatix_imx298_semco_4K_video.so
 vendor/lib/libchromatix_imx298_semco_common.so
@@ -288,33 +235,6 @@ vendor/lib/libchromatix_imx298_semco_snapshot_hdr.so
 vendor/lib/libchromatix_imx298_semco_video_hdr.so
 vendor/lib/libchromatix_imx298_semco_zsl_preview.so
 vendor/lib/libchromatix_imx298_semco_zsl_video.so
-vendor/lib/libchromatix_imx298_snapshot.so
-vendor/lib/libchromatix_imx298_snapshot_hdr.so
-vendor/lib/libchromatix_imx298_video.so
-vendor/lib/libchromatix_imx298_video_hdr.so
-vendor/lib/libchromatix_imx298_zsl_preview.so
-vendor/lib/libchromatix_imx298_zsl_video.so
-vendor/lib/libchromatix_ov4688_a7_common.so
-vendor/lib/libchromatix_ov4688_a7_cpp_hfr_60.so
-vendor/lib/libchromatix_ov4688_a7_cpp_hfr_90.so
-vendor/lib/libchromatix_ov4688_a7_cpp_hfr_120.so
-vendor/lib/libchromatix_ov4688_a7_cpp_liveshot.so
-vendor/lib/libchromatix_ov4688_a7_cpp_preview.so
-vendor/lib/libchromatix_ov4688_a7_cpp_snapshot.so
-vendor/lib/libchromatix_ov4688_a7_cpp_video.so
-vendor/lib/libchromatix_ov4688_a7_default_video.so
-vendor/lib/libchromatix_ov4688_a7_hfr_60.so
-vendor/lib/libchromatix_ov4688_a7_hfr_60_ad5823.so
-vendor/lib/libchromatix_ov4688_a7_hfr_90.so
-vendor/lib/libchromatix_ov4688_a7_hfr_90_ad5823.so
-vendor/lib/libchromatix_ov4688_a7_hfr_120.so
-vendor/lib/libchromatix_ov4688_a7_hfr_120_ad5823.so
-vendor/lib/libchromatix_ov4688_a7_liveshot.so
-vendor/lib/libchromatix_ov4688_a7_postproc.so
-vendor/lib/libchromatix_ov4688_a7_preview.so
-vendor/lib/libchromatix_ov4688_a7_snapshot.so
-vendor/lib/libchromatix_ov4688_a7_zsl_preview_ad5823.so
-vendor/lib/libchromatix_ov4688_a7_zsl_video_ad5823.so
 vendor/lib/libchromatix_ov4688_common.so
 vendor/lib/libchromatix_ov4688_cpp_hfr_60.so
 vendor/lib/libchromatix_ov4688_cpp_hfr_90.so
@@ -333,27 +253,6 @@ vendor/lib/libchromatix_ov4688_hfr_120_ad5823.so
 vendor/lib/libchromatix_ov4688_liveshot.so
 vendor/lib/libchromatix_ov4688_postproc.so
 vendor/lib/libchromatix_ov4688_preview.so
-vendor/lib/libchromatix_ov4688_primax_a7_common.so
-vendor/lib/libchromatix_ov4688_primax_a7_cpp_hfr_60.so
-vendor/lib/libchromatix_ov4688_primax_a7_cpp_hfr_90.so
-vendor/lib/libchromatix_ov4688_primax_a7_cpp_hfr_120.so
-vendor/lib/libchromatix_ov4688_primax_a7_cpp_liveshot.so
-vendor/lib/libchromatix_ov4688_primax_a7_cpp_preview.so
-vendor/lib/libchromatix_ov4688_primax_a7_cpp_snapshot.so
-vendor/lib/libchromatix_ov4688_primax_a7_cpp_video.so
-vendor/lib/libchromatix_ov4688_primax_a7_default_video.so
-vendor/lib/libchromatix_ov4688_primax_a7_hfr_60.so
-vendor/lib/libchromatix_ov4688_primax_a7_hfr_60_ad5823.so
-vendor/lib/libchromatix_ov4688_primax_a7_hfr_90.so
-vendor/lib/libchromatix_ov4688_primax_a7_hfr_90_ad5823.so
-vendor/lib/libchromatix_ov4688_primax_a7_hfr_120.so
-vendor/lib/libchromatix_ov4688_primax_a7_hfr_120_ad5823.so
-vendor/lib/libchromatix_ov4688_primax_a7_liveshot.so
-vendor/lib/libchromatix_ov4688_primax_a7_postproc.so
-vendor/lib/libchromatix_ov4688_primax_a7_preview.so
-vendor/lib/libchromatix_ov4688_primax_a7_snapshot.so
-vendor/lib/libchromatix_ov4688_primax_a7_zsl_preview_ad5823.so
-vendor/lib/libchromatix_ov4688_primax_a7_zsl_video_ad5823.so
 vendor/lib/libchromatix_ov4688_primax_common.so
 vendor/lib/libchromatix_ov4688_primax_cpp_hfr_60.so
 vendor/lib/libchromatix_ov4688_primax_cpp_hfr_90.so
@@ -379,6 +278,13 @@ vendor/lib/libchromatix_ov4688_snapshot.so
 vendor/lib/libchromatix_ov4688_zsl_preview_ad5823.so
 vendor/lib/libchromatix_ov4688_zsl_video_ad5823.so
 
+# Camera configs
+etc/camera/imx298_liteon_chromatix.xml
+etc/camera/imx298_semco_chromatix.xml
+etc/camera/msm8996_camera.xml
+etc/camera/ov4688_chromatix.xml
+etc/camera/ov4688_primax_chromatix.xml
+
 # Camera firmware
 etc/firmware/cpp_firmware_v1_1_1.fw
 etc/firmware/cpp_firmware_v1_1_6.fw
@@ -391,11 +297,6 @@ etc/firmware/cpp_firmware_v1_8_0.fw
 etc/firmware/cpp_firmware_v1_10_0.fw
 
 # Camera sensors
-vendor/lib64/libSonyIMX298PdafLibrary.so
-vendor/lib/libSonyIMX298PdafLibrary.so
-vendor/lib/libmmcamera_imx298.so
-vendor/lib/libmmcamera_imx298_liteon.so
-vendor/lib/libmmcamera_imx298_semco.so
 vendor/lib/libmmcamera_isp_abf47.so
 vendor/lib/libmmcamera_isp_aec_bg_stats47.so
 vendor/lib/libmmcamera_isp_bf_stats47.so
@@ -437,13 +338,6 @@ vendor/lib/libmmcamera_isp_scaler_viewfinder46.so
 vendor/lib/libmmcamera_isp_sce40.so
 vendor/lib/libmmcamera_isp_snr47.so
 vendor/lib/libmmcamera_isp_sub_module.so
-vendor/lib/libmmcamera_ov4688.so
-vendor/lib/libmmcamera_ov4688_a7.so
-vendor/lib/libmmcamera_ov4688_eeprom.so
-vendor/lib/libmmcamera_ov4688_primax.so
-vendor/lib/libmmcamera_ov4688_primax_a7.so
-vendor/lib/libmmcamera_sony_imx298_eeprom.so
-vendor/lib/libmmcamera_sunny_q5v41b_eeprom.so
 
 # Charger
 bin/hvdcp_opti
@@ -738,18 +632,25 @@ vendor/lib/libadpcmdec.so
 vendor/lib/libsmwrapper.so
 
 # Media
+lib64/libOmxVpp.so
+lib64/libvpplibrary.so
+lib/libOmxVpp.so
+lib/libvpplibrary.so
 vendor/lib64/libI420colorconvert.so
-vendor/lib64/libmm-color-convertor.so
-vendor/lib64/libmmosal.so
 vendor/lib64/libOmxAacDec.so
 vendor/lib64/libOmxEvrcDec.so
 vendor/lib64/libOmxQcelp13Dec.so
+vendor/lib64/libmm-color-convertor.so
+vendor/lib64/libmmosal.so
+vendor/lib64/libvpphvx.so
 vendor/lib/libI420colorconvert.so
-vendor/lib/libmm-color-convertor.so
-vendor/lib/libmmosal.so
 vendor/lib/libOmxAacDec.so
 vendor/lib/libOmxEvrcDec.so
 vendor/lib/libOmxQcelp13Dec.so
+vendor/lib/libmm-color-convertor.so
+vendor/lib/libmmosal.so
+vendor/lib/libvpphvx.so
+vendor/lib/libvqzip.so
 
 # Network
 -priv-app/QtiTetherService/QtiTetherService.apk
