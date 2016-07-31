@@ -41,11 +41,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.camera.stats.test=5
 
-# CNE and DPM
+# CNE
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.cne.feature=1 \
-    persist.dpm.feature=5 \
-    persist.dpm.nsrm.bkg.evt=3955
+    persist.cne.feature=1
 
 # Fingerprint
 PRODUCT_PROPERTY_OVERRIDES += \
