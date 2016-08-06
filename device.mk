@@ -269,10 +269,12 @@ PRODUCT_PACKAGES += \
     netmgr_config.xml \
     qmi_config.xml
 
+PRODUCT_PACKAGES += \
+    libjson
+
 # RIL
 PRODUCT_PACKAGES += \
     librmnetctl \
-    libtinyxml2 \
     libxml2
 
 # Sensors
