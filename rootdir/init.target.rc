@@ -88,17 +88,6 @@ on boot
     chmod 0666 /dev/i2c-3
     chmod 0666 /dev/i2c-9
 
-# Audio smartPA cold boot
-service tfa_cold_boot /system/bin/sh /system/bin/tfa_coldboot.sh /etc/silence_short.wav 15 1
-    class main
-    user system
-    group system
-    disabled
-    oneshot
-
-on property:service.soundcard.detected=1
-    start tfa_cold_boot
-
 # Start camera server as daemon
 service qcamerasvr /system/bin/mm-qcamera-daemon
     class late_start
