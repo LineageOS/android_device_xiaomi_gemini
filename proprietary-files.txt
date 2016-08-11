@@ -348,6 +348,7 @@ vendor/lib64/libcne.so
 vendor/lib64/libvendorconn.so
 vendor/lib64/libwms.so
 vendor/lib64/libwqe.so
+vendor/lib64/libxml.so
 vendor/lib/libNimsWrap.so
 vendor/lib/libcneapiclient.so
 vendor/lib/libcneconn.so
@@ -356,6 +357,7 @@ vendor/lib/libcne.so
 vendor/lib/libvendorconn.so
 vendor/lib/libwms.so
 vendor/lib/libwqe.so
+vendor/lib/libxml.so
 
 # Display calibration data
 -etc/qdcm_calib_data_jdi_fhd_cmd_incell_dsi_panel.xml
@@ -432,9 +434,9 @@ etc/permissions/com.qti.location.sdk.xml
 etc/permissions/com.qualcomm.location.xml
 framework/com.qti.location.sdk.jar
 -lib64/libloc_api_v02.so
--lib64/libloc_ds_api.so
+lib64/libloc_ds_api.so
 -lib/libloc_api_v02.so
--lib/libloc_ds_api.so
+lib/libloc_ds_api.so
 -priv-app/com.qualcomm.location/com.qualcomm.location.apk
 vendor/bin/slim_daemon
 vendor/lib64/hw/flp.default.so
@@ -578,29 +580,6 @@ vendor/lib64/lib-rtpdaemoninterface.so
 vendor/lib64/lib-rtpsl.so
 vendor/lib64/librcc.so
 vendor/lib64/libvoice-svc.so
-vendor/lib/libimscamera_jni.so
-vendor/lib/libimsmedia_jni.so
-vendor/lib/lib-dplmedia.so
-vendor/lib/lib-ims-rcscmjni.so
-vendor/lib/lib-imscamera.so
-vendor/lib/lib-imsdpl.so
-vendor/lib/lib-imsqimf.so
-vendor/lib/lib-imsrcs.so
-vendor/lib/lib-imsrcscm.so
-vendor/lib/lib-imsrcscmclient.so
-vendor/lib/lib-imsrcscmservice.so
-vendor/lib/lib-imss.so
-vendor/lib/lib-imsSDP.so
-vendor/lib/lib-imsvt.so
-vendor/lib/lib-imsxml.so
-vendor/lib/lib-rcsimssjni.so
-vendor/lib/lib-rcsjni.so
-vendor/lib/lib-rtpcommon.so
-vendor/lib/lib-rtpcore.so
-vendor/lib/lib-rtpdaemoninterface.so
-vendor/lib/lib-rtpsl.so
-vendor/lib/librcc.so
-vendor/lib/libvoice-svc.so
 
 # IPA
 bin/ipacm-diag
@@ -658,11 +637,7 @@ vendor/firmware/libpn548ad_fw.so
 bin/energy-awareness
 bin/iop
 bin/msm_irqbalance
-framework/QPerformance.jar
-lib64/libqti_performance.so
 lib64/libqti-iop.so
-lib/modules/core_ctl.ko
-lib/libqti_performance.so
 vendor/bin/perfd
 vendor/lib64/libqc-opt.so
 vendor/lib64/libqti-iop-client.so
@@ -687,11 +662,6 @@ vendor/lib64/libdisp-aba.so
 vendor/lib64/libmm-als.so
 vendor/lib64/libmm-disp-apis.so
 vendor/lib64/libmm-qdcm.so
-vendor/lib64/libmm-qdcm-diag.so
-vendor/lib/libdisp-aba.so
-vendor/lib/libmm-als.so
-vendor/lib/libmm-disp-apis.so
-vendor/lib/libmm-qdcm.so
 
 # QMI
 bin/irsc_util
@@ -766,17 +736,6 @@ vendor/lib64/libril-qc-qmi-1.so
 vendor/lib64/libril-qc-radioconfig.so
 vendor/lib64/libril-qcril-hook-oem.so
 vendor/lib64/libsystem_health_mon.so
-vendor/lib64/libxml.so
-vendor/lib/libconfigdb.so
-vendor/lib/liblqe.so
-vendor/lib/libmdmdetect.so
-vendor/lib/libnetmgr.so
-vendor/lib/libqcmaputils.so
-vendor/lib/libril-qc-qmi-1.so
-vendor/lib/libril-qc-radioconfig.so
-vendor/lib/libril-qcril-hook-oem.so
-vendor/lib/libsystem_health_mon.so
-vendor/lib/libxml.so
 vendor/qcril.db
 
 # Sensors
@@ -796,23 +755,21 @@ vendor/lib/sensors.ssc.so
 
 # Thermal
 vendor/bin/thermal-engine
-vendor/lib64/libthermalclient.so
+-vendor/lib64/libthermalclient.so
 vendor/lib64/libthermalioctl.so
-vendor/lib/libthermalclient.so
+-vendor/lib/libthermalclient.so
 
 # Time services
 -app/TimeService/TimeService.apk
 bin/time_daemon
--vendor/lib64/libTimeService.so
+vendor/lib64/libTimeService.so
 -vendor/lib64/libtime_genoff.so
--vendor/lib/libTimeService.so
+vendor/lib/libTimeService.so
 -vendor/lib/libtime_genoff.so
 
 # WiFi
 bin/cnss-daemon
 bin/cnss_diag
-bin/fstman
 bin/nv_fem
 bin/nv_mac
-bin/wifi_fccutild
 lib/modules/qca_cld/qca_cld_wlan.ko
