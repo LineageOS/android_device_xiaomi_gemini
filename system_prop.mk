@@ -2,16 +2,17 @@
 PRODUCT_PROPERTY_OVERRIDES += \
     af.fast_track_multiplier=1 \
     audio_hal.period_size=192 \
+    audio.deep_buffer.media=true \
     audio.offload.buffer.size.kb=32 \
-    audio.offload.video=true \
-    audio.offload.pcm.16bit.enable=true \
-    audio.offload.pcm.24bit.enable=true \
-    audio.offload.track.enable=false \
+    audio.offload.gapless.enabled=true \
+    audio.offload.min.duration.secs=15 \
     audio.offload.multiaac.enable=true \
     audio.offload.multiple.enabled=true \
     audio.offload.passthrough=false \
-    audio.offload.gapless.enabled=true \
-    audio.deep_buffer.media=true \
+    audio.offload.pcm.16bit.enable=true \
+    audio.offload.pcm.24bit.enable=true \
+    audio.offload.track.enable=false \
+    audio.offload.video=true \
     audio.safx.pbe.enabled=true \
     audio.parser.ip.buffer.size=262144 \
     audio.dolby.ds2.enabled=false \
@@ -30,7 +31,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
     bt.max.hfpclient.connections=1 \
-    ro.bluetooth.ftm_enabled=true \
     ro.btconfig.if=uart \
     ro.btconfig.vendor=qcom \
     ro.btconfig.chip=QCA6164 \
@@ -45,6 +45,23 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.cne.feature=1
 
+# Data modules
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.data.mode=concurrent \
+    persist.data.netmgrd.qos.enable=true \
+    ro.use_data_netmgrd=true
+
+# Display (Qualcomm AD)
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.qualcomm.cabl=0 \
+    ro.qcom.ad=1 \
+    ro.qcom.ad.calib.data=/system/etc/calib.cfg \
+    ro.qcom.ad.sensortype=2
+
+# Display feature (bit0-ColorPrefer bit1-EyeCare bit2-AD bit3-CE bit4-CABC bit5-SRGB)
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.sys.display.support=63
+
 # Fingerprint
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.qfp=false \
@@ -58,14 +75,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Graphics
 PRODUCT_PROPERTY_OVERRIDES += \
     debug.egl.hw=1 \
-    debug.mdpcomp.logs=0 \
     debug.gralloc.enable_fb_ubwc=1 \
     debug.sf.hw=1 \
     dev.pm.dyn_samplingrate=1 \
-    persist.hwc.mdpcomp.enable=true \
+    persist.demo.hdmirotationlock=false \
+    persist.hwc.enable_vds=1 \
+    persist.sys.wfd.virtual=0 \
     ro.opengles.version=196610 \
     ro.sf.lcd_density=480 \
-    ro.sys.display.support=63
+    sdm.debug.disable_rotator_split=1 \
+    sdm.perf_hint_window=50
 
 # GPS
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -106,13 +125,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     com.qc.hardware=true \
     ro.qc.sdk.sensors.gestures=true
 
-# Qualcomm Assertive Display
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.qualcomm.cabl=0 \
-    ro.qcom.ad=1 \
-    ro.qcom.ad.calib.data=/system/etc/calib.cfg \
-    ro.qcom.ad.sensortype=2
-
 # Radio
 PRODUCT_PROPERTY_OVERRIDES += \
     DEVICE_PROVISIONED=1 \
@@ -124,13 +136,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.default_network=22,22 \
     ro.telephony.default_cdma_sub=0 \
     ro.telephony.call_ring.multiple=false \
-    ro.use_data_netmgrd=true \
-    persist.data.netmgrd.qos.enable=true \
-    persist.data.mode=concurrent \
     persist.data.qmi.adb_logmask=0 \
     persist.dbg.volte_avail_ovr=1 \
     persist.dbg.vt_avail_ovr=1 \
     persist.logd.size.radio=4M \
+    persist.net.doxlat=true \
     persist.radio.apm_sim_not_pwdn=1 \
     persist.radio.force_on_dc=true \
     persist.radio.rat_on=combine \
