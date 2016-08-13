@@ -2239,6 +2239,10 @@
         <ctl name="RX INT2_2 MUX" value="RX6" />
         <ctl name="RX INT1 DEM MUX" value="CLSH_DSM_OUT" />
         <ctl name="RX INT2 DEM MUX" value="CLSH_DSM_OUT" />
+        <ctl name="COMP1 Switch" value="0" />
+        <ctl name="COMP2 Switch" value="0" />
+        <ctl name="HPHL Volume" value="11" />
+        <ctl name="HPHR Volume" value="11" />
     </path>
 
     <path name="headphones-44.1">
@@ -2254,6 +2258,10 @@
         <ctl name="SPL SRC1 MUX" value="SRC_IN_HPHR" />
         <ctl name="RX INT1 SPLINE MIX HPHL Switch" value="1" />
         <ctl name="RX INT2 SPLINE MIX HPHR Switch" value="1" />
+        <ctl name="COMP1 Switch" value="0" />
+        <ctl name="COMP2 Switch" value="0" />
+        <ctl name="HPHL Volume" value="11" />
+        <ctl name="HPHR Volume" value="11" />
     </path>
 
     <path name="headset-mic">
@@ -2536,6 +2544,7 @@
 
     <path name="handset-stereo-dmic-ef">
         <path name="handset-dmic-endfire" />
+        <ctl name="ADC4 Volume" value="12" />
     </path>
 
     <path name="speaker-stereo-dmic-ef">

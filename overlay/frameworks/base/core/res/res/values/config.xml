@@ -32,23 +32,27 @@
 
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
-        <item>1</item>
-        <item>100</item>
-        <item>2000</item>
-        <item>7000</item>
-        <item>10000</item>
-        <item>20000</item>
-        <item>30000</item>
-        <item>40000</item>
-        <item>60000</item>
-        <item>80000</item>
-        <item>90000</item>
-        <item>110000</item>
-        <item>140000</item>
-        <item>200000</item>
-        <item>250000</item>
-        <item>300000</item>
-        <item>400000</item>
+        <item>4</item>
+        <item>8</item>
+        <item>13</item>
+        <item>17</item>
+        <item>21</item>
+        <item>26</item>
+        <item>30</item>
+        <item>34</item>
+        <item>39</item>
+        <item>60</item>
+        <item>140</item>
+        <item>310</item>
+        <item>400</item>
+        <item>500</item>
+        <item>600</item>
+        <item>1000</item>
+        <item>1200</item>
+        <item>1500</item>
+        <item>3000</item>
+        <item>3500</item>
+        <item>4000</item>
     </integer-array>
 
     <!-- Array of output values for LCD backlight corresponding to the LUX values
@@ -56,22 +60,26 @@
          than the size of the config_autoBrightnessLevels array.
          This must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>4</item>
-        <item>10</item>
-        <item>20</item>
-        <item>20</item>
-        <item>50</item>
-        <item>52</item>
-        <item>58</item>
-        <item>65</item>
-        <item>71</item>
-        <item>83</item>
-        <item>96</item>
-        <item>103</item>
-        <item>116</item>
-        <item>135</item>
-        <item>187</item>
-        <item>233</item>
+        <item>3</item>
+        <item>7</item>
+        <item>13</item>
+        <item>19</item>
+        <item>24</item>
+        <item>31</item>
+        <item>39</item>
+        <item>43</item>
+        <item>43</item>
+        <item>44</item>
+        <item>45</item>
+        <item>48</item>
+        <item>55</item>
+        <item>60</item>
+        <item>63</item>
+        <item>67</item>
+        <item>84</item>
+        <item>93</item>
+        <item>105</item>
+        <item>200</item>
         <item>240</item>
         <item>255</item>
     </integer-array>
