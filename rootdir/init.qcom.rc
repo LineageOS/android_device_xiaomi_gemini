@@ -352,6 +352,9 @@ on property:sys.boot_completed=1
     write /sys/block/sda/queue/read_ahead_kb 256
     write /sys/block/sde/queue/read_ahead_kb 256
 
+    # CPE fw_name used by sound trigger HAL
+    chown media audio /sys/kernel/wcd_cpe0/fw_name
+
 # Corefile limit
 on property:persist.debug.trace=1
     mkdir /data/core 0777 root root
