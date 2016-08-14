@@ -117,10 +117,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Snap
 
-# Charger
-PRODUCT_PACKAGES += \
-    charger_res_images
-
 # Device config scripts
 PRODUCT_PACKAGES += \
     init.leds.sh \
