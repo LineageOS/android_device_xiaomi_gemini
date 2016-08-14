@@ -7,6 +7,7 @@ init_daemon_domain(mmbn-daemon)
 allow mmbn-daemon firmware_file:dir search;
 allow mmbn-daemon firmware_file:file { open getattr read };
 allow mmbn-daemon property_socket:sock_file write;
+allow mmbn-daemon radio_prop:property_service set;
 allow mmbn-daemon self:capability { dac_override fsetid };
 allow mmbn-daemon self:socket { create getopt ioctl read write };
 allow mmbn-daemon { init qmuxd }:unix_stream_socket connectto;
