@@ -117,7 +117,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Perf
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.min_freq_0=307200 \
-    ro.min_freq_2=307200 \
+    ro.min_freq_4=307200 \
     ro.sys.fw.bg_apps_limit=60 \
     ro.vendor.extension_library=libqti-perfd-client.so
 
