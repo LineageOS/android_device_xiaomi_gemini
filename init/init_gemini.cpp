@@ -1,5 +1,6 @@
 /*
    Copyright (c) 2015, The Linux Foundation. All rights reserved.
+   Copyright (C) 2016 The CyanogenMod Project.
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are
@@ -31,12 +32,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
+#include <sys/sysinfo.h>
 #include <sys/types.h>
 
 #include "vendor_init.h"
 #include "property_service.h"
 #include "log.h"
 #include "util.h"
+
+char const *heapminfree;
+char const *heapmaxfree;
 
 static int read_file2(const char *fname, char *data, int max_size)
 {
@@ -91,6 +96,23 @@ static void init_alarm_boot_properties()
     }
 }
 
+void check_device()
+{
+    struct sysinfo sys;
+
+    sysinfo(&sys);
+
+    if (sys.totalram > 3072ull * 1024 * 1024) {
+        // from - phone-xxxhdpi-4096-dalvik-heap.mk
+        heapminfree = "4m";
+        heapmaxfree = "16m";
+    } else {
+        // from - phone-xxhdpi-3072-dalvik-heap.mk
+        heapminfree = "512k";
+        heapmaxfree = "8m";
+    }
+}
+
 void vendor_load_properties()
 {
     char platform[PROP_VALUE_MAX];
@@ -99,6 +121,15 @@ void vendor_load_properties()
     rc = property_get("ro.board.platform", platform);
     if (!rc || strncmp(platform, ANDROID_TARGET, PROP_VALUE_MAX))
         return;
+
+    check_device();
+
+    property_set("dalvik.vm.heapstartsize", "8m");
+    property_set("dalvik.vm.heapgrowthlimit", "384m");
+    property_set("dalvik.vm.heapsize", "1024m");
+    property_set("dalvik.vm.heaptargetutilization", "0.75");
+    property_set("dalvik.vm.heapminfree", heapminfree);
+    property_set("dalvik.vm.heapmaxfree", heapmaxfree);
 
     init_alarm_boot_properties();
 }
