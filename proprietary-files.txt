@@ -96,12 +96,14 @@ lib/libmorpho_panorama.so
 lib/libqomx_core.so
 lib/libRecoFace.so
 vendor/lib/libarcsoft_beauty_shot.so
+vendor/lib/libchromaflash.so|8fe5d31f6d1e304b6b6ffe4ca2576abbcb2cc88d
 vendor/lib/libFaceGrade.so
 vendor/lib/libFaceProc.so
 vendor/lib/libflash_pmic.so
 vendor/lib/libjpegdhw.so
 vendor/lib/libjpegdmahw.so
 vendor/lib/libjpegehw.so
+vendor/lib/libllvd_smore.so|89658461217a698d1cea8772465c2d8421c1bfce
 vendor/lib/libmmcamera2_c2d_module.so
 vendor/lib/libmmcamera2_cpp_module.so
 vendor/lib/libmmcamera2_frame_algorithm.so
@@ -117,6 +119,7 @@ vendor/lib/libmmcamera2_q3a_core.so
 vendor/lib/libmmcamera2_sensor_modules.so
 vendor/lib/libmmcamera2_stats_algorithm.so
 vendor/lib/libmmcamera2_stats_modules.so
+vendor/lib/libmmcamera_chromaflash_lib.so|fe5ce108e3fe4081e3a2c544f27bc5d13019ba15
 vendor/lib/libmmcamera_dbg.so
 vendor/lib/libmmcamera_eeprom_util.so
 vendor/lib/libmmcamera_eztune_module.so
@@ -126,9 +129,12 @@ vendor/lib/libmmcamera_faceproc2.so
 vendor/lib/libmmcamera_hdr_gb_lib.so
 vendor/lib/libmmcamera_hvx_add_constant.so
 vendor/lib/libmmcamera_hvx_grid_sum.so
+vendor/lib/libmmcamera_imglib_faceproc_adspstub.so
 vendor/lib/libmmcamera_imglib.so
 vendor/lib/libmmcamera_imx298_liteon.so
 vendor/lib/libmmcamera_imx298_semco.so
+vendor/lib/libmmcamera_llvd.so|9930b4b430bf557e919ca0223156b5511c74701c
+vendor/lib/libmmcamera_optizoom_lib.so|17dfddb185f8c9a2bc075d656849024a9912dc88
 vendor/lib/libmmcamera_ov4688.so
 vendor/lib/libmmcamera_ov4688_eeprom.so
 vendor/lib/libmmcamera_ov4688_primax.so
@@ -138,6 +144,7 @@ vendor/lib/libmmcamera_pdafcamif.so
 vendor/lib/libmmcamera_ppbase_module.so
 vendor/lib/libmmcamera_ppeiscore.so
 vendor/lib/libmmcamera_sony_imx298_eeprom.so
+vendor/lib/libmmcamera_stillmore_lib.so|ffb8bb5af395a39188279083bce8232aaa279c49
 vendor/lib/libmmcamera_thread_services.so
 vendor/lib/libmmcamera_tintless_algo.so
 vendor/lib/libmmcamera_tintless_bg_pca_algo.so
@@ -151,9 +158,11 @@ vendor/lib/libmorpho_easy_hdr.so
 vendor/lib/libmorpho_hdr_checker.so
 vendor/lib/libmorpho_image_stab4.so
 vendor/lib/libmorpho_panorama_gp.so
+vendor/lib/liboptizoom.so|5cd3d2b56986eebe4a0d4605d13be825886ae017
 vendor/lib/libqomx_jpegdec.so
 vendor/lib/libqomx_jpegenc_pipe.so
 vendor/lib/libqomx_jpegenc.so
+vendor/lib/libseemore.so|74d5842f29a30b297601cb461ac78ce18fa2bc4e
 vendor/lib/libSonyIMX298PdafLibrary.so
 vendor/lib/libtm_interface.so
 
