@@ -1,2 +1,1 @@
 type DisplayFeatureControl_service, service_manager_type;
-type qpay_service, service_manager_type;

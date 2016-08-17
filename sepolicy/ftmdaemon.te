@@ -1,7 +1,0 @@
-type ftmdaemon, domain;
-type ftmdaemon_exec, exec_type, file_type;
-
-# Allow for transition from init domain to ftmdaemon
-init_daemon_domain(ftmdaemon)
-
-allow ftmdaemon devpts:chr_file { read write };

@@ -238,11 +238,6 @@ service displayfeature /system/bin/displayfeature
     user root
     group root
 
-service qpaydaemon /system/vendor/bin/qpaydaemon
-    class late_start
-    user system
-    group system
-
 service readmac /system/bin/readmac
     class main
     user root

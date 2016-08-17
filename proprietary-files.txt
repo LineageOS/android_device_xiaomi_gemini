@@ -66,7 +66,6 @@ vendor/lib/libaudiodevarb.so
 # Bluetooth
 bin/btnvtool
 bin/dun-server
-bin/ftmdaemon
 bin/hci_qcomm_init
 bin/wcnss_filter
 vendor/lib64/libbtnv.so
@@ -413,20 +412,11 @@ vendor/lib64/libsecureui_svcsock.so
 vendor/lib64/libssd.so
 vendor/lib/libQSEEComAPI.so
 
-# Fingerprint and Sense ID
+# Fingerprint
 bin/qvop-daemon
-etc/stargate/qfp_config.txt
 lib64/hw/fingerprint.fpc.so
 lib/hw/fingerprint.fpc.so
-vendor/lib64/libFIDOKeyProvisioning.so
-vendor/lib64/libFidoCryptoJNI.so
-vendor/lib64/libFidoCrypto.so
-vendor/lib64/libFidoSuiJNI.so
 vendor/lib64/libqvop-service.so
-vendor/lib/libFIDOKeyProvisioning.so
-vendor/lib/libFidoCryptoJNI.so
-vendor/lib/libFidoCrypto.so
-vendor/lib/libFidoSuiJNI.so
 vendor/lib/libqvop-service.so
 
 # Gatekeeper
@@ -493,7 +483,6 @@ vendor/lib/libxtadapter.so
 vendor/lib/libxtwifi_ulp_adaptor.so
 
 # Graphics
-bin/displayfeature
 vendor/lib64/egl/eglSubDriverAndroid.so
 vendor/lib64/egl/libEGL_adreno.so
 vendor/lib64/egl/libGLESv1_CM_adreno.so
@@ -634,11 +623,6 @@ vendor/lib64/libconnctrl.so
 vendor/lib/libQtiTether.so
 vendor/lib/libconnctrl.so
 
-# NFC
-bin/pnx
-vendor/bin/qpaydaemon
-vendor/lib64/libQPayJNI.so
-
 # NFC firmware
 vendor/firmware/libpn548ad_fw.so
 
@@ -662,6 +646,7 @@ vendor/lib64/libperipheral_client.so
 vendor/lib/libperipheral_client.so
 
 # Postprocessing
+bin/displayfeature
 etc/permissions/com.qti.snapdragon.sdk.display.xml
 framework/com.qti.snapdragon.sdk.display.jar
 -vendor/app/colorservice/colorservice.apk

@@ -375,9 +375,6 @@ on property:bluetooth.sap.status=running
 on property:bluetooth.sap.status=stopped
     stop bt-sap
 
-on property:ro.bluetooth.ftm_enabled=true
-    start ftmd
-
 on property:bluetooth.startbtsnoop=true
     start btsnoop
 
@@ -478,13 +475,6 @@ service btsnoop /system/bin/btsnoop
     user bluetooth
     group bluetooth net_bt_admin sdcard_rw sdcard_r media_rw
     class late_start
-    disabled
-    oneshot
-
-service ftmd /system/bin/ftmdaemon
-    class late_start
-    user root
-    group bluetooth net_bt_admin misc net_bt_stack qcom_diag net_bt
     disabled
     oneshot
 
