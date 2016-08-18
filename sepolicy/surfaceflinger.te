@@ -1,2 +1,2 @@
 allow surfaceflinger displayfeature:dir search;
-allow surfaceflinger displayfeature:file { open read };
+allow surfaceflinger displayfeature:file r_file_perms;

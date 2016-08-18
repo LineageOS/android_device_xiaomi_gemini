@@ -1,1 +1,0 @@
-allow kernel persist_file:dir search;

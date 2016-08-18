@@ -17,9 +17,10 @@ binder_call(displayfeature, surfaceflinger)
 # Allow surfaceflinger service to be found
 allow displayfeature surfaceflinger_service:service_manager find;
 
-allow displayfeature graphics_device:chr_file { ioctl open read write };
+# Allow displayfeature to communicate with pp-daemon via pps_socket
+unix_socket_connect(displayfeature, pps, mm-pp-daemon)
+
+allow displayfeature graphics_device:chr_file rw_file_perms;
 allow displayfeature graphics_device:dir search;
-allow displayfeature mm-pp-daemon:unix_stream_socket connectto;
-allow displayfeature pps_socket:sock_file write;
 allow displayfeature self:capability dac_override;
 allow displayfeature sysfs:file write;

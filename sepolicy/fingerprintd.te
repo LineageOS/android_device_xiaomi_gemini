@@ -1,11 +1,10 @@
-allow fingerprintd firmware_file:dir search;
-allow fingerprintd firmware_file:file { read getattr open };
-allow fingerprintd fpc_data_file:dir { add_name remove_name search write };
-allow fingerprintd fpc_data_file:file { append create getattr open };
+# Allow fingerprintd to open firmware images
+r_dir_file(fingerprintd, firmware_file)
+
+allow fingerprintd fpc_data_file:dir rw_dir_perms;
+allow fingerprintd fpc_data_file:file create_file_perms;
 allow fingerprintd fpc_data_file:sock_file { create unlink };
 allow fingerprintd sysfs:file write;
-allow fingerprintd sysmatdrv_device:chr_file { write open };
-allow fingerprintd system_data_file:dir { write remove_name add_name };
-allow fingerprintd system_data_file:sock_file { create unlink };
-allow fingerprintd tee_device:chr_file { read write ioctl open };
-allow fingerprintd uhid_device:chr_file { write ioctl open };
+allow fingerprintd sysmatdrv_device:chr_file w_file_perms;
+allow fingerprintd tee_device:chr_file rw_file_perms;
+allow fingerprintd uhid_device:chr_file rw_file_perms;
