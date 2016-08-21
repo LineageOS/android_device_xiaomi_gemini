@@ -15,8 +15,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="ambient_display_title">Inaktivitätsdisplay</string>
   <string name="ambient_display_summary">Bildschirm einschalten, wenn Sie Benachrichtigungen erhalten</string>
-  <string name="always_enabled_title">Immer aktiviert</string>
-  <string name="always_enabled_summary">Auf den Sensor reagieren, sobald der Bildschirm ausgeschaltet wird</string>
   <!-- Tilt sensor -->
   <string name="tilt_sensor_title">Neigungssensor</string>
   <string name="pick_up_title">Aufnehmen</string>
@@ -30,4 +28,5 @@
   <!-- Help text -->
   <string name="dlg_ok">OK</string>
   <string name="doze_settings_help_title">Hilfe</string>
+  <string name="doze_settings_help_text">Diese Features verwenden Sensoren, um im Standby kurz Benachrichtigungen einzublenden. Der gewählte Sensor wird nur bei Eingang einer Benachrichtigung aktiviert. Dies hilft dabei, den Stromverbrauch zu reduzieren. Alternativ kann der Sensor sofort beim Abschalten des Bildschirms aktiviert werden, wodurch sich jedoch der Stromverbrauch erhöht.</string>
 </resources>
