@@ -26,27 +26,30 @@
 # IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 # filename              partition
+
 adspso.bin              /dev/block/bootdevice/by-name/dsp
 BTFM.bin                /dev/block/bootdevice/by-name/bluetooth
-cmnlib64.mbn            /dev/block/bootdevice/by-name/cmnlib64
-cmnlib64.mbn.bak        /dev/block/bootdevice/by-name/cmnlib64bak
-cmnlib.mbn              /dev/block/bootdevice/by-name/cmnlib
-cmnlib.mbn.bak          /dev/block/bootdevice/by-name/cmnlibbak
-devcfg.mbn              /dev/block/bootdevice/by-name/devcfg
-devcfg.mbn.bak          /dev/block/bootdevice/by-name/devcfgbak
-emmc_appsboot.mbn       /dev/block/bootdevice/by-name/aboot
-emmc_appsboot.mbn.bak   /dev/block/bootdevice/by-name/abootbak
-hyp.mbn                 /dev/block/bootdevice/by-name/hyp
-hyp.mbn.bak             /dev/block/bootdevice/by-name/hypbak
-keymaster.mbn           /dev/block/bootdevice/by-name/keymaster
-keymaster.mbn.bak       /dev/block/bootdevice/by-name/keymasterbak
-logo.img                /dev/block/bootdevice/by-name/logo
 NON-HLOS.bin            /dev/block/bootdevice/by-name/modem
-pmic.elf                /dev/block/bootdevice/by-name/pmic
-pmic.elf.bak            /dev/block/bootdevice/by-name/pmicbak
-rpm.mbn                 /dev/block/bootdevice/by-name/rpm
-rpm.mbn.bak             /dev/block/bootdevice/by-name/rpmbak
-splash.img              /dev/block/bootdevice/by-name/splash
-tz.mbn                  /dev/block/bootdevice/by-name/tz
-tz.mbn.bak              /dev/block/bootdevice/by-name/tzbak
 xbl.elf                 /dev/block/bootdevice/by-name/xbl
+
+cmnlib64.mbn            /dev/block/bootdevice/by-name/cmnlib64
+cmnlib.mbn              /dev/block/bootdevice/by-name/cmnlib
+devcfg.mbn              /dev/block/bootdevice/by-name/devcfg
+emmc_appsboot.mbn       /dev/block/bootdevice/by-name/aboot
+hyp.mbn                 /dev/block/bootdevice/by-name/hyp
+keymaster.mbn           /dev/block/bootdevice/by-name/keymaster
+pmic.elf                /dev/block/bootdevice/by-name/pmic
+rpm.mbn                 /dev/block/bootdevice/by-name/rpm
+tz.mbn                  /dev/block/bootdevice/by-name/tz
+
+# filename + .bak       backup partition
+
+cmnlib64.mbn.bak        /dev/block/bootdevice/by-name/cmnlib64bak
+cmnlib.mbn.bak          /dev/block/bootdevice/by-name/cmnlibbak
+devcfg.mbn.bak          /dev/block/bootdevice/by-name/devcfgbak
+emmc_appsboot.mbn.bak   /dev/block/bootdevice/by-name/abootbak
+hyp.mbn.bak             /dev/block/bootdevice/by-name/hypbak
+keymaster.mbn.bak       /dev/block/bootdevice/by-name/keymasterbak
+pmic.elf.bak            /dev/block/bootdevice/by-name/pmicbak
+rpm.mbn.bak             /dev/block/bootdevice/by-name/rpmbak
+tz.mbn.bak              /dev/block/bootdevice/by-name/tzbak
