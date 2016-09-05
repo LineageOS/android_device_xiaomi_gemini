@@ -14,7 +14,12 @@
 # limitations under the License.
 #
 
-$(call inherit-product, device/xiaomi/gemini/full_gemini.mk)
+# Inherit from those products. Most specific first.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+
+# Inherit from gemini device
+$(call inherit-product, device/xiaomi/gemini/device.mk)
 
 # Inherit some common CM stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
@@ -22,10 +27,12 @@ $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 # Enhanced NFC
 $(call inherit-product, vendor/cm/config/nfc_enhanced.mk)
 
+# Device identifier. This must come after all inclusions.
 PRODUCT_NAME := cm_gemini
-BOARD_VENDOR := Xiaomi
-TARGET_VENDOR := Xiaomi
 PRODUCT_DEVICE := gemini
+PRODUCT_BRAND := Xiaomi
+PRODUCT_MODEL := MI 5
+PRODUCT_MANUFACTURER := Xiaomi
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
@@ -34,3 +41,5 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME="gemini" \
     BUILD_FINGERPRINT="Xiaomi/gemini/gemini:6.0.1/MXB48T/V8.0.2.0.MAAMIDG:user/release-keys" \
     PRIVATE_BUILD_DESC="gemini-user 6.0.1 MXB48T V8.0.2.0.MAAMIDG release-keys"
+
+TARGET_VENDOR := Xiaomi
