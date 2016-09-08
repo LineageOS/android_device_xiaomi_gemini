@@ -4,6 +4,10 @@
    "target_path": "device/qcom/common"
  },
  {
+   "repository": "android_kernel_xiaomi_msm8996",
+   "target_path": "kernel/xiaomi/msm8996"
+ },
+ {
    "repository": "android_vendor_nxp-nfc_opensource_frameworks",
    "target_path": "vendor/nxp-nfc/opensource/frameworks"
  },
