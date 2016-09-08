@@ -769,4 +769,3 @@ vendor/lib/mediadrm/libwvdrmengine.so|6c0954f6b6f33d25d3a2727495df93ee59b5f18f
 # WiFi
 bin/cnss-daemon
 bin/cnss_diag
-lib/modules/qca_cld/qca_cld_wlan.ko
