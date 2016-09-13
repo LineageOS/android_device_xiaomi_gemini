@@ -7,6 +7,7 @@
 /sys/devices/soc/75ba000.i2c/i2c-12/12-004a/reversed_keys			u:object_r:proc_touchpanel:s0
 /sys/devices/soc/soc:fpc_fpc1020/irq						u:object_r:sysfs_fpc:s0
 /sys/devices/soc/soc:fpc_fpc1020/enable_wakeup					u:object_r:sysfs_fpc_wakeup:s0
+/sys/devices/soc/soc:fpc_fpc1020/proximity_state                		u:object_r:sysfs_fpc_proximity:s0
 
 # Data files
 /data/fpc(/.*)?                       u:object_r:fpc_data_file:s0
