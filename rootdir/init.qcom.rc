@@ -102,6 +102,12 @@ on boot
     # Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
 
+    # Fingerprint
+    chown system system /sys/devices/soc/soc:fpc_fpc1020/irq
+    chown system system /sys/devices/soc/soc:fpc_fpc1020/enable_wakeup
+    chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/irq
+    chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/enable_wakeup
+
     # RGB lights
     chown system system /sys/class/leds/red/pause_lo
     chown system system /sys/class/leds/green/pause_lo
