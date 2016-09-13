@@ -81,6 +81,7 @@ on boot
 
     chown system system /sys/devices/soc/soc:fpc_fpc1020/irq
     chown system system /sys/devices/soc/soc:fpc_fpc1020/enable_wakeup
+    chown system system /sys/devices/soc/soc:fpc_fpc1020/proximity_state
 
     # Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
