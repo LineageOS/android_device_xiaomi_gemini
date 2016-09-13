@@ -4,3 +4,5 @@ allow system_server proc_touchpanel:dir search;
 allow system_server proc_touchpanel:file rw_file_perms;
 allow system_server sysfs_homebutton:dir search;
 allow system_server sysfs_homebutton:file rw_file_perms;
+allow system_server sysfs_fpc_wakeup:dir search;
+allow system_server sysfs_fpc_wakeup:file rw_file_perms;
