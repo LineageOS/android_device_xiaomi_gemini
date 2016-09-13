@@ -68,8 +68,6 @@ on boot
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/type
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/state
-    chown system system /sys/devices/soc/soc:fpc_fpc1020/irq
-    chown system system /sys/devices/soc/soc:fpc_fpc1020/enable_wakeup
 
     chmod 0660 /sys/module/bluetooth_power/parameters/power
 
@@ -98,6 +96,12 @@ on boot
 
     # Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
+
+    # Fingerprint
+    chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/irq
+    chown system system /sys/devices/soc/soc:fpc_fpc1020/irq
+    chmod 0660 /sys/devices/soc/soc:fpc_fpc1020/enable_wakeup
+    chown system system /sys/devices/soc/soc:fpc_fpc1020/enable_wakeup
 
     # RGB lights
     chown system system /sys/class/leds/red/pause_lo
