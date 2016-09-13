@@ -163,7 +163,8 @@ PRODUCT_PACKAGES += \
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    fingerprintd
+    fingerprintd \
+    XiaomiPocketMode
 
 # For android_filesystem_config.h
 PRODUCT_PACKAGES += \
