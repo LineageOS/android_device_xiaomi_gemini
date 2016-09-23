@@ -641,9 +641,6 @@ service wifi_fccutild /system/bin/wifi_fccutild
     disabled
     oneshot
 
-on property:wifi.fccutild.load.qcacld=true
-    insmod /system/lib/modules/qca_cld/qca_cld_wlan.ko con_mode=5
-
 service cnss_diag /system/bin/cnss_diag -q -f
     class main
     user root
