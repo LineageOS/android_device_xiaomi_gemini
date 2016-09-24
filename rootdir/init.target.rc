@@ -38,6 +38,7 @@ on post-fs
     export LD_PRELOAD libNimsWrap.so
 
 on init
+   write /sys/devices/soc/soc\:fpc_fpc1020/enable_wakeup 1
    write /sys/module/qpnp_rtc/parameters/poweron_alarm 1
 
 on fs
