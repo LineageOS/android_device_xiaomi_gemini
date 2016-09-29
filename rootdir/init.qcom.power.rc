@@ -28,9 +28,10 @@
 on boot
     # Update foreground and background cpusets
     write /dev/cpuset/foreground/cpus 0-3
-    write /dev/cpuset/foreground/boost/cpus 2-3
-    write /dev/cpuset/background/cpus 0-1
+    write /dev/cpuset/foreground/boost/cpus 0-3
+    write /dev/cpuset/background/cpus 0-3
     write /dev/cpuset/system-background/cpus 0-3
+    write /dev/cpuset/top-app/cpus 0-3
 
     # Enable sched boost
     write /proc/sys/kernel/sched_boost 1
@@ -110,9 +111,8 @@ on enable-low-power
 
     # Set big.LITTLE scheduler parameters
     write /proc/sys/kernel/sched_boost 0
-    write /proc/sys/kernel/sched_migration_fixup 1
-    write /proc/sys/kernel/sched_downmigrate 45
-    write /proc/sys/kernel/sched_upmigrate 45
+    write /proc/sys/kernel/sched_downmigrate 90
+    write /proc/sys/kernel/sched_upmigrate 95
     write /proc/sys/kernel/sched_freq_inc_notify 400000
     write /proc/sys/kernel/sched_freq_dec_notify 400000
     write /proc/sys/kernel/sched_spill_nr_run 3
@@ -164,8 +164,9 @@ on property:init.svc.recovery=running
 
 service charger /charger
     class charger
-    group system graphics
+    group log
     seclabel u:r:healthd:s0
+    writepid /dev/cpuset/system-background/tasks
 
 service energy-awareness /system/bin/energy-awareness
     class main
