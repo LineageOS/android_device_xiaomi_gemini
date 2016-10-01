@@ -482,57 +482,6 @@ vendor/lib/libxt_native.so
 vendor/lib/libxtadapter.so
 vendor/lib/libxtwifi_ulp_adaptor.so
 
-# Graphics
-vendor/lib64/egl/eglSubDriverAndroid.so
-vendor/lib64/egl/libEGL_adreno.so
-vendor/lib64/egl/libGLESv1_CM_adreno.so
-vendor/lib64/egl/libGLESv2_adreno.so
-vendor/lib64/egl/libq3dtools_adreno.so
-vendor/lib64/egl/libq3dtools_esx.so
-vendor/lib64/egl/libQTapGLES.so
-vendor/lib64/libadreno_utils.so
-vendor/lib64/libbccQTI.so
-vendor/lib64/libC2D2.so
-vendor/lib64/libCB.so
-vendor/lib64/libc2d30-a5xx.so
-vendor/lib64/libc2d30_bltlib.so
-vendor/lib64/libgsl.so
-vendor/lib64/libllvm-glnext.so
-vendor/lib64/libllvm-qcom.so
-vendor/lib64/libOpenCL.so
-vendor/lib64/libRSDriver_adreno.so
-vendor/lib64/librs_adreno.so
-vendor/lib64/librs_adreno_sha1.so
-vendor/lib64/libscalar.so
-vendor/lib64/libsdmextension.so|73440a15b4a185c1509e612c8e3fbba3d1d8a60b
-vendor/lib64/libsd_sdk_display.so
-vendor/lib64/libsdm-color.so|8a10710a5f95fcc516186deb97d86f78dfc09bcb
-vendor/lib64/libsdm-diag.so|96e271184adb27b2439b54cadb2ce4a90bfffede
--vendor/lib64/libsdm-disp-apis.so|03a1d36a173b66773b906f65e5eb2a1064704a36
-vendor/lib64/libuiblur.so|4b3fabf5ded7c4af531abde681676fc5e9248494
-vendor/lib/egl/eglSubDriverAndroid.so
-vendor/lib/egl/libEGL_adreno.so
-vendor/lib/egl/libGLESv1_CM_adreno.so
-vendor/lib/egl/libGLESv2_adreno.so
-vendor/lib/egl/libq3dtools_adreno.so
-vendor/lib/egl/libq3dtools_esx.so
-vendor/lib/egl/libQTapGLES.so
-vendor/lib/libadreno_utils.so
-vendor/lib/libbccQTI.so
-vendor/lib/libC2D2.so
-vendor/lib/libCB.so
-vendor/lib/libc2d30-a5xx.so
-vendor/lib/libc2d30_bltlib.so
-vendor/lib/libgsl.so
-vendor/lib/libllvm-glnext.so
-vendor/lib/libllvm-qcom.so
-vendor/lib/libOpenCL.so
-vendor/lib/libRSDriver_adreno.so
-vendor/lib/librs_adreno.so
-vendor/lib/librs_adreno_sha1.so
-vendor/lib/libsd_sdk_display.so
--vendor/lib/libsdm-disp-apis.so|44adfccbfb760f9efceda921c213ebc153cfa0bd
-
 # Graphics firmware
 etc/firmware/a530_gpmu.fw2
 etc/firmware/a530_pfp.fw
@@ -654,8 +603,6 @@ vendor/bin/mm-pp-daemon
 vendor/bin/mm-pp-dpps
 vendor/lib64/libdisp-aba.so
 vendor/lib64/libmm-als.so
-vendor/lib64/libmm-disp-apis.so
-vendor/lib64/libmm-qdcm.so
 
 # QMI
 bin/irsc_util
