@@ -31,11 +31,21 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Bluetooth
 PRODUCT_PROPERTY_OVERRIDES += \
     bt.max.hfpclient.connections=1 \
+    qcom.bluetooth.soc=rome \
+    ro.bluetooth.dun=true \
+    ro.bluetooth.hfp.ver=1.6 \
+    ro.bluetooth.sap=true \
     ro.btconfig.if=uart \
     ro.btconfig.vendor=qcom \
     ro.btconfig.chip=QCA6164 \
     ro.btconfig.dev=/dev/ttyHS0 \
-    qcom.bluetooth.soc=rome
+    ro.qualcomm.bluetooth.ftp=true \
+    ro.qualcomm.bluetooth.hfp=true \
+    ro.qualcomm.bluetooth.hsp=true \
+    ro.qualcomm.bluetooth.map=true \
+    ro.qualcomm.bluetooth.nap=true \
+    ro.qualcomm.bluetooth.opp=true \
+    ro.qualcomm.bluetooth.pbap=true
 
 # Camera
 PRODUCT_PROPERTY_OVERRIDES += \
