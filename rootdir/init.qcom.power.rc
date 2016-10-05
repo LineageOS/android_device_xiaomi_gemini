@@ -146,6 +146,24 @@ on enable-low-power
     # Set idle GPU to 133 MHz
     write /sys/class/kgsl/kgsl-3d0/default_pwrlevel 6
 
+    # Hotplug settings for LITTLE cluster
+    write /sys/devices/system/cpu/cpu0/core_ctl/always_online_cpu "1 0"
+    write /sys/devices/system/cpu/cpu0/core_ctl/busy_down_thres 20
+    write /sys/devices/system/cpu/cpu0/core_ctl/busy_up_thres 60
+    write /sys/devices/system/cpu/cpu0/core_ctl/is_big_cluster 0
+    write /sys/devices/system/cpu/cpu0/core_ctl/max_cpus 2
+    write /sys/devices/system/cpu/cpu0/core_ctl/min_cpus 1
+    write /sys/devices/system/cpu/cpu0/core_ctl/offline_delay_ms 600
+
+    # Hotplug settings for big cluster
+    write /sys/devices/system/cpu/cpu2/core_ctl/always_online_cpu "1 0"
+    write /sys/devices/system/cpu/cpu2/core_ctl/busy_down_thres 25
+    write /sys/devices/system/cpu/cpu2/core_ctl/busy_up_thres 75
+    write /sys/devices/system/cpu/cpu2/core_ctl/is_big_cluster 1
+    write /sys/devices/system/cpu/cpu2/core_ctl/max_cpus 2
+    write /sys/devices/system/cpu/cpu2/core_ctl/min_cpus 1
+    write /sys/devices/system/cpu/cpu2/core_ctl/offline_delay_ms 300
+
     # Set perfd properties and start service
     rm /data/system/perfd/default_values
     start perfd
@@ -164,7 +182,6 @@ on property:init.svc.recovery=running
 
 on property:sys.perf.profile=0
     # Set low-power performance settings
-    
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "conservative"
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "conservative"
 
@@ -173,7 +190,6 @@ on property:sys.perf.profile=0
 
 on property:sys.perf.profile=1
     # Set normal performance settings
-
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "interactive"
 
