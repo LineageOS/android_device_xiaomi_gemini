@@ -42,7 +42,7 @@
         <!-- format: "ADPCM_packet" or "PCM_packet" !-->
         <!-- transfer_mode: "FTRT" or "RT" -->
         <!--  kw_duration is in milli seconds. It is valid only for FTRT transfer mode -->
-        <capture_keyword format="PCM_packet" transfer_mode="RT" kw_duration="2000" />
+        <capture_keyword format="PCM_packet" transfer_mode="FTRT" kw_duration="2000" />
         <param_type name="load_sound_model" module_id="0x00012C0D" param_id="0x00012C14"/>
         <param_type name="unload_sound_model" module_id="0x00012C0D" param_id="0x00012C15"/>
         <param_type name="confidence_levels" module_id="0x00012C0D" param_id="0x00012C07"/>
