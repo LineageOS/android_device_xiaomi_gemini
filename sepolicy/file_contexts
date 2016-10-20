@@ -3,6 +3,9 @@
 /dev/pn548                            u:object_r:nfc_device:s0
 /dev/sysmatdrv                        u:object_r:sysmatdrv_device:s0
 
+/sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input[0-9]+/reversed_keys	u:object_r:proc_touchpanel:s0
+/sys/devices/soc/75ba000.i2c/i2c-12/12-004a/reversed_keys			u:object_r:proc_touchpanel:s0
+
 # Data files
 /data/fpc(/.*)?                       u:object_r:fpc_data_file:s0
 
