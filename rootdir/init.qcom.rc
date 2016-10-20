@@ -136,9 +136,10 @@ on boot
     # Button backlight permissions
     chown system system /sys/class/leds/button-backlight1/brightness
 
-    # DT2W and KeyDisabler permissions
+    # DT2W, KeyDisabler and SwapKey permissions
     chown system system /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input1/wake_gesture
     chown system system /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input1/0dbutton
+    chown system system /proc/touchpanel/reversed_keys
 
     # Graphic node permissions
     chown system graphics /sys/class/graphics/fb0/idle_time
