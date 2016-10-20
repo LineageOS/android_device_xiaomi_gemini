@@ -107,6 +107,10 @@ on boot
     # DT2W and KeyDisabler permissions
     chown system system /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input1/wake_gesture
     chown system system /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input1/0dbutton
+    chown system system /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input1/key_rep
+    chmod 0660 /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input1/wake_gesture
+    chmod 0660 /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input1/0dbutton
+    chmod 0660 /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input1/key_rep
 
     # Graphic node permissions
     chown system graphics /sys/class/graphics/fb0/idle_time
