@@ -3,6 +3,8 @@
 /dev/pn548                            u:object_r:nfc_device:s0
 /dev/sysmatdrv                        u:object_r:sysmatdrv_device:s0
 
+/sys/homebutton/enable                u:object_r:sysfs_homebutton:s0
+
 # Data files
 /data/fpc(/.*)?                       u:object_r:fpc_data_file:s0
 
