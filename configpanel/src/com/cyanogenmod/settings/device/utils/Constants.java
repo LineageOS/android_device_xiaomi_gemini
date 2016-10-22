@@ -28,8 +28,14 @@ public class Constants {
     // Swap keys
     public static final String BUTTON_SWAP_KEY = "button_swap";
 
+    // FP key
+    public static final String FP_HOME_KEY = "fp_home";
+
     // Swap nodes
     public static final String BUTTON_SWAP_NODE = "/proc/touchpanel/reversed_keys_enable";
+
+    // FP nodes
+    public static final String FP_HOME_NODE = "/sys/devices/soc/soc:fpc_fpc1020/homebutton";
 
     // Holds <preference_key> -> <proc_node> mapping
     public static final Map<String, String> sBooleanNodePreferenceMap = new HashMap<>();
@@ -40,11 +46,14 @@ public class Constants {
 
     public static final String[] sButtonPrefKeys = {
         BUTTON_SWAP_KEY,
+        FP_HOME_KEY,
     };
 
     static {
         sBooleanNodePreferenceMap.put(BUTTON_SWAP_KEY, BUTTON_SWAP_NODE);
+        sBooleanNodePreferenceMap.put(FP_HOME_KEY, FP_HOME_NODE);
         sNodeDefaultMap.put(BUTTON_SWAP_KEY, false);
+        sNodeDefaultMap.put(FP_HOME_KEY, false);
     }
 
     public static boolean isPreferenceEnabled(Context context, String key) {
