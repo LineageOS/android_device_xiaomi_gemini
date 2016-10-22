@@ -140,6 +140,9 @@ on boot
     # Button backlight permissions
     chown system system /sys/class/leds/button-backlight1/brightness
 
+    # FPC home button permissions
+    chown system system /sys/homebutton/enable
+
     # Graphic node permissions
     chown system graphics /sys/class/graphics/fb0/idle_time
     chown system graphics /sys/class/graphics/fb0/dyn_pu
