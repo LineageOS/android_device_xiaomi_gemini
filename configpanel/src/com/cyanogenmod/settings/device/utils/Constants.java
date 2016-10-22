@@ -25,11 +25,13 @@ import android.preference.PreferenceManager;
 
 public class Constants {
 
-    // Swap keys
+    // Button keys
     public static final String BUTTON_SWAP_KEY = "button_swap";
+    public static final String FP_HOME_KEY = "fp_home";
 
-    // Swap nodes
+    // Button nodes
     public static final String BUTTON_SWAP_NODE = "/sys/devices/soc/75ba000.i2c/i2c-12/12-0020/input/input1/key_rep";
+    public static final String FP_HOME_NOPE = "/sys/homebutton/enable";
 
     // Holds <preference_key> -> <proc_node> mapping
     public static final Map<String, String> sBooleanNodePreferenceMap = new HashMap<>();
@@ -40,11 +42,14 @@ public class Constants {
 
     public static final String[] sButtonPrefKeys = {
         BUTTON_SWAP_KEY,
+        FP_HOME_KEY,
     };
 
     static {
         sBooleanNodePreferenceMap.put(BUTTON_SWAP_KEY, BUTTON_SWAP_NODE);
+        sBooleanNodePreferenceMap.put(FP_HOME_KEY, FP_HOME_NODE);
         sNodeDefaultMap.put(BUTTON_SWAP_KEY, false);
+        sNodeDefaultMap.put(FP_HOME_KEY, false);
     }
 
     public static boolean isPreferenceEnabled(Context context, String key) {
