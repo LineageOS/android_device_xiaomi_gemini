@@ -30,9 +30,10 @@ import org.cyanogenmod.internal.util.FileUtils;
 public class KeyDisabler {
 
     private static String CONTROL_PATH = "/proc/touchpanel/capacitive_keys_enable";
+    private static String FP_HOME_PATH = "/sys/devices/soc/soc:fpc_fpc1020/homebutton";
 
     public static boolean isSupported() {
-        return FileUtils.isFileWritable(CONTROL_PATH);
+        return FileUtils.isFileWritable(CONTROL_PATH) && FileUtils.isFileWritable(FP_HOME_PATH);
     }
 
     public static boolean isActive() {
@@ -40,6 +41,7 @@ public class KeyDisabler {
     }
 
     public static boolean setActive(boolean state) {
-        return FileUtils.writeLine(CONTROL_PATH, (state ? "0" : "1"));
+        return FileUtils.writeLine(CONTROL_PATH, (state ? "0" : "1"))
+                && FileUtils.writeLine(FP_HOME_PATH, (state ? "0" : "1"));
     }
 }
