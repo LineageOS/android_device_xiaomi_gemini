@@ -2,3 +2,4 @@ type fpc_data_file, file_type;
 type dsp_file, fs_type, contextmount_type;
 type proc_touchpanel, sysfs_type, fs_type;
 type sysfs_fpc, sysfs_type, fs_type;
+type sysfs_homebutton, sysfs_type, fs_type;
