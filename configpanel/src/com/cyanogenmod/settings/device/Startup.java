@@ -16,6 +16,7 @@
 
 package com.cyanogenmod.settings.device;
 
+import android.app.KeyguardManager;
 import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothManager;
@@ -61,6 +62,13 @@ public class Startup extends BroadcastReceiver {
             } else {
                 enableComponent(context, ButtonSettings.class.getName());
 
+		boolean initial_state = FileUtils.readOneLine(FP_HOME_NODE).equals("1");
+		if (isKeyguardLocked) {
+			FileUtils.writeLine(FP_HOME_NODE, "0");
+		} else if (!isKeyguardLocked && initial_state) {
+			FileUtils.writeLine(FP_HOME_NODE, "1");
+		}
+
                 // Restore nodes to saved preference values
                 for (String pref : Constants.sButtonPrefKeys) {
                     String value;
@@ -82,6 +90,14 @@ public class Startup extends BroadcastReceiver {
         }
     }
 
+    private boolean isKeyguardLocked() {
+        if (mKeyguardManager == null) {
+            mKeyguardManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
+        }
+        return locked = (mKeyguardManager != null)
+                && mKeyguardManager.inKeyguardRestrictedInputMode();
+    }
+
     private void sendInputEvent(InputEvent event) {
         InputManager inputManager = InputManager.getInstance();
         inputManager.injectInputEvent(event,
@@ -89,7 +105,8 @@ public class Startup extends BroadcastReceiver {
     }
 
     static boolean hasButtonProcs() {
-        return new File(Constants.BUTTON_SWAP_NODE).exists();
+        return (new File(Constants.BUTTON_SWAP_NODE).exists() ||
+            new File(Constants.FP_HOME_NODE).exists());
     }
 
     private void disableComponent(Context context, String component) {
