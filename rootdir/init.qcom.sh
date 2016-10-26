@@ -52,6 +52,9 @@ case "$emmc_boot"
     ;;
 esac
 
+# Set touchpanel nodes permissions
+chown -LR system.system /proc/touchpanel
+
 #
 # Copy qcril.db if needed for RIL
 #
