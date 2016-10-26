@@ -52,6 +52,9 @@ case "$emmc_boot"
     ;;
 esac
 
+# Set shared touchpanel nodes ownership (these are proc_symlinks to the real sysfs nodes)
+chown -LR system.system /proc/touchpanel
+
 #
 # Copy qcril.db if needed for RIL
 #
