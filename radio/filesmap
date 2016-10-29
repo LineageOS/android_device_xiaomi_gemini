@@ -30,6 +30,7 @@
 adspso.bin              /dev/block/bootdevice/by-name/dsp
 BTFM.bin                /dev/block/bootdevice/by-name/bluetooth
 NON-HLOS.bin            /dev/block/bootdevice/by-name/modem
+modem.*                 /dev/block/bootdevice/by-name/modem
 xbl.elf                 /dev/block/bootdevice/by-name/xbl
 
 cmnlib64.mbn            /dev/block/bootdevice/by-name/cmnlib64
