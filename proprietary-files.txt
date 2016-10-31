@@ -35,7 +35,6 @@ etc/acdbdata/Forte/Forte_Handset_cal.acdb
 etc/acdbdata/Forte/Forte_Hdmi_cal.acdb
 etc/acdbdata/Forte/Forte_Headset_cal.acdb
 etc/acdbdata/Forte/Forte_Speaker_cal.acdb
-etc/acdbdata/adsp_avs_config.acdb
 
 # Audio amplifier
 etc/firmware/tfa98xx.cnt
@@ -425,62 +424,37 @@ vendor/lib64/hw/gatekeeper.msm8996.so
 vendor/lib/hw/gatekeeper.msm8996.so
 
 # GPS
-bin/loc_launcher
-bin/tloc_daemon
-bin/xtwifi-client
-bin/xtwifi-inet-agent
+bin/loc_launcher|38f32f4003fd31ec7cf5f072e19da8ea4ddb34bd
 etc/permissions/com.qti.location.sdk.xml
 etc/permissions/com.qualcomm.location.xml
-framework/com.qti.location.sdk.jar
--lib64/libloc_api_v02.so
-lib64/libloc_ds_api.so
--lib/libloc_api_v02.so
-lib/libloc_ds_api.so
--priv-app/com.qualcomm.location/com.qualcomm.location.apk
-vendor/bin/slim_daemon
-vendor/lib64/hw/flp.default.so
-vendor/lib64/libalarmservice_jni.so
-vendor/lib64/libasn1cper.so
-vendor/lib64/libasn1crt.so
-vendor/lib64/libasn1crtx.so
-vendor/lib64/libdataitems.so
-vendor/lib64/libflp.so
-vendor/lib64/libgdtap.so
-vendor/lib64/libgeofence.so
-vendor/lib64/libizat_core.so
-vendor/lib64/liblbs_core.so
-vendor/lib64/libloc_ext.so
-vendor/lib64/libloc_xtra.so
-vendor/lib64/liblocationservice.so
-vendor/lib64/liblocationservice_glue.so
-vendor/lib64/liblowi_client.so
-vendor/lib64/libquipc_os_api.so
-vendor/lib64/libslimclient.so
-vendor/lib64/libulp2.so
-vendor/lib64/libxt_native.so
-vendor/lib64/libxtadapter.so
-vendor/lib64/libxtwifi_ulp_adaptor.so
-vendor/lib/hw/flp.default.so
-vendor/lib/libalarmservice_jni.so
-vendor/lib/libasn1cper.so
-vendor/lib/libasn1crt.so
-vendor/lib/libasn1crtx.so
-vendor/lib/libdataitems.so
-vendor/lib/libflp.so
-vendor/lib/libgdtap.so
-vendor/lib/libgeofence.so
-vendor/lib/libizat_core.so
-vendor/lib/liblbs_core.so
-vendor/lib/libloc_ext.so
-vendor/lib/liblocationservice.so
-vendor/lib/liblocationservice_glue.so
-vendor/lib/liblowi_client.so
-vendor/lib/libquipc_os_api.so
-vendor/lib/libslimclient.so
-vendor/lib/libulp2.so
-vendor/lib/libxt_native.so
-vendor/lib/libxtadapter.so
-vendor/lib/libxtwifi_ulp_adaptor.so
+framework/com.qti.location.sdk.jar|ef91b72b4d99f9666a6699e12a095e66caa3b490
+-lib64/libloc_api_v02.so|a0a675b0ce9056abee76b625b8c50b40890a8b9d
+lib64/libloc_ds_api.so|50fbbc0a72dc926f6a67d9e89410d8f2a384f95d
+-priv-app/com.qualcomm.location/com.qualcomm.location.apk|d394af5bcb62c91fe85c54e0a1344d59e08d09f0
+vendor/bin/slim_daemon|24f4c67aa01a69968d6a530a60d623620e61eb03
+vendor/lib64/hw/flp.default.so|c316430273d9ed5506198f896654cdb0e27e66e5
+vendor/lib64/libalarmservice_jni.so|2e9fddcc77584903eefe1cd80220285a4c782f5c
+vendor/lib64/libasn1cper.so|9ad8311ae2fa9c93e137b4784b2081752688d91f
+vendor/lib64/libasn1crt.so|987020bd9279c34c463e149b133c75dcc64d0245
+vendor/lib64/libasn1crtx.so|dd0765f26729129ce61a56b3d0214a79ba9aca16
+vendor/lib64/libdataitems.so|a962e72175b13de3e3e90322be3b980379a4f813
+vendor/lib64/libflp.so|ef0541177147c9d34809b1fca9df07a07d0a77f6
+vendor/lib64/libgdtap.so|a7a3cd90d4ec9dd8e24b0d0e6b9237c7f2f8ade2
+vendor/lib64/libgeofence.so|79f0552befa18b88a018939da28df362b7694d22
+vendor/lib64/libizat_core.so|0b19814b823bd6192c77f0f03ac75d33944423e8
+vendor/lib64/liblbs_core.so|eb7cf0462f7dc1e93854eac1318d93df9ef3b679
+vendor/lib64/libloc_ext.so|6b55bce0c02b94e081247ba7af331e15f4f0b188
+vendor/lib64/libloc_xtra.so|f2792796f2f8afd48951bf7d277ecd76bfd0f104
+vendor/lib64/liblocationservice.so|ef7607431040a23338645cf5ff367cdfd3b8b12a
+vendor/lib64/liblocationservice_glue.so|817e2453949786fc76db0b5892e1ce18225df959
+vendor/lib64/liblowi_client.so|65b0f6d13ed8c27e452e8cf29fb92d559f95d95b
+vendor/lib64/liblowi_wifihal.so|55f6b843edf41d85d383ccb0149021d19f9f4160
+vendor/lib64/liblowi_wifihal_nl.so|dc1f6580f8d2737341185cd84b857c44fe094411
+vendor/lib64/libquipc_os_api.so|8b612f61fc551648700d8d2decf28e5533e98724
+vendor/lib64/libulp2.so|c7039dbd12ca98820622a69145d4debbed45a016
+vendor/lib64/libxt_native.so|d5ff891c5e8a24d42e38eb76d51f58e0bdb1d873
+vendor/lib64/libxtadapter.so|3f763934a8a33e2f3c3e3d8f579a694306c21add
+vendor/lib64/libxtwifi_ulp_adaptor.so|6f69ec62b83201373b2ba4df4f68226ff9351d86
 
 # Graphics firmware
 etc/firmware/a530_gpmu.fw2
@@ -577,16 +551,23 @@ vendor/firmware/libpn548ad_fw.so
 
 # Perf
 bin/energy-awareness
-bin/iop
+bin/iop|8ea149dfc9621598fc6606a89d5dda2b62969c83
 bin/msm_irqbalance
-lib64/libqti-iop.so
-vendor/bin/perfd
-vendor/lib64/libqc-opt.so
-vendor/lib64/libqti-iop-client.so
-vendor/lib64/libqti-perfd-client.so
-vendor/lib/libqc-opt.so
-vendor/lib/libqti-iop-client.so
-vendor/lib/libqti-perfd-client.so
+lib64/libqti-iop.so|91a8f39d31801762ffa0ea3005c6ab66cf7372d6
+vendor/bin/perfd|798c7d31e4fb57ff53dadc9fb7eb230db58f896d
+vendor/etc/perf-profile0.conf|02204355bf29ceb0460cd53e6716552bb9d9b05f
+vendor/etc/perf-profile1.conf|26100ffedb1780d3e0d1bc49609dba8a29847dfd
+vendor/etc/perf-profile2.conf|66ac3877bf0030b72c99107f665bb392538d0237
+vendor/etc/perf-profile3.conf|3a1edfaeaf087effcadba7c652737ab6dd2d87b5
+vendor/etc/perf-profile4.conf|0bc4779472306b1b225e9fc9be40af54e14e2266
+vendor/etc/perf-profile5.conf|5bc85ed4a0f3cedd57e1e046416f423a83dc4f63
+vendor/etc/perf-profile6.conf|910a193b8425bbe0080f746d6788e66986b2e762
+vendor/lib/libqc-opt.so|e92fb472086cf455d371ebe4e674e01becdccdc9
+vendor/lib/libqti-iop-client.so|dc13272e813f326104ee38f7616b05b3c5e29b3c
+vendor/lib/libqti-perfd-client.so|36cf6fe66d0ced53bf0ae932f5cd2f031f2639f6
+vendor/lib64/libqc-opt.so|24bd95947487e44f927307259a8367f1a6c3e7c1
+vendor/lib64/libqti-iop-client.so|20ee87aadeea08b7877c71e81e909f3b1a2f3d3f
+vendor/lib64/libqti-perfd-client.so|5b1c7ea8fa066d1a3e763bafbf43833e64a19391
 
 # Peripheral manager
 bin/pm-proxy
@@ -595,14 +576,14 @@ vendor/lib64/libperipheral_client.so
 vendor/lib/libperipheral_client.so
 
 # Postprocessing
-bin/displayfeature
+#bin/displayfeature
 etc/permissions/com.qti.snapdragon.sdk.display.xml
 framework/com.qti.snapdragon.sdk.display.jar
 -vendor/app/colorservice/colorservice.apk
-vendor/bin/mm-pp-daemon
+#vendor/bin/mm-pp-daemon
 vendor/bin/mm-pp-dpps
 vendor/lib64/libdisp-aba.so
-vendor/lib64/libmm-als.so
+#vendor/lib64/libmm-als.so
 
 # QMI
 bin/irsc_util
@@ -683,13 +664,13 @@ vendor/qcril.db
 bin/sensors.qcom
 vendor/lib64/hw/activity_recognition.msm8996.so
 vendor/lib64/libsensor_reg.so
-vendor/lib64/libsensor_user_cal.so
+#vendor/lib64/libsensor_user_cal.so
 vendor/lib64/libsensor1.so
 vendor/lib64/sensors.oem.so
 vendor/lib64/sensors.ssc.so
 vendor/lib/hw/activity_recognition.msm8996.so
 vendor/lib/libsensor_reg.so
-vendor/lib/libsensor_user_cal.so
+#vendor/lib/libsensor_user_cal.so
 vendor/lib/libsensor1.so
 vendor/lib/sensors.oem.so
 vendor/lib/sensors.ssc.so
@@ -709,9 +690,9 @@ vendor/lib/libTimeService.so
 -vendor/lib/libtime_genoff.so
 
 # Widevine
-vendor/lib/libWVStreamControlAPI_L3.so|61673304827483d44b735a3dd08f0783d10ce92d
-vendor/lib/libwvdrm_L3.so|7e77482481197997294a834bfbc817a01b6075cd
-vendor/lib/mediadrm/libwvdrmengine.so|6c0954f6b6f33d25d3a2727495df93ee59b5f18f
+vendor/lib/libWVStreamControlAPI_L3.so|3bfb950f01c51430aeefdf9850301cba8e56645a
+vendor/lib/libwvdrm_L3.so|84e3aca99db67f2323e158131978e5bc3ad69fbc
+vendor/lib/mediadrm/libwvdrmengine.so|01c7543cf509c9cdbe0572178cc11fdf432ec2fd
 
 # WiFi
 bin/cnss-daemon
