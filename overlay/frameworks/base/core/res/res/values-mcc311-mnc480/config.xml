@@ -40,8 +40,4 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
          that should be used instead. A value of RIL_RADIO_TECHNOLOGY_UNKNOWN:0 means
          there is no replacement value and VoLTE is assumed to be supported -->
     <integer name="config_volte_replacement_rat">6</integer>
-
-    <!-- Wifi framework supports ECBM mode -->
-    <bool translatable="false" name="config_wifi_ecbm_mode_change">false</bool>
-
 </resources>
