@@ -35,14 +35,12 @@ etc/acdbdata/Forte/Forte_Handset_cal.acdb
 etc/acdbdata/Forte/Forte_Hdmi_cal.acdb
 etc/acdbdata/Forte/Forte_Headset_cal.acdb
 etc/acdbdata/Forte/Forte_Speaker_cal.acdb
-etc/acdbdata/adsp_avs_config.acdb
 
 # Audio amplifier
 etc/firmware/tfa98xx.cnt
 etc/firmware/tfa9891.cnt
 
 # Audio libraries
-lib/soundfx/libdirac.so
 vendor/lib64/soundfx/libqcbassboost.so
 vendor/lib64/soundfx/libqcreverb.so
 vendor/lib64/soundfx/libqcvirt.so
@@ -69,7 +67,6 @@ bin/dun-server
 bin/hci_qcomm_init
 bin/wcnss_filter
 vendor/lib64/libbtnv.so
-vendor/lib64/libCommandSvc.so
 vendor/lib/libbtnv.so
 
 # Bluetooth firmware
@@ -89,12 +86,8 @@ bin/mm-qcamera-daemon
 lib/hw/camera.msm8996.so
 lib/libmmcamera_interface.so
 lib/libmmjpeg_interface.so
-lib/libmmlib2d_interface.so
 lib/libmm-qcamera.so
-lib/libmorpho_memory_allocator.so
-lib/libmorpho_panorama.so
 lib/libqomx_core.so
-lib/libRecoFace.so
 vendor/lib/libarcsoft_beauty_shot.so
 vendor/lib/libchromaflash.so|8fe5d31f6d1e304b6b6ffe4ca2576abbcb2cc88d
 vendor/lib/libFaceGrade.so
@@ -112,7 +105,6 @@ vendor/lib/libmmcamera2_imglib_modules.so
 vendor/lib/libmmcamera2_is.so
 vendor/lib/libmmcamera2_isp_modules.so
 vendor/lib/libmmcamera2_mct.so
-vendor/lib/libmmcamera2_memleak.so
 vendor/lib/libmmcamera2_pp_buf_mgr.so
 vendor/lib/libmmcamera2_pproc_modules.so
 vendor/lib/libmmcamera2_q3a_core.so
@@ -157,14 +149,12 @@ vendor/lib/libois_lc898122.so
 vendor/lib/libmorpho_easy_hdr.so
 vendor/lib/libmorpho_hdr_checker.so
 vendor/lib/libmorpho_image_stab4.so
-vendor/lib/libmorpho_panorama_gp.so
 vendor/lib/liboptizoom.so|5cd3d2b56986eebe4a0d4605d13be825886ae017
 vendor/lib/libqomx_jpegdec.so
 vendor/lib/libqomx_jpegenc_pipe.so
 vendor/lib/libqomx_jpegenc.so
 vendor/lib/libseemore.so|74d5842f29a30b297601cb461ac78ce18fa2bc4e
 vendor/lib/libSonyIMX298PdafLibrary.so
-vendor/lib/libtm_interface.so
 
 # Camera actuators
 vendor/lib/libactuator_ak7348.so
@@ -275,9 +265,9 @@ vendor/lib/libchromatix_ov4688_zsl_preview_ad5823.so
 vendor/lib/libchromatix_ov4688_zsl_video_ad5823.so
 
 # Camera configs
+etc/camera/camera_config.xml
 etc/camera/imx298_liteon_chromatix.xml
 etc/camera/imx298_semco_chromatix.xml
-etc/camera/msm8996_camera.xml
 etc/camera/ov4688_chromatix.xml
 etc/camera/ov4688_primax_chromatix.xml
 
@@ -349,18 +339,16 @@ framework/cneapiclient.jar
 framework/com.quicinc.cne.jar
 framework/ConnectivityExt.jar
 -priv-app/CNEService/CNEService.apk
-vendor/lib64/libNimsWrap.so
+#vendor/lib64/libNimsWrap.so
 vendor/lib64/libcneapiclient.so
-vendor/lib64/libcneconn.so
 vendor/lib64/libcneqmiutils.so
 vendor/lib64/libcne.so
 vendor/lib64/libvendorconn.so
 vendor/lib64/libwms.so
 vendor/lib64/libwqe.so
 vendor/lib64/libxml.so
-vendor/lib/libNimsWrap.so
+#vendor/lib/libNimsWrap.so
 vendor/lib/libcneapiclient.so
-vendor/lib/libcneconn.so
 vendor/lib/libcneqmiutils.so
 vendor/lib/libcne.so
 vendor/lib/libvendorconn.so
@@ -383,7 +371,7 @@ etc/permissions/dpmapi.xml
 framework/com.qti.dpmframework.jar
 framework/dpmapi.jar
 framework/tcmclient.jar
--priv-app/dpmserviceapp/dpmserviceapp.apk|c1857ea53c173de4bcc265e24aa2d2631a62c5e2
+-priv-app/dpmserviceapp/dpmserviceapp.apk
 vendor/lib64/libdpmctmgr.so
 vendor/lib64/libdpmfdmgr.so
 vendor/lib64/libdpmframework.so
@@ -415,8 +403,8 @@ vendor/lib/libQSEEComAPI.so
 
 # Fingerprint
 bin/qvop-daemon
-lib64/hw/fingerprint.fpc.so
-lib/hw/fingerprint.fpc.so
+#lib64/hw/fingerprint.fpc.so
+#lib/hw/fingerprint.fpc.so
 vendor/lib64/libqvop-service.so
 vendor/lib/libqvop-service.so
 
@@ -426,16 +414,11 @@ vendor/lib/hw/gatekeeper.msm8996.so
 
 # GPS
 bin/loc_launcher
-bin/tloc_daemon
-bin/xtwifi-client
-bin/xtwifi-inet-agent
 etc/permissions/com.qti.location.sdk.xml
 etc/permissions/com.qualcomm.location.xml
 framework/com.qti.location.sdk.jar
 -lib64/libloc_api_v02.so
 lib64/libloc_ds_api.so
--lib/libloc_api_v02.so
-lib/libloc_ds_api.so
 -priv-app/com.qualcomm.location/com.qualcomm.location.apk
 vendor/bin/slim_daemon
 vendor/lib64/hw/flp.default.so
@@ -450,7 +433,7 @@ vendor/lib64/libgeofence.so
 vendor/lib64/libizat_core.so
 vendor/lib64/liblbs_core.so
 vendor/lib64/libloc_ext.so
-vendor/lib64/libloc_xtra.so
+#vendor/lib64/libloc_xtra.so
 vendor/lib64/liblocationservice.so
 vendor/lib64/liblocationservice_glue.so
 vendor/lib64/liblowi_client.so
@@ -460,27 +443,6 @@ vendor/lib64/libulp2.so
 vendor/lib64/libxt_native.so
 vendor/lib64/libxtadapter.so
 vendor/lib64/libxtwifi_ulp_adaptor.so
-vendor/lib/hw/flp.default.so
-vendor/lib/libalarmservice_jni.so
-vendor/lib/libasn1cper.so
-vendor/lib/libasn1crt.so
-vendor/lib/libasn1crtx.so
-vendor/lib/libdataitems.so
-vendor/lib/libflp.so
-vendor/lib/libgdtap.so
-vendor/lib/libgeofence.so
-vendor/lib/libizat_core.so
-vendor/lib/liblbs_core.so
-vendor/lib/libloc_ext.so
-vendor/lib/liblocationservice.so
-vendor/lib/liblocationservice_glue.so
-vendor/lib/liblowi_client.so
-vendor/lib/libquipc_os_api.so
-vendor/lib/libslimclient.so
-vendor/lib/libulp2.so
-vendor/lib/libxt_native.so
-vendor/lib/libxtadapter.so
-vendor/lib/libxtwifi_ulp_adaptor.so
 
 # Graphics firmware
 etc/firmware/a530_gpmu.fw2
@@ -502,10 +464,10 @@ bin/imscmservice
 bin/imsdatadaemon
 bin/imsqmidaemon
 bin/ims_rtp_daemon
--vendor/app/ims/ims.apk|94bb6f3bc031e4d3ea81396352c5f085bc5bbb75
--vendor/app/imssettings/imssettings.apk|9012208878e4542e9a2332b719d0759bea5e14c0
-vendor/lib64/libimscamera_jni.so|653b5ea60d42941b32c4c9a6a6e9edcde448adea
-vendor/lib64/libimsmedia_jni.so|178030d4054a8b452da60c47644798e8b99ae10c
+-vendor/app/ims/ims.apk
+-vendor/app/imssettings/imssettings.apk
+vendor/lib64/libimscamera_jni.so
+vendor/lib64/libimsmedia_jni.so
 vendor/lib64/lib-dplmedia.so
 vendor/lib64/lib-ims-rcscmjni.so
 vendor/lib64/lib-imscamera.so
@@ -532,8 +494,8 @@ vendor/lib64/libvoice-svc.so
 bin/ipacm-diag
 
 # IRDA
-lib64/hw/consumerir.msm8996.so
-lib/hw/consumerir.msm8996.so
+#lib64/hw/consumerir.msm8996.so
+#lib/hw/consumerir.msm8996.so
 
 # Keystore
 vendor/lib64/hw/keystore.msm8996.so
@@ -577,16 +539,23 @@ vendor/firmware/libpn548ad_fw.so
 
 # Perf
 bin/energy-awareness
-bin/iop
+bin/iop|99103e715b712b7d1a1973bff3b6b189fb34473d
 bin/msm_irqbalance
-lib64/libqti-iop.so
-vendor/bin/perfd
-vendor/lib64/libqc-opt.so
-vendor/lib64/libqti-iop-client.so
-vendor/lib64/libqti-perfd-client.so
-vendor/lib/libqc-opt.so
-vendor/lib/libqti-iop-client.so
-vendor/lib/libqti-perfd-client.so
+lib64/libqti-iop.so|91a8f39d31801762ffa0ea3005c6ab66cf7372d6
+vendor/bin/perfd|798c7d31e4fb57ff53dadc9fb7eb230db58f896d
+vendor/etc/perf-profile0.conf|02204355bf29ceb0460cd53e6716552bb9d9b05f
+vendor/etc/perf-profile1.conf|26100ffedb1780d3e0d1bc49609dba8a29847dfd
+vendor/etc/perf-profile2.conf|66ac3877bf0030b72c99107f665bb392538d0237
+vendor/etc/perf-profile3.conf|3a1edfaeaf087effcadba7c652737ab6dd2d87b5
+vendor/etc/perf-profile4.conf|0bc4779472306b1b225e9fc9be40af54e14e2266
+vendor/etc/perf-profile5.conf|5bc85ed4a0f3cedd57e1e046416f423a83dc4f63
+vendor/etc/perf-profile6.conf|910a193b8425bbe0080f746d6788e66986b2e762
+vendor/lib/libqc-opt.so|e92fb472086cf455d371ebe4e674e01becdccdc9
+vendor/lib/libqti-iop-client.so|dc13272e813f326104ee38f7616b05b3c5e29b3c
+vendor/lib/libqti-perfd-client.so|36cf6fe66d0ced53bf0ae932f5cd2f031f2639f6
+vendor/lib64/libqc-opt.so|24bd95947487e44f927307259a8367f1a6c3e7c1
+vendor/lib64/libqti-iop-client.so|20ee87aadeea08b7877c71e81e909f3b1a2f3d3f
+vendor/lib64/libqti-perfd-client.so|5b1c7ea8fa066d1a3e763bafbf43833e64a19391
 
 # Peripheral manager
 bin/pm-proxy
@@ -599,10 +568,8 @@ bin/displayfeature
 etc/permissions/com.qti.snapdragon.sdk.display.xml
 framework/com.qti.snapdragon.sdk.display.jar
 -vendor/app/colorservice/colorservice.apk
-vendor/bin/mm-pp-daemon
 vendor/bin/mm-pp-dpps
 vendor/lib64/libdisp-aba.so
-vendor/lib64/libmm-als.so
 
 # QMI
 bin/irsc_util
@@ -658,13 +625,13 @@ bin/mmbn-daemon
 bin/tftp_server
 etc/modem/Diag.cfg
 etc/permissions/embms.xml
-etc/permissions/qcnvitems.xml
+#etc/permissions/qcnvitems.xml
 etc/permissions/qcrilhook.xml
 etc/permissions/telephonyservice.xml
 framework/embmslibrary.jar
--framework/qcnvitems.jar
+#-framework/qcnvitems.jar
 -framework/qcrilhook.jar
-framework/qti-telephony-common.jar|97d23b52db3773005e51eac7b9df1701c99a416c
+framework/qti-telephony-common.jar
 framework/QtiTelephonyServicelibrary.jar
 -priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
 vendor/bin/qti
@@ -683,13 +650,11 @@ vendor/qcril.db
 bin/sensors.qcom
 vendor/lib64/hw/activity_recognition.msm8996.so
 vendor/lib64/libsensor_reg.so
-vendor/lib64/libsensor_user_cal.so
 vendor/lib64/libsensor1.so
 vendor/lib64/sensors.oem.so
 vendor/lib64/sensors.ssc.so
 vendor/lib/hw/activity_recognition.msm8996.so
 vendor/lib/libsensor_reg.so
-vendor/lib/libsensor_user_cal.so
 vendor/lib/libsensor1.so
 vendor/lib/sensors.oem.so
 vendor/lib/sensors.ssc.so
