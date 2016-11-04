@@ -28,13 +28,14 @@ vendor/lib/rfsa/adsp/libvpp_svc_skel.so
 vendor/lib/rfsa/adsp/us-syncproximity.so
 
 # Audio ACDB
-etc/acdbdata/Forte/Forte_Bluetooth_cal.acdb|01569a8d61d472ae3cb0efa3640f96cdeff83ca1
-etc/acdbdata/Forte/Forte_General_cal.acdb|b72e6e28f3aca136c86b9b566c138253e8b4f42c
-etc/acdbdata/Forte/Forte_Global_cal.acdb|001552c85a596a9c40caf296eb2bcf36ad5f3794
-etc/acdbdata/Forte/Forte_Handset_cal.acdb|0549274f766a22398c396e924d4392b2e01a3d4d
-etc/acdbdata/Forte/Forte_Hdmi_cal.acdb|b2fd441d2b45832c5e23a4d25edf852034cf40cf
-etc/acdbdata/Forte/Forte_Headset_cal.acdb|f0650d74c2db91869a9e4dd478796b655eaa5b03
-etc/acdbdata/Forte/Forte_Speaker_cal.acdb|8b9989f340bc54180f038f981d986b5f77ebaea2
+etc/acdbdata/Forte/Forte_Bluetooth_cal.acdb
+etc/acdbdata/Forte/Forte_General_cal.acdb
+etc/acdbdata/Forte/Forte_Global_cal.acdb
+etc/acdbdata/Forte/Forte_Handset_cal.acdb
+etc/acdbdata/Forte/Forte_Hdmi_cal.acdb
+etc/acdbdata/Forte/Forte_Headset_cal.acdb
+etc/acdbdata/Forte/Forte_Speaker_cal.acdb
+etc/acdbdata/adsp_avs_config.acdb
 
 # Audio amplifier
 etc/firmware/tfa98xx.cnt
