@@ -27,14 +27,34 @@
 #
 
 # Update the panel color property and Leds brightness 
-if [ -f /sys/bus/i2c/devices/12-004a/panel_color ]; then
-    # Atmel
-    color=`cat /sys/bus/i2c/devices/12-004a/panel_color`
-elif [ -f /sys/bus/i2c/devices/12-0020/panel_color ]; then
-    color=`cat /sys/bus/i2c/devices/12-0020/panel_color`
-else
-    color="0"
-fi
+for i in $(seq 5); do
+    if [ -f /sys/bus/i2c/devices/12-004a/panel_color ]; then
+	# Atmel
+	color=`cat /sys/bus/i2c/devices/12-004a/panel_color`
+	if [ -n "$color" ]; then
+	    /system/bin/log -p i -t Leds-sh Get panel_color successfully from 12-004a $color
+	    break
+	else
+	    /system/bin/log -p i -t Leds-sh Get panel_color unsuccessfully, try again...
+	    sleep 1
+	    continue
+	fi
+    elif [ -f /sys/bus/i2c/devices/12-0020/panel_color ]; then
+	color=`cat /sys/bus/i2c/devices/12-0020/panel_color`
+	if [ -n "$color" ]; then
+	    /system/bin/log -p i -t Leds-sh Get panel_color successfully from 12-0020 $color
+	    break
+	else
+	    /system/bin/log -p i -t Leds-sh Get panel_color unsuccessfully, try again...
+	    sleep 1
+	    continue
+	fi
+    else
+	color="0"
+	/system/bin/log -p i -t Leds-sh Get panel_color unsuccessfully, try again...
+	sleep 1
+    fi
+done
 
 case "$color" in
     "1")

@@ -89,6 +89,7 @@ bin/mm-qcamera-daemon
 lib/hw/camera.msm8996.so
 lib/libmmcamera_interface.so
 lib/libmmjpeg_interface.so
+lib/libmmlib2d_interface.so
 lib/libmm-qcamera.so
 lib/libmorpho_memory_allocator.so
 lib/libmorpho_panorama.so
@@ -424,7 +425,6 @@ vendor/lib64/hw/gatekeeper.msm8996.so
 vendor/lib/hw/gatekeeper.msm8996.so
 
 # GPS
-bin/gpsone_daemon
 bin/loc_launcher
 bin/tloc_daemon
 bin/xtwifi-client
@@ -504,11 +504,11 @@ vendor/lib64/libRSDriver_adreno.so
 vendor/lib64/librs_adreno.so
 vendor/lib64/librs_adreno_sha1.so
 vendor/lib64/libscalar.so
-vendor/lib64/libsdmextension.so
+vendor/lib64/libsdmextension.so|73440a15b4a185c1509e612c8e3fbba3d1d8a60b
 vendor/lib64/libsd_sdk_display.so
-vendor/lib64/libsdm-color.so
-vendor/lib64/libsdm-diag.so
--vendor/lib64/libsdm-disp-apis.so
+vendor/lib64/libsdm-color.so|8a10710a5f95fcc516186deb97d86f78dfc09bcb
+vendor/lib64/libsdm-diag.so|96e271184adb27b2439b54cadb2ce4a90bfffede
+-vendor/lib64/libsdm-disp-apis.so|03a1d36a173b66773b906f65e5eb2a1064704a36
 vendor/lib64/libuiblur.so|4b3fabf5ded7c4af531abde681676fc5e9248494
 vendor/lib/egl/eglSubDriverAndroid.so
 vendor/lib/egl/libEGL_adreno.so
@@ -531,7 +531,7 @@ vendor/lib/libRSDriver_adreno.so
 vendor/lib/librs_adreno.so
 vendor/lib/librs_adreno_sha1.so
 vendor/lib/libsd_sdk_display.so
--vendor/lib/libsdm-disp-apis.so
+-vendor/lib/libsdm-disp-apis.so|44adfccbfb760f9efceda921c213ebc153cfa0bd
 
 # Graphics firmware
 etc/firmware/a530_gpmu.fw2
@@ -553,10 +553,10 @@ bin/imscmservice
 bin/imsdatadaemon
 bin/imsqmidaemon
 bin/ims_rtp_daemon
--vendor/app/ims/ims.apk
--vendor/app/imssettings/imssettings.apk
-vendor/lib64/libimscamera_jni.so
-vendor/lib64/libimsmedia_jni.so
+-vendor/app/ims/ims.apk|94bb6f3bc031e4d3ea81396352c5f085bc5bbb75
+-vendor/app/imssettings/imssettings.apk|9012208878e4542e9a2332b719d0759bea5e14c0
+vendor/lib64/libimscamera_jni.so|653b5ea60d42941b32c4c9a6a6e9edcde448adea
+vendor/lib64/libimsmedia_jni.so|178030d4054a8b452da60c47644798e8b99ae10c
 vendor/lib64/lib-dplmedia.so
 vendor/lib64/lib-ims-rcscmjni.so
 vendor/lib64/lib-imscamera.so
