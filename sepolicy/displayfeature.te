@@ -24,3 +24,4 @@ allow displayfeature graphics_device:chr_file rw_file_perms;
 allow displayfeature graphics_device:dir search;
 allow displayfeature self:capability dac_override;
 allow displayfeature sysfs:file write;
+allow displayfeature sysfs:dir write;
