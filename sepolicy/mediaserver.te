@@ -1,2 +1,0 @@
-# Camera library libFaceProc.so has text relocations
-allow mediaserver system_file:file execmod;

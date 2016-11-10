@@ -4,6 +4,8 @@ r_dir_file(fingerprintd, firmware_file)
 allow fingerprintd fpc_data_file:dir rw_dir_perms;
 allow fingerprintd fpc_data_file:file create_file_perms;
 allow fingerprintd fpc_data_file:sock_file { create unlink };
+allow fingerprintd storage_file:dir search;
+allow fingerprintd storage_file:lnk_file read;
 allow fingerprintd sysfs:file write;
 allow fingerprintd sysmatdrv_device:chr_file w_file_perms;
 allow fingerprintd tee_device:chr_file rw_file_perms;
