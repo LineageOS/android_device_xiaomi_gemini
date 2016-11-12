@@ -2,6 +2,7 @@
  * Copyright (C) 2008 The Android Open Source Project
  * Copyright (C) 2014 The Linux Foundation. All rights reserved.
  * Copyright (C) 2016 The CyanogenMod Project
+ * Copyright (C) 2017 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,7 +51,7 @@ static const char BLUE_LED_FILE[]
         = "/sys/class/leds/blue/brightness";
 
 static const char LCD_FILE[]
-        = "/sys/class/leds/lcd-backlight/brightness";
+        = "/sys/class/leds/wled/brightness";
 
 static const char BACK_BUTTON_FILE[]
         = "/sys/class/leds/button-backlight/brightness";
