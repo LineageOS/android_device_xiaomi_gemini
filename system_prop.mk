@@ -135,9 +135,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     DEVICE_PROVISIONED=1 \
     rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
     ril.subscription.types=NV,RUIM \
-    ro.baseband.arch=msm \
-    ro.ril.gprsclass=10 \
-    ro.ril.hsxpa=1 \
     ro.telephony.default_network=22,22 \
     ro.telephony.default_cdma_sub=0 \
     ro.telephony.call_ring.multiple=false \
@@ -154,7 +151,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.sib16_support=1 \
     persist.radio.NO_STAPA=1 \
     persist.radio.VT_HYBRID_ENABLE=1 \
-    sys.ims.DATA_DAEMON_STATUS=1 \
     telephony.lteOnCdmaDevice=1,1
 
 # RmNet Data
