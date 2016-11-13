@@ -47,7 +47,7 @@ static void init_alarm_boot_properties()
 
     fp = fopen("/proc/sys/kernel/boot_reason", "r");
     fscanf(fp, "%d", &boot_reason);
-    pclose(fp);
+    fclose(fp);
 
     /*
      * Setup ro.alarm_boot value to true when it is RTC triggered boot up
