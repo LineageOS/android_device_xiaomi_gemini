@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ff2e2bb8_4eccc669",
+        "filename": "rootdir/init.qcom.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2016-11-14T12:32:11Z",
+      "side": 1,
+      "message": "I don\u0027t think we need this.",
+      "range": {
+        "startLine": 69,
+        "startChar": 4,
+        "endLine": 69,
+        "endChar": 51
+      },
+      "revId": "a5dc63a3b59a160e885e7241e3cf2e6469b236a7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff2e2bb8_2ec7c247",
+        "filename": "rootdir/init.qcom.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2016-11-14T12:32:11Z",
+      "side": 1,
+      "message": "Or this.",
+      "range": {
+        "startLine": 71,
+        "startChar": 4,
+        "endLine": 71,
+        "endChar": 61
+      },
+      "revId": "a5dc63a3b59a160e885e7241e3cf2e6469b236a7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff2e2bb8_8ec6ce47",
+        "filename": "sepolicy/file_contexts",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2016-11-14T12:32:11Z",
+      "side": 1,
+      "message": "Lets label it just sysfs_fpc.",
+      "range": {
+        "startLine": 9,
+        "startChar": 91,
+        "endLine": 9,
+        "endChar": 107
+      },
+      "revId": "a5dc63a3b59a160e885e7241e3cf2e6469b236a7",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
