@@ -17,7 +17,8 @@ LOCAL_SHARED_LIBRARIES := \
     libutils \
     libcutils \
     libgps.utils \
-    libdl
+    libdl \
+    libloc_pla
 
 LOCAL_SRC_FILES += \
     LocApiBase.cpp \
@@ -32,7 +33,8 @@ LOCAL_CFLAGS += \
 
 LOCAL_C_INCLUDES:= \
     $(TARGET_OUT_HEADERS)/gps.utils \
-    $(TARGET_OUT_HEADERS)/libflp
+    $(TARGET_OUT_HEADERS)/libflp \
+    $(TARGET_OUT_HEADERS)/libloc_pla
 
 LOCAL_COPY_HEADERS_TO:= libloc_core/
 LOCAL_COPY_HEADERS:= \
