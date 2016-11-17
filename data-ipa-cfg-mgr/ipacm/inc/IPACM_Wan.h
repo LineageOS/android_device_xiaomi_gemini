@@ -97,7 +97,6 @@ public:
 	static uint8_t xlat_mux_id;
 	/* IPACM interface name */
 	static char wan_up_dev_name[IF_NAME_LEN];
-	static uint32_t curr_wan_ip;
 	IPACM_Wan(int, ipacm_wan_iface_type, uint8_t *);
 	virtual ~IPACM_Wan();
 
@@ -139,11 +138,6 @@ public:
 #else
 		return wan_up_v6;
 #endif
-	}
-
-	static uint32_t getWANIP()
-	{
-		return curr_wan_ip;
 	}
 
 	static bool getXlat_Mux_Id()

@@ -67,9 +67,6 @@
 			   <Category>VIRTUAL</Category>
 		    </Iface>
 		</IPACMIface>
-		<IPPassthroughFlag>
-			<IPPassthroughMode>0</IPPassthroughMode>
-		</IPPassthroughFlag>
 		<IPACMPrivateSubnet>
 			<Subnet>
   			   <SubnetAddress>192.168.225.0</SubnetAddress>

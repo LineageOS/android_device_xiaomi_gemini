@@ -115,8 +115,6 @@ public:
 
 	bool ipacm_odu_embms_enable;
 
-	bool ipacm_ip_passthrough_mode;
-
 	int ipa_nat_iface_entries;
 
 	/* Store the total number of wlan guest ap configured */

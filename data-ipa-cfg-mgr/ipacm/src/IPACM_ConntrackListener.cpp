@@ -33,8 +33,6 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "IPACM_ConntrackListener.h"
 #include "IPACM_ConntrackClient.h"
 #include "IPACM_EvtDispatcher.h"
-#include "IPACM_Iface.h"
-#include "IPACM_Wan.h"
 
 IPACM_ConntrackListener::IPACM_ConntrackListener()
 {
@@ -702,18 +700,6 @@ bool IPACM_ConntrackListener::AddIface(
 	int cnt;
 
 	*isTempEntry = false;
-
-	/* Special handling for Passthrough IP. */
-	if (IPACM_Iface::ipacmcfg->ipacm_ip_passthrough_mode)
-	{
-		if (rule->private_ip == IPACM_Wan::getWANIP())
-		{
-			IPACMDBG("In Passthrough mode and entry matched with Wan IP (0x%x)\n",
-				rule->private_ip);
-			return true;
-		}
-	}
-
 	/* check whether nat iface or not */
 	for (cnt = 0; cnt < MAX_IFACE_ADDRESS; cnt++)
 	{

@@ -71,6 +71,11 @@ void IPACM_Neighbor::event_callback(ipa_cm_event_id event, void *param)
 		{
 			ipacm_event_data_wlan_ex *data = (ipacm_event_data_wlan_ex *)param;
 			ipa_interface_index = IPACM_Iface::iface_ipa_index_query(data->if_index);
+			/* check for failure return */
+			if (IPACM_FAILURE == ipa_interface_index) {
+				IPACMERR("IPA_WLAN_CLIENT_ADD_EVENT_EX: not supported iface id: %d\n", data->if_index);
+				break;
+			}
 			uint8_t client_mac_addr[6];
 
 			IPACMDBG_H("Received IPA_WLAN_CLIENT_ADD_EVENT\n");
@@ -132,9 +137,14 @@ void IPACM_Neighbor::event_callback(ipa_cm_event_id event, void *param)
 							IPACM_EvtDispatcher::PostEvt(&evt_data);
 							/* ask for replaced iface name*/
 							ipa_interface_index = IPACM_Iface::iface_ipa_index_query(data_all->if_index);
-							IPACMDBG_H("Posted event %d, with %s for ipv4 client re-connect\n",
-											evt_data.event,
-											IPACM_Iface::ipacmcfg->iface_table[ipa_interface_index].iface_name);
+							/* check for failure return */
+							if (IPACM_FAILURE == ipa_interface_index) {
+								IPACMERR("not supported iface id: %d\n", data_all->if_index);
+							} else {
+								IPACMDBG_H("Posted event %d, with %s for ipv4 client re-connect\n",
+									evt_data.event,
+									IPACM_Iface::ipacmcfg->iface_table[ipa_interface_index].iface_name);
+							}
 						}
 					}
 					break;
@@ -156,7 +166,11 @@ void IPACM_Neighbor::event_callback(ipa_cm_event_id event, void *param)
 
 			ipacm_event_data_all *data = (ipacm_event_data_all *)param;
 			ipa_interface_index = IPACM_Iface::iface_ipa_index_query(data->if_index);
-
+			/* check for failure return */
+			if (IPACM_FAILURE == ipa_interface_index) {
+				IPACMERR("not supported iface id: %d\n", data->if_index);
+				break;
+			}
 			if (data->iptype == IPA_IP_v4)
 			{
 				if (data->ipv4_addr != 0) /* not 0.0.0.0 */
@@ -224,9 +238,15 @@ void IPACM_Neighbor::event_callback(ipa_cm_event_id event, void *param)
 
 								/* ask for replaced iface name*/
 								ipa_interface_index = IPACM_Iface::iface_ipa_index_query(data_all->if_index);
-								IPACMDBG_H("Posted event %d, with %s for ipv4\n",
-												evt_data.event,
-												IPACM_Iface::ipacmcfg->iface_table[ipa_interface_index].iface_name);
+								/* check for failure return */
+								if (IPACM_FAILURE == ipa_interface_index) {
+									IPACMERR("not supported iface id: %d\n", data_all->if_index);
+								} else {
+									IPACMDBG_H("Posted event %d,\
+										with %s for ipv4\n",
+										evt_data.event,
+										IPACM_Iface::ipacmcfg->iface_table[ipa_interface_index].iface_name);
+								}
 								break;
 							}
 						}
@@ -385,9 +405,15 @@ void IPACM_Neighbor::event_callback(ipa_cm_event_id event, void *param)
 								IPACM_EvtDispatcher::PostEvt(&evt_data);
 								/* ask for replaced iface name*/
 								ipa_interface_index = IPACM_Iface::iface_ipa_index_query(data_all->if_index);
-								IPACMDBG_H("Posted event %d, with %s for ipv6\n",
-												evt_data.event,
-												IPACM_Iface::ipacmcfg->iface_table[ipa_interface_index].iface_name);
+								/* check for failure return */
+								if (IPACM_FAILURE == ipa_interface_index) {
+									IPACMERR("not supported iface id: %d\n", data_all->if_index);
+								} else {
+									IPACMDBG_H("Posted event %d,\
+										with %s for ipv6\n",
+										evt_data.event,
+										IPACM_Iface::ipacmcfg->iface_table[ipa_interface_index].iface_name);
+								}
 								break;
 							};
 						}
@@ -470,9 +496,15 @@ void IPACM_Neighbor::event_callback(ipa_cm_event_id event, void *param)
 									IPACM_EvtDispatcher::PostEvt(&evt_data);
 									/* ask for replaced iface name*/
 									ipa_interface_index = IPACM_Iface::iface_ipa_index_query(data_all->if_index);
-									IPACMDBG_H("Posted event %d, with %s for ipv4 client re-connect\n",
-													evt_data.event,
-													IPACM_Iface::ipacmcfg->iface_table[ipa_interface_index].iface_name);
+									/* check for failure return */
+									if (IPACM_FAILURE == ipa_interface_index) {
+										IPACMERR("not supported iface id: %d\n", data_all->if_index);
+									} else {
+										IPACMDBG_H("Posted event %d,\
+											with %s for ipv4 client re-connect\n",
+											evt_data.event,
+											IPACM_Iface::ipacmcfg->iface_table[ipa_interface_index].iface_name);
+									}
 								}
 							}
 							/* delete cache neighbor entry */
