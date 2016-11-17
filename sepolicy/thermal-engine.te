@@ -1,0 +1,1 @@
+allow thermal-engine sysfs_kgsl:file r_file_perms;
