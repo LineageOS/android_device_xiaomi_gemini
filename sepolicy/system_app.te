@@ -1,6 +1,3 @@
-# Allow binder calls to displayfeature
-binder_call(system_app, displayfeature)
-
 # Allow binder calls to fingerprintd
 binder_call(system_app, fingerprintd)
 

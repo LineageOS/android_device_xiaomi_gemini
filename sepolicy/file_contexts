@@ -11,6 +11,4 @@
 /data/fpc(/.*)?                       u:object_r:fpc_data_file:s0
 
 # Binaries
-/system/bin/displayfeature            u:object_r:displayfeature_exec:s0
-/system/bin/mmbn-daemon               u:object_r:mmbn-daemon_exec:s0
 /system/bin/readmac                   u:object_r:readmac_exec:s0
