@@ -15,3 +15,5 @@ set_prop(mmbn-daemon, radio_prop)
 
 allow mmbn-daemon self:capability { dac_override fsetid };
 allow mmbn-daemon self:socket create_socket_perms;
+
+allow mmbn-daemon diag_device:chr_file { open ioctl read write getattr };
