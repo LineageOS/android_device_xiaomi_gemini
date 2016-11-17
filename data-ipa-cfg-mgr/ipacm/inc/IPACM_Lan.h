@@ -222,8 +222,6 @@ protected:
 
 	uint32_t if_ipv4_subnet;
 
-	uint32_t ipv6_prefix[2];
-
 private:
 
 	/* get hdr proc ctx type given source and destination l2 hdr type */
