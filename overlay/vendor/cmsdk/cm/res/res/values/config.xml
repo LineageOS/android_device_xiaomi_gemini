@@ -20,7 +20,27 @@
     <integer name="config_proximityCheckTimeout">200</integer>
     <bool name="config_proximityCheckOnWakeEnabledByDefault">true</bool>
 
-    <!-- Is the notification LED brightness adjustable ? Used to decide if the user can set LED brightness -->
-    <bool name="config_adjustableNotificationLedBrightness">true</bool>
+    <!-- What can the LEDs on this device do? If defined, this overrides all of the
+         older settings:
+
+         com.android.internal.R.bool.config_multiColorNotificationLed
+         com.android.internal.R.bool.config_multiColorBatteryLed
+         org.cyanogenmod.platform.internal.R.bool.config_multipleNotificationLeds
+         com.android.internal.R.bool.config_ledCanPulse
+         org.cyanogenmod.platform.internal.R.bool.config_useSegmentedBatteryLed
+         org.cyanogenmod.platform.internal.R.bool.config_adjustableNotificationLedBrightness
+
+         Use the following values from NotificationManager:
+         LIGHTS_RGB_LED = 0
+         LIGHTS_MULTIPLE_LED = 1
+         LIGHTS_LED_PULSE = 2
+         LIGHTS_SEGMENTED_LED = 3
+         LIGHTS_ADJUSTABLE_LED_BRIGHTNESS = 4
+    -->
+    <integer-array translatable="false" name="config_deviceLightCapabilities">
+        <item>0</item>
+        <item>2</item>
+        <item>4</item>
+    </integer-array>
 
 </resources>
