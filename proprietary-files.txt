@@ -581,6 +581,13 @@ bin/iop
 bin/msm_irqbalance
 lib64/libqti-iop.so
 vendor/bin/perfd
+vendor/etc/perf-profile0.conf
+vendor/etc/perf-profile1.conf
+vendor/etc/perf-profile2.conf
+vendor/etc/perf-profile3.conf
+vendor/etc/perf-profile4.conf
+vendor/etc/perf-profile5.conf
+vendor/etc/perf-profile6.conf
 vendor/lib64/libqc-opt.so
 vendor/lib64/libqti-iop-client.so
 vendor/lib64/libqti-perfd-client.so
@@ -656,6 +663,9 @@ bin/radish
 bin/rmt_storage
 bin/mmbn-daemon
 bin/tftp_server
+etc/data/dsi_config.xml
+etc/data/netmgr_config.xml
+etc/data/qmi_config.xml
 etc/modem/Diag.cfg
 etc/permissions/embms.xml
 etc/permissions/qcnvitems.xml
@@ -681,6 +691,8 @@ vendor/qcril.db
 
 # Sensors
 bin/sensors.qcom
+etc/sensors/hals.conf
+etc/sensors/sensor_def_qcomdev.conf
 vendor/lib64/hw/activity_recognition.msm8996.so
 vendor/lib64/libsensor_reg.so
 vendor/lib64/libsensor_user_cal.so
