@@ -255,6 +255,13 @@ service readmac /system/bin/readmac
     group root
     oneshot
 
+service ril-daemon2 /system/bin/rild -c 2
+    class late_start
+    socket rild2 stream 660 root radio
+    socket rild-debug2 stream 660 radio system
+    user root
+    group radio cache inet misc audio sdcard_r sdcard_rw qcom_diag diag log wakelock
+
 service mmbn-daemon /system/bin/mmbn-daemon
     class main
     oneshot
