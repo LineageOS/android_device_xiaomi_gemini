@@ -27,6 +27,7 @@
 
 import init.qcom.power.rc
 import init.qcom.usb.rc
+import init.qcom.usb.diag.rc
 import init.target.rc
 
 on init
