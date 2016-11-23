@@ -33,10 +33,8 @@
 /dev/kgsl-3d0             0666   system     system
 /dev/kgsl-2d0             0666   root       root
 /dev/kgsl-2d1             0666   root       root
-/dev/block/mmcblk0        0666   root       root
-/dev/block/mmcblk0p1      0666   root       root
 /dev/ion                  0664   system     system
-/dev/rtc0                 0660   system     system
+/dev/rtc0                 0640   system     system
 /dev/smd0                 0660   system     system
 /dev/smd4                 0660   system     system
 /dev/smd_cxm_qmi          0640   radio      radio
@@ -49,9 +47,6 @@
 /dev/ipaNatTable          0660   net_admin  net_admin
 /dev/rmnet_ctrl           0660   usb        usb
 /dev/dpl_ctrl             0660   usb        usb
-
-#permissions for als_camera node
-/dev/als_camera           0660   system     system
 
 #permissions for CSVT
 /dev/smd11                0660   radio      radio
@@ -108,12 +103,20 @@
 /dev/mhi_pipe_14          0640   radio      radio
 /dev/mhi_pipe_16          0640   radio      radio
 /dev/mhi_pipe_32          0640   radio      radio
+/dev/at_usb0              0640   radio      radio
+/dev/at_mdm0              0640   radio      radio
 /dev/video*               0660   system     camera
 /dev/media*               0660   system     camera
 /dev/v4l-subdev*          0660   system     camera
 /dev/qseecom              0660   system     drmrpc
+/dev/qsee_ipc_irq_spss    0660   system     drmrpc
 /dev/seemplog             0660   system     system
 /dev/pft                  0660   system     drmrpc
+/dev/spcom                0660   system     system
+/dev/sp_kernel            0660   system     system
+/dev/sp_ssr               0660   system     system
+/dev/sp_keymaster         0660   system     system
+/dev/cryptoapp            0660   system     system
 /dev/gemini0              0660   system     camera
 /dev/jpeg0                0660   system     camera
 /dev/jpeg1                0660   system     camera
@@ -122,9 +125,6 @@
 /dev/adsprpc-smd          0664   system     system
 /dev/system_health_monitor 0644  radio      system
 /dev/mdss_rotator         0664   system     system
-/dev/elliptic0            0777   system     system
-/dev/elliptic1            0777   system     system
-/dev/tiload_node          0660   system     system
 /dev/msm_camera/*         0660   system     camera
 /dev/gemini/              0660   system     camera
 /dev/mercury0             0660   system     camera
@@ -137,6 +137,7 @@
 /dev/sdsprpc-smd          0660   system     system
 
 #permissions for audio
+/dev/wcd-dsp-glink        0660   system     audio
 /dev/audio_slimslave      0660   system     audio
 /dev/msm_qcelp            0660   system     audio
 /dev/msm_evrc             0660   system     audio
@@ -212,6 +213,10 @@
 /sys/devices/virtual/input/input*                   poll           0660    input    system
 /sys/devices/virtual/input/input*                   pollrate_ms    0660    input    system
 
+# laser sensor access
+/sys/devices/virtual/input/input*                   enable_ps_sensor 0660  system   system
+/sys/devices/virtual/input/input*                   set_delay_ms     0660  system   system
+
 # wlan
 /dev/wcnss_wlan           0660   system     system
 /dev/wcnss_ctrl           0660   system     system
@@ -227,7 +232,7 @@
 /dev/uio2                 0660   system     system
 
 # SSR devices
-/dev/subsys_*         0640   system     system
+/dev/subsys_*             0640   system     system
 
 # Ultrasound device
 /dev/usf1                 0660   system     system
