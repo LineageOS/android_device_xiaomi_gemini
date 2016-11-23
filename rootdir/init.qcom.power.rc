@@ -49,7 +49,6 @@ on charger
     write /sys/devices/system/cpu/cpu3/online 0
     write /sys/module/msm_thermal/parameters/enabled "N"
     start hvdcp_opti
-    start qcom-sh
 
 on enable-low-power
     # Disable thermal BCL hotplug to switch governor
@@ -190,6 +189,7 @@ service iop /system/bin/iop
 service perfd /system/vendor/bin/perfd
     class main
     user root
+    group root readproc
     disabled
     socket perfd seqpacket 0666 root system
     writepid /dev/cpuset/system-background/tasks
