@@ -142,7 +142,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.qmi.adb_logmask=0 \
     persist.dbg.volte_avail_ovr=1 \
     persist.dbg.vt_avail_ovr=1 \
-    persist.logd.size.radio=4M \
     persist.net.doxlat=true \
     persist.radio.apm_sim_not_pwdn=1 \
     persist.radio.force_on_dc=true \
