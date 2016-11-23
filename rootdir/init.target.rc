@@ -1,4 +1,4 @@
-# Copyright (c) 2013-2015, The Linux Foundation. All rights reserved.
+# Copyright (c) 2013-2016, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -31,11 +31,6 @@ on early-init
     mkdir /bt_firmware 0771 system system
     symlink /data/tombstones /tombstones
     mkdir /dsp 0771 media media
-    chown system root  /sys/module/msm_thermal/core_control/cpus_offlined
-    chmod 666 /sys/module/msm_thermal/core_control/cpus_offlined
-
-on post-fs
-    export LD_PRELOAD libNimsWrap.so
 
 on init
    write /sys/devices/soc/soc\:fpc_fpc1020/enable_wakeup 1
@@ -46,9 +41,10 @@ on fs
     mount_all fstab.qcom
     swapon_all fstab.qcom
 
-    restorecon_recursive /persist
     mkdir /persist/data 0700 system system
+    mkdir /persist/bms 0700 root system
     mkdir /persist/wlan_bt 0700 system system
+    restorecon_recursive /persist
     mkdir /persist/audio 0777 media audio
 
 on post-fs-data
@@ -59,23 +55,17 @@ on post-fs-data
     mkdir /tombstones/dsps 0771 system system
     mkdir /persist/data/sfs 0700 system system
     mkdir /persist/data/tz 0700 system system
-    mkdir /persist/qc_senseid 0700 system system
     mkdir /data/misc/dts 0770 media audio
-    mkdir /persist/bms 0700 root system
-    restorecon_recursive /persist
-    mkdir /data/nfc 0770 nfc nfc
+    mkdir /data/misc/seemp 0700 system system
     mkdir /data/misc/tloc/ 0700 system drmrpc
     mkdir /data/misc/qvop 0660 system system
-    mkdir /data/misc/qvr 0770 system system
     mkdir /data/misc/audio_pp 0771 media audio
-    chown system system /dev/sysmatdrv
-    chmod 0660 /dev/sysmatdrv
-    mkdir /data/fpc 0770 system system
-    mkdir /data/fpc/s 0770 system system
+    mkdir /data/audio_cal 0771 system system
 
 on boot
     start rmt_storage
-	
+    start rfs_access
+
     # Access permission for secure touch
     chmod 0660 /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/secure_touch_enable
     chmod 0440 /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/secure_touch
@@ -104,6 +94,11 @@ service fingerprintd /system/bin/fingerprintd
     user system
     group input
     writepid /dev/cpuset/system-background/tasks
+
+service qfp-daemon /system/bin/qfp-daemon
+    class late_start
+    user system
+    group system drmrpc diag input sdcard_rw
 
 service qvop-daemon /system/bin/qvop-daemon
     class late_start
@@ -253,10 +248,6 @@ service readmac /system/bin/readmac
     class main
     user root
     group root
-    oneshot
-
-service mmbn-daemon /system/bin/mmbn-daemon
-    class main
     oneshot
 
 on property:slpi.restart=1
