@@ -1,4 +1,4 @@
-# Copyright (c) 2009-2012, 2014-2015, The Linux Foundation. All rights reserved.
+# Copyright (c) 2009-2012, 2014-2016, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -25,6 +25,7 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
+import init.msm.usb.configfs.rc
 import init.qcom.power.rc
 import init.qcom.usb.rc
 import init.target.rc
@@ -35,9 +36,16 @@ on early-init
 
 on init
     # Set permissions for persist partition
-    mkdir /persist 0771 system system
+    mkdir /persist 0771 root system
 
     symlink /sdcard /storage/sdcard0
+
+    # Create cgroup mount point for memory
+    mkdir /sys/fs/cgroup/memory/bg 0750 root system
+    write /sys/fs/cgroup/memory/bg/memory.swappiness 140
+    write /sys/fs/cgroup/memory/bg/memory.move_charge_at_immigrate 1
+    chown root system /sys/fs/cgroup/memory/bg/tasks
+    chmod 0660 /sys/fs/cgroup/memory/bg/tasks
 
 on early-boot
     # Set RLIMIT_MEMLOCK to 64MB
@@ -45,14 +53,11 @@ on early-boot
 
     # Set aggressive read ahead during boot up
     write /sys/block/dm-0/queue/read_ahead_kb 2048
+    write /sys/block/dm-1/queue/read_ahead_kb 2048
     write /sys/block/sda/queue/read_ahead_kb 2048
     write /sys/block/sde/queue/read_ahead_kb 2048
 
     # Allow subsystem (modem etc) debugging
-    write /sys/module/subsystem_restart/parameters/enable_debug ${persist.sys.ssr.enable_debug}
-    write /sys/module/pil_msa/parameters/pbl_mba_boot_timeout_ms ${persist.sys.mba_boot_timeout}
-    write /sys/module/pil_msa/parameters/modem_auth_timeout_ms ${persist.sys.modem_auth_timeout}
-    write /sys/module/peripheral_loader/parameters/proxy_timeout_ms ${persist.sys.pil_proxy_timeout}
     write /sys/kernel/boot_adsp/boot 1
     write /sys/kernel/boot_slpi/boot 1
 
@@ -68,20 +73,15 @@ on boot
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/type
     chown bluetooth net_bt /sys/class/rfkill/rfkill0/state
+    chown bluetooth net_bt /sys/class/rfkill/rfkill0/device/extldo
+    chown bluetooth net_bt /dev/ttyHS0
+    chmod 0660 /sys/module/bluetooth_power/parameters/power
+    chmod 0660 /sys/class/rfkill/rfkill0/device/extldo
+    chmod 0660 /sys/class/rfkill/rfkill0/state
+    chmod 0660 /dev/ttyHS0
+
     chown system system /sys/devices/soc/soc:fpc_fpc1020/irq
     chown system system /sys/devices/soc/soc:fpc_fpc1020/enable_wakeup
-
-    chmod 0660 /sys/module/bluetooth_power/parameters/power
-
-    chmod 0660 /sys/class/rfkill/rfkill0/state
-
-    chown bluetooth net_bt /dev/ttyHS0
-    chmod 0660 /dev/ttyHS0
-    chown bluetooth bluetooth /sys/devices/platform/msm_serial_hs.0/clock
-    chmod 0660 /sys/devices/platform/msm_serial_hs.0/clock
-
-    chown bluetooth net_bt /sys/class/rfkill/rfkill0/device/extldo
-    chmod 0660 /sys/class/rfkill/rfkill0/device/extldo
 
     # Create QMUX deamon socket area
     mkdir /dev/socket/qmux_radio 0770 radio radio
@@ -94,7 +94,9 @@ on boot
     chmod 2770 /dev/socket/qmux_gps
 
     mkdir /persist/drm 0770 system system
-    mkdir /persist/bluetooth 0770 bluetooth bluetooth
+    mkdir /persist/misc 0770 system system
+    mkdir /persist/alarm 0770 system system
+    mkdir /persist/time 0770 system system
 
     # Create NETMGR daemon socket area
     mkdir /dev/socket/netmgr 0750 radio radio
@@ -205,10 +207,6 @@ on boot
     # an ack packet comes out of order
     write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
 
-    # NFC local data and nfcee xml storage
-    mkdir /data/nfc 0770 nfc nfc
-    mkdir /data/nfc/param 0770 nfc nfc
-
     # Allow access for CCID command/response timeout configuration
     chown system system /sys/module/ccid_bridge/parameters/bulk_msg_timeout
 
@@ -247,6 +245,10 @@ on post-fs-data
     mkdir /data/misc/port_bridge 0770 radio radio
     chmod 0770 /data/misc/port_bridge
 
+    # Create netmgr log dir
+    mkdir /data/misc/netmgr 0770 radio radio
+    chmod 0770 /data/misc/netmgr
+
     # Create the directories used by CnE subsystem
     mkdir /data/connectivity 0771 system system
     chown system system /data/connectivity
@@ -273,7 +275,7 @@ on post-fs-data
 
     # Mounting of persist is moved to 'on emmc-fs' and 'on fs' sections
     # We chown/chmod /persist again so because mount is run as root + defaults
-    chown system system /persist
+    chown root system /persist
     chmod 0771 /persist
     chmod 0664 /sys/devices/platform/msm_sdcc.1/polling
     chmod 0664 /sys/devices/platform/msm_sdcc.2/polling
@@ -315,12 +317,6 @@ on post-fs-data
     # Create /data/time folder for time-services
     mkdir /data/time/ 0700 system system
 
-    mkdir /data/audio/ 0770 media audio
-
-    # Create a folder for audio delta files
-    mkdir /data/audio/acdbdata 0770 media audio
-    mkdir /data/audio/acdbdata/delta 0770 media audio
-
     setprop vold.post_fs_data_done 1
 
     # RIDL data
@@ -355,6 +351,10 @@ on post-fs-data
     chown radio radio /data/misc/radio/db_check_done
     chmod 0660 /data/misc/radio/db_check_done
 
+    # Create SWAP related dirs
+    mkdir /data/system/swap 0770 root system
+    chmod 2770 /data/system/swap
+
 service ssr_setup /system/bin/ssr_setup
     oneshot
     disabled
@@ -364,6 +364,18 @@ service ss_ramdump /system/bin/subsystem_ramdump 2
     user system
     group system
     disabled
+
+on property:persist.sys.ssr.enable_debug=*
+    write /sys/module/subsystem_restart/parameters/enable_debug ${persist.sys.ssr.enable_debug}
+
+on property:persist.sys.mba_boot_timeout=*
+    write /sys/module/pil_msa/parameters/pbl_mba_boot_timeout_ms ${persist.sys.mba_boot_timeout}
+
+on property:persist.sys.modem_auth_timeout=*
+    write /sys/module/pil_msa/parameters/modem_auth_timeout_ms ${persist.sys.modem_auth_timeout}
+
+on property:persist.sys.pil_proxy_timeout=*
+    write /sys/module/peripheral_loader/parameters/proxy_timeout_ms ${persist.sys.pil_proxy_timeout}
 
 on property:persist.sys.ssr.restart_level=*
     start ssr_setup
@@ -380,6 +392,7 @@ on property:sys.boot_completed=1
     write /dev/kmsg "Boot completed "
     # Reset the read_ahead_kb to 256
     write /sys/block/dm-0/queue/read_ahead_kb 256
+    write /sys/block/dm-1/queue/read_ahead_kb 256
     write /sys/block/sda/queue/read_ahead_kb 256
     write /sys/block/sde/queue/read_ahead_kb 256
 
@@ -425,6 +438,7 @@ service cnd /system/bin/cnd
 service dpmd /system/bin/dpmd
     class late_start
     socket dpmd stream 660 root system
+    group system readproc
     writepid /dev/cpuset/system-background/tasks
 
 service irsc_util /system/bin/irsc_util "/etc/sec_config"
@@ -445,7 +459,7 @@ service rfs_access /system/bin/rfs_access
     writepid /dev/cpuset/system-background/tasks
 
 service tftp_server /system/bin/tftp_server
-    class main
+    class core
     user root
     writepid /dev/cpuset/system-background/tasks
 
@@ -458,19 +472,7 @@ on property:wc_transport.start_hci=false
 service start_hci_filter /system/bin/wcnss_filter
     class late_start
     user bluetooth
-    group bluetooth qcom_diag sdcard_rw sdcard_r media_rw
-    disabled
-
-on property:wc_transport.start_root=true
-    start hci_filter_root
-
-on property:wc_transport.start_root=false
-    stop hci_filter_root
-
-service hci_filter_root /system/bin/wcnss_filter
-    class late_start
-    user bluetooth
-    group bluetooth qcom_diag system sdcard_rw sdcard_r media_rw
+    group bluetooth qcom_diag system wakelock
     disabled
 
 service config_bt_addr /system/bin/btnvtool -O
@@ -615,8 +617,16 @@ service wigig_supplicant /system/bin/wpa_supplicant \
     disabled
     oneshot
 
-# FST Manager can be started by property_set("ctl.start", "fstman:<hostap ctrl iface>");
+# FST Manager with hostapd (softap) - all settings inside ini file
 service fstman /system/bin/fstman -B -ddd -c /data/misc/wifi/fstman.ini
+    user wifi
+    group wifi net_admin net_raw
+    class main
+    disabled
+    oneshot
+
+# FST Manager with supplicant - connect to supplicant socket
+service fstman_wlan0 /system/bin/fstman -B -ddd -c /data/misc/wifi/fstman.ini @android:wpa_wlan0
     user wifi
     group wifi net_admin net_raw
     class main
@@ -629,22 +639,20 @@ on property:netd.fstman.start=true
 on property:netd.fstman.start=false
     stop fstman
 
-service wifi_fccutild /system/bin/wifi_fccutild
-    user system
-    group system inet net_admin
-    socket wififccutild_server dgram 0660 system system
-    disabled
-    oneshot
-
 service cnss_diag /system/bin/cnss_diag -q -f
     class main
-    user root
-    group root
+    user system
+    group system wifi inet net_admin sdcard_rw media_rw diag
     disabled
     oneshot
 
 service cnss-daemon /system/bin/cnss-daemon -n -l
     class late_start
+    user system
+    group system inet net_admin wifi
+
+on property:sys.shutdown.requested=*
+    stop cnss-daemon
 
 service loc_launcher /system/bin/loc_launcher
     #loc_launcher will start as root and set its uid to gps
@@ -680,15 +688,6 @@ service hostapd /system/bin/hostapd /data/hostapd/hostapd.conf
     group root
     oneshot
     disabled
-
-service ds_fmc_appd /system/bin/ds_fmc_appd -p "rmnet0" -D
-    class late_start
-    group radio wifi inet
-    disabled
-    oneshot
-
-on property:persist.data.ds_fmc_app.mode=1
-    start ds_fmc_appd
 
 service ims_regmanager /system/bin/exe-ims-regmanagerprocessnative
     class late_start
@@ -727,3 +726,6 @@ service qseeproxydaemon /system/vendor/bin/qseeproxydaemon
     user system
     group system
     writepid /dev/cpuset/system-background/tasks
+
+on property:vold.decrypt=trigger_restart_min_framework
+    start time_daemon
