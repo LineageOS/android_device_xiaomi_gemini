@@ -581,11 +581,19 @@ bool QCameraParametersIntf::isDISEnabled()
     return mImpl->isDISEnabled();
 }
 
-cam_is_type_t QCameraParametersIntf::getISType()
+int32_t QCameraParametersIntf::setISType()
 {
     Mutex::Autolock lock(mLock);
     CHECK_PARAM_INTF(mImpl);
-    return mImpl->getISType();
+    return mImpl->setISType();
+}
+
+
+cam_is_type_t QCameraParametersIntf::getVideoISType()
+{
+    Mutex::Autolock lock(mLock);
+    CHECK_PARAM_INTF(mImpl);
+    return mImpl->getVideoISType();
 }
 
 cam_is_type_t QCameraParametersIntf::getPreviewISType()

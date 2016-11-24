@@ -2278,6 +2278,7 @@ int32_t QCameraStateMachine::procEvtPicTakingState(qcamera_sm_evt_enum_t evt,
             rc = m_parent->stopCaptureChannel(restartPreview);
 
             if (restartPreview && (NO_ERROR == rc)) {
+                m_parent->unconfigureAdvancedCapture();
                 rc = m_parent->preparePreview();
                 if (NO_ERROR == rc) {
                     m_parent->m_bPreviewStarted = true;

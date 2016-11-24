@@ -770,18 +770,6 @@ void QCamera2HardwareInterface::release_recording_frame(
     }
     LOGD("E camera id %d", hw->getCameraId());
 
-    //Close and delete duplicated native handle and FD's.
-    if (hw->mVideoMem != NULL) {
-        ret = hw->mVideoMem->closeNativeHandle(opaque,
-                hw->mStoreMetaDataInFrame > 0);
-        if (ret != NO_ERROR) {
-            LOGE("Invalid video metadata");
-            return;
-        }
-    } else {
-        LOGW("Possible FD leak. Release recording called after stop");
-    }
-
     hw->lockAPI();
     qcamera_api_result_t apiResult;
     ret = hw->processAPI(QCAMERA_SM_EVT_RELEASE_RECORIDNG_FRAME, (void *)opaque);
@@ -1675,7 +1663,6 @@ QCamera2HardwareInterface::QCamera2HardwareInterface(uint32_t cameraId)
       mJpegClientHandle(0),
       mJpegHandleOwner(false),
       mMetadataMem(NULL),
-      mVideoMem(NULL),
       mCACDoneReceived(false),
       m_bNeedRestart(false)
 {
@@ -2322,7 +2309,7 @@ int QCamera2HardwareInterface::initCapabilities(uint32_t cameraId,
             CAM_MAPPING_BUF_TYPE_CAPABILITY,
             0 /*stream id*/, 0 /*buffer index*/, -1 /*plane index*/,
             0 /*cookie*/, capabilityHeap->getFd(0), sizeof(cam_capability_t),
-            bufMapList);
+            bufMapList, capabilityHeap->getPtr(0));
 
     if (rc == NO_ERROR) {
         rc = cameraHandle->ops->map_bufs(cameraHandle->camera_handle,
@@ -2496,8 +2483,12 @@ uint8_t QCamera2HardwareInterface::getBufNumRequired(cam_stream_type_t stream_ty
             if (bufferCnt > CAMERA_ISP_PING_PONG_BUFFERS )
                 bufferCnt -= CAMERA_ISP_PING_PONG_BUFFERS;
 
-            if (mParameters.getRecordingHintValue() == true)
+            // Extra ZSL preview frames are not needed for HFR case.
+            // Thumbnail will not be derived from preview for HFR live snapshot case.
+            if ((mParameters.getRecordingHintValue() == true)
+                    && (!mParameters.isHfrMode())) {
                 bufferCnt += EXTRA_ZSL_PREVIEW_STREAM_BUF;
+            }
 
             // Add the display minUndequeCount count on top of camera requirement
             bufferCnt += minUndequeCount;
@@ -2857,7 +2848,6 @@ QCameraMemory *QCamera2HardwareInterface::allocateStreamBuf(
             }
             videoMemory->setVideoInfo(usage, fmt);
             mem = videoMemory;
-            mVideoMem = videoMemory;
         }
         break;
     case CAM_STREAM_TYPE_CALLBACK:
@@ -2890,8 +2880,8 @@ QCameraMemory *QCamera2HardwareInterface::allocateStreamBuf(
         }
         bufferCnt = mem->getCnt();
     }
-    LOGH("rc = %d type = %d count = %d size = %d cache = %d, pool = %d",
-            rc, stream_type, bufferCnt, size, bCachedMem, bPoolMem);
+    LOGH("rc = %d type = %d count = %d size = %d cache = %d, pool = %d mEnqueuedBuffers = %d",
+            rc, stream_type, bufferCnt, size, bCachedMem, bPoolMem, mEnqueuedBuffers);
     return mem;
 }
 
@@ -3075,7 +3065,7 @@ QCameraHeapMemory *QCamera2HardwareInterface::allocateStreamInfoBuf(
         }
         if (mParameters.getRecordingHintValue()) {
             if(mParameters.isDISEnabled()) {
-                streamInfo->is_type = mParameters.getISType();
+                streamInfo->is_type = mParameters.getVideoISType();
             } else {
                 streamInfo->is_type = IS_TYPE_NONE;
             }
@@ -3139,10 +3129,11 @@ QCameraHeapMemory *QCamera2HardwareInterface::allocateStreamInfoBuf(
             streamInfo->pp_config.feature_mask |= CAM_QCOM_FEATURE_SCALE;
     }
 
-    LOGH("type %d, fmt %d, dim %dx%d, num_bufs %d mask = 0x%x\n",
+    LOGH("type %d, fmt %d, dim %dx%d, num_bufs %d mask = 0x%x is_type %d\n",
            stream_type, streamInfo->fmt, streamInfo->dim.width,
            streamInfo->dim.height, streamInfo->num_bufs,
-           streamInfo->pp_config.feature_mask);
+           streamInfo->pp_config.feature_mask,
+           streamInfo->is_type);
 
     return streamInfoBuf;
 }
@@ -3199,7 +3190,6 @@ QCameraMemory *QCamera2HardwareInterface::allocateStreamUserBuf(
         }
         video_mem->setVideoInfo(usage, fmt);
         mem = static_cast<QCameraMemory *>(video_mem);
-        mVideoMem = video_mem;
     }
     break;
 
@@ -3649,7 +3639,6 @@ int QCamera2HardwareInterface::startRecording()
     int32_t rc = NO_ERROR;
 
     LOGI("E");
-    mVideoMem = NULL;
     //link meta stream with video channel if low power mode.
     if (isLowPowerMode()) {
         // Find and try to link a metadata stream from preview channel
@@ -3749,7 +3738,6 @@ int QCamera2HardwareInterface::stopRecording()
     m_cbNotifier.flushVideoNotifications();
     // Disable power hint for video encoding
     m_perfLock.powerHint(POWER_HINT_VIDEO_ENCODE, false);
-    mVideoMem = NULL;
     LOGI("X rc = %d", rc);
     return rc;
 }
@@ -5330,6 +5318,9 @@ int QCamera2HardwareInterface::takeLiveSnapshot_internal()
     int rc = NO_ERROR;
 
     QCameraChannel *pChannel = NULL;
+    QCameraChannel *pPreviewChannel = NULL;
+    QCameraStream  *pPreviewStream = NULL;
+    QCameraStream  *pStream = NULL;
 
     //Set rotation value from user settings as Jpeg rotation
     //to configure back-end modules.
@@ -5352,6 +5343,45 @@ int QCamera2HardwareInterface::takeLiveSnapshot_internal()
         LOGE("Snapshot/Video channel not initialized");
         rc = NO_INIT;
         goto end;
+    }
+
+    // Check if all preview buffers are mapped before creating
+    // a jpeg session as preview stream buffers are queried during the same
+    pPreviewChannel = m_channels[QCAMERA_CH_TYPE_PREVIEW];
+    if (pPreviewChannel != NULL) {
+        uint32_t numStreams = pPreviewChannel->getNumOfStreams();
+
+        for (uint8_t i = 0 ; i < numStreams ; i++ ) {
+            pStream = pPreviewChannel->getStreamByIndex(i);
+            if (!pStream)
+                continue;
+            if (CAM_STREAM_TYPE_PREVIEW == pStream->getMyType()) {
+                pPreviewStream = pStream;
+                break;
+            }
+        }
+
+        if (pPreviewStream != NULL) {
+            Mutex::Autolock l(mMapLock);
+            QCameraMemory *pMemory = pStream->getStreamBufs();
+            if (!pMemory) {
+                LOGE("Error!! pMemory is NULL");
+                return -ENOMEM;
+            }
+
+            uint8_t waitCnt = 2;
+            while (!pMemory->checkIfAllBuffersMapped() && (waitCnt > 0)) {
+                LOGL(" Waiting for preview buffers to be mapped");
+                mMapCond.waitRelative(
+                        mMapLock, CAMERA_DEFERRED_MAP_BUF_TIMEOUT);
+                LOGL("Wait completed!!");
+                waitCnt--;
+            }
+            // If all buffers are not mapped after retries, assert
+            assert(pMemory->checkIfAllBuffersMapped());
+        } else {
+            assert(pPreviewStream);
+        }
     }
 
     DeferWorkArgs args;
@@ -5451,7 +5481,10 @@ int QCamera2HardwareInterface::takeLiveSnapshot_internal()
                     if (NULL != pStream) {
                         if (CAM_STREAM_TYPE_METADATA == pStream->getMyType()) {
                             pMetaStream = pStream;
-                        } else if (CAM_STREAM_TYPE_PREVIEW == pStream->getMyType()) {
+                        } else if ((CAM_STREAM_TYPE_PREVIEW == pStream->getMyType())
+                                && (!mParameters.isHfrMode())) {
+                            // Do not link preview stream for HFR live snapshot.
+                            // Thumbnail will not be derived from preview for HFR live snapshot.
                             pPreviewStream = pStream;
                         }
                     }
@@ -5770,7 +5803,8 @@ int QCamera2HardwareInterface::registerFaceImage(void *img_ptr,
 
     ssize_t bufSize = imgBuf->getSize(0);
     if (BAD_INDEX != bufSize) {
-        rc = pChannel->doReprocess(imgBuf->getFd(0), (size_t)bufSize, faceID);
+        rc = pChannel->doReprocess(imgBuf->getFd(0), imgBuf->getPtr(0),
+                (size_t)bufSize, faceID);
     } else {
         LOGE("Failed to retrieve buffer size (bad index)");
         return UNKNOWN_ERROR;

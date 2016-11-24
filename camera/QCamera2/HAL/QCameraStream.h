@@ -100,7 +100,7 @@ public:
     int32_t acquireStreamBufs();
 
     int32_t mapBuf(uint8_t buf_type, uint32_t buf_idx,
-            int32_t plane_idx, int fd, size_t size,
+            int32_t plane_idx, int fd, void *buffer, size_t size,
             mm_camera_map_unmap_ops_tbl_t *ops_tbl = NULL);
     int32_t mapBufs(cam_buf_map_type_list bufMapList,
             mm_camera_map_unmap_ops_tbl_t *ops_tbl = NULL);

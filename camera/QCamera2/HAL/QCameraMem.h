@@ -35,6 +35,9 @@
 #include <utils/Mutex.h>
 #include <utils/List.h>
 
+//Media depedancies
+#include "OMX_QCOMExtns.h"
+
 // Display dependencies
 #include "qdMetaData.h"
 
@@ -51,6 +54,14 @@ class QCameraMemoryPool;
 
 //OFFSET, SIZE, USAGE, TIMESTAMP, FORMAT
 #define VIDEO_METADATA_NUM_INTS          5
+
+//Buffer identity
+//Note that this macro might have already been
+//defined in OMX_QCOMExtns.h, in which case
+//the local value below will not be used.
+#ifndef VIDEO_METADATA_NUM_COMMON_INTS
+#define VIDEO_METADATA_NUM_COMMON_INTS   1
+#endif
 
 enum QCameraMemType {
     QCAMERA_MEM_TYPE_DEFAULT      = 0,
@@ -231,8 +242,8 @@ public:
     int getUsage(){return mUsage;};
     int getFormat(){return mFormat;};
     int convCamtoOMXFormat(cam_format_t format);
-    native_handle_t *updateNativeHandle(uint32_t index, bool metadata = true);
     int closeNativeHandle(const void *data, bool metadata = true);
+    native_handle_t *getNativeHandle(uint32_t index, bool metadata = true);
 private:
     camera_memory_t *mMetadata[MM_CAMERA_MAX_NUM_FRAMES];
     uint8_t mMetaBufCount;

@@ -151,13 +151,14 @@ typedef enum {
     CAM_HAL_V3 = 3
 } cam_hal_version_t;
 
-typedef enum {
-    CAM_STATUS_SUCCESS,       /* Operation Succeded */
-    CAM_STATUS_FAILED,        /* Failure in doing operation */
-    CAM_STATUS_INVALID_PARM,  /* Inavlid parameter provided */
-    CAM_STATUS_NOT_SUPPORTED, /* Parameter/operation not supported */
-    CAM_STATUS_ACCEPTED,      /* Parameter accepted */
-    CAM_STATUS_MAX,
+ typedef enum {
+    CAM_STATUS_INVALID_PARM  = -4, /* Inavlid parameter provided */
+    CAM_STATUS_NOT_SUPPORTED = -3, /* Parameter/operation not supported */
+    CAM_STATUS_BUSY          = -2, /* operation busy */
+    CAM_STATUS_FAILED        = -1, /* Failure in doing operation */
+    CAM_STATUS_SUCCESS       =  0, /* Operation Succeded */
+    CAM_STATUS_ACCEPTED      =  1, /* Parameter accepted */
+    CAM_STATUS_MAX           =  2,
 } cam_status_t;
 
 typedef enum {
@@ -429,6 +430,7 @@ typedef struct {
     uint32_t cookie;      /* could be job_id(uint32_t) to identify mapping job */
     int32_t fd;           /* origin fd */
     size_t size;          /* size of the buffer */
+    void *buffer;         /* Buffer pointer */
 } cam_buf_map_type;
 
 typedef struct {
@@ -468,6 +470,7 @@ typedef struct {
         cam_buf_unmap_type_list buf_unmap_list;
     } payload;
 } cam_sock_packet_t;
+typedef cam_sock_packet_t cam_reg_buf_t;
 
 typedef enum {
     CAM_MODE_2D = (1<<0),
@@ -859,6 +862,13 @@ typedef enum {
     CAM_SENSOR_HDR_ZIGZAG,
     CAM_SENSOR_HDR_MAX,
 } cam_sensor_hdr_type_t;
+
+typedef enum {
+    CAM_LED_CALIBRATION_MODE_OFF,
+    CAM_LED_CALIBRATION_MODE_DUAL,
+    CAM_LED_CALIBRATION_MODE_SINGLE,
+    CAM_LED_CALIBRATION_MODE_MAX
+} cam_led_calibration_mode_t;
 
 typedef struct  {
     int32_t left;
@@ -1342,6 +1352,8 @@ typedef struct {
     cam_focus_mode_type focus_mode;        /* focus mode from backend */
     int32_t focus_pos;
     cam_af_flush_info_t flush_info;
+    float focus_value;
+    uint8_t spot_light_detected;
 } cam_auto_focus_data_t;
 
 typedef struct {
@@ -1887,7 +1899,7 @@ typedef enum {
     CAM_INTF_PARM_CDS_MODE,
     CAM_INTF_PARM_TONE_MAP_MODE,
     CAM_INTF_PARM_CAPTURE_FRAME_CONFIG, /* 90 */
-    CAM_INTF_PARM_DUAL_LED_CALIBRATION,
+    CAM_INTF_PARM_LED_CALIBRATION,
     CAM_INTF_PARM_ADV_CAPTURE_MODE,
 
     /* stream based parameters */
@@ -2163,6 +2175,10 @@ typedef enum {
     CAM_INTF_PARM_JPEG_ENCODE_CROP,
     /*Param for updating Quadra CFA mode */
     CAM_INTF_PARM_QUADRA_CFA,
+    /*Focus value output from af core*/
+    CAM_INTF_META_FOCUS_VALUE,
+    /*Spot light detection result output from af core*/
+    CAM_INTF_META_SPOT_LIGHT_DETECT,
     CAM_INTF_PARM_MAX
 } cam_intf_parm_type_t;
 
@@ -2736,6 +2752,17 @@ typedef struct {
     int32_t                  pipeline_flip; /* current pipeline flip and rotational parameters */
     cam_rotation_info_t      rotation_info; /* rotation information */
 } cam_ddm_info_t;
+
+/** mm_camera_event_t: structure for event
+*    @server_event_type : event type from serer
+*    @status : status of an event, value could be
+*              CAM_STATUS_SUCCESS
+*              CAM_STATUS_FAILED
+**/
+typedef struct {
+    cam_event_type_t server_event_type;
+    uint32_t status;
+} cam_event_t;
 
 /***********************************
 * ENUM definition for custom parameter type

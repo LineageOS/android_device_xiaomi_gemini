@@ -214,6 +214,7 @@ private:
     static const char KEY_QC_INSTANT_CAPTURE[];
     static const char KEY_QC_INSTANT_AEC_SUPPORTED_MODES[];
     static const char KEY_QC_INSTANT_CAPTURE_SUPPORTED_MODES[];
+    static const char KEY_QC_LED_CALIBRATION_MODES[];
 
     static const char KEY_QC_MANUAL_FOCUS_POSITION[];
     static const char KEY_QC_MANUAL_FOCUS_POS_TYPE[];
@@ -472,6 +473,11 @@ private:
     static const char KEY_QC_INSTANT_CAPTURE_AGGRESSIVE_AEC[];
     static const char KEY_QC_INSTANT_CAPTURE_FAST_AEC[];
 
+    // Values for led calibration modes
+    static const char KEY_QC_LED_CALIBRATION_OFF[];
+    static const char KEY_QC_LED_CALIBRATION_DUAL[];
+    static const char KEY_QC_LED_CALIBRATION_SINGLE[];
+
     static const char KEY_QC_SHARPNESS[];
     static const char KEY_QC_MIN_SHARPNESS[];
     static const char KEY_QC_MAX_SHARPNESS[];
@@ -712,7 +718,8 @@ public:
     int32_t stopAEBracket();
     int32_t updateRAW(cam_dimension_t max_dim);
     bool isDISEnabled();
-    cam_is_type_t getISType();
+    int32_t setISType();
+    cam_is_type_t getVideoISType();
     cam_is_type_t getPreviewISType();
     uint8_t getMobicatMask();
 
@@ -1052,7 +1059,8 @@ private:
             size_t len, int &default_fps_index);
     String8 createFpsString(cam_fps_range_t &fps);
     String8 createZoomRatioValuesString(uint32_t *zoomRatios, size_t length);
-    int32_t setDualLedCalibration(const QCameraParameters& params);
+    int32_t setLedCalibration(const QCameraParameters& params);
+    int32_t setLedCalibration(const char *calibration_mode);
     int32_t setAdvancedCaptureMode();
 
     // ops for batch set/get params with server
@@ -1070,6 +1078,7 @@ private:
     static const QCameraMap<cam_auto_exposure_mode_type> AUTO_EXPOSURE_MAP[];
     static const QCameraMap<cam_aec_convergence_type> INSTANT_CAPTURE_MODES_MAP[];
     static const QCameraMap<cam_aec_convergence_type> INSTANT_AEC_MODES_MAP[];
+    static const QCameraMap<cam_led_calibration_mode_t> LED_CALIBRATION_MODE_MAP[];
     static const QCameraMap<cam_format_t> PREVIEW_FORMATS_MAP[];
     static const QCameraMap<cam_format_t> PICTURE_TYPES_MAP[];
     static const QCameraMap<cam_focus_mode_type> FOCUS_MODES_MAP[];
@@ -1113,7 +1122,7 @@ private:
     cam_sync_related_sensors_event_info_t *m_pRelCamSyncBuf;
     cam_sync_related_sensors_event_info_t m_relCamSyncInfo;
     bool m_bFrameSyncEnabled;
-    cam_is_type_t mIsType;
+    cam_is_type_t mIsTypeVideo;
     cam_is_type_t mIsTypePreview;
 
     bool m_bZslMode;                // if ZSL is enabled
@@ -1214,7 +1223,7 @@ private:
     int32_t m_isoValue;
     QCameraManualCaptureModes m_ManualCaptureMode;
     cam_dyn_img_data_t m_DynamicImgData;
-    int32_t m_dualLedCalibration;
+    cam_led_calibration_mode_t m_ledCalibrationMode;
     // Param to trigger instant AEC.
     bool m_bInstantAEC;
     // Param to trigger instant capture.

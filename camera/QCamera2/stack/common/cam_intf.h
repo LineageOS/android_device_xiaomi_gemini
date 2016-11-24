@@ -94,8 +94,6 @@ typedef struct {
 }cam_sync_related_sensors_event_info_t;
 
 /* Related camera sensor specific calibration data */
-// Align bytes according to API document.
-#pragma pack(2)
 typedef struct {
     /* Focal length in pixels @ calibration resolution.*/
     float       normalized_focal_length;
@@ -110,15 +108,12 @@ typedef struct {
     /* Focal length ratio @ Calibration */
     float       focal_length_ratio;
 }cam_related_sensor_calibration_data_t;
-#pragma pack()
 
 /* Related Camera System Calibration data
    Calibration data for the entire related cam sub-system is
    in a shared EEPROM. We have 2 fields which are specific to
    each sensor followed by a set of common calibration of the
    entire related cam system*/
-// Align bytes according to API document.
-#pragma pack(2)
 typedef struct {
     /* Version information */
     uint32_t    calibration_format_version;
@@ -165,7 +160,6 @@ typedef struct {
     /* Reserved for future use */
     float      reserved[RELCAM_CALIB_RESERVED_MAX];
 } cam_related_system_calibration_data_t;
-#pragma pack()
 
 typedef struct {
   uint32_t default_sensor_flip;
@@ -818,6 +812,8 @@ typedef struct {
     INCLUDE(CAM_INTF_META_LENS_FILTERDENSITY,           float,                       1);
     INCLUDE(CAM_INTF_META_LENS_FOCAL_LENGTH,            float,                       1);
     INCLUDE(CAM_INTF_META_LENS_FOCUS_DISTANCE,          float,                       1);
+    INCLUDE(CAM_INTF_META_FOCUS_VALUE,                  float,                       1);
+    INCLUDE(CAM_INTF_META_SPOT_LIGHT_DETECT,            uint8_t,                     1);
     INCLUDE(CAM_INTF_META_LENS_FOCUS_RANGE,             float,                       2);
     INCLUDE(CAM_INTF_META_LENS_STATE,                   cam_af_lens_state_t,         1);
     INCLUDE(CAM_INTF_META_LENS_OPT_STAB_MODE,           uint32_t,                    1);
@@ -931,7 +927,7 @@ typedef struct {
     INCLUDE(CAM_INTF_PARM_LONGSHOT_ENABLE,              int8_t,                      1);
     INCLUDE(CAM_INTF_PARM_TONE_MAP_MODE,                uint32_t,                    1);
     INCLUDE(CAM_INTF_META_TOUCH_AE_RESULT,              int32_t,                     1);
-    INCLUDE(CAM_INTF_PARM_DUAL_LED_CALIBRATION,         int32_t,                     1);
+    INCLUDE(CAM_INTF_PARM_LED_CALIBRATION,              cam_led_calibration_mode_t,  1);
     INCLUDE(CAM_INTF_PARM_ADV_CAPTURE_MODE,             uint8_t,                     1);
     INCLUDE(CAM_INTF_PARM_QUADRA_CFA,                   int32_t,                     1);
 

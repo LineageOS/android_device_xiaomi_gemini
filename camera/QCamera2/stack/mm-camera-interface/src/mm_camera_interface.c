@@ -37,13 +37,14 @@
 #include <stdlib.h>
 #include <linux/media.h>
 #include <media/msm_cam_sensor.h>
+#include <dlfcn.h>
+
 #define IOCTL_H <SYSTEM_HEADER_PREFIX/ioctl.h>
 #include IOCTL_H
 
 // Camera dependencies
 #include "mm_camera_dbg.h"
 #include "mm_camera_interface.h"
-#include "mm_camera_sock.h"
 #include "mm_camera.h"
 
 static pthread_mutex_t g_intf_lock = PTHREAD_MUTEX_INITIALIZER;
@@ -137,6 +138,31 @@ mm_camera_obj_t* mm_camera_util_get_camera_by_handler(uint32_t cam_handle)
         (NULL != g_cam_ctrl.cam_obj[cam_idx]) &&
         (cam_handle == g_cam_ctrl.cam_obj[cam_idx]->my_hdl)) {
         cam_obj = g_cam_ctrl.cam_obj[cam_idx];
+    }
+    return cam_obj;
+}
+
+/*===========================================================================
+ * FUNCTION   : mm_camera_util_get_camera_by_session_id
+ *
+ * DESCRIPTION: utility function to get camera object from camera sessionID
+ *
+ * PARAMETERS :
+ *   @session_id: sessionid for which cam obj mapped
+ *
+ * RETURN     : ptr to the camera object stored in global variable
+ * NOTE       : caller should not free the camera object ptr
+ *==========================================================================*/
+mm_camera_obj_t* mm_camera_util_get_camera_by_session_id(uint32_t session_id)
+{
+   int cam_idx = 0;
+   mm_camera_obj_t *cam_obj = NULL;
+   for (cam_idx = 0; cam_idx < MM_CAMERA_MAX_NUM_SENSORS; cam_idx++) {
+        if ((NULL != g_cam_ctrl.cam_obj[cam_idx]) &&
+                (session_id == (uint32_t)g_cam_ctrl.cam_obj[cam_idx]->sessionid)) {
+            LOGD("session id:%d match idx:%d\n", session_id, cam_idx);
+            cam_obj = g_cam_ctrl.cam_obj[cam_idx];
+        }
     }
     return cam_obj;
 }
@@ -1098,9 +1124,7 @@ static int32_t mm_camera_intf_configure_notify_mode(uint32_t camera_handle,
  *              -1 -- failure
  *==========================================================================*/
 static int32_t mm_camera_intf_map_buf(uint32_t camera_handle,
-                                      uint8_t buf_type,
-                                      int fd,
-                                      size_t size)
+    uint8_t buf_type, int fd, size_t size, void *buffer)
 {
     int32_t rc = -1;
     mm_camera_obj_t * my_obj = NULL;
@@ -1111,15 +1135,31 @@ static int32_t mm_camera_intf_map_buf(uint32_t camera_handle,
     if(my_obj) {
         pthread_mutex_lock(&my_obj->cam_lock);
         pthread_mutex_unlock(&g_intf_lock);
-        rc = mm_camera_map_buf(my_obj, buf_type, fd, size);
+        rc = mm_camera_map_buf(my_obj, buf_type, fd, size, buffer);
     } else {
         pthread_mutex_unlock(&g_intf_lock);
     }
     return rc;
 }
 
+/*===========================================================================
+ * FUNCTION   : mm_camera_intf_map_bufs
+ *
+ * DESCRIPTION: mapping camera buffer via domain socket to server
+ *
+ * PARAMETERS :
+ *   @camera_handle: camera handle
+ *   @buf_type     : type of buffer to be mapped. could be following values:
+ *                   CAM_MAPPING_BUF_TYPE_CAPABILITY
+ *                   CAM_MAPPING_BUF_TYPE_SETPARM_BUF
+ *                   CAM_MAPPING_BUF_TYPE_GETPARM_BUF
+ *
+ * RETURN     : int32_t type of status
+ *              0  -- success
+ *              -1 -- failure
+ *==========================================================================*/
 static int32_t mm_camera_intf_map_bufs(uint32_t camera_handle,
-                                       const cam_buf_map_type_list *buf_map_list)
+        const cam_buf_map_type_list *buf_map_list)
 {
     int32_t rc = -1;
     mm_camera_obj_t * my_obj = NULL;
@@ -1288,13 +1328,9 @@ static int32_t mm_camera_intf_get_stream_parms(uint32_t camera_handle,
  *              -1 -- failure
  *==========================================================================*/
 static int32_t mm_camera_intf_map_stream_buf(uint32_t camera_handle,
-                                             uint32_t ch_id,
-                                             uint32_t stream_id,
-                                             uint8_t buf_type,
-                                             uint32_t buf_idx,
-                                             int32_t plane_idx,
-                                             int fd,
-                                             size_t size)
+        uint32_t ch_id, uint32_t stream_id, uint8_t buf_type,
+        uint32_t buf_idx, int32_t plane_idx, int fd,
+        size_t size, void *buffer)
 {
     int32_t rc = -1;
     mm_camera_obj_t * my_obj = NULL;
@@ -1310,7 +1346,7 @@ static int32_t mm_camera_intf_map_stream_buf(uint32_t camera_handle,
         pthread_mutex_unlock(&g_intf_lock);
         rc = mm_camera_map_stream_buf(my_obj, ch_id, stream_id,
                                       buf_type, buf_idx, plane_idx,
-                                      fd, size);
+                                      fd, size, buffer);
     }else{
         pthread_mutex_unlock(&g_intf_lock);
     }
@@ -1437,7 +1473,9 @@ static int32_t mm_camera_intf_get_session_id(uint32_t camera_handle,
     if(my_obj) {
         pthread_mutex_lock(&my_obj->cam_lock);
         pthread_mutex_unlock(&g_intf_lock);
-        rc = mm_camera_get_session_id(my_obj, sessionid);
+        *sessionid = my_obj->sessionid;
+        pthread_mutex_unlock(&my_obj->cam_lock);
+        rc = 0;
     } else {
         pthread_mutex_unlock(&g_intf_lock);
     }
@@ -1703,9 +1741,15 @@ uint8_t get_num_of_cameras()
     int decrypt = atoi(prop);
     if (decrypt == 1)
      return 0;
-
-    /* lock the mutex */
     pthread_mutex_lock(&g_intf_lock);
+
+    memset (&g_cam_ctrl, 0, sizeof (g_cam_ctrl));
+#ifndef DAEMON_PRESENT
+    if (mm_camera_load_shim_lib() < 0) {
+        LOGE ("Failed to module shim library");
+        return 0;
+    }
+#endif /* DAEMON_PRESENT */
 
     while (1) {
         uint32_t num_entities = 1U;
@@ -2050,3 +2094,147 @@ int32_t camera_open(uint8_t camera_idx, mm_camera_vtbl_t **camera_vtbl)
         return 0;
     }
 }
+
+/*===========================================================================
+ * FUNCTION   : mm_camera_load_shim_lib
+ *
+ * DESCRIPTION: Load shim layer library
+ *
+ * PARAMETERS :
+ *
+ * RETURN     : status of load shim library
+ *==========================================================================*/
+int32_t mm_camera_load_shim_lib()
+{
+    const char* error = NULL;
+    void *qdaemon_lib = NULL;
+
+    LOGD("E");
+    qdaemon_lib = dlopen(SHIMLAYER_LIB, RTLD_NOW);
+    if (!qdaemon_lib) {
+        error = dlerror();
+        LOGE("dlopen failed with error %s", error ? error : "");
+        return -1;
+    }
+
+    *(void **)&mm_camera_shim_module_init =
+            dlsym(qdaemon_lib, "mct_shimlayer_process_module_init");
+    if (!mm_camera_shim_module_init) {
+        error = dlerror();
+        LOGE("dlsym failed with error code %s", error ? error: "");
+        dlclose(qdaemon_lib);
+        return -1;
+    }
+
+    return mm_camera_shim_module_init(&g_cam_ctrl.cam_shim_ops);
+}
+
+/*===========================================================================
+ * FUNCTION   : mm_camera_module_open_session
+ *
+ * DESCRIPTION: wrapper function to call shim layer API to open session.
+ *
+ * PARAMETERS :
+ *   @sessionid  : sessionID to open session
+ *   @evt_cb     : Event callback function
+ *
+ * RETURN     : int32_t type of status
+ *              0  -- success
+ *              non-zero error code -- failure
+ *==========================================================================*/
+cam_status_t mm_camera_module_open_session(int sessionid,
+        mm_camera_shim_event_handler_func evt_cb)
+{
+    cam_status_t rc = -1;
+    if(g_cam_ctrl.cam_shim_ops.mm_camera_shim_open_session) {
+        rc = g_cam_ctrl.cam_shim_ops.mm_camera_shim_open_session(
+                sessionid, evt_cb);
+    }
+    return rc;
+}
+
+/*===========================================================================
+ * FUNCTION   : mm_camera_module_close_session
+ *
+ * DESCRIPTION: wrapper function to call shim layer API to close session
+ *
+ * PARAMETERS :
+ *   @sessionid  : sessionID to open session
+ *
+ * RETURN     : int32_t type of status
+ *              0  -- success
+ *              non-zero error code -- failure
+ *==========================================================================*/
+int32_t mm_camera_module_close_session(int session)
+{
+    int32_t rc = -1;
+    if(g_cam_ctrl.cam_shim_ops.mm_camera_shim_close_session) {
+        rc = g_cam_ctrl.cam_shim_ops.mm_camera_shim_close_session(session);
+    }
+    return rc;
+}
+
+/*===========================================================================
+ * FUNCTION   : mm_camera_module_open_session
+ *
+ * DESCRIPTION: wrapper function to call shim layer API
+ *
+ * PARAMETERS :
+ *   @sessionid  : sessionID to open session
+ *   @evt_cb     : Event callback function
+ *
+ * RETURN     : int32_t type of status
+ *              0  -- success
+ *              non-zero error code -- failure
+ *==========================================================================*/
+int32_t mm_camera_module_send_cmd(cam_shim_packet_t *event)
+{
+    int32_t rc = -1;
+    if(g_cam_ctrl.cam_shim_ops.mm_camera_shim_send_cmd) {
+        rc = g_cam_ctrl.cam_shim_ops.mm_camera_shim_send_cmd(event);
+    }
+    return rc;
+}
+
+/*===========================================================================
+ * FUNCTION   : mm_camera_module_event_handler
+ *
+ * DESCRIPTION: call back function for shim layer
+ *
+ * PARAMETERS :
+ *
+ * RETURN     : status of call back function
+ *==========================================================================*/
+int mm_camera_module_event_handler(uint32_t session_id, cam_event_t *event)
+{
+    if (!event) {
+        LOGE("null event");
+        return FALSE;
+    }
+    mm_camera_event_t evt;
+
+    LOGD("session_id:%d, cmd:0x%x", session_id, event->server_event_type);
+    memset(&evt, 0, sizeof(mm_camera_event_t));
+
+    evt = *event;
+    mm_camera_obj_t *my_obj =
+         mm_camera_util_get_camera_by_session_id(session_id);
+    if (!my_obj) {
+        LOGE("my_obj:%p", my_obj);
+        return FALSE;
+    }
+    switch( evt.server_event_type) {
+       case CAM_EVENT_TYPE_DAEMON_PULL_REQ:
+       case CAM_EVENT_TYPE_CAC_DONE:
+       case CAM_EVENT_TYPE_DAEMON_DIED:
+       case CAM_EVENT_TYPE_INT_TAKE_JPEG:
+       case CAM_EVENT_TYPE_INT_TAKE_RAW:
+           mm_camera_enqueue_evt(my_obj, &evt);
+           break;
+       default:
+           LOGE("cmd:%x from shim layer is not handled", evt.server_event_type);
+           break;
+   }
+   return TRUE;
+}
+

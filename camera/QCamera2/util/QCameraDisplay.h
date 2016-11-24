@@ -37,6 +37,7 @@
 namespace qcamera {
 
 #define CAMERA_NUM_VSYNC_INTERVAL_HISTORY  6
+#define NSEC_PER_MSEC 1000000LLU
 
 class QCameraDisplay {
 public:
@@ -59,14 +60,14 @@ private:
     // Tunable property. Increasing this will increase the frame delay and will loose
     // the real time display.
     uint32_t  mNum_vsync_from_vfe_isr_to_presentation_timestamp;
-    // Tunable property. Set the time stamp x ms prior to expected vsync so that
+    // Tunable property. Set the time stamp x ns prior to expected vsync so that
     // it will be picked in that vsync
-    uint32_t  mSet_timestamp_num_ms_prior_to_vsync;
+    nsecs_t  mSet_timestamp_num_ns_prior_to_vsync;
     // Tunable property for filtering timestamp wiggle when VFE ISR crosses
     // over MDP ISR over a period. Typical scenario is VFE is running at
     // 30.2 fps vs display running at 60 fps.
-    uint32_t  mVfe_and_mdp_freq_wiggle_filter_max_ms;
-    uint32_t  mVfe_and_mdp_freq_wiggle_filter_min_ms;
+    nsecs_t  mVfe_and_mdp_freq_wiggle_filter_max_ns;
+    nsecs_t  mVfe_and_mdp_freq_wiggle_filter_min_ns;
 
     android::DisplayEventReceiver  mDisplayEventReceiver;
 };

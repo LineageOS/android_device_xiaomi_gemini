@@ -138,7 +138,7 @@ public:
             uint8_t meta_buf_index);
 
     // offline reprocess
-    int32_t doReprocess(int buf_fd, size_t buf_length, int32_t &ret_val);
+    int32_t doReprocess(int buf_fd, void *buffer, size_t buf_length, int32_t &ret_val);
 
     int32_t doReprocessOffline(mm_camera_super_buf_t *frame,
              mm_camera_buf_def_t *meta_buf, QCameraParametersIntf &param);

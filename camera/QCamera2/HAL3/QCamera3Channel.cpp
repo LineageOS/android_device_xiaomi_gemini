@@ -1551,8 +1551,8 @@ void QCamera3ProcessingChannel::showDebugFPS(int32_t streamType)
                 (double)(s2ns(1))) / (double)diff;
         switch(streamType) {
             case CAM_STREAM_TYPE_PREVIEW:
-                LOGH("PROFILE_PREVIEW_FRAMES_PER_SECOND : %.4f",
-                         fps);
+                LOGH("PROFILE_PREVIEW_FRAMES_PER_SECOND : %.4f: mFrameCount=%d",
+                         fps, mFrameCount);
                 break;
             case CAM_STREAM_TYPE_VIDEO:
                 LOGH("PROFILE_VIDEO_FRAMES_PER_SECOND : %.4f",
@@ -1736,6 +1736,15 @@ int32_t QCamera3RegularChannel::initialize(cam_is_type_t isType)
                          mCamera3Stream->rotation);
             return -EINVAL;
         }
+
+        // Camera3/HAL3 spec expecting counter clockwise rotation but CPP HW is
+        // doing Clockwise rotation and so swap it.
+        if (mRotation == ROTATE_90) {
+            mRotation = ROTATE_270;
+        } else if (mRotation == ROTATE_270) {
+            mRotation = ROTATE_90;
+        }
+
     } else if (mCamera3Stream->rotation != CAMERA3_STREAM_ROTATION_0) {
         LOGE("Rotation %d is not supported by stream type %d",
                 mCamera3Stream->rotation,
@@ -3130,7 +3139,7 @@ QCamera3PicChannel::QCamera3PicChannel(uint32_t cam_handle,
                     void *userData,
                     camera3_stream_t *stream,
                     cam_feature_mask_t postprocess_mask,
-                    bool is4KVideo,
+                    __unused bool is4KVideo,
                     bool isInputStreamConfigured,
                     QCamera3Channel *metadataChannel,
                     uint32_t numBuffers) :
@@ -3149,9 +3158,7 @@ QCamera3PicChannel::QCamera3PicChannel(uint32_t cam_handle,
     mYuvHeight = stream->height;
     mStreamType = CAM_STREAM_TYPE_SNAPSHOT;
     // Use same pixelformat for 4K video case
-    mStreamFormat = is4KVideo ?
-            getStreamDefaultFormat(CAM_STREAM_TYPE_VIDEO)
-            :getStreamDefaultFormat(CAM_STREAM_TYPE_SNAPSHOT);
+    mStreamFormat = getStreamDefaultFormat(CAM_STREAM_TYPE_SNAPSHOT);
     int32_t rc = m_postprocessor.initJpeg(jpegEvtHandle, &m_max_pic_dim, this);
     if (rc != 0) {
         LOGE("Init Postprocessor failed");
@@ -4443,7 +4450,8 @@ int32_t QCamera3ReprocessChannel::overrideFwkMetadata(
     rc = pStream->mapBuf(
             CAM_MAPPING_BUF_TYPE_OFFLINE_INPUT_BUF,
             buf_idx, -1,
-            frame->input_buffer.fd, frame->input_buffer.frame_len);
+            frame->input_buffer.fd, frame->input_buffer.buffer,
+            frame->input_buffer.frame_len);
     if (NO_ERROR == rc) {
         mappedBuffer.index = buf_idx;
         mappedBuffer.stream = pStream;
@@ -4462,7 +4470,8 @@ int32_t QCamera3ReprocessChannel::overrideFwkMetadata(
     rc |= pStream->mapBuf(
             CAM_MAPPING_BUF_TYPE_OFFLINE_META_BUF,
             meta_buf_idx, -1,
-            frame->metadata_buffer.fd, frame->metadata_buffer.frame_len);
+            frame->metadata_buffer.fd, frame->metadata_buffer.buffer,
+            frame->metadata_buffer.frame_len);
     if (NO_ERROR == rc) {
         mappedBuffer.index = meta_buf_idx;
         mappedBuffer.stream = pStream;
@@ -4529,6 +4538,7 @@ int32_t QCamera3ReprocessChannel::overrideFwkMetadata(
  *
  * PARAMETERS :
  *   @buf_fd     : fd to the input buffer that needs reprocess
+ *   @buffer     : Buffer ptr
  *   @buf_lenght : length of the input buffer
  *   @ret_val    : result of reprocess.
  *                 Example: Could be faceID in case of register face image.
@@ -4538,7 +4548,7 @@ int32_t QCamera3ReprocessChannel::overrideFwkMetadata(
  *              NO_ERROR  -- success
  *              none-zero failure code
  *==========================================================================*/
-int32_t QCamera3ReprocessChannel::doReprocess(int buf_fd, size_t buf_length,
+int32_t QCamera3ReprocessChannel::doReprocess(int buf_fd, void *buffer, size_t buf_length,
         int32_t &ret_val, mm_camera_super_buf_t *meta_frame)
 {
     int32_t rc = 0;
@@ -4555,7 +4565,7 @@ int32_t QCamera3ReprocessChannel::doReprocess(int buf_fd, size_t buf_length,
     for (uint32_t i = 0; i < m_numStreams; i++) {
         rc = mStreams[i]->mapBuf(CAM_MAPPING_BUF_TYPE_OFFLINE_INPUT_BUF,
                                  buf_idx, -1,
-                                 buf_fd, buf_length);
+                                 buf_fd, buffer, buf_length);
 
         if (rc == NO_ERROR) {
             cam_stream_parm_buffer_t param;

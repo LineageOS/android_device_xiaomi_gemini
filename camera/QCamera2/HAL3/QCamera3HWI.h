@@ -324,6 +324,8 @@ private:
     int32_t startAllChannels();
     int32_t stopAllChannels();
     int32_t notifyErrorForPendingRequests();
+    void notifyError(uint32_t frameNumber,
+            camera3_error_msg_code_t errorCode);
     int32_t getReprocessibleOutputStreamId(uint32_t &id);
     int32_t handleCameraDeviceError();
 
@@ -373,6 +375,7 @@ private:
     bool m_bIs4KVideo;
     bool m_bEisSupportedSize;
     bool m_bEisEnable;
+    bool m_bEisSupported;
     typedef struct {
         cam_dimension_t dim;
         int format;

@@ -574,11 +574,11 @@ cam_dimension_t mm_app_get_analysis_stream_dim(
         requested_ratio = (double)preview_dim->width / (double)preview_dim->height;
 
         if (max_ratio < requested_ratio) {
-            analysis_dim.width = analysis_dim.width;
-            analysis_dim.height = (int32_t)((double)analysis_dim.width / requested_ratio);
+            analysis_dim.width = max_analysis_dim.width;
+            analysis_dim.height = (int32_t)((double)max_analysis_dim.width / requested_ratio);
         } else {
-            analysis_dim.height = analysis_dim.height;
-            analysis_dim.width = (int32_t)((double)analysis_dim.height * requested_ratio);
+            analysis_dim.height = max_analysis_dim.height;
+            analysis_dim.width = (int32_t)((double)max_analysis_dim.height * requested_ratio);
         }
         analysis_dim.width &= ~0x1;
         analysis_dim.height &= ~0x1;

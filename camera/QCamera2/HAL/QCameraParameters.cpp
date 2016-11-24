@@ -211,6 +211,7 @@ const char QCameraParameters::KEY_QC_INSTANT_AEC[] = "instant-aec";
 const char QCameraParameters::KEY_QC_INSTANT_CAPTURE[] = "instant-capture";
 const char QCameraParameters::KEY_QC_INSTANT_AEC_SUPPORTED_MODES[] = "instant-aec-values";
 const char QCameraParameters::KEY_QC_INSTANT_CAPTURE_SUPPORTED_MODES[] = "instant-capture-values";
+const char QCameraParameters::KEY_QC_LED_CALIBRATION_MODES[] = "led-calibration-mode";
 
 // Values for effect settings.
 const char QCameraParameters::EFFECT_EMBOSS[] = "emboss";
@@ -355,6 +356,11 @@ const char QCameraParameters::KEY_QC_INSTANT_AEC_FAST_AEC[] = "2";
 const char QCameraParameters::KEY_QC_INSTANT_CAPTURE_DISABLE[] = "0";
 const char QCameraParameters::KEY_QC_INSTANT_CAPTURE_AGGRESSIVE_AEC[] = "1";
 const char QCameraParameters::KEY_QC_INSTANT_CAPTURE_FAST_AEC[] = "2";
+
+//Values for led calibration mode
+const char QCameraParameters::KEY_QC_LED_CALIBRATION_OFF[] = "0";
+const char QCameraParameters::KEY_QC_LED_CALIBRATION_DUAL[] = "1";
+const char QCameraParameters::KEY_QC_LED_CALIBRATION_SINGLE[] = "2";
 
 const char QCameraParameters::KEY_QC_GPS_LATITUDE_REF[] = "gps-latitude-ref";
 const char QCameraParameters::KEY_QC_GPS_LONGITUDE_REF[] = "gps-longitude-ref";
@@ -528,6 +534,13 @@ const QCameraParameters::QCameraMap<cam_aec_convergence_type>
     { KEY_QC_INSTANT_CAPTURE_DISABLE,        CAM_AEC_NORMAL_CONVERGENCE },
     { KEY_QC_INSTANT_CAPTURE_AGGRESSIVE_AEC, CAM_AEC_AGGRESSIVE_CONVERGENCE },
     { KEY_QC_INSTANT_CAPTURE_FAST_AEC,       CAM_AEC_FAST_CONVERGENCE },
+};
+
+const QCameraParameters::QCameraMap<cam_led_calibration_mode_t>
+        QCameraParameters::LED_CALIBRATION_MODE_MAP[] = {
+    {KEY_QC_LED_CALIBRATION_OFF,        CAM_LED_CALIBRATION_MODE_OFF},
+    {KEY_QC_LED_CALIBRATION_DUAL,       CAM_LED_CALIBRATION_MODE_DUAL},
+    {KEY_QC_LED_CALIBRATION_SINGLE,     CAM_LED_CALIBRATION_MODE_SINGLE},
 };
 
 const QCameraParameters::QCameraMap<cam_format_t>
@@ -900,7 +913,7 @@ QCameraParameters::QCameraParameters()
       m_pRelCamSyncHeap(NULL),
       m_pRelCamSyncBuf(NULL),
       m_bFrameSyncEnabled(false),
-      mIsType(IS_TYPE_NONE),
+      mIsTypeVideo(IS_TYPE_NONE),
       mIsTypePreview(IS_TYPE_NONE),
       m_bZslMode(false),
       m_bZslMode_new(false),
@@ -971,7 +984,7 @@ QCameraParameters::QCameraParameters()
       m_expTime(0),
       m_isoValue(0),
       m_ManualCaptureMode(CAM_MANUAL_CAPTURE_TYPE_OFF),
-      m_dualLedCalibration(0),
+      m_ledCalibrationMode(CAM_LED_CALIBRATION_MODE_OFF),
       m_bInstantAEC(false),
       m_bInstantCapture(false),
       mAecFrameBound(0),
@@ -1102,7 +1115,7 @@ QCameraParameters::QCameraParameters(const String8 &params)
     m_expTime(0),
     m_isoValue(0),
     m_ManualCaptureMode(CAM_MANUAL_CAPTURE_TYPE_OFF),
-    m_dualLedCalibration(0),
+    m_ledCalibrationMode(CAM_LED_CALIBRATION_MODE_OFF),
     m_bInstantAEC(false),
     m_bInstantCapture(false),
     mAecFrameBound(0),
@@ -5112,7 +5125,7 @@ int32_t QCameraParameters::updateParameters(const String8& p,
     if ((rc = setNoiseReductionMode(params)))           final_rc = rc;
 
     if ((rc = setLongshotParam(params)))                final_rc = rc;
-    if ((rc = setDualLedCalibration(params)))           final_rc = rc;
+    if ((rc = setLedCalibration(params)))               final_rc = rc;
 
     setVideoBatchSize();
     setLowLightCapture();
@@ -6131,7 +6144,8 @@ int32_t QCameraParameters::init(cam_capability_t *capabilities,
     rc = QCameraBufferMaps::makeSingletonBufMapList(
             CAM_MAPPING_BUF_TYPE_PARM_BUF, 0 /*stream id*/,
             0 /*buffer index*/, -1 /*plane index*/, 0 /*cookie*/,
-            m_pParamHeap->getFd(0), sizeof(parm_buffer_t), bufMapList);
+            m_pParamHeap->getFd(0), sizeof(parm_buffer_t), bufMapList,
+                    m_pParamHeap->getPtr(0));
 
     if (rc == NO_ERROR) {
         rc = m_pCamOpsTbl->ops->map_bufs(m_pCamOpsTbl->camera_handle,
@@ -6163,7 +6177,8 @@ int32_t QCameraParameters::init(cam_capability_t *capabilities,
         rc = m_pCamOpsTbl->ops->map_buf(m_pCamOpsTbl->camera_handle,
                 CAM_MAPPING_BUF_TYPE_SYNC_RELATED_SENSORS_BUF,
                 m_pRelCamSyncHeap->getFd(0),
-                sizeof(cam_sync_related_sensors_event_info_t));
+                sizeof(cam_sync_related_sensors_event_info_t),
+                (cam_sync_related_sensors_event_info_t*)DATA_PTR(m_pRelCamSyncHeap,0));
         if(rc < 0) {
             LOGE("failed to map Related cam sync buffer");
             rc = FAILED_TRANSACTION;
@@ -6172,11 +6187,8 @@ int32_t QCameraParameters::init(cam_capability_t *capabilities,
         m_pRelCamSyncBuf =
                 (cam_sync_related_sensors_event_info_t*) DATA_PTR(m_pRelCamSyncHeap,0);
     }
-
     initDefaultParameters();
-
     mCommon.init(capabilities);
-
     m_bInited = true;
 
     goto TRANS_INIT_DONE;
@@ -11967,7 +11979,6 @@ int32_t QCameraParameters::getRelatedCamCalibration(
 int32_t QCameraParameters::initBatchUpdate(parm_buffer_t *p_table)
 {
     m_tempMap.clear();
-
     clear_metadata_buffer(p_table);
     return NO_ERROR;
 }
@@ -12611,6 +12622,47 @@ bool QCameraParameters::isDISEnabled()
 }
 
 /*===========================================================================
+* FUNCTION   : setISType
+*
+* DESCRIPTION: Set both Preview & Video IS type by reading the correspoding setprop's
+*
+* PARAMETERS : none
+*
+* RETURN     : IS type
+*
+*==========================================================================*/
+int32_t QCameraParameters::setISType()
+{
+    bool eisSupported = false, eis3Supported = false;
+    for (size_t i = 0; i < m_pCapability->supported_is_types_cnt; i++) {
+        if ((m_pCapability->supported_is_types[i] == IS_TYPE_EIS_2_0) ||
+                (m_pCapability->supported_is_types[i] == IS_TYPE_EIS_3_0)) {
+            eisSupported = true;
+        }
+        if (m_pCapability->supported_is_types[i] == IS_TYPE_EIS_3_0) {
+            eis3Supported = TRUE;
+        }
+    }
+    if (m_bDISEnabled && eisSupported) {
+        char value[PROPERTY_VALUE_MAX];
+        // Make default value for Video IS_TYPE as IS_TYPE_EIS_2_0
+        property_get("persist.camera.is_type", value, "4");
+        mIsTypeVideo = static_cast<cam_is_type_t>(atoi(value));
+        if ( (mIsTypeVideo == IS_TYPE_EIS_3_0) && (eis3Supported == FALSE) ) {
+            LOGW("EIS_3.0 is not supported and so setting EIS_2.0");
+            mIsTypeVideo = IS_TYPE_EIS_2_0;
+        }
+        // Make default value for preview IS_TYPE as IS_TYPE_EIS_2_0
+        property_get("persist.camera.is_type_preview", value, "4");
+        mIsTypePreview = static_cast<cam_is_type_t>(atoi(value));
+    } else {
+        mIsTypeVideo = IS_TYPE_NONE;
+        mIsTypePreview = IS_TYPE_NONE;
+    }
+    return NO_ERROR;
+}
+
+/*===========================================================================
 * FUNCTION   : getISType
 *
 * DESCRIPTION: returns IS type
@@ -12620,9 +12672,9 @@ bool QCameraParameters::isDISEnabled()
 * RETURN     : IS type
 *
 *==========================================================================*/
-cam_is_type_t QCameraParameters::getISType()
+cam_is_type_t QCameraParameters::getVideoISType()
 {
-    return mIsType;
+    return mIsTypeVideo;
 }
 
 /*===========================================================================
@@ -12790,19 +12842,10 @@ bool QCameraParameters::setStreamConfigure(bool isCapture,
 
     } else if (!isCapture) {
         if (m_bRecordingHint) {
-            if (m_bDISEnabled) {
-                char value[PROPERTY_VALUE_MAX];
-                // Make default value for IS_TYPE as IS_TYPE_EIS_2_0
-                property_get("persist.camera.is_type", value, "4");
-                mIsType = static_cast<cam_is_type_t>(atoi(value));
-                // Make default value for preview IS_TYPE as IS_TYPE_EIS_2_0
-                property_get("persist.camera.is_type_preview", value, "4");
-                mIsTypePreview = static_cast<cam_is_type_t>(atoi(value));
-            } else {
-                mIsType = IS_TYPE_NONE;
-                mIsTypePreview = IS_TYPE_NONE;
-            }
-            stream_config_info.is_type[stream_config_info.num_streams] = mIsType;
+            setISType();
+            mIsTypeVideo = getVideoISType();
+            mIsTypePreview = getPreviewISType();
+            stream_config_info.is_type[stream_config_info.num_streams] = IS_TYPE_NONE;
             stream_config_info.type[stream_config_info.num_streams] =
                     CAM_STREAM_TYPE_SNAPSHOT;
             getStreamDimension(CAM_STREAM_TYPE_SNAPSHOT,
@@ -12813,7 +12856,7 @@ bool QCameraParameters::setStreamConfigure(bool isCapture,
             getStreamFormat(CAM_STREAM_TYPE_SNAPSHOT,
                         stream_config_info.format[stream_config_info.num_streams]);
             stream_config_info.num_streams++;
-            stream_config_info.is_type[stream_config_info.num_streams] = mIsType;
+            stream_config_info.is_type[stream_config_info.num_streams] = mIsTypeVideo;
             stream_config_info.type[stream_config_info.num_streams] =
                     CAM_STREAM_TYPE_VIDEO;
             getStreamDimension(CAM_STREAM_TYPE_VIDEO,
@@ -12867,7 +12910,7 @@ bool QCameraParameters::setStreamConfigure(bool isCapture,
                         mStreamPpMask[CAM_STREAM_TYPE_CALLBACK];
                 getStreamFormat(CAM_STREAM_TYPE_CALLBACK,
                         stream_config_info.format[stream_config_info.num_streams]);
-                stream_config_info.is_type[stream_config_info.num_streams] = mIsType;
+                stream_config_info.is_type[stream_config_info.num_streams] = IS_TYPE_NONE;
                 stream_config_info.num_streams++;
             }
         }
@@ -12884,7 +12927,7 @@ bool QCameraParameters::setStreamConfigure(bool isCapture,
                         mStreamPpMask[CAM_STREAM_TYPE_SNAPSHOT];
                 getStreamFormat(CAM_STREAM_TYPE_SNAPSHOT,
                         stream_config_info.format[stream_config_info.num_streams]);
-                stream_config_info.is_type[stream_config_info.num_streams] = mIsType;
+                stream_config_info.is_type[stream_config_info.num_streams] = IS_TYPE_NONE;
                 stream_config_info.num_streams++;
             }
 
@@ -12898,7 +12941,7 @@ bool QCameraParameters::setStreamConfigure(bool isCapture,
                         mStreamPpMask[CAM_STREAM_TYPE_PREVIEW];
                 getStreamFormat(CAM_STREAM_TYPE_PREVIEW,
                         stream_config_info.format[stream_config_info.num_streams]);
-                stream_config_info.is_type[stream_config_info.num_streams] = mIsType;
+                stream_config_info.is_type[stream_config_info.num_streams] = IS_TYPE_NONE;
                 stream_config_info.num_streams++;
             } else {
                 stream_config_info.type[stream_config_info.num_streams] =
@@ -12910,7 +12953,7 @@ bool QCameraParameters::setStreamConfigure(bool isCapture,
                         mStreamPpMask[CAM_STREAM_TYPE_POSTVIEW];
                 getStreamFormat(CAM_STREAM_TYPE_POSTVIEW,
                         stream_config_info.format[stream_config_info.num_streams]);
-                stream_config_info.is_type[stream_config_info.num_streams] = mIsType;
+                stream_config_info.is_type[stream_config_info.num_streams] = IS_TYPE_NONE;
                 stream_config_info.num_streams++;
             }
         } else {
@@ -12924,7 +12967,7 @@ bool QCameraParameters::setStreamConfigure(bool isCapture,
                     mStreamPpMask[CAM_STREAM_TYPE_RAW];
             getStreamFormat(CAM_STREAM_TYPE_RAW,
                     stream_config_info.format[stream_config_info.num_streams]);
-            stream_config_info.is_type[stream_config_info.num_streams] = mIsType;
+            stream_config_info.is_type[stream_config_info.num_streams] = IS_TYPE_NONE;
             stream_config_info.num_streams++;
         }
     }
@@ -12955,12 +12998,13 @@ bool QCameraParameters::setStreamConfigure(bool isCapture,
         stream_config_info.num_streams++;
     }
     for (uint32_t k = 0; k < stream_config_info.num_streams; k++) {
-        LOGI("STREAM INFO : type %d, wxh: %d x %d, pp_mask: 0x%llx Format = %d",
+        LOGI("STREAM INFO : type %d, wxh: %d x %d, pp_mask: 0x%llx Format = %d, is_type %d",
                 stream_config_info.type[k],
                 stream_config_info.stream_sizes[k].width,
                 stream_config_info.stream_sizes[k].height,
                 stream_config_info.postprocess_mask[k],
-                stream_config_info.format[k]);
+                stream_config_info.format[k],
+                stream_config_info.is_type[k]);
     }
 
     rc = sendStreamConfigInfo(stream_config_info);
@@ -13471,7 +13515,7 @@ int32_t QCameraParameters::updatePpFeatureMask(cam_stream_type_t stream_type) {
     case CAM_FILTER_ARRANGEMENT_BGGR:
         if ((stream_type == CAM_STREAM_TYPE_CALLBACK) ||
             (stream_type == CAM_STREAM_TYPE_PREVIEW) ||
-            (stream_type == CAM_STREAM_TYPE_VIDEO && getISType() != IS_TYPE_EIS_3_0)) {
+            (stream_type == CAM_STREAM_TYPE_VIDEO && getVideoISType() != IS_TYPE_EIS_3_0)) {
                 feature_mask |= CAM_QCOM_FEATURE_PAAF;
         }
         break;
@@ -14245,29 +14289,67 @@ int32_t QCameraParameters::getPicSizeFromAPK(int &width, int &height)
  *              NO_ERROR  -- success
  *              none-zero failure code
  *==========================================================================*/
-int32_t QCameraParameters::setDualLedCalibration(
+int32_t QCameraParameters::setLedCalibration(
         __unused const QCameraParameters& params)
 {
-    char value[PROPERTY_VALUE_MAX];
-    int32_t calibration = 0;
+    const char *str = params.get(KEY_QC_LED_CALIBRATION_MODES);
+    const char *prev_str = get(KEY_QC_LED_CALIBRATION_MODES);
 
-    memset(value, 0, sizeof(value));
-    property_get("persist.camera.dual_led_calib", value, "0");
-    calibration = atoi(value);
-    if (calibration != m_dualLedCalibration) {
-      m_dualLedCalibration = calibration;
-      LOGD("%s:updating calibration=%d m_dualLedCalibration=%d",
-        __func__, calibration, m_dualLedCalibration);
+    if (str != NULL) {
+        if (prev_str == NULL || strcmp(str, prev_str) != 0) {
+            return setLedCalibration(str);
+        }
+    } else {
+        char value[PROPERTY_VALUE_MAX];
 
-      if (ADD_SET_PARAM_ENTRY_TO_BATCH(m_pParamBuf,
-               CAM_INTF_PARM_DUAL_LED_CALIBRATION,
-               m_dualLedCalibration)) {
-          LOGE("%s:Failed to update dual led calibration param", __func__);
-          return BAD_VALUE;
-      }
+        memset(value, 0, sizeof(value));
+        property_get("persist.camera.led_calib_mode", value, "0");
+        if (strlen(value) > 0) {
+            if (prev_str == NULL || strcmp(value, prev_str) != 0) {
+                return setLedCalibration(value);
+            }
+        }
     }
     return NO_ERROR;
 }
+
+
+/*===========================================================================
+ * FUNCTION   : setLedCalibration
+ *
+ * DESCRIPTION: set Led Calibration Mode
+ *
+ * PARAMETERS :
+ *   @calibration_mode : calibration mode string
+ *
+ * RETURN     : int32_t type of status
+ *              NO_ERROR  -- success
+ *              none-zero failure code
+ *==========================================================================*/
+ int32_t QCameraParameters::setLedCalibration(const char *calibModeStr)
+{
+
+    if (calibModeStr != NULL) {
+        int32_t value = lookupAttr(LED_CALIBRATION_MODE_MAP,
+                PARAM_MAP_SIZE(LED_CALIBRATION_MODE_MAP), calibModeStr);
+        if (value != NAME_NOT_FOUND) {
+            m_ledCalibrationMode = static_cast<cam_led_calibration_mode_t>(value);
+            LOGD("Setting led calibration mode %d", m_ledCalibrationMode);
+            updateParamEntry(KEY_QC_LED_CALIBRATION_MODES, calibModeStr);
+
+            if (ADD_SET_PARAM_ENTRY_TO_BATCH(m_pParamBuf,
+                    CAM_INTF_PARM_LED_CALIBRATION, m_ledCalibrationMode)) {
+                LOGE("Failed to update led calibration param");
+                return BAD_VALUE;
+            }
+            return NO_ERROR;
+        }
+    }
+    LOGE("Invalid Calibraon Mode value: %s",
+            (calibModeStr == NULL) ? "NULL" : calibModeStr);
+    return BAD_VALUE;
+}
+
 
 /*===========================================================================
  * FUNCTION   : setinstantAEC

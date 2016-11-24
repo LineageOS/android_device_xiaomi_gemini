@@ -46,7 +46,8 @@ public:
             int32_t pPlaneIndex,
             uint32_t pCookie,
             int32_t pFd,
-            size_t pSize);
+            size_t pSize,
+            void *buffer);
 
     ~QCameraBufferMaps();
 
@@ -58,7 +59,8 @@ public:
             int32_t pPlaneIndex,
             uint32_t pCookie,
             int32_t pFd,
-            size_t pSize);
+            size_t pSize,
+            void *buffer);
 
     uint32_t getCamBufMapList(cam_buf_map_type_list& pBufMapList) const;
 
@@ -69,7 +71,8 @@ public:
             uint32_t pCookie,
             int32_t pFd,
             size_t pSize,
-            cam_buf_map_type_list& pBufMapList);
+            cam_buf_map_type_list& pBufMapList,
+            void *buffer);
 
 private:
     cam_buf_map_type_list mBufMapList;
