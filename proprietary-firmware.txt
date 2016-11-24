@@ -7,10 +7,8 @@ devcfg.mbn
 emmc_appsboot.mbn
 hyp.mbn
 keymaster.mbn
-logo.img
 NON-HLOS.bin
 pmic.elf
 rpm.mbn
-splash.img
 tz.mbn
 xbl.elf
