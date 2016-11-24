@@ -91,14 +91,8 @@ etc/firmware/rampatch_tlv_3.2.tlv
 
 # Camera
 bin/mm-qcamera-daemon
-lib/hw/camera.msm8996.so
-lib/libmmcamera_interface.so
-lib/libmmjpeg_interface.so
-lib/libmmlib2d_interface.so
-lib/libmm-qcamera.so
 lib/libmorpho_memory_allocator.so
 lib/libmorpho_panorama.so
-lib/libqomx_core.so
 vendor/lib/libarcsoft_beautyshot_image_algorithm.so
 vendor/lib/libarcsoft_beauty_shot.so
 vendor/lib/libarcsoft_beautyshot.so
