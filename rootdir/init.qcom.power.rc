@@ -102,7 +102,7 @@ on enable-low-power
     write /sys/module/msm_thermal/core_control/enabled 1
     write /sys/devices/soc/soc:qcom,bcl/mode "disable"
     write /sys/devices/soc/soc:qcom,bcl/hotplug_mask 12
-    write /sys/devices/soc/soc:qcom,bcl/hotplug_soc_mask 15
+    write /sys/devices/soc/soc:qcom,bcl/hotplug_soc_mask 8
     write /sys/devices/soc/soc:qcom,bcl/mode "enable"
 
     # Input boost config
