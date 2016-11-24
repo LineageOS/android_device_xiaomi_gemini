@@ -122,6 +122,11 @@ PRODUCT_PACKAGES += \
 #PRODUCT_PACKAGES += \
 #    Snap
 
+PRODUCT_PACKAGES += \
+    camera.msm8996 \
+    libqomx_core \
+    libmm-qcamera
+
 # Device config scripts
 PRODUCT_PACKAGES += \
     init.leds.sh \
