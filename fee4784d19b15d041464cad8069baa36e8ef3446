@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f681702_3fd74bc2",
+        "filename": "Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2016-12-03T11:01:41Z",
+      "side": 0,
+      "message": "Luca, do you suggest to re-write these? These apparently are created fine until now.",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 26
+      },
+      "revId": "fee4784d19b15d041464cad8069baa36e8ef3446",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
