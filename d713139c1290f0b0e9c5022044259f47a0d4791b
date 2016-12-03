@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f681702_e27898f9",
+        "filename": "Android.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2016-12-03T13:58:46Z",
+      "side": 1,
+      "message": "This can probably be simplified.",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 82
+      },
+      "revId": "d713139c1290f0b0e9c5022044259f47a0d4791b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
