@@ -22,6 +22,30 @@
       "revId": "fee4784d19b15d041464cad8069baa36e8ef3446",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f681702_023af434",
+        "filename": "Android.mk",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 13452
+      },
+      "writtenOn": "2016-12-03T13:43:00Z",
+      "side": 0,
+      "message": "How about doing this: https://review.cyanogenmod.org/#/c/146585/",
+      "parentUuid": "5f681702_3fd74bc2",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 26
+      },
+      "revId": "fee4784d19b15d041464cad8069baa36e8ef3446",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
