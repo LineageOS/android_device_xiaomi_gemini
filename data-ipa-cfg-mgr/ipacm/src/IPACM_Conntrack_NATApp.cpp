@@ -242,7 +242,7 @@ bool NatApp::ChkForDup(const nat_table_entry *rule)
 			 cache[cnt].protocol == rule->protocol)
 		{
 			log_nat(rule->protocol,rule->private_ip,rule->target_ip,rule->private_port,\
-			rule->target_port,"Duplicate Rule");
+			rule->target_port,"Duplicate Rule\n");
 			return true;
 		}
 	}
@@ -257,7 +257,7 @@ int NatApp::DeleteEntry(const nat_table_entry *rule)
 	IPACMDBG("%s() %d\n", __FUNCTION__, __LINE__);
 
 	log_nat(rule->protocol,rule->private_ip,rule->target_ip,rule->private_port,\
-	rule->target_port,"for deletion");
+	rule->target_port,"for deletion\n");
 
 
 	for(; cnt < max_entries; cnt++)
@@ -302,7 +302,7 @@ int NatApp::AddEntry(const nat_table_entry *rule)
 
 	CHK_TBL_HDL();
 	log_nat(rule->protocol,rule->private_ip,rule->target_ip,rule->private_port,\
-	rule->target_port,"for addition");
+	rule->target_port,"for addition\n");
 	if(isAlgPort(rule->protocol, rule->private_port) ||
 		 isAlgPort(rule->protocol, rule->target_port))
 	{
