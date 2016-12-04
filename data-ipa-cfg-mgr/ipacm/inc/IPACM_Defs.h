@@ -75,7 +75,7 @@ extern "C"
 #define IPA_ODU_HDR_NAME_v6  "IPACM_ODU_v6"
 
 
-#define IPA_MAX_IFACE_ENTRIES 15
+#define IPA_MAX_IFACE_ENTRIES 20
 #define IPA_MAX_PRIVATE_SUBNET_ENTRIES 3
 #define IPA_MAX_ALG_ENTRIES 20
 #define IPA_MAX_RM_ENTRY 6
@@ -95,7 +95,13 @@ extern "C"
 #define WWAN_QMI_IOCTL_DEVICE_NAME "/dev/wwan_ioctl"
 #define IPA_DEVICE_NAME "/dev/ipa"
 #define MAX_NUM_PROP 2
+
+#ifndef FEATURE_IPA_V3
 #define IPA_MAX_FLT_RULE 50
+#else
+#define IPA_MAX_FLT_RULE 100
+#endif
+
 #define TCP_FIN_SHIFT 16
 #define TCP_SYN_SHIFT 17
 #define TCP_RST_SHIFT 18
@@ -281,6 +287,10 @@ typedef struct _ipacm_event_data_iptype
 	int if_index;
 	int if_index_tether;
 	enum ipa_ip_type iptype;
+#ifdef IPA_WAN_MSG_IPv6_ADDR_GW_LEN
+	uint32_t  ipv4_addr_gw;
+	uint32_t  ipv6_addr_gw[4];
+#endif
 } ipacm_event_data_iptype;
 
 
