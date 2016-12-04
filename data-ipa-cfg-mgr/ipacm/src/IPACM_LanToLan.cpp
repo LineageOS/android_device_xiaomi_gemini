@@ -205,11 +205,15 @@ void IPACM_LanToLan::handle_iface_up(ipacm_event_eth_bridge *data)
 		{
 			for(it = ++m_iface.begin(); it != m_iface.end(); it++)
 			{
-				/* populate hdr_proc_ctx and routing table handle */
-				handle_new_iface_up(&front_iface, &(*it));
+				/* add peer info only when both interfaces support inter-interface communication */
+				if(it->get_m_support_inter_iface_offload())
+				{
+					/* populate hdr_proc_ctx and routing table handle */
+					handle_new_iface_up(&front_iface, &(*it));
 
-				/* add client specific routing rule on existing interface */
-				it->add_client_rt_rule_for_new_iface();
+					/* add client specific routing rule on existing interface */
+					it->add_client_rt_rule_for_new_iface();
+				}
 			}
 
 			/* add client specific filtering rule on new interface */
@@ -593,7 +597,6 @@ void IPACM_LanToLan_Iface::add_client_flt_rule(peer_iface_info *peer, client_inf
 	m_p_iface->eth_bridge_add_flt_rule(client->mac_addr, rt_tbl.hdl,
 		iptype, &flt_rule_hdl);
 	IPACMDBG_H("Installed flt rule for IP type %d: handle %d\n", iptype, flt_rule_hdl);
-	IPACM_Iface::m_routing.PutRoutingTable(rt_tbl.hdl);
 
 	for(it_flt = peer->flt_rule.begin(); it_flt != peer->flt_rule.end(); it_flt++)
 	{
@@ -888,6 +891,12 @@ void IPACM_LanToLan_Iface::handle_wlan_scc_mcc_switch()
 void IPACM_LanToLan_Iface::handle_intra_interface_info()
 {
 	uint32_t hdr_proc_ctx_hdl;
+
+	if(m_p_iface->tx_prop == NULL)
+	{
+		IPACMERR("No tx prop.\n");
+		return;
+	}
 
 	m_intra_interface_info.peer = this;
 
