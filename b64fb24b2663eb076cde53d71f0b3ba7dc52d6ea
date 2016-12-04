@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f681702_f82164a1",
+        "filename": "proprietary-files.txt",
+        "patchSetId": 23
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2016-12-04T13:52:44Z",
+      "side": 1,
+      "message": "@Jitao, don\u0027t you have this also in OnePlus3 stock package?",
+      "range": {
+        "startLine": 459,
+        "startChar": 0,
+        "endLine": 459,
+        "endChar": 25
+      },
+      "revId": "b64fb24b2663eb076cde53d71f0b3ba7dc52d6ea",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
