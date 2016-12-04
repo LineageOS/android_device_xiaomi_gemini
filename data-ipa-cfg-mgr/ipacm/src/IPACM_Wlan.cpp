@@ -157,7 +157,7 @@ void IPACM_Wlan::event_callback(ipa_cm_event_id event, void *param)
 				IPACMDBG_H("Received IPA_WLAN_LINK_DOWN_EVENT\n");
 				handle_down_evt();
 				/* reset the AP-iface category to unknown */
-				ipa_if_cate = UNKNOWN_IF;
+				IPACM_Iface::ipacmcfg->iface_table[ipa_if_num].if_cat = UNKNOWN_IF;
 				IPACM_Iface::ipacmcfg->DelNatIfaces(dev_name); // delete NAT-iface
 				IPACM_Wlan::total_num_wifi_clients = (IPACM_Wlan::total_num_wifi_clients) - \
                                                                      (num_wifi_client);
@@ -284,6 +284,7 @@ void IPACM_Wlan::event_callback(ipa_cm_event_id event, void *param)
 					{
 						if((data->iptype == IPA_IP_v6 || data->iptype == IPA_IP_MAX) && num_dft_rt_v6 == 1)
 						{
+							memcpy(ipv6_prefix, IPACM_Wan::backhaul_ipv6_prefix, sizeof(ipv6_prefix));
 							install_ipv6_prefix_flt_rule(IPACM_Wan::backhaul_ipv6_prefix);
 
 							if(IPACM_Wan::backhaul_is_sta_mode == false)
@@ -356,6 +357,7 @@ void IPACM_Wlan::event_callback(ipa_cm_event_id event, void *param)
 		{
 			if(ip_type == IPA_IP_v6 || ip_type == IPA_IP_MAX)
 			{
+				memcpy(ipv6_prefix, data_wan_tether->ipv6_prefix, sizeof(ipv6_prefix));
 				install_ipv6_prefix_flt_rule(data_wan_tether->ipv6_prefix);
 
 				if(data_wan_tether->is_sta == false)
@@ -463,6 +465,7 @@ void IPACM_Wlan::event_callback(ipa_cm_event_id event, void *param)
 		IPACMDBG_H("Backhaul is sta mode?%d\n", data_wan->is_sta);
 		if(ip_type == IPA_IP_v6 || ip_type == IPA_IP_MAX)
 		{
+			memcpy(ipv6_prefix, data_wan->ipv6_prefix, sizeof(ipv6_prefix));
 			install_ipv6_prefix_flt_rule(data_wan->ipv6_prefix);
 
 			if(data_wan->is_sta == false)
@@ -1038,6 +1041,8 @@ int IPACM_Wlan::handle_wlan_client_ipaddr(ipacm_event_data_all *data)
 {
 	int clnt_indx;
 	int v6_num;
+	uint32_t ipv6_link_local_prefix = 0xFE800000;
+	uint32_t ipv6_link_local_prefix_mask = 0xFFC00000;
 
 	IPACMDBG_H("number of wifi clients: %d\n", num_wifi_client);
 	IPACMDBG_H(" event MAC %02x:%02x:%02x:%02x:%02x:%02x\n",
@@ -1097,22 +1102,29 @@ int IPACM_Wlan::handle_wlan_client_ipaddr(ipacm_event_data_all *data)
 		if ((data->ipv6_addr[0] != 0) || (data->ipv6_addr[1] != 0) ||
 				(data->ipv6_addr[2] != 0) || (data->ipv6_addr[3] || 0)) /* check if all 0 not valid ipv6 address */
 		{
-		   IPACMDBG_H("ipv6 address: 0x%x:%x:%x:%x\n", data->ipv6_addr[0], data->ipv6_addr[1], data->ipv6_addr[2], data->ipv6_addr[3]);
-                   if(get_client_memptr(wlan_client, clnt_indx)->ipv6_set < IPV6_NUM_ADDR)
-		   {
+			IPACMDBG_H("ipv6 address: 0x%x:%x:%x:%x\n", data->ipv6_addr[0], data->ipv6_addr[1], data->ipv6_addr[2], data->ipv6_addr[3]);
+			if( (data->ipv6_addr[0] & ipv6_link_local_prefix_mask) != (ipv6_link_local_prefix & ipv6_link_local_prefix_mask) &&
+				memcmp(ipv6_prefix, data->ipv6_addr, sizeof(ipv6_prefix)) != 0)
+			{
+				IPACMDBG_H("This IPv6 address is not global IPv6 address with correct prefix, ignore.\n");
+				return IPACM_FAILURE;
+			}
+
+			if(get_client_memptr(wlan_client, clnt_indx)->ipv6_set < IPV6_NUM_ADDR)
+			{
 
 		       for(v6_num=0;v6_num < get_client_memptr(wlan_client, clnt_indx)->ipv6_set;v6_num++)
-	               {
-			      if( data->ipv6_addr[0] == get_client_memptr(wlan_client, clnt_indx)->v6_addr[v6_num][0] &&
+				{
+					if( data->ipv6_addr[0] == get_client_memptr(wlan_client, clnt_indx)->v6_addr[v6_num][0] &&
 			           data->ipv6_addr[1] == get_client_memptr(wlan_client, clnt_indx)->v6_addr[v6_num][1] &&
 			  	        data->ipv6_addr[2]== get_client_memptr(wlan_client, clnt_indx)->v6_addr[v6_num][2] &&
 			  	         data->ipv6_addr[3] == get_client_memptr(wlan_client, clnt_indx)->v6_addr[v6_num][3])
-			      {
+					{
 			  	    IPACMDBG_H("Already see this ipv6 addr for client:%d\n", clnt_indx);
 			  	    return IPACM_FAILURE; /* not setup the RT rules*/
 			  		break;
-			      }
-		       }
+					}
+				}
 
 		       /* not see this ipv6 before for wifi client*/
 			   get_client_memptr(wlan_client, clnt_indx)->v6_addr[get_client_memptr(wlan_client, clnt_indx)->ipv6_set][0] = data->ipv6_addr[0];
@@ -1123,8 +1135,8 @@ int IPACM_Wlan::handle_wlan_client_ipaddr(ipacm_event_data_all *data)
 		    }
 		    else
 		    {
-		         IPACMDBG_H("Already got 3 ipv6 addr for client:%d\n", clnt_indx);
-			 return IPACM_FAILURE; /* not setup the RT rules*/
+				IPACMDBG_H("Already got %d ipv6 addr for client:%d\n", IPV6_NUM_ADDR, clnt_indx);
+				return IPACM_FAILURE; /* not setup the RT rules*/
 		    }
 		}
 	}
@@ -1641,66 +1653,7 @@ int IPACM_Wlan::handle_down_evt()
 	}
 	IPACMDBG_H("finished deleting default RT rules\n ");
 
-	/* check software routing fl rule hdl */
-	if (softwarerouting_act == true && rx_prop != NULL )
-	{
-		IPACMDBG_H("Delete sw routing filtering rules\n");
-		IPACM_Iface::handle_software_routing_disable();
-	}
-	IPACMDBG_H("finished delete software-routing filtering rules\n ");
-
-
-	/* clean wifi-client header, routing rules */
-	/* clean wifi client rule*/
-	IPACMDBG_H("left %d wifi clients need to be deleted \n ", num_wifi_client);
-
 	eth_bridge_post_event(IPA_ETH_BRIDGE_IFACE_DOWN, IPA_IP_MAX, NULL);
-
-	for (i = 0; i < num_wifi_client; i++)
-	{
-		/* First reset nat rules and then route rules */
-		if(get_client_memptr(wlan_client, i)->ipv4_set == true)
-		{
-	        IPACMDBG_H("Clean Nat Rules for ipv4:0x%x\n", get_client_memptr(wlan_client, i)->v4_addr);
-			CtList->HandleNeighIpAddrDelEvt(get_client_memptr(wlan_client, i)->v4_addr);
-		}
-
-		if (delete_default_qos_rtrules(i, IPA_IP_v4))
-		{
-			IPACMERR("unbale to delete v4 default qos route rules for index: %d\n", i);
-			res = IPACM_FAILURE;
-			goto fail;
-		}
-
-		if (delete_default_qos_rtrules(i, IPA_IP_v6))
-		{
-			IPACMERR("unbale to delete v6 default qos route rules for index: %d\n", i);
-			res = IPACM_FAILURE;
-			goto fail;
-		}
-
-		IPACMDBG_H("Delete %d client header\n", num_wifi_client);
-
-		if(get_client_memptr(wlan_client, i)->ipv4_header_set == true)
-		{
-			if (m_header.DeleteHeaderHdl(get_client_memptr(wlan_client, i)->hdr_hdl_v4)
-				== false)
-			{
-				res = IPACM_FAILURE;
-				goto fail;
-			}
-		}
-
-		if(get_client_memptr(wlan_client, i)->ipv6_header_set == true)
-		{
-			if (m_header.DeleteHeaderHdl(get_client_memptr(wlan_client, i)->hdr_hdl_v6)
-					== false)
-			{
-				res = IPACM_FAILURE;
-				goto fail;
-			}
-		}
-	} /* end of for loop */
 
 	/* free the wlan clients cache */
 	IPACMDBG_H("Free wlan clients cache\n");
@@ -1721,6 +1674,59 @@ int IPACM_Wlan::handle_down_evt()
 #endif /* defined(FEATURE_IPA_ANDROID)*/
 
 fail:
+	/* clean wifi-client header, routing rules */
+	/* clean wifi client rule*/
+	IPACMDBG_H("left %d wifi clients need to be deleted \n ", num_wifi_client);
+	for (i = 0; i < num_wifi_client; i++)
+	{
+		/* First reset nat rules and then route rules */
+		if(get_client_memptr(wlan_client, i)->ipv4_set == true)
+		{
+	        IPACMDBG_H("Clean Nat Rules for ipv4:0x%x\n", get_client_memptr(wlan_client, i)->v4_addr);
+			CtList->HandleNeighIpAddrDelEvt(get_client_memptr(wlan_client, i)->v4_addr);
+		}
+
+		if (delete_default_qos_rtrules(i, IPA_IP_v4))
+		{
+			IPACMERR("unbale to delete v4 default qos route rules for index: %d\n", i);
+			res = IPACM_FAILURE;
+		}
+
+		if (delete_default_qos_rtrules(i, IPA_IP_v6))
+		{
+			IPACMERR("unbale to delete v6 default qos route rules for index: %d\n", i);
+			res = IPACM_FAILURE;
+		}
+
+		IPACMDBG_H("Delete %d client header\n", num_wifi_client);
+
+		if(get_client_memptr(wlan_client, i)->ipv4_header_set == true)
+		{
+			if (m_header.DeleteHeaderHdl(get_client_memptr(wlan_client, i)->hdr_hdl_v4)
+				== false)
+			{
+				res = IPACM_FAILURE;
+			}
+		}
+
+		if(get_client_memptr(wlan_client, i)->ipv6_header_set == true)
+		{
+			if (m_header.DeleteHeaderHdl(get_client_memptr(wlan_client, i)->hdr_hdl_v6)
+					== false)
+			{
+				res = IPACM_FAILURE;
+			}
+		}
+	} /* end of for loop */
+
+	/* check software routing fl rule hdl */
+	if (softwarerouting_act == true && rx_prop != NULL )
+	{
+		IPACMDBG_H("Delete sw routing filtering rules\n");
+		IPACM_Iface::handle_software_routing_disable();
+	}
+	IPACMDBG_H("finished delete software-routing filtering rules\n ");
+
 	/* Delete corresponding ipa_rm_resource_name of RX-endpoint after delete all IPV4V6 FT-rule */
 	if (rx_prop != NULL)
 	{

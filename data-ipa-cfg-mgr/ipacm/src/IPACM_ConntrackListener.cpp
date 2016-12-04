@@ -33,6 +33,8 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "IPACM_ConntrackListener.h"
 #include "IPACM_ConntrackClient.h"
 #include "IPACM_EvtDispatcher.h"
+#include "IPACM_Iface.h"
+#include "IPACM_Wan.h"
 
 IPACM_ConntrackListener::IPACM_ConntrackListener()
 {
@@ -210,30 +212,11 @@ int IPACM_ConntrackListener::CheckNatIface(
 					pNatIfaces[i].iface_name,
 					sizeof(pNatIfaces[i].iface_name)) == 0)
 		{
-			/* copy the ipv4 address to filter out downlink connections
-				 ignore downlink after listening connection event from
-				 conntrack as it is not destinated to private ip address */
-			IPACMDBG("Interface (%s) is nat\n", ifr.ifr_name);
-			for (j = 0; j < MAX_IFACE_ADDRESS; j++)
-			{
-				/* check if duplicate NAT ip */
-				if (nat_iface_ipv4_addr[j] == data->ipv4_addr)
-				{
-					*NatIface = true;
-					return IPACM_SUCCESS;
-				}
-
-				if (nat_iface_ipv4_addr[j] == 0)
-				{
-					nat_iface_ipv4_addr[j] = data->ipv4_addr;
-					IPACMDBG_H("Nating connections of Interface (%s), entry (%d) ",
+			IPACMDBG_H("Nat iface (%s), entry (%d), dont cache",
 						pNatIfaces[i].iface_name, j);
-					iptodot("with ipv4 address: ", nat_iface_ipv4_addr[j]);
-
-					*NatIface = true;
-					return IPACM_SUCCESS;
-				}
-			}
+			iptodot("with ipv4 address: ", nat_iface_ipv4_addr[j]);
+			*NatIface = true;
+			return IPACM_SUCCESS;
 		}
 	}
 
@@ -246,6 +229,12 @@ void IPACM_ConntrackListener::HandleNonNatIPAddr(
 	ipacm_event_data_all *data = (ipacm_event_data_all *)inParam;
 	bool NatIface = false;
 	int cnt, ret;
+
+	if (isStaMode)
+	{
+		IPACMDBG("In STA mode, don't add dummy rules for non nat ifaces\n");
+		return;
+	}
 
 	/* Handle only non nat ifaces, NAT iface should be handle
 	   separately to avoid race conditions between route/nat
@@ -261,6 +250,9 @@ void IPACM_ConntrackListener::HandleNonNatIPAddr(
 				if (nonnat_iface_ipv4_addr[cnt] == 0)
 				{
 					nonnat_iface_ipv4_addr[cnt] = data->ipv4_addr;
+					IPACMDBG("Add ip addr to non nat list (%d) ", cnt);
+					iptodot("with ipv4 address", nonnat_iface_ipv4_addr[cnt]);
+
 					/* Add dummy nat rule for non nat ifaces */
 					nat_inst->FlushTempEntries(data->ipv4_addr, true, true);
 					return;
@@ -700,6 +692,18 @@ bool IPACM_ConntrackListener::AddIface(
 	int cnt;
 
 	*isTempEntry = false;
+
+	/* Special handling for Passthrough IP. */
+	if (IPACM_Iface::ipacmcfg->ipacm_ip_passthrough_mode)
+	{
+		if (rule->private_ip == IPACM_Wan::getWANIP())
+		{
+			IPACMDBG("In Passthrough mode and entry matched with Wan IP (0x%x)\n",
+				rule->private_ip);
+			return true;
+		}
+	}
+
 	/* check whether nat iface or not */
 	for (cnt = 0; cnt < MAX_IFACE_ADDRESS; cnt++)
 	{
@@ -716,27 +720,32 @@ bool IPACM_ConntrackListener::AddIface(
 		}
 	}
 
-	/* check whether non nat iface or not, on Nat iface
-	   add dummy rule by copying public ip to private ip */
-	for (cnt = 0; cnt < MAX_IFACE_ADDRESS; cnt++)
+	if (!isStaMode)
 	{
-		if (nonnat_iface_ipv4_addr[cnt] != 0)
+		/* check whether non nat iface or not, on Non Nat iface
+		   add dummy rule by copying public ip to private ip */
+		for (cnt = 0; cnt < MAX_IFACE_ADDRESS; cnt++)
 		{
-			if (rule->private_ip == nonnat_iface_ipv4_addr[cnt] ||
-				rule->target_ip == nonnat_iface_ipv4_addr[cnt])
+			if (nonnat_iface_ipv4_addr[cnt] != 0)
 			{
-				IPACMDBG("matched non_nat_iface_ipv4_addr entry(%d)\n", cnt);
-				iptodot("AddIface(): Non Nat entry match with ip addr",
-						nat_iface_ipv4_addr[cnt]);
+				if (rule->private_ip == nonnat_iface_ipv4_addr[cnt] ||
+					rule->target_ip == nonnat_iface_ipv4_addr[cnt])
+				{
+					IPACMDBG("matched non_nat_iface_ipv4_addr entry(%d)\n", cnt);
+					iptodot("AddIface(): Non Nat entry match with ip addr",
+							nonnat_iface_ipv4_addr[cnt]);
 
-				rule->private_ip = rule->public_ip;
-				rule->private_port = rule->public_port;
-				return true;
+					rule->private_ip = rule->public_ip;
+					rule->private_port = rule->public_port;
+					return true;
+				}
 			}
 		}
+		IPACMDBG_H("Not mtaching with non-nat ifaces\n");
 	}
+	else
+		IPACMDBG("In STA mode, don't compare against non nat ifaces\n");
 
-	IPACMDBG_H("Not mtaching with non-nat ifaces\n");
 	if(pConfig == NULL)
 	{
 		pConfig = IPACM_Config::GetInstance();

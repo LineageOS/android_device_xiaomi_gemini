@@ -196,36 +196,8 @@ void IPACM_Neighbor::event_callback(ipa_cm_event_id event, void *param)
 								if (event == IPA_NEW_NEIGH_EVENT)
 									evt_data.event = IPA_NEIGH_CLIENT_IP_ADDR_ADD_EVENT;
 								else
-								{
+									/* not to clean-up the client mac cache on bridge0 delneigh */
 									evt_data.event = IPA_NEIGH_CLIENT_IP_ADDR_DEL_EVENT;
-									/* do the clean-up*/
-									IPACMDBG_H("Clean %d-st Cached client-MAC %02x:%02x:%02x:%02x:%02x:%02x\n, total client: %d\n",
-												i,
-												neighbor_client[i].mac_addr[0],
-												neighbor_client[i].mac_addr[1],
-												neighbor_client[i].mac_addr[2],
-												neighbor_client[i].mac_addr[3],
-												neighbor_client[i].mac_addr[4],
-												neighbor_client[i].mac_addr[5],
-												num_neighbor_client);
-
-									memset(neighbor_client[i].mac_addr, 0, sizeof(neighbor_client[i].mac_addr));
-									neighbor_client[i].iface_index = 0;
-									neighbor_client[i].v4_addr = 0;
-									neighbor_client[i].ipa_if_num = 0;
-
-									for (; i < num_neighbor_client_temp - 1; i++)
-									{
-										memcpy(neighbor_client[i].mac_addr,
-													neighbor_client[i+1].mac_addr,
-													sizeof(neighbor_client[i].mac_addr));
-										neighbor_client[i].iface_index = neighbor_client[i+1].iface_index;
-										neighbor_client[i].v4_addr = neighbor_client[i+1].v4_addr;
-										neighbor_client[i].ipa_if_num = neighbor_client[i+1].ipa_if_num;
-									}
-									num_neighbor_client--;
-									IPACMDBG_H(" total number of left cased clients: %d\n", num_neighbor_client);
-								}
 								data_all = (ipacm_event_data_all *)malloc(sizeof(ipacm_event_data_all));
 								if (data_all == NULL)
 								{
