@@ -33,7 +33,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     bt.max.hfpclient.connections=1 \
     qcom.bluetooth.soc=rome \
     ro.bluetooth.dun=true \
-    ro.bluetooth.hfp.ver=1.6 \
+    ro.bluetooth.hfp.ver=1.7 \
     ro.bluetooth.sap=true \
     ro.btconfig.if=uart \
     ro.btconfig.vendor=qcom \
@@ -49,6 +49,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Camera
 PRODUCT_PROPERTY_OVERRIDES += \
+    persist.camera.gyro.disable=0 \
     persist.camera.imglib.fddsp=1
 
 # CNE
@@ -152,7 +153,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.qmi.adb_logmask=0 \
     persist.dbg.volte_avail_ovr=1 \
     persist.dbg.vt_avail_ovr=1 \
-    persist.logd.size.radio=4M \
     persist.net.doxlat=true \
     persist.radio.apm_sim_not_pwdn=1 \
     persist.radio.force_on_dc=true \
@@ -183,6 +183,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # TimeService
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.timed.enable=true
+
+# USB
+PRODUCT_PROPERTY_OVERRIDES += \
+    sys.usb.controller=6a00000.dwc3
 
 # Wifi
 PRODUCT_PROPERTY_OVERRIDES += \
