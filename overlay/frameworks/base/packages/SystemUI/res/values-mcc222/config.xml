@@ -21,6 +21,6 @@
      for different hardware and product builds. -->
 <resources>
     <!-- Should "4G" be shown instead of "LTE" when the network is NETWORK_TYPE_LTE? -->
-    <bool name="config_show4GForLTE">true</bool>
+    <bool name="config_show4GForLTE">false</bool>
 </resources>
 
