@@ -491,7 +491,7 @@
 
     <!-- Support in Surfaceflinger for blur layers.
          NOTE: This requires additional hardware-specific code. -->
-    <!--bool name="config_ui_blur_enabled">true</bool-->
+    <bool name="config_uiBlurEnabled">true</bool>
 
     <!-- Default list of files pinned by the Pinner Service -->
     <string-array translatable="false" name="config_defaultPinnerServiceFiles">
