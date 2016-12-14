@@ -43,6 +43,8 @@ public class NodePreferenceActivity extends PreferenceActivity
     protected void onResume() {
         super.onResume();
 
+        updatePreferenceFromDependencies();
+
         // If running on a phone, remove padding around the listview
         if (!ScreenType.isTablet(this)) {
             getListView().setPadding(0, 0, 0, 0);
@@ -103,5 +105,18 @@ public class NodePreferenceActivity extends PreferenceActivity
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void updatePreferenceFromDependencies() {
+        for (String pref : Constants.sNodeDependencyMap.keySet()) {
+            SwitchPreference b = (SwitchPreference) findPreference(pref);
+            if (b == null) continue;
+            String dependencyNode = Constants.sNodeDependencyMap.get(pref)[0];
+            if (new File(dependencyNode).exists()) {
+                String dependencyNodeValue = FileUtils.readOneLine(dependencyNode);
+                String shouldSetEnabledValue = Constants.sNodeDependencyMap.get(pref)[1];
+                b.setEnabled(dependencyNodeValue.equals(shouldSetEnabledValue));
+            }
+        }
     }
 }
