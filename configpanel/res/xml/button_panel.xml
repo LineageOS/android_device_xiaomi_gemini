@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
      Copyright (C) 2016 The CyanogenMod Project
+               (C) 2017 The LineageOS Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -20,6 +21,11 @@
         android:key="button_swap"
         android:title="@string/button_swap_title"
         android:summary="@string/button_swap_summary" />
+
+    <SwitchPreference
+        android:key="fp_home"
+        android:title="@string/fp_home_title"
+        android:summary="@string/fp_home_summary" />
 
     <SwitchPreference
         android:key="fp_wakeup"
