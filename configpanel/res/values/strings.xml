@@ -17,6 +17,10 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Button settings -->
     <string name="button_panel_title">Additional buttons</string>
+
     <string name="button_swap_title">Swap buttons</string>
     <string name="button_swap_summary">Swap the order of recents and back buttons</string>
+
+    <string name="fp_home_title">Fingerprint as home button</string>
+    <string name="fp_home_summary">Use fingerprint reader as a home button</string>
 </resources>
