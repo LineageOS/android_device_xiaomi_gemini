@@ -2,5 +2,6 @@ type fpc_data_file, file_type;
 type dsp_file, fs_type, contextmount_type;
 type proc_touchpanel, sysfs_type, fs_type;
 type sysfs_fpc, sysfs_type, fs_type;
+type sysfs_fpc_keyevents, sysfs_type, fs_type;
 type sysfs_fpc_wakeup, sysfs_type, fs_type;
 type sysfs_fpc_proximity, sysfs_type, fs_type;
