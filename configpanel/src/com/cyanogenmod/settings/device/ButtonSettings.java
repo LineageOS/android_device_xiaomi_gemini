@@ -17,15 +17,41 @@
 package com.cyanogenmod.settings.device;
 
 import android.os.Bundle;
+import android.content.Intent;
+import android.preference.Preference;
+import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.SwitchPreference;
 
+import com.cyanogenmod.settings.device.utils.Constants;
 import com.cyanogenmod.settings.device.utils.NodePreferenceActivity;
 
 import org.cyanogenmod.internal.util.ScreenType;
 
 public class ButtonSettings extends NodePreferenceActivity {
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.button_panel);
+    }
+
+    @Override
+    public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (Constants.FP_HOME_KEY.equals(preference.getKey())) {
+            final Intent intent = new Intent(Constants.FP_HOME_CUSTOM_INTENT);
+            intent.putExtra(Constants.FP_HOME_CUSTOM_INTENT_EXTRA, (Boolean) newValue);
+            intent.setFlags(Intent.FLAG_RECEIVER_REGISTERED_ONLY);
+            sendBroadcast(intent);
+            return true;
+        }
+        return super.onPreferenceChange(preference, newValue);
+    }
+
+    @Override
+    public void addPreferencesFromResource(int preferencesResId) {
+        super.addPreferencesFromResource(preferencesResId);
+        // Initialize other preferences
+        SwitchPreference b = (SwitchPreference) findPreference(Constants.FP_HOME_KEY);
+        b.setOnPreferenceChangeListener(this);
     }
 }
