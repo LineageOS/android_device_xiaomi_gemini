@@ -17,8 +17,10 @@
 package com.cyanogenmod.settings.device.utils;
 
 import android.os.Bundle;
+import android.content.SharedPreferences;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
+import android.preference.PreferenceManager;
 import android.preference.PreferenceActivity;
 import android.preference.ListPreference;
 import android.preference.SwitchPreference;
@@ -42,6 +44,7 @@ public class NodePreferenceActivity extends PreferenceActivity
     @Override
     protected void onResume() {
         super.onResume();
+        updatePreferencesBasedOnDependencies();
 
         // If running on a phone, remove padding around the listview
         if (!ScreenType.isTablet(this)) {
@@ -103,5 +106,36 @@ public class NodePreferenceActivity extends PreferenceActivity
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void updatePreferencesBasedOnDependencies() {
+        for (String pref : Constants.sNodeDependencyMap.keySet()) {
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            SwitchPreference b = (SwitchPreference) findPreference(pref);
+            if (b == null) continue;
+            String dependencyNode = Constants.sNodeDependencyMap.get(pref)[0];
+            if (new File(dependencyNode).exists()) {
+                String dependencyNodeValue = FileUtils.readOneLine(dependencyNode);
+                boolean shouldSetEnabled = dependencyNodeValue.equals(
+                        Constants.sNodeDependencyMap.get(pref)[1]);
+                boolean actualPrefValue = prefs.getBoolean(pref, false);
+                if (shouldSetEnabled) {
+                    if (Constants.sNodeUserSetValuesMap.get(pref) != null &&
+                            (Boolean) Constants.sNodeUserSetValuesMap.get(pref)[1] &&
+                            (Boolean) Constants.sNodeUserSetValuesMap.get(pref)[1] != actualPrefValue) {
+                        b.setChecked(true);
+                        Boolean[] prefValueAndToggleFlag = { actualPrefValue, false };
+                        Constants.sNodeUserSetValuesMap.put(pref, prefValueAndToggleFlag);
+                    }
+                } else {
+                    if (b.isEnabled() && actualPrefValue) {
+                        Boolean[] prefValueAndToggleFlag = { actualPrefValue, true };
+                        Constants.sNodeUserSetValuesMap.put(pref, prefValueAndToggleFlag);
+                    }
+                    b.setEnabled(false);
+                    b.setChecked(false);
+                }
+            }
+        }
     }
 }

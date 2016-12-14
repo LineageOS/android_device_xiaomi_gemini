@@ -16,9 +16,6 @@
 
 package com.cyanogenmod.settings.device;
 
-import android.app.PendingIntent;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -26,19 +23,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.input.InputManager;
-import android.os.Build;
-import android.os.IBinder;
-import android.os.RemoteException;
-import android.os.ServiceManager;
-import android.os.SystemClock;
-import android.os.UserHandle;
 import android.preference.PreferenceManager;
-import android.service.gesture.IGestureService;
 import android.util.Log;
-import android.view.InputDevice;
 import android.view.InputEvent;
-import android.view.KeyCharacterMap;
-import android.view.KeyEvent;
 
 import java.io.File;
 
@@ -54,6 +41,7 @@ public class Startup extends BroadcastReceiver {
     public void onReceive(final Context context, final Intent intent) {
         final String action = intent.getAction();
         if (cyanogenmod.content.Intent.ACTION_INITIALIZE_CM_HARDWARE.equals(action)) {
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
             // Disable button settings if needed
             if (!hasButtonProcs()) {
@@ -78,6 +66,13 @@ public class Startup extends BroadcastReceiver {
                             " failed while restoring saved preference values");
                     }
                 }
+
+                // Send initial broadcasts
+                final Intent custIntent = new Intent(Constants.FP_HOME_CUSTOM_INTENT);
+                custIntent.putExtra(Constants.FP_HOME_CUSTOM_INTENT_EXTRA,
+                        prefs.getBoolean(Constants.FP_HOME_KEY, false));
+                custIntent.setFlags(Intent.FLAG_RECEIVER_REGISTERED_ONLY);
+                context.sendBroadcast(custIntent);
             }
         }
     }
