@@ -17,12 +17,16 @@
 package com.cyanogenmod.settings.device.utils;
 
 import android.os.Bundle;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
 import android.preference.ListPreference;
 import android.preference.SwitchPreference;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 
 import java.io.File;
@@ -33,15 +37,24 @@ import org.cyanogenmod.internal.util.ScreenType;
 public class NodePreferenceActivity extends PreferenceActivity
         implements OnPreferenceChangeListener {
 
+    private static final String FP_HOME_CUSTOM_INTENT = "com.cyanogenmod.settings.device.FP_HOME_SETTING";
+    private static final String FP_HOME_CUSTOM_INTENT_EXTRA = "fp_home_pref_value";
+
+    private static SharedPreferences mPrefs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        updatePreferenceFromDependencies();
 
         // If running on a phone, remove padding around the listview
         if (!ScreenType.isTablet(this)) {
@@ -51,6 +64,13 @@ public class NodePreferenceActivity extends PreferenceActivity
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
+        if (Constants.FP_HOME_KEY.equals(preference.getKey())) {
+            final Intent fpChangedIntent = new Intent(FP_HOME_CUSTOM_INTENT);
+            fpChangedIntent.putExtra(FP_HOME_CUSTOM_INTENT_EXTRA, (Boolean) newValue);
+            sendBroadcast(fpChangedIntent);
+            return true;
+        }
+
         String node = Constants.sBooleanNodePreferenceMap.get(preference.getKey());
         if (!TextUtils.isEmpty(node)) {
             Boolean value = (Boolean) newValue;
@@ -92,6 +112,15 @@ public class NodePreferenceActivity extends PreferenceActivity
                 l.setEnabled(false);
             }
         }
+
+        // Initialize other preferences
+        String pref = Constants.FP_HOME_KEY;
+        SwitchPreference b = (SwitchPreference) findPreference(pref);
+        b.setOnPreferenceChangeListener(this);
+        final Intent fpInitialIntent = new Intent(FP_HOME_CUSTOM_INTENT);
+        fpInitialIntent.putExtra(FP_HOME_CUSTOM_INTENT_EXTRA,
+                mPrefs.getBoolean(Constants.FP_HOME_KEY, false));
+        sendBroadcast(fpInitialIntent);
     }
 
     @Override
@@ -103,5 +132,18 @@ public class NodePreferenceActivity extends PreferenceActivity
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void updatePreferenceFromDependencies() {
+        for (String pref : Constants.sNodeDependencyMap.keySet()) {
+            SwitchPreference b = (SwitchPreference) findPreference(pref);
+            if (b == null) continue;
+            String dependencyNode = Constants.sNodeDependencyMap.get(pref)[0];
+            if (new File(dependencyNode).exists()) {
+                String dependencyNodeValue = FileUtils.readOneLine(dependencyNode);
+                String shouldSetEnabledValue = Constants.sNodeDependencyMap.get(pref)[1];
+                b.setEnabled(dependencyNodeValue.equals(shouldSetEnabledValue));
+            }
+        }
     }
 }
