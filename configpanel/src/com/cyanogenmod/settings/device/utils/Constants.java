@@ -22,14 +22,21 @@ import java.util.Map;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.preference.SwitchPreference;
 
 public class Constants {
 
-    // Swap keys
+    // Preference keys
     public static final String BUTTON_SWAP_KEY = "button_swap";
+    public static final String FP_HOME_KEY = "fp_home";
 
-    // Swap nodes
+    // Nodes
     public static final String BUTTON_SWAP_NODE = "/proc/touchpanel/reversed_keys_enable";
+    public static final String VIRTUAL_KEYS_NODE = "/proc/touchpanel/capacitive_keys_enable";
+
+    // Intents
+    public static final String FP_HOME_INTENT = "com.cyanogenmod.settings.device.FP_HOME_SETTING";
+    public static final String FP_HOME_INTENT_EXTRA = "fp_home_pref_value";
 
     // Holds <preference_key> -> <proc_node> mapping
     public static final Map<String, String> sBooleanNodePreferenceMap = new HashMap<>();
@@ -38,13 +45,22 @@ public class Constants {
     // Holds <preference_key> -> <default_values> mapping
     public static final Map<String, Object> sNodeDefaultMap = new HashMap<>();
 
+    // Holds <preference_key> -> <user_set_values> mapping
+    public static final Map<String, Object[]> sNodeUserSetValuesMap = new HashMap<>();
+
+    // Holds <preference_key> -> <dependency_check> mapping
+    public static final Map<String, String[]> sNodeDependencyMap = new HashMap<>();
+
     public static final String[] sButtonPrefKeys = {
         BUTTON_SWAP_KEY,
     };
 
     static {
         sBooleanNodePreferenceMap.put(BUTTON_SWAP_KEY, BUTTON_SWAP_NODE);
+
         sNodeDefaultMap.put(BUTTON_SWAP_KEY, false);
+
+        sNodeDependencyMap.put(FP_HOME_KEY, new String[]{ VIRTUAL_KEYS_NODE, "1" });
     }
 
     public static boolean isPreferenceEnabled(Context context, String key) {
@@ -55,5 +71,25 @@ public class Constants {
     public static String getPreferenceString(Context context, String key) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getString(key, (String) sNodeDefaultMap.get(key));
+    }
+
+    public static void updateDependentPreference(Context context, SwitchPreference b,
+            String key, Boolean shouldSetEnabled) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean prefActualValue = preferences.getBoolean(key, false);
+
+        if (shouldSetEnabled) {
+            if (sNodeUserSetValuesMap.get(key) != null &&
+                    (Boolean) sNodeUserSetValuesMap.get(key)[1] &&
+                    (Boolean) sNodeUserSetValuesMap.get(key)[1] != prefActualValue) {
+                b.setChecked(true);
+                sNodeUserSetValuesMap.put(key, new Boolean[]{ prefActualValue, false });
+            }
+        } else {
+            if (b.isEnabled() && prefActualValue)
+                sNodeUserSetValuesMap.put(key, new Boolean[]{ prefActualValue, true });
+            b.setEnabled(false);
+            b.setChecked(false);
+        }
     }
 }
