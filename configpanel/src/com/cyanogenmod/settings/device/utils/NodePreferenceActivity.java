@@ -42,6 +42,7 @@ public class NodePreferenceActivity extends PreferenceActivity
     @Override
     protected void onResume() {
         super.onResume();
+        updatePreferencesBasedOnDependencies();
 
         // If running on a phone, remove padding around the listview
         if (!ScreenType.isTablet(this)) {
@@ -103,5 +104,19 @@ public class NodePreferenceActivity extends PreferenceActivity
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void updatePreferencesBasedOnDependencies() {
+        for (String pref : Constants.sNodeDependencyMap.keySet()) {
+            SwitchPreference b = (SwitchPreference) findPreference(pref);
+            if (b == null) continue;
+            String dependencyNode = Constants.sNodeDependencyMap.get(pref)[0];
+            if (new File(dependencyNode).exists()) {
+                String dependencyNodeValue = FileUtils.readOneLine(dependencyNode);
+                boolean shouldSetEnabled = dependencyNodeValue.equals(
+                        Constants.sNodeDependencyMap.get(pref)[1]);
+                Constants.updateDependentPreference(this, b, pref, shouldSetEnabled);
+            }
+        }
     }
 }
