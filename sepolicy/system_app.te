@@ -4,7 +4,7 @@ binder_call(system_app, fingerprintd)
 # Allow ConfigPanel to work
 allow system_app proc_touchpanel:dir search;
 allow system_app proc_touchpanel:file rw_file_perms;
-allow system_app sysfs_fpc_wakeup:dir search;
+allow system_app sysfs_fpc_keyevents:file rw_file_perms;
 allow system_app sysfs_fpc_wakeup:file rw_file_perms;
 
 # Allow PocketMode to work
