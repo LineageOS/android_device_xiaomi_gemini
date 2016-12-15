@@ -21,4 +21,9 @@
         android:title="@string/button_swap_title"
         android:summary="@string/button_swap_summary" />
 
+    <SwitchPreference
+        android:key="fp_wakeup"
+        android:title="@string/fp_wakeup_title"
+        android:summary="@string/fp_wakeup_summary" />
+
 </PreferenceScreen>
