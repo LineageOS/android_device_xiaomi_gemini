@@ -28,9 +28,11 @@ public class Constants {
     // Preference keys
     public static final String BUTTON_SWAP_KEY = "button_swap";
     public static final String FP_HOME_KEY = "fp_home";
+    public static final String FP_WAKEUP_KEY = "fp_wakeup";
 
     // Nodes
     public static final String BUTTON_SWAP_NODE = "/proc/touchpanel/reversed_keys_enable";
+    public static final String FP_WAKEUP_NODE = "/sys/devices/soc/soc:fpc_fpc1020/enable_wakeup";
     public static final String VIRTUAL_KEYS_NODE = "/proc/touchpanel/capacitive_keys_enable";
 
     // Holds <preference_key> -> <proc_node> mapping
@@ -45,12 +47,15 @@ public class Constants {
 
     public static final String[] sButtonPrefKeys = {
         BUTTON_SWAP_KEY,
+        FP_WAKEUP_KEY,
     };
 
     static {
         sBooleanNodePreferenceMap.put(BUTTON_SWAP_KEY, BUTTON_SWAP_NODE);
+        sBooleanNodePreferenceMap.put(FP_WAKEUP_KEY, FP_WAKEUP_NODE);
 
         sNodeDefaultMap.put(BUTTON_SWAP_KEY, false);
+        sNodeDefaultMap.put(FP_WAKEUP_KEY, true);
 
         String[] dependencyCheck = { VIRTUAL_KEYS_NODE, "1" };
         sNodeDependencyMap.put(FP_HOME_KEY, dependencyCheck);
