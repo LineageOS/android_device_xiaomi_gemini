@@ -23,4 +23,7 @@
 
     <string name="fp_home_title">Fingerprint as home button</string>
     <string name="fp_home_summary">Use fingerprint reader as a home button</string>
+
+    <string name="fp_wakeup_title">Fingerprint wakes phone</string>
+    <string name="fp_wakeup_summary">Allow fingerprint to wake the phone while screen is off</string>
 </resources>
