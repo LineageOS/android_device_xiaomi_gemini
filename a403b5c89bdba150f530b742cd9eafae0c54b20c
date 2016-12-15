@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f681702_4514c4a0",
+        "filename": "configpanel/src/com/cyanogenmod/settings/device/Startup.java",
+        "patchSetId": 17
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 9607
+      },
+      "writtenOn": "2016-12-15T06:29:19Z",
+      "side": 1,
+      "message": "Should be Constants.FP_HOME_NODE, also two more lines below.",
+      "range": {
+        "startLine": 65,
+        "startChar": 62,
+        "endLine": 65,
+        "endChar": 74
+      },
+      "revId": "a403b5c89bdba150f530b742cd9eafae0c54b20c",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
