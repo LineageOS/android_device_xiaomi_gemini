@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f681702_c088c2c7",
+        "filename": "configpanel/src/com/cyanogenmod/settings/device/Startup.java",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 13028
+      },
+      "writtenOn": "2016-12-15T18:44:47Z",
+      "side": 1,
+      "message": "Line length",
+      "range": {
+        "startLine": 93,
+        "startChar": 100,
+        "endLine": 93,
+        "endChar": 105
+      },
+      "revId": "d431ca9da1bce65255887040c4d8035229ddf835",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
