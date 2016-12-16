@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f681702_b43b4be9",
+        "filename": "keyhandler/src/com/cyanogenmod/settings/device/KeyHandler.java",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2016-12-16T10:24:40Z",
+      "side": 1,
+      "message": "Once we are able to properly update \"fp_home\" preference value based on KeyDisabler state, this check will no longer be required, because both booleans will never be true at the same time.",
+      "range": {
+        "startLine": 58,
+        "startChar": 41,
+        "endLine": 58,
+        "endChar": 64
+      },
+      "revId": "1faec258ac438c6150a6a04757ed08f6fbf0ac47",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
