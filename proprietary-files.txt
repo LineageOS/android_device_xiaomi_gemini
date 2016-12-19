@@ -718,6 +718,8 @@ vendor/lib/sensors.oem.so
 vendor/lib/sensors.ssc.so
 
 # Thermal
+etc/thermal-engine-8996.conf
+etc/thermal-engine-8996-a1.conf
 vendor/bin/thermal-engine
 -vendor/lib64/libthermalclient.so
 vendor/lib64/libthermalioctl.so
