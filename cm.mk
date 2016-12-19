@@ -36,7 +36,7 @@ PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 PRODUCT_BUILD_PROP_OVERRIDES += \
     TARGET_DEVICE="gemini" \
     PRODUCT_NAME="gemini" \
-    BUILD_FINGERPRINT="Xiaomi/gemini/gemini:6.0.1/MXB48T/6.9.29:user/release-keys" \
-    PRIVATE_BUILD_DESC="gemini-user 6.0.1 MXB48T 6.9.29 release-keys"
+    BUILD_FINGERPRINT="Xiaomi/gemini/gemini:7.0/NRD90M/6.12.15:user/release-keys" \
+    PRIVATE_BUILD_DESC="gemini-user 7.0 NRD90M 6.12.15 release-keys"
 
 TARGET_VENDOR := Xiaomi
