@@ -63,7 +63,7 @@
         <!-- format: "ADPCM_packet" or "PCM_packet" !-->
         <!-- transfer_mode: "FTRT" or "RT" -->
         <!--  kw_duration is in milli seconds. It is valid only for FTRT transfer mode -->
-        <param capture_keyword="PCM_packet, RT, 2000" />
+        <param capture_keyword="PCM_packet, FTRT, 2000" />
         <param client_capture_read_delay="2000" />
     </sound_model_config>
 
