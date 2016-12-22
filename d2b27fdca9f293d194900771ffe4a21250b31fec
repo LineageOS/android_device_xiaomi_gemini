@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f681702_74ad1d30",
+        "filename": "keyhandler/src/com/cyanogenmod/settings/device/KeyHandler.java",
+        "patchSetId": 22
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2016-12-22T23:29:02Z",
+      "side": 1,
+      "message": "This is only a workaround to make sure that long press on home action is set to nothing, even if user decides to force it to something else. It could be avoided, if I knew how to disable \"hardware_keys_home_long_press\" preference (https://github.com/CyanogenMod/android_packages_apps_CMParts/blob/cm-14.1/res/xml/button_settings.xml#L118) without touching CMParts source.",
+      "range": {
+        "startLine": 100,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 17
+      },
+      "revId": "d2b27fdca9f293d194900771ffe4a21250b31fec",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
