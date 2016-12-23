@@ -126,8 +126,8 @@ PRODUCT_PACKAGES += \
     Gello
 
 # Camera
-#PRODUCT_PACKAGES += \
-#    Snap
+PRODUCT_PACKAGES += \
+    Snap
 
 # Device config scripts
 PRODUCT_PACKAGES += \
