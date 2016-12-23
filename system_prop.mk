@@ -62,6 +62,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.data.netmgrd.qos.enable=true \
     ro.use_data_netmgrd=true
 
+# DPM
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.dpm.feature=1 \
+    persist.dpm.nsrm.bkg.evt=3955
+
 # Display (Qualcomm AD)
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qualcomm.cabl=0 \
