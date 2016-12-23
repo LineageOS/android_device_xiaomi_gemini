@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5f681702_b29fc45d",
+        "filename": "rootdir/init.qcom.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2016-12-23T16:06:51Z",
+      "side": 1,
+      "message": "Not required",
+      "range": {
+        "startLine": 679,
+        "startChar": 0,
+        "endLine": 684,
+        "endChar": 83
+      },
+      "revId": "5e61c379227d3000270d931a12bb2b499e3c9b96",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f681702_d2a400bc",
+        "filename": "rootdir/init.target.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2016-12-23T16:06:51Z",
+      "side": 1,
+      "message": "This is where thermal wants to save the temp dump files.",
+      "range": {
+        "startLine": 66,
+        "startChar": 10,
+        "endLine": 66,
+        "endChar": 23
+      },
+      "revId": "5e61c379227d3000270d931a12bb2b499e3c9b96",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f681702_f2a13cab",
+        "filename": "rootdir/init.target.rc",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2016-12-23T16:06:51Z",
+      "side": 1,
+      "message": "This is used to dump temps to a log file. Pointless.",
+      "range": {
+        "startLine": 137,
+        "startChar": 56,
+        "endLine": 137,
+        "endChar": 59
+      },
+      "revId": "5e61c379227d3000270d931a12bb2b499e3c9b96",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5f681702_5290f04e",
+        "filename": "system_prop.mk",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2016-12-23T16:06:51Z",
+      "side": 1,
+      "message": "https://github.com/CyanogenMod/android_device_xiaomi_gemini/commit/0e836e2dca9537f9449ddc54c10e7cc1058a4136",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 33
+      },
+      "revId": "5e61c379227d3000270d931a12bb2b499e3c9b96",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
