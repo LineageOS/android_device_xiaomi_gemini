@@ -32,7 +32,9 @@
 
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
+        <item>1</item>
         <item>4</item>
+        <item>5</item>
         <item>8</item>
         <item>13</item>
         <item>17</item>
@@ -61,10 +63,12 @@
          This must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLcdBacklightValues">
         <item>3</item>
-        <item>7</item>
-        <item>13</item>
-        <item>19</item>
-        <item>24</item>
+        <item>3</item>
+        <item>3</item>
+        <item>15</item>
+        <item>15</item>
+        <item>15</item>
+        <item>15</item>
         <item>31</item>
         <item>39</item>
         <item>43</item>
@@ -160,7 +164,6 @@
     <integer-array translatable="false" name="config_tether_upstream_types">
         <item>0</item>
         <item>1</item>
-        <item>4</item>
         <item>5</item>
         <item>7</item>
     </integer-array>

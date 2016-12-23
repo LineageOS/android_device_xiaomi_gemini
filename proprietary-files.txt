@@ -562,23 +562,29 @@ vendor/lib/libadpcmdec.so
 vendor/lib/libsmwrapper.so
 
 # Media
+lib64/libmm-omxcore.so
 lib64/libOmxVpp.so
 lib64/libvpplibrary.so
+lib/libmiomxinterface_lc_19.so
+lib/libmiomxinterface_mt_19.so
+lib/libmiomxinterface_nv_19.so
+lib/libmiomxinterface_qc_19.so
+lib/libmm-omxcore.so
 lib/libOmxVpp.so
 lib/libvpplibrary.so
 vendor/lib64/libI420colorconvert.so
+vendor/lib64/libmm-color-convertor.so
+vendor/lib64/libmmosal.so
 vendor/lib64/libOmxAacDec.so
 vendor/lib64/libOmxEvrcDec.so
 vendor/lib64/libOmxQcelp13Dec.so
-vendor/lib64/libmm-color-convertor.so
-vendor/lib64/libmmosal.so
 vendor/lib64/libvpphvx.so
 vendor/lib/libI420colorconvert.so
+vendor/lib/libmm-color-convertor.so
+vendor/lib/libmmosal.so
 vendor/lib/libOmxAacDec.so
 vendor/lib/libOmxEvrcDec.so
 vendor/lib/libOmxQcelp13Dec.so
-vendor/lib/libmm-color-convertor.so
-vendor/lib/libmmosal.so
 vendor/lib/libvpphvx.so
 vendor/lib/libvqzip.so
 
@@ -644,6 +650,7 @@ vendor/lib64/libqmi_common_so.so
 vendor/lib64/libqmi_csi.so
 vendor/lib64/libqmi_encdec.so
 vendor/lib64/libqmiservices.so
+vendor/lib64/libqti-wl.so
 vendor/lib64/libqmi.so
 vendor/lib64/libsmemlog.so
 vendor/lib/libdiag.so
@@ -660,6 +667,7 @@ vendor/lib/libqmi_common_so.so
 vendor/lib/libqmi_csi.so
 vendor/lib/libqmi_encdec.so
 vendor/lib/libqmiservices.so
+vendor/lib/libqti-wl.so
 vendor/lib/libqmi.so
 vendor/lib/libsmemlog.so
 
