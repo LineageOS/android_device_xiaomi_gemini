@@ -69,9 +69,13 @@ public class Startup extends BroadcastReceiver {
                 }
 
                 // Send initial broadcasts
-                final Intent custIntent = new Intent(Constants.FP_HOME_INTENT);
+                Intent custIntent = new Intent(Constants.FP_HOME_INTENT);
                 custIntent.putExtra(Constants.FP_HOME_INTENT_EXTRA,
                         prefs.getBoolean(Constants.FP_HOME_KEY, false));
+                context.sendBroadcast(custIntent);
+                custIntent = new Intent(Constants.FP_WAKEUP_INTENT);
+                custIntent.putExtra(Constants.FP_WAKEUP_INTENT_EXTRA,
+                        prefs.getBoolean(Constants.FP_WAKEUP_KEY, true));
                 context.sendBroadcast(custIntent);
             }
         }

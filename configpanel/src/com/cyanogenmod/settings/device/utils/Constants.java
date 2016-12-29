@@ -40,6 +40,8 @@ public class Constants {
     // Intents
     public static final String FP_HOME_INTENT = "com.cyanogenmod.settings.device.FP_HOME_TOGGLE";
     public static final String FP_HOME_INTENT_EXTRA = "fingerprint_home";
+    public static final String FP_WAKEUP_INTENT = "com.cyanogenmod.settings.device.FP_WAKEUP_TOGGLE";
+    public static final String FP_WAKEUP_INTENT_EXTRA = "fingerprint_wakeup";
 
     // Holds <preference_key> -> <proc_node> mapping
     public static final Map<String, String> sBooleanNodePreferenceMap = new HashMap<>();

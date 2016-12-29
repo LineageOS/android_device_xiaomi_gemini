@@ -25,6 +25,7 @@
     <uses-permission android:name="cyanogenmod.permission.HARDWARE_ABSTRACTION_ACCESS" />
 
     <protected-broadcast android:name="com.cyanogenmod.settings.device.FP_HOME_TOGGLE" />
+    <protected-broadcast android:name="com.cyanogenmod.settings.device.FP_WAKEUP_TOGGLE" />
 
     <uses-sdk
         android:minSdkVersion="24" />

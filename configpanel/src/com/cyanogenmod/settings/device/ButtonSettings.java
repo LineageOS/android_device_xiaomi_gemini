@@ -43,6 +43,11 @@ public class ButtonSettings extends NodePreferenceActivity {
             intent.putExtra(Constants.FP_HOME_INTENT_EXTRA, (Boolean) newValue);
             sendBroadcast(intent);
             return true;
+        } else if (Constants.FP_WAKEUP_KEY.equals(preference.getKey())) {
+            final Intent intent = new Intent(Constants.FP_WAKEUP_INTENT);
+            intent.putExtra(Constants.FP_WAKEUP_INTENT_EXTRA, (Boolean) newValue);
+            sendBroadcast(intent);
+            return true;
         }
         return super.onPreferenceChange(preference, newValue);
     }
