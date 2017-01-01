@@ -161,8 +161,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.custom_ecc=1 \
     persist.radio.sib16_support=1 \
     persist.radio.NO_STAPA=1 \
-    persist.radio.VT_HYBRID_ENABLE=1 \
-    telephony.lteOnCdmaDevice=1,1
+    persist.radio.VT_HYBRID_ENABLE=1
 
 # RmNet Data
 PRODUCT_PROPERTY_OVERRIDES += \
