@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The CyanogenMod Project
+ * Copyright (C) 2017 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +25,7 @@ import cyanogenmod.preference.RemotePreferenceUpdater;
 public class DozeReceiver extends RemotePreferenceUpdater {
 
     private static final boolean DEBUG = false;
-    private static final String TAG = "OneplusDoze";
+    private static final String TAG = "XiaomiDoze";
 
     private static final String DOZE_CATEGORY_KEY = "doze_device_settings";
 
