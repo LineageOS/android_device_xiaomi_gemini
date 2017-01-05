@@ -24,17 +24,17 @@
 
     <PreferenceCategory
         android:key="fp_key"
-        android:title="@string/fp_title" >
+        android:title="@string/fingerprint_title" >
 
         <SwitchPreference
             android:key="fp_home"
-            android:title="@string/fp_home_title"
-            android:summary="@string/fp_home_summary" />
+            android:title="@string/fingerprint_as_home_title"
+            android:summary="@string/fingerprint_as_home_summary" />
 
         <SwitchPreference
             android:key="fp_wakeup"
-            android:title="@string/fp_wakeup_title"
-            android:summary="@string/fp_wakeup_summary" />
+            android:title="@string/fingerprint_wakeup_title"
+            android:summary="@string/fingerprint_wakeup_summary" />
 
     </PreferenceCategory>
 
