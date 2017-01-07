@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The CyanogenMod Project
+ *           (C) 2017 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,29 +17,12 @@
 
 package com.cyanogenmod.settings.device;
 
-import android.app.PendingIntent;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.hardware.input.InputManager;
-import android.os.Build;
-import android.os.IBinder;
-import android.os.RemoteException;
-import android.os.ServiceManager;
-import android.os.SystemClock;
-import android.os.UserHandle;
-import android.preference.PreferenceManager;
-import android.service.gesture.IGestureService;
 import android.util.Log;
-import android.view.InputDevice;
-import android.view.InputEvent;
-import android.view.KeyCharacterMap;
-import android.view.KeyEvent;
 
 import java.io.File;
 
@@ -80,12 +64,6 @@ public class Startup extends BroadcastReceiver {
                 }
             }
         }
-    }
-
-    private void sendInputEvent(InputEvent event) {
-        InputManager inputManager = InputManager.getInstance();
-        inputManager.injectInputEvent(event,
-                InputManager.INJECT_INPUT_EVENT_MODE_WAIT_FOR_FINISH);
     }
 
     static boolean hasButtonProcs() {

@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016 The CyanogenMod Project
+ *           (C) 2017 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +16,6 @@
  */
 
 package com.cyanogenmod.settings.device;
-
 
 import android.database.Cursor;
 import android.database.MatrixCursor;
@@ -37,9 +37,6 @@ public class ConfigPanelSearchIndexablesProvider extends SearchIndexablesProvide
     private static final String TAG = "ConfigPanelSearchIndexablesProvider";
 
     public static final int SEARCH_IDX_BUTTON_PANEL = 0;
-    public static final int SEARCH_IDX_GESTURE_PANEL = 1;
-    public static final int SEARCH_IDX_OCLICK_PANEL = 2;
-    public static final int SEARCH_IDX_TOUCHSCREEN_PANEL = 3;
 
     private static SearchIndexableResource[] INDEXABLE_RES = new SearchIndexableResource[]{
             new SearchIndexableResource(1, R.xml.button_panel,
