@@ -1285,9 +1285,9 @@ enum loc_api_adapter_err LocApiV02 :: setXtraData(
   char* data, int length)
 {
   locClientStatusEnumType status = eLOC_CLIENT_SUCCESS;
-  int     total_parts;
-  uint8_t   part;
-  uint16_t  len_injected;
+  uint16_t  total_parts;
+  uint16_t  part;
+  uint32_t  len_injected;
 
   locClientReqUnionType req_union;
   qmiLocInjectPredictedOrbitsDataReqMsgT_v02 inject_xtra;
