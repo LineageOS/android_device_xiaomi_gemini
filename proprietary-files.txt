@@ -702,18 +702,28 @@ vendor/qcril.db
 
 # Sensors
 bin/sensors.qcom
+etc/permissions/com.xiaomi.sensor.xml
 etc/sensors/hals.conf
 etc/sensors/sensor_def_qcomdev.conf
+framework/com.xiaomi.sensor.jar
+lib64/libcalapi.so
+lib64/libsensor_cal.so
+lib64/libsensor_calJNI.so
+lib/libcalapi.so
+lib/libsensor_cal.so
+lib/libsensor_calJNI.so
 vendor/lib64/hw/activity_recognition.msm8996.so
+vendor/lib64/libsensor1.so
 vendor/lib64/libsensor_reg.so
 vendor/lib64/libsensor_user_cal.so
-vendor/lib64/libsensor1.so
+vendor/lib64/libsensor_test.so
 vendor/lib64/sensors.oem.so
 vendor/lib64/sensors.ssc.so
 vendor/lib/hw/activity_recognition.msm8996.so
+vendor/lib/libsensor1.so
 vendor/lib/libsensor_reg.so
 vendor/lib/libsensor_user_cal.so
-vendor/lib/libsensor1.so
+vendor/lib/libsensor_test.so
 vendor/lib/sensors.oem.so
 vendor/lib/sensors.ssc.so
 
