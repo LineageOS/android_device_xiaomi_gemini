@@ -16,7 +16,11 @@
 
 package com.android.internal.telephony;
 
+import static com.android.internal.telephony.RILConstants.*;
+
 import android.content.Context;
+import android.os.AsyncResult;
+import android.os.Parcel;
 
 /**
  * Custom Qualcomm RIL for Xiaomi Mi 5
@@ -25,6 +29,8 @@ import android.content.Context;
  */
 public class GeminiRIL extends RIL implements CommandsInterface {
 
+    protected boolean isGSM = false;
+
     public GeminiRIL(Context context, int preferredNetworkType, int cdmaSubscription) {
         super(context, preferredNetworkType, cdmaSubscription);
     }
@@ -32,5 +38,118 @@ public class GeminiRIL extends RIL implements CommandsInterface {
     public GeminiRIL(Context context, int preferredNetworkType,
             int cdmaSubscription, Integer instanceId) {
         super(context, preferredNetworkType, cdmaSubscription, instanceId);
+    }
+
+    @Override
+    public void setPhoneType(int phoneType){
+        super.setPhoneType(phoneType);
+        isGSM = (phoneType != RILConstants.CDMA_PHONE);
+    }
+
+    @Override
+    protected RILRequest
+    processSolicited (Parcel p) {
+        int serial, error;
+        boolean found = false;
+
+        int dataPosition = p.dataPosition(); // Save off position within the parcel
+        serial = p.readInt();
+        error = p.readInt();
+        RILRequest rr = null;
+
+        // Pre-process the reply before popping it
+        synchronized (mRequestList) {
+            RILRequest tr = mRequestList.get(serial);
+            if (tr != null && tr.mSerial == serial) {
+                if (error == 0 || p.dataAvail() > 0) {
+                    try {switch (tr.mRequest) {
+                        // Get those we're interested in
+                        case RIL_REQUEST_VOICE_REGISTRATION_STATE:
+                        case RIL_REQUEST_DATA_REGISTRATION_STATE:
+                            rr = tr;
+                            break;
+                    }} catch (Throwable thr) {
+                        // Exceptions here usually mean invalid RIL responses
+                        if (tr.mResult != null) {
+                            AsyncResult.forMessage(tr.mResult, null, thr);
+                            tr.mResult.sendToTarget();
+                        }
+                        return tr;
+                    }
+                }
+            }
+        }
+        if (rr == null) {
+            // Nothing we care about, go up
+            p.setDataPosition(dataPosition);
+            // Forward responses that we're not overriding to the super class
+            return super.processSolicited(p);
+        }
+        rr = findAndRemoveRequestFromList(serial);
+        if (rr == null) {
+            return rr;
+        }
+        Object ret = null;
+        if (error == 0 || p.dataAvail() > 0) {
+            switch (rr.mRequest) {
+                case RIL_REQUEST_VOICE_REGISTRATION_STATE:
+                    ret = responseVoiceRegistrationState(p);
+                    break;
+                case RIL_REQUEST_DATA_REGISTRATION_STATE:
+                    ret = responseDataRegistrationState(p);
+                    break;
+                default:
+                    throw new RuntimeException("Unrecognized solicited response: " + rr.mRequest);
+            }
+            //break;
+        }
+        if (RILJ_LOGD) riljLog(rr.serialString() + "< " + requestToString(rr.mRequest)
+                               + " " + retToString(rr.mRequest, ret));
+        if (rr.mResult != null) {
+            AsyncResult.forMessage(rr.mResult, ret, null);
+            rr.mResult.sendToTarget();
+        }
+        return rr;
+    }
+
+    private Object
+    responseDataRegistrationState(Parcel p) {
+        String response[] = (String[]) responseStrings(p); // All data from parcel get popped
+        if (isGSM){
+            /* Our RIL reports a value of 20 for DC-HSPAP.
+               However, this isn't supported in AOSP. So, map it to HSPAP instead */
+            if (response.length > 4 && response[0].equals("1") && response[3].equals("20")) {
+                response[3] = "15";
+            }
+        }
+        return responseVoiceDataRegistrationState(response);
+    }
+
+    private Object
+    responseVoiceRegistrationState(Parcel p) {
+        String response[] = (String[])responseStrings(p); // All data from parcel get popped
+        return responseVoiceDataRegistrationState(response);
+    }
+
+    private Object
+    responseVoiceDataRegistrationState(String[] response) {
+        if (isGSM){
+            return response;
+        }
+        if (response.length >= 10){
+            for (int i = 6; i <= 9; i++) {
+                if (response[i] == null) {
+                    response[i] = Integer.toString(Integer.MAX_VALUE);
+                } else {
+                    try {
+                        Integer.parseInt(response[i]);
+                    } catch(NumberFormatException e) {
+                        response[i] = Integer.toString(Integer.parseInt(response[i],16));
+                    }
+                }
+            }
+        }
+
+        return response;
     }
 }
