@@ -150,6 +150,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.default_network=22,22 \
     ro.telephony.default_cdma_sub=0 \
     ro.telephony.call_ring.multiple=false \
+    ro.telephony.ril_class=GeminiRIL \
     persist.data.qmi.adb_logmask=0 \
     persist.dbg.volte_avail_ovr=1 \
     persist.dbg.vt_avail_ovr=1 \
