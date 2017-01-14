@@ -34,6 +34,8 @@ on early-init
     chmod 0755 /sys/kernel/debug
 
 on init
+    export LD_SHIM_LIBS /system/vendor/lib64/lib-imsvt.so|libshims_ims.so
+
     # Set permissions for persist partition
     mkdir /persist 0771 root system
 
