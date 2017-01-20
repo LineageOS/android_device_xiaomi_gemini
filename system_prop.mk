@@ -3,7 +3,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     af.fast_track_multiplier=1 \
     audio_hal.period_size=192 \
     audio.deep_buffer.media=true \
-    audio.offload.buffer.size.kb=32 \
+    audio.offload.buffer.size.kb=64 \
     audio.offload.gapless.enabled=true \
     audio.offload.min.duration.secs=15 \
     audio.offload.multiaac.enable=true \
@@ -17,13 +17,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
     audio.parser.ip.buffer.size=262144 \
     audio.dolby.ds2.enabled=false \
     audio.dolby.ds2.hardbypass=false \
-    ro.audio.flinger_standbytime_ms=300 \
-    tunnel.audio.encode=true \
+    qcom.hw.aac.encoder=true \
+    tunnel.audio.encode=false \
     use.voice.path.for.pcm.voip=true
 
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.qc.sdk.audio.ssr=false \
-    ro.qc.sdk.audio.fluencetype=fluence \
+    ro.qc.sdk.audio.fluencetype=none \
     persist.audio.fluence.voicecall=true \
     persist.audio.fluence.voicerec=false \
     persist.audio.fluence.speaker=true
@@ -107,10 +107,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.loc.nlp_name=com.qualcomm.location \
     ro.gps.agps_provider=1
 
+# IMS
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.dbg.volte_avail_ovr=1 \
+    persist.dbg.vt_avail_ovr=1 \
+    persist.radio.NO_STAPA=1 \
+    persist.radio.VT_HYBRID_ENABLE=1
+
 # Media
 PRODUCT_PROPERTY_OVERRIDES += \
-    media.aac_51_output_enabled=true \
-    mm.enable.smoothstreaming=true
+    media.aac_51_output_enabled=true
 
 # NFC
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -137,32 +143,24 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sys.fw.bg_apps_limit=60 \
     ro.vendor.extension_library=libqti-perfd-client.so
 
-# Qualcomm
-PRODUCT_PROPERTY_OVERRIDES += \
-    com.qc.hardware=true \
-    ro.qc.sdk.sensors.gestures=true
-
 # Radio
 PRODUCT_PROPERTY_OVERRIDES += \
     DEVICE_PROVISIONED=1 \
     rild.libpath=/vendor/lib64/libril-qc-qmi-1.so \
     ril.subscription.types=NV,RUIM \
-    ro.telephony.default_network=22,22 \
-    ro.telephony.default_cdma_sub=0 \
     ro.telephony.call_ring.multiple=false \
+    ro.telephony.default_cdma_sub=0 \
+    ro.telephony.default_network=20,20 \
     ro.telephony.ril_class=GeminiRIL \
     persist.data.qmi.adb_logmask=0 \
-    persist.dbg.volte_avail_ovr=1 \
-    persist.dbg.vt_avail_ovr=1 \
     persist.net.doxlat=true \
     persist.radio.apm_sim_not_pwdn=1 \
-    persist.radio.force_on_dc=true \
-    persist.radio.rat_on=combine \
-    persist.radio.multisim.config=dsds \
     persist.radio.custom_ecc=1 \
-    persist.radio.sib16_support=1 \
-    persist.radio.NO_STAPA=1 \
-    persist.radio.VT_HYBRID_ENABLE=1
+    persist.radio.force_on_dc=true \
+    persist.radio.multisim.config=dsds \
+    persist.radio.rat_on=combine \
+    persist.radio.redir_party_num=1 \
+    persist.radio.sib16_support=1
 
 # RmNet Data
 PRODUCT_PROPERTY_OVERRIDES += \
