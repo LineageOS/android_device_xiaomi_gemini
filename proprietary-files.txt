@@ -444,13 +444,10 @@ vendor/lib64/libssd.so
 vendor/lib/libQSEEComAPI.so
 
 # Fingerprint
-bin/qfp-daemon
 bin/qvop-daemon
 lib64/hw/fingerprint.fpc.so
 lib/hw/fingerprint.fpc.so
-vendor/lib64/libqfp-service.so
 vendor/lib64/libqvop-service.so
-vendor/lib64/qfp.wakeup.so
 vendor/lib/libqvop-service.so
 
 # Gatekeeper
@@ -712,18 +709,20 @@ lib64/libsensor_calJNI.so
 lib/libcalapi.so
 lib/libsensor_cal.so
 lib/libsensor_calJNI.so
+system/vendor/lib64/sensor_calibrate.so
+system/vendor/lib/sensor_calibrate.so
 vendor/lib64/hw/activity_recognition.msm8996.so
 vendor/lib64/libsensor1.so
 vendor/lib64/libsensor_reg.so
-vendor/lib64/libsensor_user_cal.so
 vendor/lib64/libsensor_test.so
+vendor/lib64/libsensor_user_cal.so
 vendor/lib64/sensors.oem.so
 vendor/lib64/sensors.ssc.so
 vendor/lib/hw/activity_recognition.msm8996.so
 vendor/lib/libsensor1.so
 vendor/lib/libsensor_reg.so
-vendor/lib/libsensor_user_cal.so
 vendor/lib/libsensor_test.so
+vendor/lib/libsensor_user_cal.so
 vendor/lib/sensors.oem.so
 vendor/lib/sensors.ssc.so
 
