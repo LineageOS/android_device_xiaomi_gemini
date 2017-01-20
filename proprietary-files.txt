@@ -444,13 +444,10 @@ vendor/lib64/libssd.so
 vendor/lib/libQSEEComAPI.so
 
 # Fingerprint
-bin/qfp-daemon
 bin/qvop-daemon
 lib64/hw/fingerprint.fpc.so
 lib/hw/fingerprint.fpc.so
-vendor/lib64/libqfp-service.so
 vendor/lib64/libqvop-service.so
-vendor/lib64/qfp.wakeup.so
 vendor/lib/libqvop-service.so
 
 # Gatekeeper
@@ -458,13 +455,14 @@ vendor/lib64/hw/gatekeeper.msm8996.so
 vendor/lib/hw/gatekeeper.msm8996.so
 
 # GPS
-bin/garden_app
 bin/loc_launcher
 bin/xtwifi-client
 bin/xtwifi-inet-agent
 etc/permissions/com.qti.location.sdk.xml
 etc/permissions/com.qualcomm.location.xml
 etc/permissions/izat.xt.srv.xml
+etc/cacert_location.pem
+etc/xtra_root_cert.pem
 framework/com.qti.location.sdk.jar
 framework/izat.xt.srv.jar
 -lib64/libloc_api_v02.so
@@ -715,15 +713,17 @@ lib/libsensor_calJNI.so
 vendor/lib64/hw/activity_recognition.msm8996.so
 vendor/lib64/libsensor1.so
 vendor/lib64/libsensor_reg.so
-vendor/lib64/libsensor_user_cal.so
 vendor/lib64/libsensor_test.so
+vendor/lib64/libsensor_user_cal.so
+vendor/lib64/sensor_calibrate.so
 vendor/lib64/sensors.oem.so
 vendor/lib64/sensors.ssc.so
 vendor/lib/hw/activity_recognition.msm8996.so
 vendor/lib/libsensor1.so
 vendor/lib/libsensor_reg.so
-vendor/lib/libsensor_user_cal.so
 vendor/lib/libsensor_test.so
+vendor/lib/libsensor_user_cal.so
+vendor/lib/sensor_calibrate.so
 vendor/lib/sensors.oem.so
 vendor/lib/sensors.ssc.so
 
