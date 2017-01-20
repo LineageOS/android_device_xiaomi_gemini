@@ -444,13 +444,10 @@ vendor/lib64/libssd.so
 vendor/lib/libQSEEComAPI.so
 
 # Fingerprint
-bin/qfp-daemon
 bin/qvop-daemon
 lib64/hw/fingerprint.fpc.so
 lib/hw/fingerprint.fpc.so
-vendor/lib64/libqfp-service.so
 vendor/lib64/libqvop-service.so
-vendor/lib64/qfp.wakeup.so
 vendor/lib/libqvop-service.so
 
 # Gatekeeper
