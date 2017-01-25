@@ -57,7 +57,6 @@ on post-fs-data
     mkdir /persist/qc_senseid 0700 system system
     mkdir /data/misc/dts 0770 media audio
     mkdir /data/misc/seemp 0700 system system
-    mkdir /data/misc/tloc/ 0700 system drmrpc
     mkdir /data/misc/qvop 0660 system system
     mkdir /data/misc/audio_pp 0771 media audio
     mkdir /data/audio_cal 0771 system system
@@ -66,7 +65,6 @@ on post-fs-data
 
 on boot
     start rmt_storage
-    start rfs_access
 
     # Access permission for secure touch
     chmod 0660 /sys/devices/soc/75ba000.i2c/i2c-12/12-0020/secure_touch_enable
@@ -96,11 +94,6 @@ service fingerprintd /system/bin/fingerprintd
     user system
     group system drmrpc diag input
     writepid /dev/cpuset/system-background/tasks
-
-service qfp-daemon /system/bin/qfp-daemon
-    class late_start
-    user system
-    group system drmrpc diag input sdcard_rw
 
 service qvop-daemon /system/bin/qvop-daemon
     class late_start
@@ -213,47 +206,27 @@ service ppd /system/vendor/bin/mm-pp-dpps
     disabled
 
 on property:init.svc.surfaceflinger=stopped
-    stop displayfeature
     stop ppd
 
 on property:init.svc.surfaceflinger=running
-    start displayfeature
     start ppd
 
 on property:init.svc.surfaceflinger=restarting
-    stop displayfeature
     stop ppd
 
 on property:init.svc.zygote=stopped
-    stop displayfeature
     stop ppd
 
 on property:init.svc.zygote=running
-    start displayfeature
     start ppd
 
 on property:init.svc.zygote=restarting
-    stop displayfeature
     stop ppd
-
-service tlocd /system/bin/tloc_daemon
-    class late_start
-    user system
-    group drmrpc gps
-
-service displayfeature /system/bin/displayfeature
-    class late_start
-    user root
-    group root
 
 service readmac /system/bin/readmac
     class main
     user root
     group root
-    oneshot
-
-service mmbn-daemon /system/bin/mmbn-daemon
-    class main
     oneshot
 
 on property:slpi.restart=1
