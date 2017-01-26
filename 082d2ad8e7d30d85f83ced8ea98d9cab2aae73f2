@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_76a55403",
+        "filename": "recovery/recovery_updater.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 10258
+      },
+      "writtenOn": "2017-01-26T10:37:17Z",
+      "side": 1,
+      "message": "TZ size on op3 is 2048k, should be the same here",
+      "range": {
+        "startLine": 41,
+        "startChar": 14,
+        "endLine": 41,
+        "endChar": 17
+      },
+      "revId": "082d2ad8e7d30d85f83ced8ea98d9cab2aae73f2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
