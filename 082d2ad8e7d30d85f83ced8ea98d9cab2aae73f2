@@ -22,6 +22,30 @@
       "revId": "082d2ad8e7d30d85f83ced8ea98d9cab2aae73f2",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a437d4f_364b4c2d",
+        "filename": "recovery/recovery_updater.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-01-26T12:15:19Z",
+      "side": 1,
+      "message": "gemini:/ # blockdev --getsize64 /dev/block/bootdevice/by-name/tz\n4194304\n\nCan you double check on yours?",
+      "parentUuid": "9a437d4f_76a55403",
+      "range": {
+        "startLine": 41,
+        "startChar": 14,
+        "endLine": 41,
+        "endChar": 17
+      },
+      "revId": "082d2ad8e7d30d85f83ced8ea98d9cab2aae73f2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
     }
   ]
 }
