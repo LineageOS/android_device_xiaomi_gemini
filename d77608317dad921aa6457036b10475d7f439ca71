@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_2f1d2a10",
+        "filename": "gps/etc/gps.conf",
+        "patchSetId": 18
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 8300
+      },
+      "writtenOn": "2017-01-28T18:56:32Z",
+      "side": 1,
+      "message": "Not sure if thats a good idea for a default value ... there is already enough whining n XDA about gps fix",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 29
+      },
+      "revId": "d77608317dad921aa6457036b10475d7f439ca71",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
