@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a437d4f_03747097",
+        "filename": "gps/loc_api/libloc_api_50001/LocEngAdapter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-02-02T08:44:21Z",
+      "side": 1,
+      "message": "Watch out: https://github.com/LineageOS/android_device_xiaomi_gemini/commit/9440c51ac1d014337b8d409786e2910e1aaa45f2",
+      "range": {
+        "startLine": 196,
+        "startChar": 15,
+        "endLine": 200,
+        "endChar": 17
+      },
+      "revId": "fe000ea2523dd69fbbcf1e1dd869d6ca5f05a5b5",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
