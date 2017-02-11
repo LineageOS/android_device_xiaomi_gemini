@@ -1,1 +1,5 @@
+type_transition thermal-engine system_data_file:file thermal_data_file "decrypt.txt";
+
 allow thermal-engine sysfs_kgsl:file r_file_perms;
+allow thermal-engine system_data_file:dir { add_name write remove_name };
+allow thermal-engine thermal_data_file:file { rw_file_perms create unlink };
