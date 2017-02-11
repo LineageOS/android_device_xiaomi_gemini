@@ -1,1 +1,4 @@
+type_transition netmgrd system_data_file:file netmgrd_data_file "log.txt";
+
 allow netmgrd self:capability dac_override;
+allow netmgrd netmgrd_data_file:file rw_file_perms;

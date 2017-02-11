@@ -15,3 +15,4 @@ allow readmac self:capability dac_override;
 allow readmac self:socket create_socket_perms;
 
 allow readmac diag_device:chr_file rw_file_perms;
+allow readmac sysfs:file r_file_perms;
