@@ -48,7 +48,6 @@ cat << EOF >> "$ANDROIDMK"
 
 EOF
 
-printf '\n%s\n' "\$(call inherit-product, vendor/qcom/binaries/bluetooth/bluetooth-vendor.mk)" >> "$PRODUCTMK"
 printf '\n%s\n' "\$(call inherit-product, vendor/qcom/binaries/msm8996/graphics/graphics-vendor.mk)" >> "$PRODUCTMK"
 
 # Finish
