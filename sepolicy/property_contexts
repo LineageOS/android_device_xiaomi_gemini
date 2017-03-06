@@ -1,5 +1,0 @@
-service.soundcard.         u:object_r:audio_prop:s0
-audio.                     u:object_r:audio_prop:s0
-ro.sys.oem.sno             u:object_r:system_radio_prop:s0
-sys.fake_bs_flag0          u:object_r:system_radio_prop:s0
-sys.fake_bs_flag1          u:object_r:system_radio_prop:s0
