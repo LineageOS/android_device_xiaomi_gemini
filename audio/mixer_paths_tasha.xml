@@ -321,7 +321,6 @@
     <ctl name="RX INT2 DEM MUX" value="CLSH_DSM_OUT" />
     <ctl name="SLIM_0_RX Channels" value="One" />
     <ctl name="SLIM_5_RX Channels" value="One" />
-    <ctl name="SLIM_6_RX Channels" value="One" />
     <ctl name="SLIM_0_TX Channels" value="One" />
     <ctl name="SLIM_1_TX Channels" value="One" />
     <ctl name="SLIM RX0 MUX" value="ZERO" />
@@ -329,7 +328,6 @@
     <ctl name="SLIM RX3 MUX" value="ZERO" />
     <ctl name="SLIM RX4 MUX" value="ZERO" />
     <ctl name="SLIM RX5 MUX" value="ZERO" />
-    <ctl name="SLIM RX6 MUX" value="ZERO" />
     <ctl name="EAR PA Gain" value="G_6_DB" />
     <ctl name="SpkrLeft COMP Switch" value="0" />
     <ctl name="SpkrRight COMP Switch" value="0" />
@@ -2134,6 +2132,10 @@
         <ctl name="RX INT2_2 MUX" value="RX3" />
         <ctl name="RX INT1 DEM MUX" value="CLSH_DSM_OUT" />
         <ctl name="RX INT2 DEM MUX" value="CLSH_DSM_OUT" />
+        <ctl name="COMP1 Switch" value="0" />
+        <ctl name="COMP2 Switch" value="0" />
+        <ctl name="HPHL Volume" value="11" />
+        <ctl name="HPHR Volume" value="11" />
     </path>
 
     <path name="headphones-44.1">
@@ -2149,6 +2151,10 @@
         <ctl name="SPL SRC1 MUX" value="SRC_IN_HPHR" />
         <ctl name="RX INT1 SPLINE MIX HPHL Switch" value="1" />
         <ctl name="RX INT2 SPLINE MIX HPHR Switch" value="1" />
+        <ctl name="COMP1 Switch" value="0" />
+        <ctl name="COMP2 Switch" value="0" />
+        <ctl name="HPHL Volume" value="11" />
+        <ctl name="HPHR Volume" value="11" />
     </path>
 
     <path name="true-native-mode">
