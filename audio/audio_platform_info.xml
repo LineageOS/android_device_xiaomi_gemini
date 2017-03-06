@@ -49,7 +49,7 @@
         <device name="SND_DEVICE_IN_BT_SCO_MIC" acdb_id="323"/>
         <device name="SND_DEVICE_IN_BT_SCO_MIC_NREC" acdb_id="835"/>
         <device name="SND_DEVICE_IN_BT_SCO_MIC_WB" acdb_id="1347"/>
-        <device name="SND_DEVICE_IN_BT_SCO_MIC_WB_NREC" acdb_id="1827"/>
+        <device name="SND_DEVICE_IN_BT_SCO_MIC_WB_NREC" acdb_id="1859"/>
         <device name="SND_DEVICE_IN_CAMCORDER_MIC" acdb_id="4"/>
         <device name="SND_DEVICE_IN_VOICE_DMIC" acdb_id="277"/>
         <device name="SND_DEVICE_IN_VOICE_SPEAKER_DMIC" acdb_id="293"/>
