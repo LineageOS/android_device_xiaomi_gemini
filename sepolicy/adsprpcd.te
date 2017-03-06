@@ -1,2 +1,0 @@
-allow adsprpcd dsp_file:dir r_dir_perms;
-allow adsprpcd dsp_file:file r_file_perms;
