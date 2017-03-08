@@ -143,6 +143,13 @@ vendor/lib/libSonyIMX298PdafLibrary.so
 lib64/hw/fingerprint.fpc.so
 lib/hw/fingerprint.fpc.so
 
+# Graphics firmware
+etc/firmware/a530_zap.b00
+etc/firmware/a530_zap.b01
+etc/firmware/a530_zap.b02
+etc/firmware/a530_zap.elf
+etc/firmware/a530_zap.mdt
+
 # IRDA
 lib64/hw/consumerir.msm8996.so
 lib/hw/consumerir.msm8996.so
