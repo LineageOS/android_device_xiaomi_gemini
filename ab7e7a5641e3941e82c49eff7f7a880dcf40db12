@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da6255ed_52794a92",
+        "filename": "audio/audio_platform_info.xml",
+        "patchSetId": 10
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2017-03-08T09:17:36Z",
+      "side": 1,
+      "message": "03-08 10:11:51.193   522   522 E msm8974_platform: find_index: Could not find index for name \u003d SND_DEVICE_OUT_VOICE_TX\n03-08 10:11:51.193   522   522 E platform_info: process_acdb_id: Device SND_DEVICE_OUT_VOICE_TX in platform info xml not found, no ACDB ID set!",
+      "range": {
+        "startLine": 39,
+        "startChar": 8,
+        "endLine": 39,
+        "endChar": 61
+      },
+      "revId": "ab7e7a5641e3941e82c49eff7f7a880dcf40db12",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71",
+      "unresolved": false
+    }
+  ]
+}
