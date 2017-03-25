@@ -35,7 +35,7 @@ PRODUCT_COPY_FILES += \
 
 # ConfigPanel
 PRODUCT_PACKAGES += \
-    ConfigPanel \
+    ConfigPanel
 
 # Device init scripts
 PRODUCT_PACKAGES += \
@@ -49,10 +49,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/keylayout/atmel-maxtouch.kl:system/usr/keylayout/atmel-maxtouch.kl \
     $(LOCAL_PATH)/keylayout/synaptics_dsx.kl:system/usr/keylayout/synaptics_dsx.kl \
     $(LOCAL_PATH)/keylayout/uinput-fpc.kl:system/usr/keylayout/uinput-fpc.kl
-
-# KeyHandler
-PRODUCT_PACKAGES += \
-    com.cyanogenmod.keyhandler
 
 # NFC
 PRODUCT_COPY_FILES += \
