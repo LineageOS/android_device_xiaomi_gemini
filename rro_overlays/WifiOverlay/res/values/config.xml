@@ -17,4 +17,6 @@
  */
 -->
 <resources>
+    <!-- Do not translate. Default access point SSID used for tethering -->
+    <string name="wifi_tether_configure_ssid_default" translatable="false">Xiaomi MI 5</string>
 </resources>
