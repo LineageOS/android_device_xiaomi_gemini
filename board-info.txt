@@ -1,1 +1,1 @@
-require version-trustzone=TZ.BF.4.0.1-77307
+require version-modem=2017-04-11 00:05:12
