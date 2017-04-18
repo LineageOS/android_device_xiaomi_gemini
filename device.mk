@@ -16,7 +16,7 @@
 #
 
 # Get non-open-source specific aspects
-$(call inherit-product-if-exists, vendor/xiaomi/gemini/gemini-vendor.mk)
+$(call inherit-product, vendor/xiaomi/gemini/gemini-vendor.mk)
 
 # Local overlays
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
