@@ -156,9 +156,5 @@ etc/firmware/a530_zap.b02
 etc/firmware/a530_zap.elf
 etc/firmware/a530_zap.mdt
 
-# IRDA
-lib64/hw/consumerir.msm8996.so
-lib/hw/consumerir.msm8996.so
-
 # NFC firmware
 vendor/firmware/libpn548ad_fw.so
