@@ -158,3 +158,11 @@ etc/firmware/a530_zap.mdt
 
 # NFC firmware
 vendor/firmware/libpn548ad_fw.so
+
+# Sensors
+etc/sensors/hals.conf
+etc/sensors/sensor_def_qcomdev.conf
+
+# Thermal
+etc/thermal-engine-8996.conf
+etc/thermal-engine-8996-a1.conf
