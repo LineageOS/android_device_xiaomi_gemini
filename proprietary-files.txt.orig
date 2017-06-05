@@ -139,9 +139,6 @@ vendor/lib/libmmcamera_ov4688.so
 vendor/lib/libmmcamera_ov4688_primax.so
 vendor/lib/libSonyIMX298PdafLibrary.so
 
-# Charger
-bin/hvdcp_opti
-
 # Display calibration data
 -etc/qdcm_calib_data_jdi_fhd_cmd_incell_dsi_panel.xml
 -etc/qdcm_calib_data_jdi_j1_fhd_cmd_incell_dsi_panel.xml
