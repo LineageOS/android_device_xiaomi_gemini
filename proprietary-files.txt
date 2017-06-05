@@ -131,6 +131,9 @@ etc/camera/ov4688_primax_chromatix.xml
 vendor/lib/libmmcamera_ov4688_eeprom.so
 vendor/lib/libmmcamera_sony_imx298_eeprom.so
 
+# Camera ois
+vendor/lib/libois_lc898122.so
+
 # Camera sensors
 vendor/lib/libmmcamera_imx298.so
 vendor/lib/libmmcamera_imx298_liteon.so
