@@ -6,7 +6,6 @@ etc/acdbdata/Forte/Forte_Handset_cal.acdb
 etc/acdbdata/Forte/Forte_Hdmi_cal.acdb
 etc/acdbdata/Forte/Forte_Headset_cal.acdb
 etc/acdbdata/Forte/Forte_Speaker_cal.acdb
-etc/acdbdata/adsp_avs_config.acdb
 
 # Audio amplifier firmware
 etc/firmware/tfa98xx.cnt
