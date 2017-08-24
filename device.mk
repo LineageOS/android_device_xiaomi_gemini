@@ -21,7 +21,7 @@ $(call inherit-product, vendor/xiaomi/gemini/gemini-vendor.mk)
 # Local overlays
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
-    $(LOCAL_PATH)/overlay-lineage
+#    $(LOCAL_PATH)/overlay-lineage
 
 # Inherit from msm8996-common
 $(call inherit-product, device/xiaomi/msm8996-common/msm8996.mk)
@@ -36,8 +36,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/mixer_paths_tasha.xml:system/etc/mixer_paths_tasha.xml
 
 # ConfigPanel
-PRODUCT_PACKAGES += \
-    ConfigPanel
+#PRODUCT_PACKAGES += \
+#    ConfigPanel
 
 # Consumerir
 PRODUCT_PACKAGES += \
