@@ -163,7 +163,7 @@ etc/firmware/a530_zap.mdt
 vendor/firmware/libpn548ad_fw.so
 
 # Sensors
-etc/sensors/hals.conf
+etc/sensors/hals.conf:vendor/etc/sensors/hals.conf
 etc/sensors/sensor_def_qcomdev.conf
 
 # Thermal
