@@ -32,6 +32,6 @@
 
     <!-- Names of the key handler classes -->
     <string-array name="config_deviceKeyHandlerClasses" translatable="false">
-        <item>com.cyanogenmod.settings.device.KeyHandler</item>
+        <item>org.lineageos.settings.device.KeyHandler</item>
     </string-array>
 </resources>
