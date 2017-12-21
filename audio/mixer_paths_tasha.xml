@@ -785,6 +785,32 @@
         <ctl name="AFE_PCM_RX Audio Mixer MultiMedia8" value="1" />
     </path>
 
+    <path name="mmap-playback">
+        <ctl name="SLIMBUS_0_RX Audio Mixer MultiMedia10" value="1" />
+    </path>
+
+    <path name="mmap-playback speaker">
+        <ctl name="QUAT_MI2S_RX Audio Mixer MultiMedia10" value="1" />
+    </path>
+
+    <path name="mmap-playback speaker-and-headphones">
+        <path name="mmap-playback speaker" />
+        <path name="mmap-playback" />
+    </path>
+
+    <path name="mmap-playback bt-sco">
+        <ctl name="AUX_PCM_RX Audio Mixer MultiMedia10" value="1" />
+    </path>
+
+    <path name="mmap-playback bt-sco-wb">
+        <ctl name="AUX PCM SampleRate" value="16000" />
+        <path name="mmap-playback bt-sco" />
+    </path>
+
+    <path name="mmap-playback afe-proxy">
+        <ctl name="AFE_PCM_RX Audio Mixer MultiMedia10" value="1" />
+    </path>
+
     <path name="multi-channel-playback hdmi">
         <ctl name="HDMI Mixer MultiMedia2" value="1" />
     </path>
@@ -1337,6 +1363,23 @@
 
     <path name="low-latency-record capture-fm">
       <ctl name="MultiMedia5 Mixer TERT_MI2S_TX" value="1" />
+    </path>
+
+    <path name="mmap-record">
+      <ctl name="MultiMedia10 Mixer SLIM_0_TX" value="1" />
+    </path>
+
+    <path name="mmap-record bt-sco">
+      <ctl name="MultiMedia10 Mixer AUX_PCM_UL_TX" value="1" />
+    </path>
+
+    <path name="mmap-record bt-sco-wb">
+        <ctl name="AUX PCM SampleRate" value="16000" />
+        <path name="mmap-record bt-sco" />
+    </path>
+
+    <path name="mmap-record capture-fm">
+      <ctl name="MultiMedia10 Mixer TERT_MI2S_TX" value="1" />
     </path>
 
     <path name="fm-virtual-record capture-fm">
