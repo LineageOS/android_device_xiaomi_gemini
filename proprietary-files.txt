@@ -126,7 +126,7 @@ vendor/lib/libchromatix_ov4688_zsl_video_ad5823.so
 # Camera configs
 etc/camera/imx298_liteon_chromatix.xml
 etc/camera/imx298_semco_chromatix.xml
-etc/camera/msm8996_camera.xml|8685c76353e614b312589e848eb45d74e1c20685
+etc/camera/msm8996_camera.xml
 etc/camera/ov4688_chromatix.xml
 etc/camera/ov4688_primax_chromatix.xml
 
