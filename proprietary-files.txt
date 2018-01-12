@@ -1,12 +1,12 @@
 # Audio ACDB
-etc/acdbdata/Forte/Forte_Bluetooth_cal.acdb
-etc/acdbdata/Forte/Forte_General_cal.acdb
-etc/acdbdata/Forte/Forte_Global_cal.acdb
-etc/acdbdata/Forte/Forte_Handset_cal.acdb
-etc/acdbdata/Forte/Forte_Hdmi_cal.acdb
-etc/acdbdata/Forte/Forte_Headset_cal.acdb
-etc/acdbdata/Forte/Forte_Speaker_cal.acdb
-etc/acdbdata/adsp_avs_config.acdb
+etc/acdbdata/Forte/Forte_Bluetooth_cal.acdb:vendor/etc/acdbdata/Bluetooth_cal.acdb
+etc/acdbdata/Forte/Forte_General_cal.acdb:vendor/etc/acdbdata/General_cal.acdb
+etc/acdbdata/Forte/Forte_Global_cal.acdb:vendor/etc/acdbdata/Global_cal.acdb
+etc/acdbdata/Forte/Forte_Handset_cal.acdb:vendor/etc/acdbdata/Handset_cal.acdb
+etc/acdbdata/Forte/Forte_Hdmi_cal.acdb:vendor/etc/acdbdata/Hdmi_cal.acdb
+etc/acdbdata/Forte/Forte_Headset_cal.acdb:vendor/etc/acdbdata/Headset_cal.acdb
+etc/acdbdata/Forte/Forte_Speaker_cal.acdb:vendor/etc/acdbdata/Speaker_cal.acdb
+etc/acdbdata/adsp_avs_config.acdb:vendor/etc/acdbdata/adsp_avs_config.acdb
 
 # Audio amplifier calibration sound
 etc/silence_short.wav
