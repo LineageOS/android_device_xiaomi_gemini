@@ -31,7 +31,6 @@
         <device name="SND_DEVICE_OUT_HEADPHONES" acdb_id="564"/>
         <device name="SND_DEVICE_OUT_HEADPHONES_44_1" acdb_id="564"/>
         <device name="SND_DEVICE_OUT_SPEAKER_AND_HEADPHONES" acdb_id="34"/>
-        <device name="SND_DEVICE_OUT_VOICE_HANDSET" acdb_id="18"/>
         <device name="SND_DEVICE_OUT_VOICE_SPEAKER" acdb_id="34"/>
         <device name="SND_DEVICE_OUT_VOICE_HEADPHONES" acdb_id="52"/>
         <device name="SND_DEVICE_OUT_BT_SCO" acdb_id="66"/>
@@ -39,7 +38,6 @@
         <device name="SND_DEVICE_OUT_TRANSMISSION_FM" acdb_id="0"/>
         <device name="SND_DEVICE_OUT_SPEAKER_PROTECTED" acdb_id="101"/>
         <device name="SND_DEVICE_OUT_VOICE_SPEAKER_PROTECTED" acdb_id="101"/>
-        <device name="SND_DEVICE_IN_HANDSET_MIC" acdb_id="19"/>
         <device name="SND_DEVICE_IN_HANDSET_DMIC" acdb_id="41"/>
         <device name="SND_DEVICE_IN_SPEAKER_MIC" acdb_id="35"/>
         <device name="SND_DEVICE_IN_SPEAKER_DMIC" acdb_id="37"/>
