@@ -39,11 +39,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     ConfigPanel
 
-# Consumerir
+# Consumer IR
 PRODUCT_PACKAGES += \
-    android.hardware.ir@1.0-impl \
-    android.hardware.ir@1.0-service \
-    consumerir.msm8996
+    android.hardware.ir@1.0-service.xiaomi_8996
 
 # Device init scripts
 PRODUCT_PACKAGES += \
