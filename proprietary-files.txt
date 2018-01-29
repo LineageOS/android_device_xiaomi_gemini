@@ -146,10 +146,10 @@ vendor/lib/libmmcamera_ov4688_primax.so
 vendor/lib/libSonyIMX298PdafLibrary.so
 
 # Display calibration data
--etc/qdcm_calib_data_jdi_fhd_cmd_incell_dsi_panel.xml
--etc/qdcm_calib_data_jdi_j1_fhd_cmd_incell_dsi_panel.xml
--etc/qdcm_calib_data_lgd_fhd_cmd_incell_dsi_panel.xml
--etc/qdcm_calib_data_sharp_fhd_cmd_incell_dsi_panel.xml
+-etc/qdcm_calib_data_jdi_fhd_cmd_incell_dsi_panel.xml:vendor/etc/qdcm_calib_data_jdi_fhd_cmd_incell_dsi_panel.xml
+-etc/qdcm_calib_data_jdi_j1_fhd_cmd_incell_dsi_panel.xml:vendor/etc/qdcm_calib_data_jdi_j1_fhd_cmd_incell_dsi_panel.xml
+-etc/qdcm_calib_data_lgd_fhd_cmd_incell_dsi_panel.xml:vendor/etc/qdcm_calib_data_lgd_fhd_cmd_incell_dsi_panel.xml
+-etc/qdcm_calib_data_sharp_fhd_cmd_incell_dsi_panel.xml:vendor/etc/qdcm_calib_data_sharp_fhd_cmd_incell_dsi_panel.xml
 
 # Fingerprint
 lib64/hw/fingerprint.fpc.so
