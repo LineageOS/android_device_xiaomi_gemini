@@ -69,3 +69,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     init.tfa.sh \
     tinyplay
+
+# Thermal
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/thermal-engine-8996.conf:system/etc/thermal-engine-8996.conf \
+    $(LOCAL_PATH)/configs/thermal-engine-8996-a1.conf:system/etc/thermal-engine-8996-a1.conf
