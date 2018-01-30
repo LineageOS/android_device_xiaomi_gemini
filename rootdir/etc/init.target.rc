@@ -39,3 +39,6 @@ service tfa-sh /system/bin/init.tfa.sh /etc/silence_short.wav 15 1
 
 on property:sys.boot_completed=1
     start tfa-sh
+
+on property:ro.boot.hwversion=2.2.0
+    setprop sys.qcom.thermalcfg /vendor/etc/thermal-engine-8996-lite.conf
