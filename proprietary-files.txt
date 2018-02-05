@@ -12,8 +12,8 @@ etc/acdbdata/adsp_avs_config.acdb:vendor/etc/acdbdata/adsp_avs_config.acdb
 etc/silence_short.wav
 
 # Audio amplifier firmware
-etc/firmware/tfa98xx.cnt
-etc/firmware/tfa9891.cnt
+etc/firmware/tfa98xx.cnt:vendor/firmware/tfa98xx.cnt
+etc/firmware/tfa9891.cnt:vendor/firmware/tfa9891.cnt
 
 # Camera actuators
 vendor/lib/libactuator_ak7348.so
@@ -156,11 +156,11 @@ lib64/hw/fingerprint.fpc.so
 lib/hw/fingerprint.fpc.so
 
 # Graphics firmware
-etc/firmware/a530_zap.b00
-etc/firmware/a530_zap.b01
-etc/firmware/a530_zap.b02
-etc/firmware/a530_zap.elf
-etc/firmware/a530_zap.mdt
+etc/firmware/a530_zap.b00:vendor/firmware/a530_zap.b00
+etc/firmware/a530_zap.b01:vendor/firmware/a530_zap.b01
+etc/firmware/a530_zap.b02:vendor/firmware/a530_zap.b02
+etc/firmware/a530_zap.elf:vendor/firmware/a530_zap.elf
+etc/firmware/a530_zap.mdt:vendor/firmware/a530_zap.mdt
 
 # NFC firmware
 vendor/firmware/libpn548ad_fw.so
