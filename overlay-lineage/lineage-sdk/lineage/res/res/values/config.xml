@@ -23,6 +23,7 @@
         <item>Default:standard</item>
         <item>Warm1:reading</item>
         <item>Cold1:dynamic</item>
+        <item>srgb:srgb</item>
     </string-array>
 
     <!-- Paths to the libraries that contain device specific key handlers -->
