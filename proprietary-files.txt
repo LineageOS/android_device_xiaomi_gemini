@@ -9,7 +9,7 @@ etc/acdbdata/Forte/Forte_Speaker_cal.acdb:vendor/etc/acdbdata/Forte/Forte_Speake
 etc/acdbdata/adsp_avs_config.acdb:vendor/etc/acdbdata/adsp_avs_config.acdb
 
 # Audio amplifier calibration sound
-etc/silence_short.wav
+etc/silence_short.wav:vendor/etc/silence_short.wav
 
 # Audio amplifier firmware
 etc/firmware/tfa98xx.cnt:vendor/firmware/tfa98xx.cnt
