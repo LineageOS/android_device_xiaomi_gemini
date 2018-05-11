@@ -2134,6 +2134,7 @@
         <ctl name="SLIM RX2 MUX" value="AIF4_PB" />
         <ctl name="SLIM RX3 MUX" value="AIF4_PB" />
         <ctl name="SLIM_6_RX Channels" value="Two" />
+        <ctl name="SLIM_6_RX Format" value="S24_LE" />
         <ctl name="RX INT1_2 MUX" value="RX2" />
         <ctl name="RX INT2_2 MUX" value="RX3" />
         <ctl name="RX INT1 DEM MUX" value="CLSH_DSM_OUT" />
@@ -2144,6 +2145,7 @@
         <ctl name="SLIM RX4 MUX" value="AIF3_PB" />
         <ctl name="SLIM RX5 MUX" value="AIF3_PB" />
         <ctl name="SLIM_5_RX Channels" value="Two" />
+        <ctl name="SLIM_5_RX Format" value="S24_LE" />
         <ctl name="SLIM_5_RX SampleRate" value="KHZ_44P1" />
         <ctl name="RX INT1_1 MIX1 INP0" value="RX4" />
         <ctl name="RX INT2_1 MIX1 INP1" value="RX5" />
