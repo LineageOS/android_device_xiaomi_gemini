@@ -1,1 +1,2 @@
 require version-modem=2018-04-20 15:21:31
+require version-firmware=8.5.10
