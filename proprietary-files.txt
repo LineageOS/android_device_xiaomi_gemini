@@ -162,7 +162,7 @@ vendor/firmware/a530_zap.elf
 vendor/firmware/a530_zap.mdt
 
 # NFC firmware
-vendor/firmware/libpn548ad_fw.so
+vendor/firmware/libpn548ad_fw.so:vendor/lib/libpn548ad_fw.so
 
 # Sensors
 vendor/etc/sensors/hals.conf|bf3677cbfa5ce5735662e8c259cb027969f65c87
