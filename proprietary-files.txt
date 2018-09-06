@@ -1,3 +1,6 @@
+# ADSP modules
+vendor/lib/rfsa/adsp/libdirac-appi.so
+
 # Audio ACDB
 vendor/etc/acdbdata/Forte/Forte_Bluetooth_cal.acdb
 vendor/etc/acdbdata/Forte/Forte_General_cal.acdb
