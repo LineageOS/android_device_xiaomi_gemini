@@ -15,13 +15,13 @@
 
 function enable_speaker {
 	echo "enabling speaker"
-	tinymix 'QUAT_MI2S_RX Audio Mixer MultiMedia1' 1
-	tinymix 'left Profile' 'music'
+	/vendor/bin/tinymix 'QUAT_MI2S_RX Audio Mixer MultiMedia1' 1
+	/vendor/bin/tinymix 'left Profile' 'music'
 }
 
 function disable_speaker {
 	echo "disabling speaker"
-	tinymix 'QUAT_MI2S_RX Audio Mixer MultiMedia1' 0
+	/vendor/bin/tinymix 'QUAT_MI2S_RX Audio Mixer MultiMedia1' 0
 }
 
 echo "Volume is ignored by this script for now"
@@ -30,7 +30,7 @@ if [ "$3" -eq "1" -o "$3" -eq "-1" ]; then
 	enable_speaker
 fi
 
-tinyplay $1
+/vendor/bin/tinyplay $1
 
 if [ "$3" -eq "1" -o "$3" -eq "-1" ]; then
 	disable_speaker
