@@ -37,10 +37,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/audio_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info.xml \
     $(LOCAL_PATH)/audio/mixer_paths_tasha.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_tasha.xml
 
-# Camera
-PRODUCT_PACKAGES += \
-    Snap
-
 # ConfigPanel
 PRODUCT_PACKAGES += \
     ConfigPanel
@@ -56,6 +52,13 @@ PRODUCT_PACKAGES += \
 # Fingerprint
 PRODUCT_PACKAGES += \
     android.hardware.biometrics.fingerprint@2.1-service
+
+# Google Camera
+PRODUCT_PACKAGES += \
+    GoogleCamera
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/com.google.android.GoogleCamera.xml:system/etc/permissions/com.google.android.GoogleCamera.xml \
+    $(LOCAL_PATH)/configs/android.hardware.camera.ar.xml:vendor/etc/permissions/android.hardware.camera.ar.xml
 
 # Input
 PRODUCT_COPY_FILES += \
