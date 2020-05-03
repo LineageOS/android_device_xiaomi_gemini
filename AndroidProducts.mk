@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2018-2019 The LineageOS Project
+# Copyright (C) 2018-2020 The SuperiorOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
 # limitations under the License.
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/lineage_gemini.mk
+    $(LOCAL_DIR)/superior_gemini.mk
 
 COMMON_LUNCH_CHOICES := \
-    lineage_gemini-user \
-    lineage_gemini-userdebug \
-    lineage_gemini-eng
+    superior_gemini-user \
+    superior_gemini-userdebug \
+    superior_gemini-eng
