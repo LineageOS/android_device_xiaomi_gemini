@@ -23,7 +23,7 @@ DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
     $(LOCAL_PATH)/overlay-lineage
 
-PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
+#PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
     $(LOCAL_PATH)/overlay-lineage/lineage-sdk
 
 # Inherit from msm8996-common
@@ -46,7 +46,7 @@ PRODUCT_PACKAGES += \
     Snap
 
 # ConfigPanel
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     ConfigPanel
 
 # Consumer IR
@@ -81,7 +81,7 @@ PRODUCT_PACKAGES += \
     tinyplay
 
 # Touch HAL
-PRODUCT_PACKAGES += \
+#PRODUCT_PACKAGES += \
     vendor.lineage.touch@1.0-service.xiaomi_8996
 
 # Thermal
