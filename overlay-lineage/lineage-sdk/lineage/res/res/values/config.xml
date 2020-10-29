@@ -66,8 +66,12 @@
          config to 7. -->
     <integer name="config_deviceHardwareWakeKeys">65</integer>
 
-    <!-- Button backlight -->
-    <bool name="config_deviceHasVariableButtonBrightness">true</bool>
+    <!-- Button backlight control. Possible values are:
+            0 - Not supported
+            1 - Supported, but only on/off mode
+            2 - Supported with variable brightness control
+    -->
+    <bool name="config_deviceSupportsButtonBrightnessControl">2</bool>
 
     <!-- Whether to cleanup fingerprints upon connection to the daemon and when
          user switches -->
