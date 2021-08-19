@@ -42,6 +42,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     Snap
 
+# GCamGOPrebuilt
+PRODUCT_PACKAGES += \
+    GCamGOPrebuilt
+
 # ConfigPanel
 PRODUCT_PACKAGES += \
     ConfigPanel
