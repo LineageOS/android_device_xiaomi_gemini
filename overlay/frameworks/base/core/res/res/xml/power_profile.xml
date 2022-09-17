@@ -116,4 +116,6 @@
     <!-- This is the battery capacity in mAh -->
     <item name="battery.capacity">3000</item>
 
+    <!-- Operating voltage for bluetooth controller in mV -->
+    <item name="bluetooth.controller.voltage">3300</item>
 </device>
