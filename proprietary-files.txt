@@ -127,11 +127,11 @@ vendor/lib/libchromatix_ov4688_zsl_preview_ad5823.so
 vendor/lib/libchromatix_ov4688_zsl_video_ad5823.so
 
 # Camera configs
-etc/camera/imx298_liteon_chromatix.xml
-etc/camera/imx298_semco_chromatix.xml
-etc/camera/msm8996_camera.xml
-etc/camera/ov4688_chromatix.xml
-etc/camera/ov4688_primax_chromatix.xml
+system/etc/camera/imx298_liteon_chromatix.xml:vendor/etc/camera/imx298_liteon_chromatix.xml
+system/etc/camera/imx298_semco_chromatix.xml:vendor/etc/camera/imx298_semco_chromatix.xml
+system/etc/camera/msm8996_camera.xml:vendor/etc/camera/msm8996_camera.xml
+system/etc/camera/ov4688_chromatix.xml:vendor/etc/camera/ov4688_chromatix.xml
+system/etc/camera/ov4688_primax_chromatix.xml:vendor/etc/camera/ov4688_primax_chromatix.xml
 
 # Camera eeproms
 vendor/lib/libmmcamera_ov4688_eeprom.so
