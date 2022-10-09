@@ -30,15 +30,5 @@ on post-fs-data
     chown system system /dev/sysmatdrv
     chmod 0660 /dev/sysmatdrv
 
-service tfa-sh /vendor/bin/init.tfa.sh /vendor/etc/silence_short.wav 15 1
-    class main
-    user system
-    group system
-    disabled
-    oneshot
-
-on property:sys.boot_completed=1
-    start tfa-sh
-
 on property:ro.boot.hwversion=2.2.0
     setprop sys.qcom.thermalcfg /vendor/etc/thermal-engine-8996-lite.conf
