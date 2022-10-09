@@ -70,8 +70,7 @@ PRODUCT_COPY_FILES += \
 
 # TFA calibration
 PRODUCT_PACKAGES += \
-    init.tfa.sh \
-    tinyplay
+    tfa-calib
 
 # Touch HAL
 PRODUCT_PACKAGES += \
