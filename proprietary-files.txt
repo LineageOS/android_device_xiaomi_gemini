@@ -15,8 +15,8 @@ vendor/etc/acdbdata/adsp_avs_config.acdb
 etc/silence_short.wav:vendor/etc/silence_short.wav
 
 # Audio amplifier firmware
-etc/firmware/tfa98xx.cnt:vendor/firmware/tfa98xx.cnt
 etc/firmware/tfa9891.cnt:vendor/firmware/tfa9891.cnt
+etc/firmware/tfa98xx.cnt:vendor/firmware/tfa98xx.cnt
 
 # Camera actuators
 vendor/lib/libactuator_ak7348.so
@@ -141,18 +141,18 @@ vendor/lib/libmmcamera_sony_imx298_eeprom.so
 vendor/lib/libois_lc898122.so
 
 # Camera sensors
+vendor/lib/libSonyIMX298PdafLibrary.so
 vendor/lib/libmmcamera_imx298.so
 vendor/lib/libmmcamera_imx298_liteon.so
 vendor/lib/libmmcamera_imx298_semco.so
 vendor/lib/libmmcamera_ov4688.so
 vendor/lib/libmmcamera_ov4688_primax.so
-vendor/lib/libSonyIMX298PdafLibrary.so
 
 # Display calibration data
+etc/qdcm_calib_data_sharp_fhd_cmd_incell_dsi_panel.xml:vendor/etc/qdcm_calib_data_sharp_fhd_cmd_incell_dsi_panel.xml
 vendor/etc/qdcm_calib_data_jdi_fhd_cmd_incell_dsi_panel.xml|73c66f2479714619c394d4e19863521d622da6db
 vendor/etc/qdcm_calib_data_jdi_j1_fhd_cmd_incell_dsi_panel.xml|73c66f2479714619c394d4e19863521d622da6db
 vendor/etc/qdcm_calib_data_lgd_fhd_cmd_incell_dsi_panel.xml|bb10ca71e619811a7e0b44f2bad03f7b8eb7e324
-etc/qdcm_calib_data_sharp_fhd_cmd_incell_dsi_panel.xml:vendor/etc/qdcm_calib_data_sharp_fhd_cmd_incell_dsi_panel.xml
 
 # Fingerprint
 lib64/hw/fingerprint.fpc.so:vendor/lib64/hw/fingerprint.fpc.so|15fa15959d44bdf3760a3009d6a8b61a7f9e8830
@@ -168,5 +168,5 @@ vendor/firmware/a530_zap.mdt
 vendor/firmware/libpn548ad_fw.so:vendor/lib/libpn548ad_fw.so
 
 # Sensors
-vendor/etc/sensors/hals.conf|bf3677cbfa5ce5735662e8c259cb027969f65c87
 etc/sensors/sensor_def_qcomdev.conf
+vendor/etc/sensors/hals.conf|bf3677cbfa5ce5735662e8c259cb027969f65c87
