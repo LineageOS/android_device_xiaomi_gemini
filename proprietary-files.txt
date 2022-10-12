@@ -12,11 +12,11 @@ vendor/etc/acdbdata/Forte/Forte_Speaker_cal.acdb
 vendor/etc/acdbdata/adsp_avs_config.acdb
 
 # Audio amplifier calibration sound
-etc/silence_short.wav:vendor/etc/silence_short.wav
+system/etc/silence_short.wav:vendor/etc/silence_short.wav
 
 # Audio amplifier firmware
-etc/firmware/tfa9891.cnt:vendor/firmware/tfa9891.cnt
-etc/firmware/tfa98xx.cnt:vendor/firmware/tfa98xx.cnt
+system/etc/firmware/tfa9891.cnt:vendor/firmware/tfa9891.cnt
+system/etc/firmware/tfa98xx.cnt:vendor/firmware/tfa98xx.cnt
 
 # Camera actuators
 vendor/lib/libactuator_ak7348.so
@@ -149,13 +149,13 @@ vendor/lib/libmmcamera_ov4688.so
 vendor/lib/libmmcamera_ov4688_primax.so
 
 # Display calibration data
-etc/qdcm_calib_data_sharp_fhd_cmd_incell_dsi_panel.xml:vendor/etc/qdcm_calib_data_sharp_fhd_cmd_incell_dsi_panel.xml
+system/etc/qdcm_calib_data_sharp_fhd_cmd_incell_dsi_panel.xml:vendor/etc/qdcm_calib_data_sharp_fhd_cmd_incell_dsi_panel.xml
 vendor/etc/qdcm_calib_data_jdi_fhd_cmd_incell_dsi_panel.xml|73c66f2479714619c394d4e19863521d622da6db
 vendor/etc/qdcm_calib_data_jdi_j1_fhd_cmd_incell_dsi_panel.xml|73c66f2479714619c394d4e19863521d622da6db
 vendor/etc/qdcm_calib_data_lgd_fhd_cmd_incell_dsi_panel.xml|bb10ca71e619811a7e0b44f2bad03f7b8eb7e324
 
 # Fingerprint
-lib64/hw/fingerprint.fpc.so:vendor/lib64/hw/fingerprint.fpc.so|15fa15959d44bdf3760a3009d6a8b61a7f9e8830
+system/lib64/hw/fingerprint.fpc.so:vendor/lib64/hw/fingerprint.fpc.so|15fa15959d44bdf3760a3009d6a8b61a7f9e8830
 
 # Graphics firmware
 vendor/firmware/a530_zap.b00
@@ -168,5 +168,5 @@ vendor/firmware/a530_zap.mdt
 vendor/firmware/libpn548ad_fw.so:vendor/lib/libpn548ad_fw.so
 
 # Sensors
-etc/sensors/sensor_def_qcomdev.conf
+system/etc/sensors/sensor_def_qcomdev.conf
 vendor/etc/sensors/hals.conf|bf3677cbfa5ce5735662e8c259cb027969f65c87
