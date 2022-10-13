@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f550d9c_75aa1ab5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2022-10-13T13:20:11Z",
+      "side": 1,
+      "message": "There is no point in decommonizing it. What\u0027s common remains in msm8996-common.",
+      "revId": "798f110a14e22d5d786ff54885a81f5d45bb0f65",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
