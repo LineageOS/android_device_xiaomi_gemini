@@ -16,6 +16,24 @@
       "message": "There is no point in decommonizing it. What\u0027s common remains in msm8996-common.",
       "revId": "798f110a14e22d5d786ff54885a81f5d45bb0f65",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b66d51a_6aef19b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 25485
+      },
+      "writtenOn": "2022-10-13T13:21:56Z",
+      "side": 1,
+      "message": "to set default hotspot ssid.\nhttps://review.lineageos.org/c/LineageOS/android_device_xiaomi_gemini/+/341658",
+      "parentUuid": "9f550d9c_75aa1ab5",
+      "revId": "798f110a14e22d5d786ff54885a81f5d45bb0f65",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
