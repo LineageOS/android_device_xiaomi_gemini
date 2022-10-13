@@ -34,6 +34,24 @@
       "parentUuid": "9f550d9c_75aa1ab5",
       "revId": "798f110a14e22d5d786ff54885a81f5d45bb0f65",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "019372be_0badacb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2022-10-13T13:29:57Z",
+      "side": 1,
+      "message": "I know, but you don\u0027t need to decommonize stuff that is common. That\u0027s the point.",
+      "parentUuid": "4b66d51a_6aef19b5",
+      "revId": "798f110a14e22d5d786ff54885a81f5d45bb0f65",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
