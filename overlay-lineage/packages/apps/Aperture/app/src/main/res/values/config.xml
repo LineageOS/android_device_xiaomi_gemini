@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: 2022-2023 The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<resources>
+    <!-- An array of triplets made of (camera ID, qualities, frame rates).
+         These video modes will be added to the available
+         quality/frame rate combinations of a camera device.
+         Make sure the device is able to handle those configurations
+         and maintain a stable frame rate at any condition.
+         Note that you can't add video qualities that aren't
+         exposed by the camera, only new frame rates.
+         Valid values of resolution are:
+          - "sd" (480p)
+          - "hd" (720p)
+          - "fhd" (1080p)
+          - "uhd" (2160p)
+         Valid values of frame rate are:
+          - "24"
+          - "30"
+          - "60"
+          - "120"
+         Additionally you can prepend `-` to frame rate to mark it as unsupported.
+         Example:
+             <string-array name="config_additionalVideoConfigurations">
+                 <item>0</item> <item>sd|hd|fhd</item> <item>60|120</item>
+                 <item>0</item> <item>uhd</item> <item>-60</item>
+                 <item>1</item> <item>sd|hd|fhd</item> <item>60</item>
+             </string-array>
+    -->
+    <string-array name="config_additionalVideoConfigurations">
+        <item>0</item> <item>uhd</item> <item>-30</item>
+    </string-array>
+</resources>
