@@ -1,2 +1,1 @@
 require board=MSM8996|gemini
-require version-modem=2018-08-02 23:14:42,8.8.30
