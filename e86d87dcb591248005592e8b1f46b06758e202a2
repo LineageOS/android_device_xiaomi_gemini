@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7174c4a_7a25796a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 13648
+      },
+      "writtenOn": "2023-11-14T15:01:35Z",
+      "side": 1,
+      "message": "Depends on https://review.lineageos.org/c/LineageOS/android_build/+/374112",
+      "revId": "e86d87dcb591248005592e8b1f46b06758e202a2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
