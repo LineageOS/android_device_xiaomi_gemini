@@ -40,7 +40,7 @@ PRODUCT_COPY_FILES += \
 
 # Consumer IR
 PRODUCT_PACKAGES += \
-    android.hardware.ir@1.0-service.xiaomi
+    android.hardware.ir-service.xiaomi
 
 # Device init scripts
 PRODUCT_PACKAGES += \
