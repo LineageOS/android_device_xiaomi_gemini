@@ -1,5 +1,10 @@
 # Bluetooth
 bluetooth.device.default_name=Xiaomi Mi 5
 
+# Fingerprint
+persist.qfp=false
+ro.hardware.fingerprint=fpc
+sys.fpc.tu.disabled=0
+
 # USB
 vendor.usb.product_string=Xiaomi Mi 5
